@@ -11,7 +11,7 @@ public class Coordinates {
     public Coordinates(int coordinateID, String latitude, String longitute) {
 
         IDCounter++;
-        this.coordinateID = coordinateID;
+        this.coordinateID = IDCounter;
         this.latitude = latitude;
         this.longitute = longitute;
     }

@@ -16,7 +16,7 @@ public class Person {
 
     public Person(int personID, String firstname, String name, LocalDate birthdate, Image picture) {
         IDCounter++;
-        this.personID = personID;
+        this.personID = IDCounter;
         this.firstname = firstname;
         this.name = name;
         this.birthdate = birthdate;

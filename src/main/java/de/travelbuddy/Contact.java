@@ -10,7 +10,7 @@ public class Contact {
 
     public Contact(int contactID, String phone, String email) {
         IDCounter++;
-        this.contactID = contactID;
+        this.contactID = IDCounter;
         this.phone = phone;
         this.email = email;
     }

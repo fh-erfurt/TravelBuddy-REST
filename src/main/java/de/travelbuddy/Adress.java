@@ -13,7 +13,7 @@ public class Adress {
 
     public Adress(int adressID, String town, String street, int streetNumber, String ZIP, String country) {
         IDCounter++;
-        this.adressID = adressID;
+        this.adressID = IDCounter;
         this.town = town;
         this.street = street;
         this.streetNumber = streetNumber;

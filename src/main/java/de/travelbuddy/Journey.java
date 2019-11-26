@@ -14,7 +14,7 @@ public class Journey {
 
     public Journey(int journeyID, String title, List<Place> places, List<Person> persons, List<Expense> expenses) {
         IDCounter++;
-        this.journeyID = journeyID;
+        this.journeyID = IDCounter;
         this.title = title;
         this.places = places;
         this.persons = persons;

@@ -13,21 +13,24 @@ public class Expense {
     private String currency;
     private boolean perPerson;
     private List <Person> involvedPersons;
+    private planned status;
 
     enum planned
     {
         PLANNED,ISSUED,CANCELED
     }
 
-    public Expense(int expenseID, String title, String description, double price, String currency, boolean perPerson, List<Person> involvedPersons) {
+    public Expense(int expenseID, String title, String description, double price, String currency, boolean perPerson, List<Person> involvedPersons, planned status) {
+
         IDCounter++;
-        this.expenseID = expenseID;
+        this.expenseID = IDCounter;
         this.title = title;
         this.description = description;
         this.price = price;
         this.currency = currency;
         this.perPerson = perPerson;
         this.involvedPersons = involvedPersons;
+        this.status = status;
     }
 
     public static int getIDCounter() {
@@ -88,5 +91,13 @@ public class Expense {
 
     public void setInvolvedPersons(List<Person> involvedPersons) {
         this.involvedPersons = involvedPersons;
+    }
+
+    public planned getStatus() {
+        return status;
+    }
+
+    public void setStatus(planned status) {
+        this.status = status;
     }
 }

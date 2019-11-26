@@ -16,7 +16,7 @@ public class Connection {
 
     public Connection(int connetionID, String title, LocalDateTime arrive, LocalDateTime departure, Place start, Place end, Expense expense) {
         IDCounter++;
-        this.connetionID = connetionID;
+        this.connetionID = IDCounter;
         this.title = title;
         this.arrive = arrive;
         this.departure = departure;
