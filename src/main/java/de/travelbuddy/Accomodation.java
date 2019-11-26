@@ -19,4 +19,24 @@ public class Accomodation extends Place {
         this.accomodationID = IDCounter;
         this.type = type;
     }
+
+    public static int getIDCounter() {
+        return IDCounter;
+    }
+
+    public int getAccomodationID() {
+        return accomodationID;
+    }
+
+    public void setAccomodationID(int accomodationID) {
+        this.accomodationID = accomodationID;
+    }
+
+    public accomodationType getType() {
+        return type;
+    }
+
+    public void setType(accomodationType type) {
+        this.type = type;
+    }
 }

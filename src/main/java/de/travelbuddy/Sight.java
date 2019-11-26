@@ -14,4 +14,24 @@ public class Sight extends Place {
         this.sightID = IDCounter;
         this.indoor = indoor;
     }
+
+    public static int getIDCounter() {
+        return IDCounter;
+    }
+
+    public int getSightID() {
+        return sightID;
+    }
+
+    public void setSightID(int sightID) {
+        this.sightID = sightID;
+    }
+
+    public boolean isIndoor() {
+        return indoor;
+    }
+
+    public void setIndoor(boolean indoor) {
+        this.indoor = indoor;
+    }
 }
