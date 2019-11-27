@@ -1,6 +1,6 @@
 package de.travelbuddy;
 
-import javafx.scene.image.Image;
+import java.awt.*;
 
 import java.time.LocalDate;
 
