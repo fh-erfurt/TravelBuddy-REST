@@ -8,30 +8,23 @@ public class Sight extends Place {
     private int sightID;
     private boolean indoor;
 
-    public Sight(int placeID, String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive, LocalDateTime departure, Connection connectionToNextDestination, Expense expense, int sightID, boolean indoor) {
+    public Sight(int placeID, String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive,
+                 LocalDateTime departure, Connection connectionToNextDestination, Expense expense,
+                 int sightID, boolean indoor) {
+
         super(placeID, name, coordiantes, adress, arrive, departure, connectionToNextDestination, expense);
         IDCounter++;
         this.sightID = IDCounter;
         this.indoor = indoor;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
+    public static int getDCounter() {return IDCounter;}
 
-    public int getSightID() {
-        return sightID;
-    }
+    public int getSightID() {return sightID;}
 
-    public void setSightID(int sightID) {
-        this.sightID = sightID;
-    }
+    public boolean isIndoor() {return indoor;}
 
-    public boolean isIndoor() {
-        return indoor;
-    }
+    public void setIndoor(boolean indoor) {this.indoor = indoor;}
 
-    public void setIndoor(boolean indoor) {
-        this.indoor = indoor;
-    }
+
 }

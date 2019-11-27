@@ -20,7 +20,8 @@ public class Expense {
         PLANNED,ISSUED,CANCELED
     }
 
-    public Expense(int expenseID, String title, String description, double price, String currency, boolean perPerson, List<Person> involvedPersons, planned status) {
+    public Expense(int expenseID, String title, String description, double price, String currency, boolean perPerson,
+                   List<Person> involvedPersons, planned status) {
 
         IDCounter++;
         this.expenseID = IDCounter;
@@ -33,71 +34,35 @@ public class Expense {
         this.status = status;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
+    public static int getIDCounter() {return IDCounter;}
 
-    public int getExpenseID() {
-        return expenseID;
-    }
+    public int getExpenseID() {return expenseID;}
 
-    public void setExpenseID(int expenseID) {
-        this.expenseID = expenseID;
-    }
+    public String getTitle() {return title;}
 
-    public String getTitle() {
-        return title;
-    }
+    public void setTitle(String title) {this.title = title;}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getDescription() {return description;}
 
-    public String getDescription() {
-        return description;
-    }
+    public void setDescription(String description) {this.description = description;}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public double getPrice() {return price;}
 
-    public double getPrice() {
-        return price;
-    }
+    public void setPrice(double price) {this.price = price;}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    public String getCurrency() {return currency;}
 
-    public String getCurrency() {
-        return currency;
-    }
+    public void setCurrency(String currency) {this.currency = currency;}
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
+    public boolean isPerPerson() {return perPerson;}
 
-    public boolean isPerPerson() {
-        return perPerson;
-    }
+    public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
 
-    public void setPerPerson(boolean perPerson) {
-        this.perPerson = perPerson;
-    }
+    public List<Person> getInvolvedPersons() {return involvedPersons;}
 
-    public List<Person> getInvolvedPersons() {
-        return involvedPersons;
-    }
+    public void setInvolvedPersons(List<Person> involvedPersons) {this.involvedPersons = involvedPersons;}
 
-    public void setInvolvedPersons(List<Person> involvedPersons) {
-        this.involvedPersons = involvedPersons;
-    }
+    public planned getStatus() {return status;}
 
-    public planned getStatus() {
-        return status;
-    }
-
-    public void setStatus(planned status) {
-        this.status = status;
-    }
+    public void setStatus(planned status) {this.status = status;}
 }

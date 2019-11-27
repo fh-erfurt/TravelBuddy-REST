@@ -18,7 +18,8 @@ public abstract class Place {
     protected Connection connectionToNextDestination;
     protected Expense expense;
 
-    public Place(int placeID, String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive, LocalDateTime departure, Connection connectionToNextDestination, Expense expense) {
+    public Place(int placeID, String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive,
+                 LocalDateTime departure, Connection connectionToNextDestination, Expense expense) {
         IDCounter++;
         this.PlaceID = IDCounter;
         this.name = name;
@@ -36,10 +37,6 @@ public abstract class Place {
 
     public int getPlaceID() {
         return PlaceID;
-    }
-
-    public void setPlaceID(int placeID) {
-        PlaceID = placeID;
     }
 
     public String getName() {
@@ -97,4 +94,6 @@ public abstract class Place {
     public void setExpense(Expense expense) {
         this.expense = expense;
     }
+
+
 }

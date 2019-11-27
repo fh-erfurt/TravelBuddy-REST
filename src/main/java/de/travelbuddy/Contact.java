@@ -15,31 +15,15 @@ public class Contact {
         this.email = email;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
+    public static int getIDCounter() {return IDCounter;}
 
-    public int getContactID() {
-        return contactID;
-    }
+    public int getContactID() {return contactID;}
 
-    public void setContactID(int contactID) {
-        this.contactID = contactID;
-    }
+    public String getPhone() {return phone;}
 
-    public String getPhone() {
-        return phone;
-    }
+    public void setPhone(String phone) {this.phone = phone;}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public String getEmail() {return email;}
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) {this.email = email;}
 }

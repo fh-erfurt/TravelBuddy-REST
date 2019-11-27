@@ -23,47 +23,23 @@ public class Person {
         this.picture = picture;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
+    public static int getIDCounter() {return IDCounter;}
 
-    public int getPersonID() {
-        return personID;
-    }
+    public int getPersonID() {return personID;}
 
-    public void setPersonID(int personID) {
-        this.personID = personID;
-    }
+    public String getFirstname() {return firstname;}
 
-    public String getFirstname() {
-        return firstname;
-    }
+    public void setFirstname(String firstname) {this.firstname = firstname;}
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+    public String getName() {return name;}
 
-    public String getName() {
-        return name;
-    }
+    public void setName(String name) {this.name = name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public LocalDate getBirthdate() {return birthdate;}
 
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
+    public void setBirthdate(LocalDate birthdate) {this.birthdate = birthdate;}
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
+    public Image getPicture() {return picture;}
 
-    public Image getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Image picture) {
-        this.picture = picture;
-    }
+    public void setPicture(Image picture) {this.picture = picture;}
 }
