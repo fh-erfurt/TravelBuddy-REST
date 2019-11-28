@@ -50,6 +50,7 @@ public class Journey {
     }
 
     public List<Person> getPersons() {
+
         return persons;
     }
 
@@ -64,4 +65,10 @@ public class Journey {
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
     }
+
+    public void addPerson(Person newPerson) {
+        persons.add(newPerson);
+    }
+
+
 }

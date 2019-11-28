@@ -9,15 +9,15 @@ public class Person {
     private static int IDCounter;
 
     private int personID;
-    private String firstname;
+    private String firstName;
     private String name;
     private LocalDate birthdate;
     private Image picture;
 
-    public Person(int personID, String firstname, String name, LocalDate birthdate, Image picture) {
+    public Person(String firstName, String name, LocalDate birthdate, Image picture) {
         IDCounter++;
         this.personID = IDCounter;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.name = name;
         this.birthdate = birthdate;
         this.picture = picture;
@@ -27,9 +27,9 @@ public class Person {
 
     public int getPersonID() {return personID;}
 
-    public String getFirstname() {return firstname;}
+    public String getFirstName() {return firstName;}
 
-    public void setFirstname(String firstname) {this.firstname = firstname;}
+    public void setFirstName(String firstName) {this.firstName = firstName;}
 
     public String getName() {return name;}
 
