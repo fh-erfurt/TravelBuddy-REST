@@ -1,9 +1,12 @@
 package de.travelbuddy;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+
 public class ConnectionTest {
     @Test
-    public void (){
+    public void Test() {
         //Given
 
 
@@ -13,3 +16,4 @@ public class ConnectionTest {
         //Then
 
     }
+}

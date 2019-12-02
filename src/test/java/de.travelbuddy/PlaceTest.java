@@ -1,9 +1,10 @@
 package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
 public class PlaceTest {
     @Test
-    public void (){
+    public void Test() {
         //Given
 
 
@@ -13,3 +14,4 @@ public class PlaceTest {
         //Then
 
     }
+}

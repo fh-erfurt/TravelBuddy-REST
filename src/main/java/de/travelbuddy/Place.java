@@ -1,6 +1,5 @@
 package de.travelbuddy;
 
-import java.security.ProtectionDomain;
 import java.time.LocalDateTime;
 
 
@@ -11,19 +10,19 @@ public abstract class Place {
 
     protected int PlaceID;
     protected String name;
-    protected Coordinates coordiantes;
+    protected Coordinates coordinates;
     protected Adress adress;
     protected LocalDateTime arrive;
     protected LocalDateTime departure;
     protected Connection connectionToNextDestination;
     protected Expense expense;
 
-    public Place(int placeID, String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive,
+    public Place(int placeID, String name, Coordinates coordinates, Adress adress, LocalDateTime arrive,
                  LocalDateTime departure, Connection connectionToNextDestination, Expense expense) {
         IDCounter++;
         this.PlaceID = IDCounter;
         this.name = name;
-        this.coordiantes = coordiantes;
+        this.coordinates = coordinates;
         this.adress = adress;
         this.arrive = arrive;
         this.departure = departure;
@@ -47,12 +46,12 @@ public abstract class Place {
         this.name = name;
     }
 
-    public Coordinates getCoordiantes() {
-        return coordiantes;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    public void setCoordiantes(Coordinates coordiantes) {
-        this.coordiantes = coordiantes;
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     public Adress getAdress() {

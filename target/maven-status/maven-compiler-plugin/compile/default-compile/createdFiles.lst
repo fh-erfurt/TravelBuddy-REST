@@ -1,2 +1,13 @@
-de\travelbuddy\places\Places.class
-de\travelbuddy\places\IPlaces.class
+de\travelbuddy\Adress.class
+de\travelbuddy\Expense$planned.class
+de\travelbuddy\Contact.class
+de\travelbuddy\Journey.class
+de\travelbuddy\Accomodation.class
+de\travelbuddy\Coordinates.class
+de\travelbuddy\Accomodation$accomodationType.class
+de\travelbuddy\Connection.class
+de\travelbuddy\Main.class
+de\travelbuddy\Sight.class
+de\travelbuddy\Person.class
+de\travelbuddy\Expense.class
+de\travelbuddy\Place.class
