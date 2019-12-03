@@ -3,24 +3,18 @@ package de.travelbuddy;
 import java.time.LocalDateTime;
 
 
-//Verständnisfrage: hier unbedingt protected erforderlich? Oder kann die initialisierung in Tochterklassen auch über super konstruktor erfolgen?
 public abstract class Place {
 
-    private static int IDCounter;
+    private String name;
+    private Coordinates coordinates;
+    private Adress adress;
+    private LocalDateTime arrive;
+    private LocalDateTime departure;
+    private Connection connectionToNextDestination;
+    private Expense expense;
 
-    protected int PlaceID;
-    protected String name;
-    protected Coordinates coordinates;
-    protected Adress adress;
-    protected LocalDateTime arrive;
-    protected LocalDateTime departure;
-    protected Connection connectionToNextDestination;
-    protected Expense expense;
-
-    public Place(int placeID, String name, Coordinates coordinates, Adress adress, LocalDateTime arrive,
+    public Place(String name, Coordinates coordinates, Adress adress, LocalDateTime arrive,
                  LocalDateTime departure, Connection connectionToNextDestination, Expense expense) {
-        IDCounter++;
-        this.PlaceID = IDCounter;
         this.name = name;
         this.coordinates = coordinates;
         this.adress = adress;
@@ -28,14 +22,6 @@ public abstract class Place {
         this.departure = departure;
         this.connectionToNextDestination = connectionToNextDestination;
         this.expense = expense;
-    }
-
-    public static int getIDCounter() {
-        return IDCounter;
-    }
-
-    public int getPlaceID() {
-        return PlaceID;
     }
 
     public String getName() {

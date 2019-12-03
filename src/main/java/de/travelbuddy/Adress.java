@@ -2,28 +2,19 @@ package de.travelbuddy;
 
 public class Adress {
 
-    private static int IDCounter;
-
-    private int adressID;
     private String town;
     private String street;
     private int streetNumber;
     private String ZIP;
     private String country;
 
-    public Adress(int adressID, String town, String street, int streetNumber, String ZIP, String country) {
-        IDCounter++;
-        this.adressID = IDCounter;
+    public Adress(String town, String street, int streetNumber, String ZIP, String country) {
         this.town = town;
         this.street = street;
         this.streetNumber = streetNumber;
         this.ZIP = ZIP;
         this.country = country;
     }
-
-    public static int getIDCounter() {return IDCounter;}
-
-    public int getAdressID() {return adressID;}
 
     public String getTown() {return town;}
 

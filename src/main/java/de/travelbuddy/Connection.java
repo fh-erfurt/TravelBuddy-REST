@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 
 public class Connection {
 
-    private static int IDCounter;
-
-    private int connetionID;
     private String title;
     private LocalDateTime arrive;
     private LocalDateTime departure;
@@ -14,10 +11,8 @@ public class Connection {
     private Place end;
     private Expense expense;
 
-    public Connection(int connetionID, String title, LocalDateTime arrive, LocalDateTime departure, Place start,
+    public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
                       Place end, Expense expense) {
-        IDCounter++;
-        this.connetionID = IDCounter;
         this.title = title;
         this.arrive = arrive;
         this.departure = departure;
@@ -25,10 +20,6 @@ public class Connection {
         this.end = end;
         this.expense = expense;
     }
-
-    public static int getIDCounter() {return IDCounter;}
-
-    public int getConnetionID() {return connetionID;}
 
     public String getTitle() {return title;}
 

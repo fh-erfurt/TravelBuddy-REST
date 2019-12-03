@@ -3,9 +3,6 @@ package de.travelbuddy;
 import java.time.LocalDateTime;
 
 public class Accomodation extends Place {
-
-    private static int IDCounter;
-    private int accomodationID;
     private accomodationType type;
 
     enum accomodationType
@@ -13,18 +10,12 @@ public class Accomodation extends Place {
         HOTEL,HOSTEL,CAMPING,COUCHSURF,AIRBNB
     }
 
-    public Accomodation(int placeID, String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive,
+    public Accomodation(String name, Coordinates coordiantes, Adress adress, LocalDateTime arrive,
                         LocalDateTime departure, Connection connectionToNextDestination, Expense expense,
-                        int accomodationID, accomodationType type) {
-        super(placeID, name, coordiantes, adress, arrive, departure, connectionToNextDestination, expense);
-        IDCounter++;
-        this.accomodationID = IDCounter;
+                        accomodationType type) {
+        super(name, coordiantes, adress, arrive, departure, connectionToNextDestination, expense);
         this.type = type;
     }
-
-    public static int getIDCounter() {return IDCounter;}
-
-    public int getAccomodationID() {return accomodationID;}
 
     public accomodationType getType() {return type;}
 

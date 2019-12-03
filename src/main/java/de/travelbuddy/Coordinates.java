@@ -2,23 +2,13 @@ package de.travelbuddy;
 
 public class Coordinates {
 
-    private static int IDCounter;
-
-    private int coordinateID;
     private String latitude;
     private String longitute;
 
-    public Coordinates(int coordinateID, String latitude, String longitute) {
-
-        IDCounter++;
-        this.coordinateID = IDCounter;
+    public Coordinates(String latitude, String longitute) {
         this.latitude = latitude;
         this.longitute = longitute;
     }
-
-    public static int getIDCounter() {return IDCounter;}
-
-    public int getCoordinateID() {return coordinateID;}
 
     public String getLatitude() {return latitude;}
 

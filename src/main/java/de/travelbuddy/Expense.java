@@ -4,9 +4,6 @@ import java.util.List;
 
 public class Expense {
 
-    private static int IDCounter;
-
-    private int expenseID;
     private String title;
     private String description;
     private double price;
@@ -20,11 +17,9 @@ public class Expense {
         PLANNED,ISSUED,CANCELED
     }
 
-    public Expense(int expenseID, String title, String description, double price, String currency, boolean perPerson,
+    public Expense(String title, String description, double price, String currency, boolean perPerson,
                    List<Person> involvedPersons, planned status) {
 
-        IDCounter++;
-        this.expenseID = IDCounter;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -33,10 +28,6 @@ public class Expense {
         this.involvedPersons = involvedPersons;
         this.status = status;
     }
-
-    public static int getIDCounter() {return IDCounter;}
-
-    public int getExpenseID() {return expenseID;}
 
     public String getTitle() {return title;}
 

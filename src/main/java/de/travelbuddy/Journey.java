@@ -4,33 +4,16 @@ import java.util.List;
 
 public class Journey {
 
-    private static int IDCounter;
-
-    private int journeyID;
     private String title;
     private List<Place> places; //Unterscheiden zwischen accomodations und sights
     private List<Person> persons;
     private List<Expense> expenses;
 
-    public Journey(int journeyID, String title, List<Place> places, List<Person> persons, List<Expense> expenses) {
-        IDCounter++;
-        this.journeyID = IDCounter;
+    public Journey(String title, List<Place> places, List<Person> persons, List<Expense> expenses) {
         this.title = title;
         this.places = places;
         this.persons = persons;
         this.expenses = expenses;
-    }
-
-    public static int getIDCounter() {
-        return IDCounter;
-    }
-
-    public int getJourneyID() {
-        return journeyID;
-    }
-
-    public void setJourneyID(int journeyID) {
-        this.journeyID = journeyID;
     }
 
     public String getTitle() {
