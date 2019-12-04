@@ -7,7 +7,7 @@ import de.travelbuddy.Journey;
 public class JourneyTest {
 
     @Test
-    public void Test(){
+    public void should_create_journey(){
         //Given
 
         //When
