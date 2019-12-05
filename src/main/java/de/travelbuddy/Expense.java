@@ -1,14 +1,17 @@
 package de.travelbuddy;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.List;
 
+
+// Kosten können momentan nur zu gleichen Teilen aufgeteilt werden!!!
 public class Expense {
 
     private String title;
     private String description;
-    private double price;
-    private String currency;
-    private boolean perPerson;
+    private Money price;
     private List <Person> involvedPersons;
     private planned status;
 
@@ -17,14 +20,12 @@ public class Expense {
         PLANNED,ISSUED,CANCELED
     }
 
-    public Expense(String title, String description, double price, String currency, boolean perPerson,
+    public Expense(String title, String description, Money price,
                    List<Person> involvedPersons, planned status) {
 
         this.title = title;
         this.description = description;
         this.price = price;
-        this.currency = currency;
-        this.perPerson = perPerson;
         this.involvedPersons = involvedPersons;
         this.status = status;
     }
@@ -37,17 +38,9 @@ public class Expense {
 
     public void setDescription(String description) {this.description = description;}
 
-    public double getPrice() {return price;}
+    public Money getPrice() {return price;}
 
-    public void setPrice(double price) {this.price = price;}
-
-    public String getCurrency() {return currency;}
-
-    public void setCurrency(String currency) {this.currency = currency;}
-
-    public boolean isPerPerson() {return perPerson;}
-
-    public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
+    public void setPrice(Money price) {this.price = price;}
 
     public List<Person> getInvolvedPersons() {return involvedPersons;}
 
@@ -56,4 +49,15 @@ public class Expense {
     public planned getStatus() {return status;}
 
     public void setStatus(planned status) {this.status = status;}
+
+
+    public Money GetMoneyPerPerson(){
+
+        if (involvedPersons.size()!=0)
+            return new Money(price.getCurrency(), this.price.getValue().divide(new BigDecimal(involvedPersons.size()), RoundingMode.UNNECESSARY));
+
+
+        else
+            return new Money(price.getCurrency(), this.price.getValue()); // Exception werfen? -> Keine Person eingetragen.
+    }
 }
