@@ -8,6 +8,7 @@ public class MoneyConverter {
 
     enum ConversionRate
     {
+        // nach ISO 4217
         EUR (new BigDecimal(1)), USD (new BigDecimal(1.1)), CNY (new BigDecimal(7.82)), RUB (new BigDecimal(70.8));
 
         private final BigDecimal conversionRate;
@@ -22,7 +23,7 @@ public class MoneyConverter {
         BigDecimal toEUR = ConversionRate.valueOf(startMoney.getCurrency().getCurrencyCode()).getConversionRate();
         BigDecimal toResultCurrency = ConversionRate.valueOf(resultCurrnecy.getCurrencyCode()).getConversionRate();
 
-        BigDecimal resultValue = (startMoney.getValue().divide(toEUR, RoundingMode.UNNECESSARY)).multiply(toResultCurrency);
+        BigDecimal resultValue = (startMoney.getValue().divide(toEUR, RoundingMode.UP)).multiply(toResultCurrency);
 
         return new Money(resultCurrnecy,resultValue);
     }

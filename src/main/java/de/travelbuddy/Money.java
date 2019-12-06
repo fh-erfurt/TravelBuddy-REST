@@ -28,4 +28,11 @@ public class Money {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
+
+    public Money ConvertTo(Currency resultCurrency) {
+
+        MoneyConverter converter = new MoneyConverter();
+
+        return converter.ConvertFromTo(this,resultCurrency);
+    }
 }

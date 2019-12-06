@@ -1,7 +1,6 @@
 package de.travelbuddy;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class Expense {
     public Money GetMoneyPerPerson(){
 
         if (involvedPersons.size()!=0)
-            return new Money(price.getCurrency(), this.price.getValue().divide(new BigDecimal(involvedPersons.size()), RoundingMode.UNNECESSARY));
+            return new Money(price.getCurrency(), this.price.getValue().divide(new BigDecimal(involvedPersons.size()), RoundingMode.UP));
 
 
         else
