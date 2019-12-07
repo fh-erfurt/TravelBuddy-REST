@@ -1,20 +1,33 @@
 package de.travelbuddy;
 
-public class Adress {
+public class ContactDetails {
 
+    private String phone;
+    private String email;
     private String town;
     private String street;
     private int streetNumber;
     private String ZIP;
     private String country;
 
-    public Adress(String town, String street, int streetNumber, String ZIP, String country) {
+
+    public ContactDetails(String phone, String email,String town, String street, int streetNumber, String ZIP, String country) {
+        this.phone = phone;
+        this.email = email;
         this.town = town;
         this.street = street;
         this.streetNumber = streetNumber;
         this.ZIP = ZIP;
         this.country = country;
     }
+
+    public String getPhone() {return phone;}
+
+    public void setPhone(String phone) {this.phone = phone;}
+
+    public String getEmail() {return email;}
+
+    public void setEmail(String email) {this.email = email;}
 
     public String getTown() {return town;}
 

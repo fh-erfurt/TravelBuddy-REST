@@ -1,5 +1,7 @@
 package de.travelbuddy;
 
+import de.travelbuddy.places.Place;
+
 import java.time.LocalDateTime;
 
 public class Connection {

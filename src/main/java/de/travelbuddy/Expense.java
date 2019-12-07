@@ -1,5 +1,7 @@
 package de.travelbuddy;
 
+import de.travelbuddy.finance.Money;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -11,8 +13,9 @@ public class Expense {
     private String title;
     private String description;
     private Money price;
-    private List <Person> involvedPersons;
+    private List<Person> involvedPersons;
     private planned status;
+    private boolean perPerson;
 
     enum planned
     {
@@ -20,13 +23,14 @@ public class Expense {
     }
 
     public Expense(String title, String description, Money price,
-                   List<Person> involvedPersons, planned status) {
+                   List<Person> involvedPersons, planned status, boolean perPerson) {
 
         this.title = title;
         this.description = description;
         this.price = price;
         this.involvedPersons = involvedPersons;
         this.status = status;
+        this.perPerson = perPerson;
     }
 
     public String getTitle() {return title;}
@@ -49,14 +53,31 @@ public class Expense {
 
     public void setStatus(planned status) {this.status = status;}
 
+    public boolean getPerPerson() {return perPerson;}
 
-    public Money GetMoneyPerPerson(){
+    public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
+
+    public Money getMoneyPerPerson(){
 
         if (involvedPersons.size()!=0)
             return new Money(price.getCurrency(), this.price.getValue().divide(new BigDecimal(involvedPersons.size()), RoundingMode.UP));
-
-
         else
             return new Money(price.getCurrency(), this.price.getValue()); // Exception werfen? -> Keine Person eingetragen.
+    }
+
+    public void addPerson(Person person) {
+        if (involvedPersons.contains(person)) { //Todo Langsam? Objekt wird hier vermutlich komplett geprüft da kein Key vorhanden
+            throw new IllegalArgumentException("Person already added.");
+        }
+
+        involvedPersons.add(person);
+    }
+
+    public void removePerson(Person person) {
+        if (!involvedPersons.contains(person)) { //Todo Langsam? Objekt wird hier vermutlich komplett geprüft da kein Key vorhanden
+            throw new IllegalArgumentException("Person does not exist.");
+        }
+
+        involvedPersons.remove(person); //Todo ebenfalls langsam?
     }
 }

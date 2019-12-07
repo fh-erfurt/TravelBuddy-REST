@@ -1,5 +1,9 @@
 package de.travelbuddy;
 
+import de.travelbuddy.finance.Money;
+import de.travelbuddy.places.Place;
+
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 
@@ -7,17 +11,13 @@ public class Journey {
 
     private String title;
 
-    private List<Place> places; //Unterscheiden zwischen accomodations und sights
+    private List<Place> places;
     private List<Person> persons;
-    private List<Expense> expenses;
-    private List<Connection> connections;
 
-    public Journey(String title, List<Place> places, List<Person> persons, List<Expense> expenses, List<Connection> connections) {
+    public Journey(String title, List<Place> places, List<Person> persons) {
         this.title = title;
         this.places = places;
         this.persons = persons;
-        this.expenses = expenses;
-        this.connections = connections;
     }
 
     public String getTitle() {
@@ -42,19 +42,6 @@ public class Journey {
         this.persons = persons;
     }
 
-    public List<Expense> getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(List<Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    public List<Connection> getConnections() { return connections; }
-
-    public void setConnections(List<Connection> connections) { this.connections = connections; }
-
-
     public void addPlace(Place newPlace) {
         places.add(newPlace);
     }
@@ -63,24 +50,18 @@ public class Journey {
         persons.add(newPerson);
     }
 
-    public void addExpense(Expense newExpense) {
-        expenses.add(newExpense);
-    }
-
-    public void addConnection(Connection newConnection) {
-        connections.add(newConnection);
-    }
-
-  /*
 
     public Money TotalCost(Currency currency) {
+        Money total = new Money(currency, new BigDecimal(0));
 
+        places.forEach((n) -> total.add(n.TotalCost(currency)));
+
+        return total;
     }
 
     public Money TotalCostOfPerson(Currency currency,Person person) {
-
+        //Todo implement!
+        return new Money(currency, new BigDecimal(0));
     }
 
-
-   */
 }
