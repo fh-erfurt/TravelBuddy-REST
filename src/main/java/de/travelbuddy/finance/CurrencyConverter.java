@@ -20,7 +20,7 @@ public class CurrencyConverter implements ICurrencyConverter {
 
 
 
-    public Money convert(Money money, Currency currency) {
+    public Money convert(Money money, Currency currency) { //Todo Umbauen und GetRate verwenden (wenn die gebaut ist)
         BigDecimal toEUR = ConversionRate.valueOf(money.getCurrency().getCurrencyCode()).getConversionRate();
         BigDecimal toResultCurrency = ConversionRate.valueOf(currency.getCurrencyCode()).getConversionRate();
 
