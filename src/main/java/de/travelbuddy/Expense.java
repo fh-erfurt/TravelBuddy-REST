@@ -66,7 +66,7 @@ public class Expense {
     }
 
     public void addPerson(Person person) {
-        if (involvedPersons.contains(person)) { //Todo Langsam? Objekt wird hier vermutlich komplett geprüft da kein Key vorhanden
+        if (isInvolved(person)) {
             throw new IllegalArgumentException("Person already added.");
         }
 
@@ -74,10 +74,14 @@ public class Expense {
     }
 
     public void removePerson(Person person) {
-        if (!involvedPersons.contains(person)) { //Todo Langsam? Objekt wird hier vermutlich komplett geprüft da kein Key vorhanden
+        if (!isInvolved(person)) {
             throw new IllegalArgumentException("Person does not exist.");
         }
 
-        involvedPersons.remove(person); //Todo ebenfalls langsam?
+        involvedPersons.remove(person);
+    }
+
+    public boolean isInvolved(Person person) {
+        return involvedPersons.contains(person); //Todo Langsam? Objekt wird hier vermutlich komplett geprüft da kein Key vorhanden
     }
 }

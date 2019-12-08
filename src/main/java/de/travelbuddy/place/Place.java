@@ -141,12 +141,21 @@ public abstract class Place {
     public Money TotalCost(Currency currency) {
         Money total = new Money(currency, new BigDecimal(0));
 
-        expenses.forEach((n) -> total.add(n.getPrice()));
+        expenses.stream()
+                .filter(x -> x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
+                .forEach((n) -> total.add(n.getPrice()));
+
         return total;
     }
 
     public Money TotalCostOfPerson(Currency currency,Person person) {
-        //Todo implement!
-        return new Money(currency, new BigDecimal(0));
+        Money total = new Money(currency, new BigDecimal(0));
+
+        expenses.stream()
+                .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
+                        && x.isInvolved(person))
+                .forEach((n) -> total.add(n.getPrice()));
+
+        return total;
     }
 }

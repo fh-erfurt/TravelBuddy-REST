@@ -60,8 +60,11 @@ public class Journey {
     }
 
     public Money TotalCostOfPerson(Currency currency,Person person) {
-        //Todo implement!
-        return new Money(currency, new BigDecimal(0));
+        Money total = new Money(currency, new BigDecimal(0));
+
+        places.forEach((n) -> total.add(n.TotalCostOfPerson(currency, person)));
+
+        return total;
     }
 
 }
