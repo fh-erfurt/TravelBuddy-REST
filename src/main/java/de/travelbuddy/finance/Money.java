@@ -30,7 +30,6 @@ public class Money {
     }
 
     public Money convert(Currency resultCurrency) {
-
         ICurrencyConverter converter = CurrencyConverterFactory.create();
         return converter.convert(this, resultCurrency);
     }

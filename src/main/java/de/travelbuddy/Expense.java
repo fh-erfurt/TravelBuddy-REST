@@ -17,7 +17,7 @@ public class Expense {
     private planned status;
     private boolean perPerson;
 
-    enum planned
+    public enum planned
     {
         PLANNED,ISSUED,CANCELED
     }
