@@ -1,4 +1,4 @@
-package de.travelbuddy.places;
+package de.travelbuddy.place;
 
 import de.travelbuddy.*;
 import de.travelbuddy.finance.Money;

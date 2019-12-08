@@ -1,12 +1,9 @@
 de\travelbuddy\JourneyManager.class
 de\travelbuddy\ContactDetails.class
 de\travelbuddy\Expense$planned.class
-de\travelbuddy\places\Sight.class
-de\travelbuddy\places\Accomodation.class
 de\travelbuddy\finance\ICurrencyConverter.class
 de\travelbuddy\Journey.class
 de\travelbuddy\Coordinates.class
-de\travelbuddy\places\Accomodation$accomodationType.class
 de\travelbuddy\Connection.class
 de\travelbuddy\finance\CurrencyConverter$ConversionRate.class
 de\travelbuddy\Travelbuddy.class
@@ -16,4 +13,3 @@ de\travelbuddy\finance\CurrencyConverterFactory.class
 de\travelbuddy\Person.class
 de\travelbuddy\Expense.class
 de\travelbuddy\finance\CurrencyConverter.class
-de\travelbuddy\places\Place.class

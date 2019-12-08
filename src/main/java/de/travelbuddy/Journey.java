@@ -1,7 +1,7 @@
 package de.travelbuddy;
 
 import de.travelbuddy.finance.Money;
-import de.travelbuddy.places.Place;
+import de.travelbuddy.place.Place;
 
 import java.math.BigDecimal;
 import java.util.Currency;

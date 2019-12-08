@@ -1,9 +1,7 @@
-package de.travelbuddy;
-import static org.junit.jupiter.api.Assertions.*;
+package de.travelbuddy.place;
 import org.junit.jupiter.api.Test;
 
-
-public class CoordinatesTest {
+public class PlaceTest {
     @Test
     public void Test() {
         //Given

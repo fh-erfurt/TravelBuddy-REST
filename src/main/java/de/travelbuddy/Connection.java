@@ -1,6 +1,6 @@
 package de.travelbuddy;
 
-import de.travelbuddy.places.Place;
+import de.travelbuddy.place.Place;
 
 import java.time.LocalDateTime;
 

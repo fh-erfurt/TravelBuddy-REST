@@ -1,8 +1,6 @@
-package de.travelbuddy;
-import static org.junit.jupiter.api.Assertions.*;
+package de.travelbuddy.place;
 import org.junit.jupiter.api.Test;
-
-public class PlaceTest {
+public class SightTest {
     @Test
     public void Test() {
         //Given

@@ -1,4 +1,4 @@
-package de.travelbuddy;
+package de.travelbuddy.finance;
 
 import de.travelbuddy.finance.Money;
 import org.junit.jupiter.api.Test;
@@ -12,22 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class MoneyTest {
 
     @Test
-    public void shouldConvertRUBToEUR (){
-        /*
+    public void shouldConvertRUBToEUR(){
+
         //Given
         Currency RUB = Currency.getInstance("RUB");
         Currency EUR = Currency.getInstance("EUR");
         Money testMoney = new Money(RUB, BigDecimal.valueOf(100));
 
         //When
-        testMoney.ConvertTo(EUR);
-
+        Money newMoney = testMoney.convert(EUR);
 
         //Then
-        assertEquals(testMoney.getCurrency().getCurrencyCode(),"EUR");
-        assertEquals(testMoney.getValue(),testMoney.getValue().divide(new BigDecimal(70.8), RoundingMode.UP));
-
-         */
+        assertEquals(newMoney.getCurrency().getCurrencyCode(),"EUR");
+        assertEquals(newMoney.getValue(),testMoney.getValue().divide(new BigDecimal(70.8), RoundingMode.UP));
     }
 
 }
