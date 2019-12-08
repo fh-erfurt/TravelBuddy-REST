@@ -9,7 +9,10 @@ public class CurrencyConverter implements ICurrencyConverter {
     enum ConversionRate
     {
         // nach ISO 4217
-        EUR (new BigDecimal(1)), USD (new BigDecimal(1.1)), CNY (new BigDecimal(7.82)), RUB (new BigDecimal(70.8));
+        EUR (new BigDecimal(1)),
+        USD (new BigDecimal(1.1)),
+        CNY (new BigDecimal(7.82)),
+        RUB (new BigDecimal(70.8));
 
         private final BigDecimal conversionRate;
 

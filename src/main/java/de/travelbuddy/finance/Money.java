@@ -31,8 +31,7 @@ public class Money {
 
     public Money convert(Currency resultCurrency) {
 
-        CurrencyConverter converter = new CurrencyConverter();
-
+        ICurrencyConverter converter = CurrencyConverterFactory.create();
         return converter.convert(this, resultCurrency);
     }
 
