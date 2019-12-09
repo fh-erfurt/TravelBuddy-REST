@@ -23,16 +23,19 @@ public class CurrencyConverter implements ICurrencyConverter {
 
 
 
-    public Money convert(Money money, Currency currency) { //Todo Umbauen und GetRate verwenden (wenn die gebaut ist)
-        BigDecimal toEUR = ConversionRate.valueOf(money.getCurrency().getCurrencyCode()).getConversionRate();
-        BigDecimal toResultCurrency = ConversionRate.valueOf(currency.getCurrencyCode()).getConversionRate();
+    public Money convert(Money money, Currency currencyTarget) { //Todo Test bauen
 
-        BigDecimal resultValue = (money.getValue().divide(toEUR, RoundingMode.UP)).multiply(toResultCurrency);
+        BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
 
-        return new Money(currency,resultValue);
+        return new Money(currencyTarget,money.getValue().multiply(rate));
     }
 
-    public BigDecimal getRate(Currency currency_source, Currency currency_target) {
-        return new BigDecimal(0); //Todo implement!
+    public BigDecimal getRate(Currency currencySource, Currency currencyTarget) {
+
+        BigDecimal toEUR = ConversionRate.valueOf(currencySource.getCurrencyCode()).getConversionRate();
+        BigDecimal toResultCurrency = ConversionRate.valueOf(currencyTarget.getCurrencyCode()).getConversionRate();
+
+        return toResultCurrency.divide(toEUR,RoundingMode.UP);
+
     }
 }
