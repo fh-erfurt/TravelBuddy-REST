@@ -6,13 +6,16 @@ import org.junit.jupiter.api.Test;
 public class CoordinatesTest {
     @Test
     public void correctly_instantiate_Coordinates() {
-        //Given
 
+        String latitude = "40.689249";
+        String longitude = "-74.044500";
 
-        //When
+        Coordinates coordinates = new Coordinates(latitude, longitude);
 
-
-        //Then
-
+        assertEquals(coordinates.getLatitude(), latitude);
+        assertEquals(coordinates.getLongitude(), longitude);
     }
 }
+
+
+

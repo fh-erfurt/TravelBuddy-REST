@@ -3,18 +3,18 @@ package de.travelbuddy;
 public class Coordinates {
 
     private String latitude;
-    private String longitute;
+    private String longitude;
 
-    public Coordinates(String latitude, String longitute) {
+    public Coordinates(String latitude, String longitude) {
         this.latitude = latitude;
-        this.longitute = longitute;
+        this.longitude = longitude;
     }
 
     public String getLatitude() {return latitude;}
 
     public void setLatitude(String latitude) {this.latitude = latitude;}
 
-    public String getLongitute() {return longitute;}
+    public String getLongitude() {return longitude;}
 
-    public void setLongitute(String longitute) {this.longitute = longitute;}
+    public void setLongitude(String longitude) {this.longitude = longitude;}
 }
