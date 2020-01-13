@@ -24,6 +24,7 @@ public class JourneyTest {
         assertEquals(journey.getTitle(), title);
         assertEquals(journey.getPlaces(), places);
         assertEquals(journey.getPersons(), persons);
+
     }
 }
 

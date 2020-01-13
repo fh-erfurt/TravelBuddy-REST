@@ -22,7 +22,6 @@ public class CurrencyConverter implements ICurrencyConverter {
     }
 
 
-
     public Money convert(Money money, Currency currencyTarget) { //Todo Test bauen
 
         BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
