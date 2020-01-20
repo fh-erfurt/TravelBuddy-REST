@@ -10,13 +10,14 @@ public class CurrencyConverter implements ICurrencyConverter {
     {
         // nach ISO 4217
         EUR (new BigDecimal(1)),//Euro
-        USD (new BigDecimal(1.1)),//US Dollar
+        CHF (new BigDecimal(1.07)),//Schweizer Franken
         CNY (new BigDecimal(7.82)),//Yuan
+        CZK (new BigDecimal(25.15)),//Tschechische Krone
+        PLN (new BigDecimal(4.24));//Polnischer Zloty
         RUB (new BigDecimal(70.8)),//Rubel
-        CZK (new BigDecimal()),//Krone
-        CHF (new BigDecimal()),//Franken
-        PLN (new BigDecimal());//Zloty
-
+        USD (new BigDecimal(1.1)),//US Dollar
+        
+    
         private final BigDecimal conversionRate;
 
         ConversionRate(BigDecimal conversionRate) { this.conversionRate = conversionRate; }
