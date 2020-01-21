@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 
+//TODO remove Methoden erstellen (Place und Person), getMethoden für einzelne places/personen erstellen (brauchen wir überhaupt einen getter für die komplette Liste?)
 public class Journey {
 
     private String title;
