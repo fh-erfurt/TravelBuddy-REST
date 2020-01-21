@@ -18,4 +18,6 @@ public class JourneyManager {
 
         return journeys.remove(journey.getTitle());
     }
+
+    //TODO get Methode erstellen
 }
