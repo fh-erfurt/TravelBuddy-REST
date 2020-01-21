@@ -9,18 +9,21 @@ public class CurrencyConverter implements ICurrencyConverter {
     enum ConversionRate
     {
         // nach ISO 4217
-        EUR (new BigDecimal(1)),
-        USD (new BigDecimal(1.1)),
-        CNY (new BigDecimal(7.82)),
-        RUB (new BigDecimal(70.8));
-
+        EUR (new BigDecimal(1)),//Euro
+        CHF (new BigDecimal(1.07)),//Schweizer Franken
+        CNY (new BigDecimal(7.82)),//Yuan
+        CZK (new BigDecimal(25.15)),//Tschechische Krone
+        PLN (new BigDecimal(4.24)),//Polnischer Zloty
+        RUB (new BigDecimal(70.8)),//Rubel
+        USD (new BigDecimal(1.1));//US Dollar
+        
+    
         private final BigDecimal conversionRate;
 
         ConversionRate(BigDecimal conversionRate) { this.conversionRate = conversionRate; }
 
         public BigDecimal getConversionRate() { return conversionRate; }
     }
-
 
 
     public Money convert(Money money, Currency currencyTarget) { //Todo Test bauen
