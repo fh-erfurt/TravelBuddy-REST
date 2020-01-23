@@ -34,7 +34,7 @@ public class Money {
         return converter.convert(this, resultCurrency);
     }
 
-    public void add(Money money)
+    public Money add(Money money)
     {
         Money newMoney = null;
 
@@ -44,9 +44,10 @@ public class Money {
             newMoney = money;
 
         this.setValue(this.getValue().add(newMoney.getValue()));
+        return this;
     }
 
-    public void subtract(Money money)
+    public Money subtract(Money money)
     {
         Money newMoney = null;
 
@@ -56,5 +57,6 @@ public class Money {
             newMoney = money;
 
         this.setValue(this.getValue().subtract(newMoney.getValue()));
+        return this;
     }
 }

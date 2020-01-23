@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public abstract class Place {
@@ -96,48 +97,84 @@ public abstract class Place {
         this.involvedPersons = involvedPersons;
     }
 
-    public void addPerson(Person person) {
+    /**
+     * Add a person to this place
+     * @param person The person to add
+     * @throws IllegalArgumentException When the given person already exists for this place
+     */
+    public void addPerson(Person person) throws IllegalArgumentException {
         if (involvedPersons.contains(person))
             throw new IllegalArgumentException("Person is already involved.");
 
         involvedPersons.add(person);
     }
 
-    public void removePerson(Person person) {
+    /**
+     * Removes a person from this place
+     * @param person THe person to remove
+     * @throws IllegalArgumentException When the given person does not exist for this place
+     */
+    public void removePerson(Person person) throws IllegalArgumentException {
         if (!involvedPersons.contains(person))
             throw new IllegalArgumentException("Person is not involved.");
 
         involvedPersons.remove(person);
     }
 
-    public void addExpense(Expense expense) {
+    /**
+     * Adds an expense to the this place
+     * @param expense The expense to add
+     * @throws IllegalArgumentException When the expense already exists for this place
+     */
+    public void addExpense(Expense expense) throws IllegalArgumentException {
         if (expenses.contains(expense))
             throw new IllegalArgumentException("Expense does already exist.");
 
         expenses.add(expense);
     }
 
-    public void removeExpense(Expense expense) {
+    /**
+     * Removes an expense from this place
+     * @param expense The expense to remove
+     * @throws IllegalArgumentException When the given expense does not exist for this place
+     */
+    public void removeExpense(Expense expense) throws IllegalArgumentException {
         if (!expenses.contains(expense))
             throw new IllegalArgumentException("Expense does not exist.");
 
         expenses.remove(expense);
     }
 
-    public void addConnection(Connection connection) {
+    /**
+     * Adds a connection to this place
+     * @param connection The connection to add
+     * @throws IllegalArgumentException When the place already exists or does not start/end at this place
+     */
+    public void addConnection(Connection connection) throws IllegalArgumentException {
         if (connectionsToNextPlace.contains(connection))
             throw new IllegalArgumentException("Connection does already exist.");
-
+        if (!connection.getStart().equals(this) && !connection.getEnd().equals(this))
+            throw new IllegalArgumentException("Connection does not start or end at this place.");
         connectionsToNextPlace.add(connection);
     }
 
-    public void removeConnection(Connection connection) {
+    /**
+     * Removes a connection from this place
+     * @param connection Connection to remove
+     * @throws IllegalArgumentException When the given connection does not exists for this place
+     */
+    public void removeConnection(Connection connection) throws IllegalArgumentException {
         if (!connectionsToNextPlace.contains(connection))
             throw new IllegalArgumentException("Connection does not exist.");
 
         connectionsToNextPlace.remove(connection);
     }
 
+    /**
+     * Calculate the total costs for this place
+     * @param currency Currency in which to costs should be converted
+     * @return The calculated total costs in Money
+     */
     public Money TotalCost(Currency currency) {
         Money total = new Money(currency, new BigDecimal(0));
 
@@ -148,14 +185,55 @@ public abstract class Place {
         return total;
     }
 
+    /**
+     * Calculate the total costs for the given person for this place
+     * @param currency Currency in which to costs should be converted
+     * @param person The person dor which the costs should be calculated
+     * @return The calculated total costs in Money
+     */
     public Money TotalCostOfPerson(Currency currency,Person person) {
         Money total = new Money(currency, new BigDecimal(0));
 
         expenses.stream()
-                .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
-                        && x.isInvolved(person))
+                .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED))
+                .filter(x -> x.isInvolved(person))
                 .forEach((n) -> total.add(n.getPrice()));
 
         return total;
+    }
+
+    /**
+     * Get all connections between two places
+     * @param from The place where the connection should start
+     * @param to The place where the connection should end
+     * @return A collection of connections
+     */
+    public List<Connection> getConnection(Place from, Place to) {
+        return connectionsToNextPlace.stream()
+                .filter(conn -> conn.getStart().equals(from))
+                .filter(conn -> conn.getEnd().equals(to))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get all expenses with the given title
+     * @param title Title of the expenses to search for
+     * @return A collection of expenses
+     */
+    public List<Expense> getExpense(String title) {
+        return expenses.stream()
+                .filter(exp -> exp.getTitle().equals(title))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get all persons with the given name, who are involved
+     * @param name Name of the persons to search for
+     * @return A collection of persons
+     */
+    public List<Person> getPersons(String name) {
+        return involvedPersons.stream()
+                .filter(pers -> pers.getName().equals(name))
+                .collect(Collectors.toList());
     }
 }

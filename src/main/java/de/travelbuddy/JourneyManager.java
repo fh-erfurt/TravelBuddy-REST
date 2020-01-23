@@ -19,5 +19,10 @@ public class JourneyManager {
         return journeys.remove(journey.getTitle());
     }
 
-    //TODO get Methode erstellen
+    public Journey get(String name) throws IllegalArgumentException {
+        if (!journeys.containsKey(name))
+            throw new IllegalArgumentException(String.format("Journey with the title '%s' does not exists", name));
+
+        return journeys.get(name);
+    }
 }

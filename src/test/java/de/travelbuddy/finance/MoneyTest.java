@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MoneyTest {
 
     @Test
-    public void shouldConvertRUBToEUR(){
+    public void should_convert_RUB_to_EUR(){
 
         //Given
         Currency RUB = Currency.getInstance("RUB");
@@ -25,6 +25,6 @@ class MoneyTest {
         //Then
         assertEquals(newMoney.getCurrency().getCurrencyCode(),"EUR");
         // TODO assertEquals(newMoney.getValue(),testMoney.getValue().divide(new BigDecimal(70.8), RoundingMode.UP));
+        //TODO more generic way?
     }
-
 }

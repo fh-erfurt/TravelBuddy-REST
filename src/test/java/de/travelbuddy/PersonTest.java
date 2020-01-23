@@ -1,7 +1,7 @@
 package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 
+import org.junit.Test;
 import java.time.LocalDate;
 
 public class PersonTest {
