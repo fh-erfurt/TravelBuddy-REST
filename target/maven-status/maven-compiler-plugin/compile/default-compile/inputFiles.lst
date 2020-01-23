@@ -1,17 +1,18 @@
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\ContactDetails.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\finance\CurrencyConverter.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\finance\CurrencyConverterFactory.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\place\Accommodation.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\place\TravelPoint.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Main.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Coordinates.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\place\Sight.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\JourneyManager.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\finance\ICurrencyConverter.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Connection.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Journey.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Person.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\place\Place.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\finance\Money.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Expense.java
-D:\Richtiges Java Projekt\src\main\java\de\travelbuddy\Travelbuddy.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\finance\CurrencyConverter.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\place\Place.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Connection.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Expense.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Travelbuddy.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\place\TravelPoint.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\finance\ICurrencyConverter.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\finance\Money.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Journey.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\ContactDetails.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Coordinates.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\finance\CurrencyConverterFactory.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\JourneyManager.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\place\Accommodation.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Main.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\navigation\Menu.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\place\Sight.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\main\java\de\travelbuddy\Person.java

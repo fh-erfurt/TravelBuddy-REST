@@ -1,6 +1,7 @@
 package de.travelbuddy.navigation;
 
 import de.travelbuddy.*;
+import de.travelbuddy.place.Accommodation;
 import de.travelbuddy.place.Place;
 
 import java.time.LocalDateTime;
@@ -10,19 +11,19 @@ import java.util.Scanner;
 //TODO Exception für Menü Ausfall
 public class Menu {
 
-    public boolean menuJourneyManager (){
+    public boolean menuJourneyManager() {
 
-        JourneyManager Test =  new JourneyManager();
+        JourneyManager Test = new JourneyManager();
 
         System.out.println("\t-- Journeymanager --\n\n " +
-                        "1 - Journey anlegen \n" +
-                        "2 - Journey auswählen \n" +
-                        "3 - Journey löschen \n" +
-                        "0 - Programm Beenden");
+                "1 - Journey anlegen \n" +
+                "2 - Journey auswählen \n" +
+                "3 - Journey löschen \n" +
+                "0 - Programm Beenden");
 
         Scanner scMenu = new Scanner(System.in);
         int menu;
-        menu =  scMenu.nextInt();
+        menu = scMenu.nextInt();
 
         switch (menu) {
             case 1://Journey anlegen
@@ -44,16 +45,15 @@ public class Menu {
             case 0://Programm Beenden
                 scMenu.close();
                 return true;
-                break;
 
             default:
-
+                return false;
         }
 
-
+        return false; //Todo remove
     }
 
-    public boolean menuJourney(Journey selectedJourney){
+    public boolean menuJourney(Journey selectedJourney) {
         //TODO Journey übersicht anzeigen
         System.out.println("\t-- Journey " + selectedJourney.getTitle() + "--\n\n" +
                 "1 - Place anlegen \n" +
@@ -67,9 +67,9 @@ public class Menu {
 
         Scanner scMenuJ = new Scanner(System.in);
         int menu;
-        menu =  scMenuJ.nextInt();
+        menu = scMenuJ.nextInt();
 
-        switch (menu){
+        switch (menu) {
             case 1://Place anlegen
                 selectedJourney.addPlace(createPlace());
                 //TODO Ausgabe Place angelegt
@@ -88,7 +88,7 @@ public class Menu {
                 break;
 
             case 4://Person anlegen
-                selectedJourney.addPerson(createPerson());
+                //selectedJourney.addPerson(createPerson());
                 //TODO Ausgabe Person angelegt
                 break;
 
@@ -100,7 +100,7 @@ public class Menu {
                 break;
 
             case 6://Person löschen
-               //TODO selectedJourney.removePerson(selectedJourney.getPerson(selectPerson))
+                //TODO selectedJourney.removePerson(selectedJourney.getPerson(selectPerson))
 
                 break;
 
@@ -111,14 +111,14 @@ public class Menu {
             case 0://Journey verlassen
                 scMenuJ.close();
                 return true;
-                break;
 
             default:
-
+                return false;
         }
+        return false; //Todo remove
     }
 
-    public boolean menuPlace(Place selectedPlace){
+    public boolean menuPlace(Place selectedPlace) {
         //TODO Place übersicht anzeigen
         System.out.println("\t-- Place " + selectedPlace.getName() + "--\n\n" +
                 "1 - Expense anlegen \n" +
@@ -129,11 +129,11 @@ public class Menu {
 
         Scanner scMenuPl = new Scanner(System.in);
         int menu;
-        menu =  scMenuPl.nextInt();
+        menu = scMenuPl.nextInt();
 
         switch (menu) {
             case 1://Expense anlegen
-                selectedPlace.addExpense(createExpense());
+                //selectedPlace.addExpense(createExpense());
                 //TODO Ausgabe Expense angelegt
                 break;
 
@@ -156,25 +156,24 @@ public class Menu {
             case 0://Place verlassen
                 scMenuPl.close();
                 return true;
-                break;
 
             default:
-
+                return false;
         }
 
-
+        return false; //Todo remove
     }
 
-    public boolean menuPerson(Person selectedPerson){
+    public boolean menuPerson(Person selectedPerson) {
         System.out.println("\t-- Person " + selectedPerson.getFirstName() + " " + selectedPerson.getName() + "--\n\n" +
                 "1 - Person bearbeiten \n" +
                 "0 - Person verlassen");
 
         Scanner scMenuPer = new Scanner(System.in);
         int menu;
-        menu =  scMenuPer.nextInt();
+        menu = scMenuPer.nextInt();
 
-        switch (menu){
+        switch (menu) {
             case 1://Person bearbeiten
                 //TODO alterPerson(selectedPerson);
                 break;
@@ -182,15 +181,15 @@ public class Menu {
             case 0://Person verlassen
                 scMenuPer.close();
                 return true;
-                break;
 
             default:
+                return false;
         }
 
-
+        return false; //Todo remmove
     }
 
-    public boolean menuExpense(Expense selectedExpense){
+    public boolean menuExpense(Expense selectedExpense) {
         System.out.println("\t-- Expense " + selectedExpense.getTitle() + "--\n\n" +
                 "1 - Person hinzufügen \n" +
                 "2 - Person löschen \n" +
@@ -199,7 +198,7 @@ public class Menu {
 
         Scanner scMenuExp = new Scanner(System.in);
         int menu;
-        menu =  scMenuExp.nextInt();
+        menu = scMenuExp.nextInt();
 
         switch (menu) {
             case 1://Person hinzufügen
@@ -218,28 +217,26 @@ public class Menu {
             case 0://Expense verlassen
                 scMenuExp.close();
                 return true;
-            break;
 
             default:
-
+                return false;
         }
 
-
+        return false; //Todo remove
     }
+
     //TODO create funktionen mit structs realisieren?
-    public Journey createJourney ()
-    {
+    public Journey createJourney() {
         String tempTitle;
         Scanner scJourney = new Scanner(System.in);
         tempTitle = scJourney.nextLine();
 
         scJourney.close();
-        return new Journey(tempTitle,null,null);
+        return new Journey(tempTitle, null, null);
     }
 
     //TODO auf Accomodation umschreiben
-    public Place createPlace ()
-    {
+    public Place createPlace() {
         Scanner scPlace = new Scanner(System.in);
 
         System.out.println("Name:");
@@ -251,22 +248,26 @@ public class Menu {
         System.out.println("Longitude:");
         String tempLongitude = scPlace.nextLine();
 
-        ContactDetails tempCD = new ContactDetails("036167000","rektorat@fh-erfurt.de","Erfurt",
-                "Altonaer Straße",25,"99085v","Deutschland");
+        ContactDetails tempCD = new ContactDetails("036167000", "rektorat@fh-erfurt.de", "Erfurt",
+                "Altonaer Straße", 25, "99085v", "Deutschland");
 
 
-        Coordinates tempCoordinates = new Coordinates(tempLatitude,tempLongitude);
+        Coordinates tempCoordinates = new Coordinates(tempLatitude, tempLongitude);
 
         LocalDateTime tempArrival = LocalDateTime.now();
         LocalDateTime tempDeparture = LocalDateTime.now();
 
         scPlace.close();
-
+/*
         return new Place(tempName,tempCoordinates,tempCD,tempArrival,tempDeparture,null,
                 null,null);
+                */
 
+        return new Accommodation(null, null, null, null, null,
+                null, null, null, null);
     }
 
+/*
     public Person createPerson ()
     {
 
@@ -286,7 +287,7 @@ public class Menu {
 
     }
 
-
+*/
 
 
 

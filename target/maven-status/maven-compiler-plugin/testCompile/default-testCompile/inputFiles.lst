@@ -1,12 +1,13 @@
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\CoordinatesTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\finance\CurrencyConverterTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\finance\MoneyTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\place\SightTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\ConnectionTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\ExpenseTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\ContactDetailsTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\JourneyTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\MainTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\PersonTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\place\AccommodationTest.java
-D:\Richtiges Java Projekt\src\test\java\de\travelbuddy\place\PlaceTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\ContactDetailsTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\finance\CurrencyConverterFactoryTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\finance\CurrencyConverterTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\MainTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\JourneyTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\ConnectionTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\CoordinatesTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\place\PlaceTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\PersonTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\ExpenseTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\finance\MoneyTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\place\AccommodationTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\place\SightTest.java

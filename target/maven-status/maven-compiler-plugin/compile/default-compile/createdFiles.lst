@@ -11,6 +11,7 @@ de\travelbuddy\Travelbuddy.class
 de\travelbuddy\place\Accommodation.class
 de\travelbuddy\finance\Money.class
 de\travelbuddy\Main.class
+de\travelbuddy\navigation\Menu.class
 de\travelbuddy\finance\CurrencyConverterFactory.class
 de\travelbuddy\place\Sight.class
 de\travelbuddy\place\Place.class

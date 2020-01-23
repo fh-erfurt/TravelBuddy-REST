@@ -27,4 +27,59 @@ class MoneyTest {
         // TODO assertEquals(newMoney.getValue(),testMoney.getValue().divide(new BigDecimal(70.8), RoundingMode.UP));
         //TODO more generic way?
     }
+    @Test
+    public void subtract_with_same_currency(){
+        //Given
+        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
+        Money subtrVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(25));
+
+        //When
+        Money newVal = startVal.subtract(subtrVal);
+
+        //Then
+        assertEquals(newVal.getValue(), BigDecimal.valueOf(75));
+        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+    }
+
+    @Test
+    public void subtract_with_different_currency(){
+        //Given
+        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
+        Money subtrVal = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(25));
+
+        //When
+        Money newVal = startVal.subtract(subtrVal);
+
+        //Then
+        //assertEquals(newVal.getValue(), BigDecimal.valueOf(75)); //Todo value test
+        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+    }
+
+    @Test
+    public void add_with_same_currency(){
+        //Given
+        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
+        Money subtrVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(25));
+
+        //When
+        Money newVal = startVal.add(subtrVal);
+
+        //Then
+        assertEquals(newVal.getValue(), BigDecimal.valueOf(125));
+        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+    }
+
+    @Test
+    public void add_with_different_currency(){
+        //Given
+        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
+        Money subtrVal = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(25));
+
+        //When
+        Money newVal = startVal.subtract(subtrVal);
+
+        //Then
+        //assertEquals(newVal.getValue(), BigDecimal.valueOf(75)); //Todo value test
+        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+    }
 }
