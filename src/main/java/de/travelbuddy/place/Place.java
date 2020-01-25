@@ -175,7 +175,7 @@ public abstract class Place {
      * @param currency Currency in which to costs should be converted
      * @return The calculated total costs in Money
      */
-    public Money TotalCost(Currency currency) {
+    public Money totalCost(Currency currency) {
         Money total = new Money(currency, new BigDecimal(0));
 
         expenses.stream()
@@ -191,7 +191,7 @@ public abstract class Place {
      * @param person The person dor which the costs should be calculated
      * @return The calculated total costs in Money
      */
-    public Money TotalCostOfPerson(Currency currency,Person person) {
+    public Money totalCostOfPerson(Currency currency, Person person) {
         Money total = new Money(currency, new BigDecimal(0));
 
         expenses.stream()
@@ -235,5 +235,21 @@ public abstract class Place {
         return involvedPersons.stream()
                 .filter(pers -> pers.getName().equals(name))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Get possible connections to the desired destination, at a given start time
+     * @param destination Destination to travel to
+     * @param startTime Connections starting or after the given start time
+     * @param number The limit for connections to look for
+     * @return A collection of connections
+     */
+    public List<Connection> getPossibleConnectionsTo(Place destination, LocalDateTime startTime, int number)
+    {
+         return connectionsToNextPlace.stream()
+            .filter(conn -> conn.getEnd().equals(destination))
+            .filter(conn -> conn.getDeparture().isAfter(LocalDateTime.now().minusSeconds(1)))
+            .limit(number)
+            .collect(Collectors.toList());
     }
 }
