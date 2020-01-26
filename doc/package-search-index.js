@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"de.travelbuddy"},{"l":"de.travelbuddy.finance"},{"l":"de.travelbuddy.place"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"de.travelbuddy"},{"l":"de.travelbuddy.finance"},{"l":"de.travelbuddy.navigation"},{"l":"de.travelbuddy.place"}]
