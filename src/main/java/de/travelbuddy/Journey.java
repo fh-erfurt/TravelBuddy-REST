@@ -8,7 +8,7 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 
-//TODO remove Methoden erstellen (Place und Person), getMethoden für einzelne places/personen erstellen (brauchen wir überhaupt einen getter für die komplette Liste?)
+//TODO remove Methoden erstellen (Place und Person)
 public class Journey {
 
     private String title;
@@ -30,26 +30,52 @@ public class Journey {
         this.title = title;
     }
 
-    public List<Place> getPlaces() {
-        return places;
-    }
+    /**
+     * Adds a new place to this journey
+     * @param newPlace The place to add
+     * @throws IllegalArgumentException When the place already exists in this journey
+     */
+    public void addPlace(Place newPlace) throws IllegalArgumentException {
+        if (this.places.contains(newPlace))
+            throw new IllegalArgumentException("Place does already exist.");
 
-    public void setPlaces(List<Place> places) {
-        this.places = places;
-    }
-
-    public List<Person> getPersons() { return persons; }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public void addPlace(Place newPlace) {
         places.add(newPlace);
     }
 
-    public void addPerson(Person newPerson) {
+    /**
+     * Adds a new person to this journey
+     * @param newPerson The person to add
+     * @throws IllegalArgumentException When the person already exists in this journey
+     */
+    public void addPerson(Person newPerson) throws IllegalArgumentException {
+        if (this.persons.contains(newPerson))
+            throw new IllegalArgumentException("Person does already exist.");
+
         persons.add(newPerson);
+    }
+
+    /**
+     * Removes the given place from this journey
+     * @param place The place to remove
+     * @throws IllegalArgumentException When the place does not exist in this journey
+     */
+    public void removePlace(Place place) throws IllegalArgumentException {
+        if (!this.places.contains(place))
+            throw new IllegalArgumentException("Place does not exist.");
+
+        places.remove(place);
+    }
+
+    /**
+     * Removes the given person from this journey
+     * @param person The person to reemove
+     * @throws IllegalArgumentException When the person does not exist in this journey
+     */
+    public void removePerson(Person person) throws IllegalArgumentException {
+        if (!this.persons.contains(person))
+            throw new IllegalArgumentException("Person does not exist.");
+
+        persons.remove(person);
     }
 
     /**
@@ -57,10 +83,10 @@ public class Journey {
      * @param currency Currency in which to costs should be converted
      * @return The calculated total costs in Money
      */
-    public Money TotalCost(Currency currency) {
+    public Money totalCost(Currency currency) {
         Money total = new Money(currency, new BigDecimal(0));
 
-        places.forEach((n) -> total.add(n.TotalCost(currency)));
+        places.forEach((n) -> total.add(n.totalCost(currency)));
 
         return total;
     }
@@ -71,10 +97,10 @@ public class Journey {
      * @param person The person dor which the costs should be calculated
      * @return The calculated total costs in Money
      */
-    public Money TotalCostOfPerson(Currency currency,Person person) {
+    public Money totalCostOfPerson(Currency currency, Person person) {
         Money total = new Money(currency, new BigDecimal(0));
 
-        places.forEach((n) -> total.add(n.TotalCostOfPerson(currency, person)));
+        places.forEach((n) -> total.add(n.totalCostOfPerson(currency, person)));
 
         return total;
     }
@@ -82,10 +108,9 @@ public class Journey {
     /**
      * Search for a person with the given name
      * @param name Name of the person
-     * @return
-     * @throws IllegalArgumentException
+     * @return Returns Optional<Person>, check with isPresent()
      */
-    public Optional<Person> getPerson(String name) throws IllegalArgumentException {
+    public Optional<Person> getPerson(String name) {
         return persons.stream().filter(person -> person.getName().equals(name)).findFirst();
     }
 

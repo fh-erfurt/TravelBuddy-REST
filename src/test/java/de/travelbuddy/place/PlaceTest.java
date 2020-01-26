@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,7 +41,7 @@ public class PlaceTest {
         totalMoney.add(expense2.getPrice());
 
         //Then
-        assertEquals(place.TotalCost(Currency.getInstance("EUR")).getValue(), totalMoney.getValue());
+        assertEquals(place.totalCost(Currency.getInstance("EUR")).getValue(), totalMoney.getValue());
     }
 
     @Test
@@ -74,8 +73,8 @@ public class PlaceTest {
         totalMoney.add(expense2.getPrice());
 
         //Then
-        assertEquals(place.TotalCostOfPerson(Currency.getInstance("EUR"), person).getValue(), expense1.getPrice().getValue());
-        assertEquals(place.TotalCostOfPerson(Currency.getInstance("EUR"), person2).getValue(), expense2.getPrice().getValue());
+        assertEquals(place.totalCostOfPerson(Currency.getInstance("EUR"), person).getValue(), expense1.getPrice().getValue());
+        assertEquals(place.totalCostOfPerson(Currency.getInstance("EUR"), person2).getValue(), expense2.getPrice().getValue());
     }
 
     //Todo Test with multiple persons involved!

@@ -65,7 +65,7 @@ public class Expense {
             return new Money(price.getCurrency(), this.price.getValue()); // Exception werfen? -> Keine Person eingetragen.
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(Person person) throws IllegalArgumentException {
         if (isInvolved(person)) {
             throw new IllegalArgumentException("Person already added.");
         }
@@ -73,7 +73,7 @@ public class Expense {
         involvedPersons.add(person);
     }
 
-    public void removePerson(Person person) {
+    public void removePerson(Person person) throws IllegalArgumentException {
         if (!isInvolved(person)) {
             throw new IllegalArgumentException("Person does not exist.");
         }

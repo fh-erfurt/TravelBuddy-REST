@@ -1,5 +1,6 @@
 package de.travelbuddy;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import de.travelbuddy.place.Place;
 
 import java.time.LocalDateTime;
@@ -12,15 +13,28 @@ public class Connection {
     private Place start;
     private Place end;
     private Expense expense;
+    private Boolean used;
 
     public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
                       Place end, Expense expense) {
+        init(title, arrive, departure, start, end, expense, false);
+    }
+
+    public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
+                      Place end, Expense expense, Boolean used) {
+        init(title, arrive, departure, start, end, expense, used);
+    }
+
+    private void init(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
+                      Place end, Expense expense, Boolean used)
+    {
         this.title = title;
         this.arrive = arrive;
         this.departure = departure;
         this.start = start;
         this.end = end;
         this.expense = expense;
+        this.used = used;
     }
 
     public String getTitle() {return title;}
@@ -46,4 +60,8 @@ public class Connection {
     public Expense getExpense() {return expense;}
 
     public void setExpense(Expense expense) {this.expense = expense;}
+
+    public void setUsed(Boolean used) {this.used = used;}
+
+    public Boolean getUsed() {return this.used;}
 }
