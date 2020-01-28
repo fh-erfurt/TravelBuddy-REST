@@ -6,7 +6,7 @@ import de.travelbuddy.place.Place;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 //TODO remove Methoden erstellen (Place und Person)
 public class Journey {
@@ -108,18 +108,21 @@ public class Journey {
     /**
      * Search for a person with the given name
      * @param name Name of the person
-     * @return Returns Optional<Person>, check with isPresent()
+     * @return All persons with the given name
      */
-    public Optional<Person> getPerson(String name) {
-        return persons.stream().filter(person -> person.getName().equals(name)).findFirst();
+    public List<Person> getPerson(String name) {
+        return persons
+                .stream()
+                .filter(person -> person.getName().equals(name))
+                .collect(Collectors.toList());
     }
 
     /**
      * Search for a place with the given name.
      * @param name Name of the place
-     * @return Returns Optional<Place>, check with isPresent()
+     * @return All places with the given name
      */
-    public Optional<Place> getPlace(String name)
+    public List<Place> getPlace(String name)
     {
         return getPlace(name, Place.class);
     }
@@ -129,13 +132,13 @@ public class Journey {
      * @param <T>
      * @param name Name of the place
      * @param type Type of the place
-     * @return Returns Optional<Place>, check with isPresent()
+     * @return All places with the given name and type
      */
-    public  <T extends Place> Optional<Place> getPlace(String name, Class<T> type) {
+    public  <T extends Place> List<Place> getPlace(String name, Class<T> type) {
         return places.stream()
                     .filter(place -> place.getClass().isAssignableFrom(type))
                     .filter(place -> place.getName().equals(name))
-                    .findFirst();
+                    .collect(Collectors.toList());
     }
 
 }

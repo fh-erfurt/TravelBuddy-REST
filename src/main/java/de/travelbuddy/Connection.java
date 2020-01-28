@@ -1,6 +1,5 @@
 package de.travelbuddy;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import de.travelbuddy.place.Place;
 
 import java.time.LocalDateTime;

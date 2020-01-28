@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public abstract class Place {
+public class Place {
 
     private String name;
     private Coordinates coordinates;

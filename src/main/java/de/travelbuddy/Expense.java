@@ -65,7 +65,7 @@ public class Expense {
             return new Money(price.getCurrency(), this.price.getValue()); // Exception werfen? -> Keine Person eingetragen.
     }
 
-    public void addPerson(Person person) throws IllegalArgumentException {
+    public void addPerson(Person person) throws IllegalArgumentException { //Todo check if person is in journey
         if (isInvolved(person)) {
             throw new IllegalArgumentException("Person already added.");
         }
