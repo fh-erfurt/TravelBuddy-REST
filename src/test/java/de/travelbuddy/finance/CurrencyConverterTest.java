@@ -43,7 +43,7 @@ public class CurrencyConverterTest {
 
         //Then
 
-        assertEquals(Rate,BigDecimal.valueOf(0.93).setScale(2,RoundingMode.HALF_UP));
+        assertEquals(Rate,BigDecimal.valueOf(0.9345794393).setScale(10,RoundingMode.HALF_UP));
 
     }
 
@@ -61,7 +61,7 @@ public class CurrencyConverterTest {
 
         //Then
 
-        assertEquals(Rate,BigDecimal.valueOf(70).setScale(2,RoundingMode.HALF_UP));
+        assertEquals(Rate,BigDecimal.valueOf(70).setScale(10,RoundingMode.HALF_UP));
 
     }
 
@@ -79,7 +79,7 @@ public class CurrencyConverterTest {
 
         //Then
 
-        assertEquals(Rate,BigDecimal.valueOf(2.78).setScale(2,RoundingMode.HALF_UP));
+        assertEquals(Rate,BigDecimal.valueOf(2.7833001988).setScale(10,RoundingMode.HALF_UP));
 
     }
 }
