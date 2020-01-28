@@ -17,15 +17,14 @@ class MoneyTest {
         //Given
         Currency RUB = Currency.getInstance("RUB");
         Currency EUR = Currency.getInstance("EUR");
-        Money testMoney = new Money(RUB, BigDecimal.valueOf(100));
+        Money testMoney = new Money(RUB, BigDecimal.valueOf(70));
 
         //When
         Money newMoney = testMoney.convert(EUR);
 
         //Then
         assertEquals(newMoney.getCurrency().getCurrencyCode(),"EUR");
-        // TODO assertEquals(newMoney.getValue(),testMoney.getValue().divide(new BigDecimal(70.8), RoundingMode.UP));
-        //TODO more generic way?
+        assertEquals(newMoney.getValue(),testMoney.getValue().divide(new BigDecimal(70),2,RoundingMode.HALF_UP));
     }
     @Test
     public void subtract_with_same_currency(){
