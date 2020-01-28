@@ -12,9 +12,14 @@ public class PersonTest {
         String firstname = "Marcel";
         String name = "van der Heide";
         LocalDate bday = LocalDate.of(1990,5,2);
-
-        ContactDetails contact = new ContactDetails("9999999", "max@musterman.de", "Erfurt",
-                "Altonaer Str.", 25, "99086", "Germany" );
+        String town = "Erfurt",
+        String street = "Altonaer Straße",
+        int streetNumber =  25,
+        String ZIP = "99085",
+        String country = "Deutschland",
+        String phone = "036167000",
+        String email = "rektorat@fh-erfurt.de");
+        ContactDetails contact = new ContactDetails(phone, email, town,street, streetNumber,ZIP,country );
 
         Person person = new Person(firstname, name, bday, contact);
         

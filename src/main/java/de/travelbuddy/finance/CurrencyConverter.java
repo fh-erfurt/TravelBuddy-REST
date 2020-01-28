@@ -25,6 +25,12 @@ public class CurrencyConverter implements ICurrencyConverter {
         public BigDecimal getConversionRate() { return conversionRate; }
     }
 
+    /**
+     * Convert the money in the right currency
+     * @param money is the
+     * @param currencyTarget is the currency we want to get
+     * @return The Money with the target currency
+     */
 
     public Money convert(Money money, Currency currencyTarget) { //Todo Test bauen
 
@@ -32,6 +38,13 @@ public class CurrencyConverter implements ICurrencyConverter {
 
         return new Money(currencyTarget,money.getValue().multiply(rate));
     }
+
+    /**
+     * Get the Rate, between currency source and currency target
+     * @param currencySource is the currency we have
+     * @param currencyTarget is the currency we want to get
+     * @return the currency
+     */
 
     public BigDecimal getRate(Currency currencySource, Currency currencyTarget) {
 
