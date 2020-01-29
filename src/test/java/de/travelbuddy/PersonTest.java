@@ -9,6 +9,7 @@ public class PersonTest {
     public void correctly_instantiate_person()
     {
 
+        //Given
         String firstname = "Marcel";
         String name = "van der Heide";
         LocalDate bday = LocalDate.of(1990,5,2);
@@ -21,8 +22,10 @@ public class PersonTest {
         String email = "rektorat@fh-erfurt.de";
         ContactDetails contact = new ContactDetails(phone, email, town,street, streetNumber,ZIP,country );
 
+        //When
         Person person = new Person(firstname, name, bday, contact);
-        
+
+        //Then
         assertEquals(person.getFirstName(), firstname);
         assertEquals(person.getName(), name);
         assertEquals(person.getBirthdate(), bday);
