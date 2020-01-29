@@ -3,7 +3,6 @@ de\travelbuddy\ContactDetails.class
 de\travelbuddy\Expense$planned.class
 de\travelbuddy\finance\ICurrencyConverter.class
 de\travelbuddy\Journey.class
-de\travelbuddy\place\TravelPoint.class
 de\travelbuddy\Coordinates.class
 de\travelbuddy\Connection.class
 de\travelbuddy\finance\CurrencyConverter$ConversionRate.class

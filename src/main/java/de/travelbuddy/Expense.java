@@ -60,12 +60,13 @@ public class Expense {
     public Money getMoneyPerPerson(){
 
         if (involvedPersons.size()!=0)
-            return new Money(price.getCurrency(), this.price.getValue().divide(new BigDecimal(involvedPersons.size()), RoundingMode.UP));
+            return new Money(price.getCurrency(), this.price.getValue().divide(BigDecimal.valueOf(involvedPersons.size()),2, RoundingMode.HALF_UP));
         else
             return new Money(price.getCurrency(), this.price.getValue()); // Exception werfen? -> Keine Person eingetragen.
     }
 
     public void addPerson(Person person) throws IllegalArgumentException { //Todo check if person is in journey
+
         if (isInvolved(person)) {
             throw new IllegalArgumentException("Person already added.");
         }
