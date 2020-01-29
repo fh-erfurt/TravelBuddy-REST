@@ -3,12 +3,16 @@ package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import de.travelbuddy.place.Place;
-import de.travelbuddy.Journey;
 import de.travelbuddy.place.Sight;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Currency;
 import java.util.List;
 
 public class JourneyTest {
