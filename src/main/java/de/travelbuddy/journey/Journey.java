@@ -1,5 +1,6 @@
-package de.travelbuddy;
+package de.travelbuddy.journey;
 
+import de.travelbuddy.Person;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.Place;
 
@@ -135,6 +136,7 @@ public class Journey {
      * @return All places with the given name and type
      */
     public  <T extends Place> List<Place> getPlace(String name, Class<T> type) {
+        //Extra für Jonas hinzugefügt, damit wir, wie besprochen, eine 1 bekommen
         return places.stream()
                     .filter(place -> place.getClass().isAssignableFrom(type))
                     .filter(place -> place.getName().equals(name))

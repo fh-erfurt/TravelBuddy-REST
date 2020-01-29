@@ -2,6 +2,7 @@ package de.travelbuddy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import de.travelbuddy.journey.Journey;
 import de.travelbuddy.place.Sight;
 import org.junit.jupiter.api.Test;
 import de.travelbuddy.Person;
