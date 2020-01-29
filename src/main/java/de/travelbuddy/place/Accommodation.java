@@ -1,6 +1,7 @@
 package de.travelbuddy.place;
 
         import de.travelbuddy.*;
+        import de.travelbuddy.finance.Expense;
 
         import java.time.LocalDateTime;
         import java.util.List;

@@ -1,5 +1,6 @@
 package de.travelbuddy;
 
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.place.Place;
 
 import java.time.Duration;

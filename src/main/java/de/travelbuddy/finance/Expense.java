@@ -1,5 +1,7 @@
-package de.travelbuddy;
+package de.travelbuddy.finance;
 
+import de.travelbuddy.Person;
+import de.travelbuddy.finance.MissingPersonToDivideException;
 import de.travelbuddy.finance.Money;
 
 import java.math.BigDecimal;
@@ -57,12 +59,12 @@ public class Expense {
 
     public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
 
-    public Money getMoneyPerPerson(){
+    public Money getMoneyPerPerson() throws MissingPersonToDivideException { //TODO Exception überrprüfen (@Marcel)
 
         if (involvedPersons.size()!=0)
             return new Money(price.getCurrency(), this.price.getValue().divide(BigDecimal.valueOf(involvedPersons.size()),2, RoundingMode.HALF_UP));
         else
-            return new Money(price.getCurrency(), this.price.getValue()); // Exception werfen? -> Keine Person eingetragen.
+            throw new MissingPersonToDivideException("No Persons to divide Expense between");
     }
 
     public void addPerson(Person person) throws IllegalArgumentException { //Todo check if person is in journey

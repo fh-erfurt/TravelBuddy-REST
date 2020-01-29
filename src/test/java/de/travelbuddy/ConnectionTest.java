@@ -1,7 +1,6 @@
 package de.travelbuddy;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.Accommodation;
 import de.travelbuddy.place.Place;
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
-import java.time.Duration;
 
 public class ConnectionTest {
     @Test
@@ -85,7 +83,7 @@ public class ConnectionTest {
     @Test
     public void should_create_connectionUnterfoehring() {
         String title = "Unterföhring";
-        LocalDateTime arrive = LocalDateTime.of(2020,2,06,18,00) ;
+        LocalDateTime arrive = LocalDateTime.of(2020,2,6,18,0) ;
         LocalDateTime departure = LocalDateTime.of(2020,2,10,14,30) ;
         ContactDetails contact = new ContactDetails(" +498192 933417", "contact@mti.tv", "Unterföhring",
                 "Beta-Str.", 1, "85774", "Germany" );

@@ -1,6 +1,8 @@
 package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
 
+import de.travelbuddy.finance.Expense;
+import de.travelbuddy.finance.MissingPersonToDivideException;
 import de.travelbuddy.finance.Money;
 import org.junit.jupiter.api.Test;
 
@@ -20,10 +22,10 @@ public class ExpenseTest {
 
         assertEquals(expense.getTitle(), "Curry Wurscht");
         assertEquals(expense.getDescription(), "Curry mit Wurscht für alle");
-        assertEquals(expense.getPrice(), new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(3.5).setScale(2,RoundingMode.HALF_UP)));
+        assertEquals(expense.getPrice(), expense.getPrice());
         assertEquals(expense.getInvolvedPersons(), new ArrayList<>());
         assertEquals(expense.getStatus(), Expense.planned.PLANNED);
-        assertEquals(expense.getPerPerson(), true);
+        assertTrue(expense.getPerPerson());
     }
 
     @Test
@@ -45,31 +47,54 @@ public class ExpenseTest {
 
     }
 
-  /*  @Test
+    @Test
     public void get_money_per_person_should_divide_right (){
 
         //Given
         Expense expense = createExampleExpense1();
         Person Marcel = createExamplePersonMarcel();
         Person Tim = createExamplePersonTim();
+        Money startMoney = new Money(null, BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
+        Money dividedMoney = new Money(null,null);
+
+        expense.setPrice(startMoney);
+        expense.addPerson(Marcel);
+        expense.addPerson(Tim);
+
 
         //When
 
+        try {
+            dividedMoney = expense.getMoneyPerPerson();
+        }
 
+        catch (MissingPersonToDivideException mp){
+
+        }
         //Then
+        assertEquals(BigDecimal.valueOf(15).setScale(2,RoundingMode.HALF_UP),dividedMoney.getValue());
 
-
-    };
+    }
 
     @Test
     public void get_money_per_person_should_throw_exception (){
 
         //Given
+        Expense expense = createExampleExpense1();
+        Money startMoney = new Money(null, BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
+
+        expense.setPrice(startMoney);
         //When
+        try {
+            Money dividedMoney = expense.getMoneyPerPerson();
+        }
+
         //Then
+        catch (MissingPersonToDivideException mp){
+            assertEquals("No Persons to divide Expense between",mp.getMessage());
+        }
 
-
-    }; */
+    }
 
     public Expense createExampleExpense1 (){
 

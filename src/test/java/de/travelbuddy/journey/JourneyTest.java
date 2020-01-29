@@ -1,6 +1,6 @@
 package de.travelbuddy.journey;
 
-import de.travelbuddy.*;
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.Place;
 import de.travelbuddy.utilities.InstanceHelper;
