@@ -2,6 +2,7 @@ package de.travelbuddy;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import de.travelbuddy.*;
 import de.travelbuddy.place.Place;
 
 import java.time.LocalDate;
@@ -11,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class JourneyTest {
     @Test
