@@ -7,13 +7,15 @@ import de.travelbuddy.place.Accommodation;
 import de.travelbuddy.place.Place;
 import de.travelbuddy.place.Sight;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
-
+import java.time.Duration;
 
 public class ConnectionTest {
     @Test
