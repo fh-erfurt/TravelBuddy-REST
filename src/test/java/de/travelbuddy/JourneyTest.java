@@ -1,9 +1,8 @@
 package de.travelbuddy;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Test;
 import de.travelbuddy.place.Place;
-import org.junit.Test;
 
 import java.time.LocalDate;
 import java.math.BigDecimal;
