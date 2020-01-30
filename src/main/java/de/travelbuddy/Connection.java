@@ -1,7 +1,9 @@
 package de.travelbuddy;
 
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.place.Place;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Connection {
@@ -63,4 +65,9 @@ public class Connection {
     public void setUsed(Boolean used) {this.used = used;}
 
     public Boolean getUsed() {return this.used;}
+
+    public Duration getDuration()
+    {
+        return Duration.between(getDeparture(), getArrive());
+    }
 }

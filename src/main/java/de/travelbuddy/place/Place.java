@@ -1,6 +1,7 @@
 package de.travelbuddy.place;
 
 import de.travelbuddy.*;
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 
 import java.math.BigDecimal;

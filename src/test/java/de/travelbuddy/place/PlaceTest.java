@@ -1,5 +1,6 @@
 package de.travelbuddy.place;
 import de.travelbuddy.*;
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 
 import org.junit.jupiter.api.Test;

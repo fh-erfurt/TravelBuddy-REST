@@ -3,6 +3,7 @@ package de.travelbuddy.place;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.travelbuddy.*;
+import de.travelbuddy.finance.Expense;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

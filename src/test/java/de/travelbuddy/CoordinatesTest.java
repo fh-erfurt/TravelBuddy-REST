@@ -15,6 +15,10 @@ public class CoordinatesTest {
         assertEquals(coordinates.getLatitude(), latitude);
         assertEquals(coordinates.getLongitude(), longitude);
     }
+
+    // TODO Test schreiben in dem geprüft wird ob die Coordinaten im möglichen Bereich liegen
+
+
 }
 
 
