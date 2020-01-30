@@ -68,6 +68,6 @@ public class Connection {
 
     public Duration getDuration()
     {
-        return Duration.between(getDeparture(), getArrive());
+        return Duration.between( getArrive(),getDeparture());
     }
 }
