@@ -2,7 +2,9 @@ package de.travelbuddy.journey;
 
 import de.travelbuddy.Person;
 import de.travelbuddy.finance.Money;
+import de.travelbuddy.place.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
+import de.travelbuddy.place.PlaceNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -26,7 +28,8 @@ public class Journey {
     public String getTitle() {
         return title;
     }
-
+    public List<Place> getPlaces() { return places; }
+    public List<Person> getPersons() { return persons; }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -36,9 +39,9 @@ public class Journey {
      * @param newPlace The place to add
      * @throws IllegalArgumentException When the place already exists in this journey
      */
-    public void addPlace(Place newPlace) throws IllegalArgumentException {
+    public void addPlace(Place newPlace) throws DuplicatePlaceException {
         if (this.places.contains(newPlace))
-            throw new IllegalArgumentException("Place does already exist.");
+            throw new DuplicatePlaceException(String.format("Place '%s' does already exist.", newPlace.getName()));
 
         places.add(newPlace);
     }
@@ -60,9 +63,9 @@ public class Journey {
      * @param place The place to remove
      * @throws IllegalArgumentException When the place does not exist in this journey
      */
-    public void removePlace(Place place) throws IllegalArgumentException {
+    public void removePlace(Place place) throws PlaceNotFoundException {
         if (!this.places.contains(place))
-            throw new IllegalArgumentException("Place does not exist.");
+            throw new PlaceNotFoundException(String.format("Place '%s' does not exist.", place.getName()));
 
         places.remove(place);
     }
