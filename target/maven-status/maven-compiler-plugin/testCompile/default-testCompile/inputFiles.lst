@@ -2,12 +2,14 @@ C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\Co
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\finance\CurrencyConverterFactoryTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\finance\CurrencyConverterTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\MainTest.java
-C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\JourneyTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\ConnectionTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\journey\JourneyManagerTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\CoordinatesTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\place\PlaceTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\PersonTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\journey\JourneyTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\ExpenseTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\finance\MoneyTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\place\AccommodationTest.java
 C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\place\SightTest.java
+C:\Users\FlyingDutchman\IdeaProjects\travelbuddy\src\test\java\de\travelbuddy\utilities\InstanceHelper.java

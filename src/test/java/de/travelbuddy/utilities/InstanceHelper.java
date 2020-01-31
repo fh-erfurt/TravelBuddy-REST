@@ -22,6 +22,11 @@ public class InstanceHelper {
         return new Journey(rndString(), new ArrayList<Place>(), new ArrayList<Person>());
     }
 
+    public static Place createPlace()
+    {
+        return createPlace(LocalDateTime.now());
+    }
+
     public static Place createPlace(LocalDateTime start)
     {
         return new Place(rndString(), createCoordinate(), createContactDetails(), start,
@@ -80,6 +85,21 @@ public class InstanceHelper {
         return (rndInt(1,2) == 1) ? createPersonFemale() : createPersonMale();
     }
 
+    public static Connection createConnection()
+    {
+        return createConnection(createPlace(LocalDateTime.now()), createPlace(LocalDateTime.now().plusHours(rndInt(1,8))));
+    }
+
+    public static Connection createConnection(Place from)
+    {
+        return createConnection(from, createPlace(from.getDeparture()));
+    }
+
+    public static Connection createConnection(Place from, Place to)
+    {
+        return new Connection(rndString(), to.getArrive(), from.getDeparture(), from, to, createExpense());
+    }
+
     /* ######### HELPERS ####### */
     private static String rndString() {
         return UUID.randomUUID().toString().replace("-", "");
@@ -87,17 +107,17 @@ public class InstanceHelper {
 
     private static int rndInt(int min, int max)
     {
-        return min + (max - min) * new Random().nextInt();
+        return java.util.concurrent.ThreadLocalRandom.current().nextInt(min, max);
     }
 
     private static long rndLong(long min, long max)
     {
-        return min + (max - min) * new Random().nextLong();
+        return java.util.concurrent.ThreadLocalRandom.current().nextLong(min, max);
     }
 
     private static double rndDouble(double min, double max)
     {
-        return min + (max - min) * (new Random().nextDouble());
+        return java.util.concurrent.ThreadLocalRandom.current().nextDouble(min, max);
     }
 
     private static String rndEmail()
@@ -108,7 +128,7 @@ public class InstanceHelper {
     private static String rndCountry()
     {
         String[] name = {"Germany", "England", "USA", "France", "Netherlands", "Belgium", "Denmark", "Swiss", "Canada"};
-        return name[new Random().nextInt(name.length) -1];
+        return name[new Random().nextInt(name.length)];
     }
 
     private static Currency rndCurrency()
