@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.travelbuddy.*;
 import de.travelbuddy.finance.Expense;
+import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AccommodationTest {
@@ -19,9 +21,9 @@ public class AccommodationTest {
                 "London", "Sewardstone Road ", 1, "E4 7RA", "England");
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
-        List<Expense> expenses = new ArrayList<>();
+        List<Expense> expenses = new ArrayList<>(Arrays.asList(InstanceHelper.createExpense()));
         List<Connection> connectionsToNextPlace = new ArrayList<>();
-        List<Person> involvedPersons = new ArrayList<>();
+        List<Person> involvedPersons = new ArrayList<>(Arrays.asList(InstanceHelper.createPerson()));
         Accommodation.accommodationType type = Accommodation.accommodationType.CAMPING;
 
         Accommodation accommodation = new Accommodation (name, coordinates, contactDetails, arrive, departure,

@@ -139,4 +139,13 @@ public class InstanceHelper {
     {
         return LocalDate.of(rndInt(minyear, maxyear), rndInt(minmonth, maxmonth), rndInt(1, 28));
     }
+    private static String rndPlaceTitle()
+    {
+        String[] title = {"Erfurter Dom", "Kölner Dom", "Brandenburger Tor", "Berlin Mitte", "FH-Erfurt", "Uni Erfurt", "Veste Coburg", "Nürnberger Flughafen", "Erfurter HBF", "Münchner HBF", "Berlin HBF", "Berlin Westbahnhof"};
+        return title[new Random().nextInt(title.length)];
+    }
 }
+/*
+fehlt Connection
+Person funktioniert Geb. nicht
+ */
