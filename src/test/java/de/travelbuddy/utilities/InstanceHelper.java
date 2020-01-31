@@ -34,10 +34,12 @@ public class InstanceHelper {
                 new ArrayList<Person>());
     }
 
+
     public static Coordinates createCoordinate()
     {
-        return new Coordinates(String.valueOf(rndDouble(-90, 90)), String.valueOf(rndDouble(-180, 180)));
+        return new Coordinates(rndDouble(-90, 90), rndDouble(-180, 180));
     }
+
 
     public static ContactDetails createContactDetails()
     {

@@ -16,7 +16,7 @@ public class AccommodationTest {
     @Test
     public void correctly_instantiate_Accommodation() {
         String name = "Lee Valley Camping and Caravan Park";
-        Coordinates coordinates = new Coordinates("-0.006111", "51.654722");
+        Coordinates coordinates = new Coordinates(-0.006111, 51.654722);
         ContactDetails contactDetails = new ContactDetails("+ 20 / 85 29 56 89", "scs@leevalleypark.org.uk",
                 "London", "Sewardstone Road ", 1, "E4 7RA", "England");
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);

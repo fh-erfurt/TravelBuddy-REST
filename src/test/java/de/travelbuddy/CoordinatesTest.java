@@ -7,8 +7,8 @@ public class CoordinatesTest {
     @Test
     public void correctly_instantiate_Coordinates() {
 
-        String latitude = "40.689249";
-        String longitude = "-74.044500";
+        double latitude = 40.689249;
+        double longitude = -74.044500;
 
         Coordinates coordinates = new Coordinates(latitude, longitude);
 

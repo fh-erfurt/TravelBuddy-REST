@@ -16,7 +16,7 @@ public class SightTest {
     public void correctly_instantiate_Sight_Louvre() {
 
         String name = "Louvre";
-        Coordinates coordinates = new Coordinates("48.864824", "2.334595");
+        Coordinates coordinates = new Coordinates(48.864824, 2.334595);
         ContactDetails contactDetails = new ContactDetails("+33 1 40 20 50 50", "louvre@paris.fr",
                 "Paris", "Rue de Rivoli", 1, "75001", "Frankreich");
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
