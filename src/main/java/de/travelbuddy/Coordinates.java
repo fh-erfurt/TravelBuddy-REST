@@ -24,14 +24,25 @@ public class Coordinates {
 
     public void setLongitude(double longitude) {this.longitude = longitude;}
 
-    private boolean checkLongitude(double longitude) {
+    static boolean checkLongitude(double longitude) {
+        if(longitude >=-180.0 && longitude <= 180.0){
+            return true;
+        }else{
+            return false;
+        }
         // TODO Übergebenen Wert prüfen, wenn er im zulässigen Bereich liegt true zurück geben, wenn nicht dann false zurückgeben.
-        return true;
+
     }
 
-    private boolean checkLatitude(double latitude) {
+    static boolean checkLatitude(double latitude) {
+        if(latitude >=-90.0 && latitude <= 90.0){
+            return true;
+        }else{
+            return false;
+        }
         // TODO Übergebenen Wert prüfen, wenn er im zulässigen Bereich liegt true zurück geben, wenn nicht dann false zurückgeben.
         
-        return true;
+
     }
+
 }

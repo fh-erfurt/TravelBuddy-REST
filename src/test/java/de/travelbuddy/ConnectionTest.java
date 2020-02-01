@@ -108,4 +108,23 @@ public class ConnectionTest {
         //Then
         assertEquals(10174200 , GToH.toSeconds());
     }
+
+    @Test
+    public void duration_between_departure_and_arrive_inRegularTimeUnit(){
+
+        //Given
+        Connection fromIToJ = new Connection("Saturn",  LocalDateTime.of(2038,5,17,10,11),
+                LocalDateTime.of(2039,2,28,11,27),
+                null, null, null);
+
+        //When
+        Duration GToH = fromIToJ.getDuration();
+
+        //Then
+        assertEquals(287 , GToH.toDays());
+        assertEquals(6889 , GToH.toHours());
+        assertEquals(413356 , GToH.toMinutes());
+        assertEquals(24801360 , GToH.toSeconds());
+    }
+
 }
