@@ -1,6 +1,8 @@
-package de.travelbuddy;
+package de.travelbuddy.finance;
 import static org.junit.jupiter.api.Assertions.*;
 
+import de.travelbuddy.ContactDetails;
+import de.travelbuddy.Person;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.MissingPersonToDivideException;
 import de.travelbuddy.finance.Money;
