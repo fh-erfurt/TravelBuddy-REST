@@ -11,7 +11,6 @@ import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//TODO remove Methoden erstellen (Place und Person)
 public class Journey {
 
     private String title;
@@ -131,6 +130,7 @@ public class Journey {
         return getPlace(name, Place.class);
     }
 
+    // TODO Warning:(135, 15) '@param <T>' tag description is missing
     /**
      * Search for a place of the given type and with the given name.
      * @param <T>

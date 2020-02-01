@@ -59,7 +59,7 @@ public class Expense {
 
     public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
 
-    public Money getMoneyPerPerson() throws MissingPersonToDivideException { //TODO Exception überrprüfen (@Marcel)
+    public Money getMoneyPerPerson() throws MissingPersonToDivideException {
 
         if (involvedPersons.size()!=0)
             return new Money(price.getCurrency(), this.price.getValue().divide(BigDecimal.valueOf(involvedPersons.size()),2, RoundingMode.HALF_UP));
@@ -67,7 +67,7 @@ public class Expense {
             throw new MissingPersonToDivideException("No Persons to divide Expense between");
     }
 
-    public void addPerson(Person person) throws IllegalArgumentException { //Todo check if person is in journey
+    public void addPerson(Person person) throws IllegalArgumentException {
 
         if (isInvolved(person)) {
             throw new IllegalArgumentException("Person already added.");
@@ -85,6 +85,6 @@ public class Expense {
     }
 
     public boolean isInvolved(Person person) {
-        return involvedPersons.contains(person); //Todo Langsam? Objekt wird hier vermutlich komplett geprüft da kein Key vorhanden
+        return involvedPersons.contains(person);
     }
 }

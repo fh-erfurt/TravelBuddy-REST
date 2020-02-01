@@ -3,9 +3,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import de.travelbuddy.ContactDetails;
 import de.travelbuddy.Person;
-import de.travelbuddy.finance.Expense;
-import de.travelbuddy.finance.MissingPersonToDivideException;
-import de.travelbuddy.finance.Money;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -50,7 +47,7 @@ public class ExpenseTest {
     }
 
     @Test
-    public void get_money_per_person_should_divide_right (){
+    public void get_money_per_person_should_divide_right ()  {
 
         //Given
         Expense expense = createExampleExpense1();
@@ -63,16 +60,14 @@ public class ExpenseTest {
         expense.addPerson(Marcel);
         expense.addPerson(Tim);
 
-
         //When
-
+        //TODO Try Catch umbauen und Exception durchreichen
         try {
             dividedMoney = expense.getMoneyPerPerson();
         }
-
         catch (MissingPersonToDivideException mp){
-
         }
+
         //Then
         assertEquals(BigDecimal.valueOf(15).setScale(2,RoundingMode.HALF_UP),dividedMoney.getValue());
 
@@ -86,15 +81,16 @@ public class ExpenseTest {
         Money startMoney = new Money(null, BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
 
         expense.setPrice(startMoney);
+
         //When
-        try {
-            Money dividedMoney = expense.getMoneyPerPerson();
-        }
+        // TODO Warning:(85, 88) Statement lambda can be replaced with expression lambda
+        Exception exception = assertThrows(MissingPersonToDivideException.class, () -> {
+            // TODO Warning:(86, 13) Lambda can be replaced with method reference
+            expense.getMoneyPerPerson();
+        });
 
         //Then
-        catch (MissingPersonToDivideException mp){
-            assertEquals("No Persons to divide Expense between",mp.getMessage());
-        }
+        assertTrue(exception.getMessage().contains("No Persons to divide Expense between"));
 
     }
 

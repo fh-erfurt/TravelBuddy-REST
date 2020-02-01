@@ -32,10 +32,10 @@ public class JourneyTest {
         ContactDetails contact = InstanceHelper.createContactDetails();
         ContactDetails contact2 = InstanceHelper.createContactDetails();
         Place place = InstanceHelper.createPlace(LocalDateTime.now());
-        ArrayList<Place> places = new ArrayList<Place>();
+        ArrayList<Place> places = new ArrayList<>();
         places.add(place);
         Person person = InstanceHelper.createPersonMale();
-        ArrayList<Person> persons = new ArrayList<Person>();
+        ArrayList<Person> persons = new ArrayList<>();
         persons.add(person);
 
         //When
@@ -146,17 +146,19 @@ public class JourneyTest {
 
         //Then
         assertEquals(places.size(), 1);
+        // TODO Warning:(149, 50) 'Optional.get()' without 'isPresent()' check
         assertEquals(places.stream().findFirst().get(), place);
     }
 
     @Test
-    public void journey_should_throw_place_not_found()  {
+    public void journey_remove_place_should_throw_place_not_found()  {
         //Given
         Journey journey = InstanceHelper.createJourney();
         Place place = InstanceHelper.createPlace(LocalDateTime.now());
         place.setName("Blubber");
 
         //When
+        // TODO Warning:(177, 81) Statement lambda can be replaced with expression lambda
         Exception exception = assertThrows(PlaceNotFoundException.class, () -> {
             journey.removePlace(place);
         });
@@ -166,7 +168,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void journey_should_throw_duplicate_place() throws DuplicatePlaceException {
+    public void journey_add_place_should_throw_duplicate_place() throws DuplicatePlaceException {
         //Given
         Journey journey = InstanceHelper.createJourney();
         Place place = InstanceHelper.createPlace();
@@ -174,6 +176,7 @@ public class JourneyTest {
 
         //When
         journey.addPlace(place);
+        // TODO Warning:(177, 81) Statement lambda can be replaced with expression lambda
         Exception exception = assertThrows(DuplicatePlaceException.class, () -> {
             journey.addPlace(place);
         });

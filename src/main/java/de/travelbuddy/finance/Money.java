@@ -3,6 +3,7 @@ package de.travelbuddy.finance;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+//TODO Exception für nicht verfügbare Währung einbauen
 public class Money {
 
     private Currency currency;
@@ -36,7 +37,7 @@ public class Money {
 
     public Money add(Money money)
     {
-        Money newMoney = null;
+        Money newMoney;
 
         if (money.getCurrency() != this.getCurrency())
             newMoney = money.convert(this.getCurrency());
@@ -49,7 +50,7 @@ public class Money {
 
     public Money subtract(Money money)
     {
-        Money newMoney = null;
+        Money newMoney;
 
         if (money.getCurrency() != this.getCurrency())
             newMoney = money.convert(this.getCurrency());

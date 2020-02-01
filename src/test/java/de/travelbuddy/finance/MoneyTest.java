@@ -43,42 +43,42 @@ class MoneyTest {
     @Test
     public void subtract_with_different_currency(){
         //Given
-        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
-        Money subtrVal = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(25));
+        Money startMoney = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
+        Money subtrMoney = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(1750).setScale(2,RoundingMode.HALF_UP));
 
         //When
-        Money newVal = startVal.subtract(subtrVal);
+        Money newMoney = startMoney.subtract(subtrMoney);
 
         //Then
-        //assertEquals(newVal.getValue(), BigDecimal.valueOf(75)); //Todo value test
-        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+        assertEquals(BigDecimal.valueOf(75).setScale(2,RoundingMode.HALF_UP), newMoney.getValue());
+        assertEquals(startMoney.getCurrency(),newMoney.getCurrency());
     }
 
     @Test
     public void add_with_same_currency(){
         //Given
-        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
-        Money subtrVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(25));
+        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
+        Money subtrVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(25).setScale(2,RoundingMode.HALF_UP));
 
         //When
         Money newVal = startVal.add(subtrVal);
 
         //Then
-        assertEquals(newVal.getValue(), BigDecimal.valueOf(125));
-        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+        assertEquals(BigDecimal.valueOf(125).setScale(2,RoundingMode.HALF_UP),newVal.getValue());
+        assertEquals(startVal.getCurrency(),newVal.getCurrency());
     }
 
     @Test
     public void add_with_different_currency(){
         //Given
-        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
-        Money subtrVal = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(25));
+        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
+        Money subtrVal = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(1750).setScale(2,RoundingMode.HALF_UP));
 
         //When
-        Money newVal = startVal.subtract(subtrVal);
+        Money newVal = startVal.add(subtrVal);
 
         //Then
-        //assertEquals(newVal.getValue(), BigDecimal.valueOf(75)); //Todo value test
-        assertEquals(newVal.getCurrency(), startVal.getCurrency());
+        assertEquals(BigDecimal.valueOf(125).setScale(2,RoundingMode.HALF_UP),newVal.getValue());
+        assertEquals(startVal.getCurrency(),newVal.getCurrency());
     }
 }

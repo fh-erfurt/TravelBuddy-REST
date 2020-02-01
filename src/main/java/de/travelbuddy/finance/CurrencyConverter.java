@@ -5,6 +5,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Currency;
 
+
 public class CurrencyConverter implements ICurrencyConverter {
 
     enum ConversionRate
