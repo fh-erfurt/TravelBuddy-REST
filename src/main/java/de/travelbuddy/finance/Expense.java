@@ -58,7 +58,7 @@ public class Expense {
     public boolean getPerPerson() {return perPerson;}
 
     public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
-
+    // TODO JAVADOC
     public Money getMoneyPerPerson() throws MissingPersonToDivideException {
 
         if (involvedPersons.size()!=0)
@@ -66,7 +66,7 @@ public class Expense {
         else
             throw new MissingPersonToDivideException("No Persons to divide Expense between");
     }
-
+    // TODO JAVADOC
     public void addPerson(Person person) throws IllegalArgumentException {
 
         if (isInvolved(person)) {
@@ -75,7 +75,7 @@ public class Expense {
 
         involvedPersons.add(person);
     }
-
+    // TODO JAVADOC
     public void removePerson(Person person) throws IllegalArgumentException {
         if (!isInvolved(person)) {
             throw new IllegalArgumentException("Person does not exist.");
@@ -83,7 +83,7 @@ public class Expense {
 
         involvedPersons.remove(person);
     }
-
+    // TODO JAVADOC
     public boolean isInvolved(Person person) {
         return involvedPersons.contains(person);
     }

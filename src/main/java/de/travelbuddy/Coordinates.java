@@ -5,12 +5,15 @@ public class Coordinates {
     private double latitude;
     private double longitude;
 
+    // TODO JAVADOC
     public Coordinates(double latitude, double longitude) {
-        if (checkLatitude(latitude))
-            //Todo throw ...;
+        if (!checkLatitude(latitude)){
+            //TODO throw exception
+             }
 
-        if (checkLongitude(longitude))
-            //Todo throw...;
+        if (!checkLongitude(longitude)) {
+            //TODO throw exception
+        }
 
         this.latitude = latitude;
         this.longitude = longitude;
@@ -24,25 +27,15 @@ public class Coordinates {
 
     public void setLongitude(double longitude) {this.longitude = longitude;}
 
-    static boolean checkLongitude(double longitude) {
-        if(longitude >=-180.0 && longitude <= 180.0){
-            return true;
-        }else{
-            return false;
-        }
-        // TODO Übergebenen Wert prüfen, wenn er im zulässigen Bereich liegt true zurück geben, wenn nicht dann false zurückgeben.
-
+    // TODO JAVADOC
+    boolean checkLatitude(double latitude) {
+        return latitude >= -90.0 && latitude <= 90.0;
+    }
+    // TODO JAVADOC
+    // TODO Warum wolltest du das static machen? @Marcel
+    boolean checkLongitude(double longitude) {
+        return longitude >= -180.0 && longitude <= 180.0;
     }
 
-    static boolean checkLatitude(double latitude) {
-        if(latitude >=-90.0 && latitude <= 90.0){
-            return true;
-        }else{
-            return false;
-        }
-        // TODO Übergebenen Wert prüfen, wenn er im zulässigen Bereich liegt true zurück geben, wenn nicht dann false zurückgeben.
-        
-
-    }
 
 }

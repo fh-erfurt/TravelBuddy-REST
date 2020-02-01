@@ -6,8 +6,6 @@ import de.travelbuddy.finance.Money;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -47,8 +45,8 @@ public class PlaceTest {
         assertEquals(place.getDeparture(), departure);
         assertEquals(place.getContactDetails(), contact);
         assertEquals(place.getCoordinates(), coordinates);
-        assertTrue(place.getInvolvedPersons().contains(person));
-        assertEquals(place.getInvolvedPersons().size(), persons.size());
+        assertTrue(place.getListOfInvolvedPersons().contains(person));
+        assertEquals(place.getListOfInvolvedPersons().size(), persons.size());
         assertTrue(place.getConnectionsToNextPlace().contains(connection));
         assertEquals(place.getConnectionsToNextPlace().size(), connections.size());
         assertTrue(place.getExpenses().contains(expense));

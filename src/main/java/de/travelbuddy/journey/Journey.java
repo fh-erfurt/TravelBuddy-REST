@@ -1,6 +1,7 @@
 package de.travelbuddy.journey;
 
 import de.travelbuddy.Person;
+import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
@@ -17,6 +18,8 @@ public class Journey {
 
     private List<Place> places;
     private List<Person> persons;
+
+    private List<Expense> expenses;
 
     public Journey(String title, List<Place> places, List<Person> persons) {
         this.title = title;

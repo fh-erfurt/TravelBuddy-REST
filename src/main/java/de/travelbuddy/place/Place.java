@@ -90,11 +90,11 @@ public class Place {
         this.connectionsToNextPlace = connectionsToNextPlace;
     }
 
-    public List<Person> getInvolvedPersons() {
+    public List<Person> getListOfInvolvedPersons() {
         return involvedPersons;
     }
 
-    public void setInvolvedPersons(List<Person> involvedPersons) {
+    public void setListOfInvolvedPersons(List<Person> involvedPersons) {
         this.involvedPersons = involvedPersons;
     }
 

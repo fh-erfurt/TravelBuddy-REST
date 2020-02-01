@@ -7,31 +7,36 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class JourneyManager {
-    private Map<String, Journey> journeys = new HashMap<String, Journey>();
+    private Map<String, Journey> journeys = new HashMap<>();
 
     public JourneyManager()
     {
+    }
+
+    public List<String> getJourneyNames()
+    {
+        return new ArrayList<>(journeys.keySet());
     }
 
     public int journeyCount()
     {
         return journeys.keySet().size();
     }
-
+    // TODO JAVADOC
     public void addJourney(Journey journey) throws DuplicateJourneyException {
         if (journeys.containsKey(journey.getTitle()))
             throw new DuplicateJourneyException(String.format("Journey with the title '%s' already exists", journey.getTitle()));
 
         journeys.put(journey.getTitle(), journey);
     }
-
+    // TODO JAVADOC
     public Journey removeJourney(Journey journey) throws JourneyNotFoundException {
         if (!journeys.containsKey(journey.getTitle()))
             throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", journey.getTitle()));
 
         return journeys.remove(journey.getTitle());
     }
-
+    // TODO JAVADOC
     public Journey getJourney(String name) throws JourneyNotFoundException {
         if (!journeys.containsKey(name))
             throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", name));
@@ -39,10 +44,7 @@ public class JourneyManager {
         return journeys.get(name);
     }
 
-    public List<String> getJourneyNames()
-    {
-        return new ArrayList<>(journeys.keySet());
-    }
+
 
 
     /**

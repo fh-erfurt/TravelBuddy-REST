@@ -53,7 +53,7 @@ public class CurrencyConverter implements ICurrencyConverter {
 
         return toResultCurrency.setScale(10,RoundingMode.HALF_UP).divide(toEUR,RoundingMode.HALF_UP);
     }
-
+    // TODO JAVADOC
     public Money convert(Money money, Currency currencyTarget) {
 
         BigDecimal rate = getRate(money.getCurrency(),currencyTarget);

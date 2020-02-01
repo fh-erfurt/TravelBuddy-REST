@@ -18,22 +18,50 @@ public class CoordinatesTest {
         assertEquals(coordinates.getLatitude(), latitude);
         assertEquals(coordinates.getLongitude(), longitude);
     }
-/*
+
+    /* TODO Build tests with exceptions
     @Test
-    public void check_Coordinates_between_min_and_max() {
+    public void instantiate_Coordinates_with_invalid_latitude_should_throw_exception() {
         //Given
-        Coordinates check = new Coordinates(190.548203, -167.964066);
+        double latitude = 92.689249;
+        double longitude = -74.044500;
 
         //When
-        boolean checkLa = check.checkLatitude(check.getLatitude());
-        boolean checkLo = check.checkLongitude(check.getLongitude());
-
+        Coordinates coordinates = new Coordinates(latitude, longitude);
 
         //Then
-        assertEquals(false, checkLa);
-        assertEquals(true, checkLo);
+
     }
-*/
+
+    @Test
+    public void instantiate_Coordinates_with_invalid_longitude_should_throw_exception() {
+        //Given
+        double latitude = 40.689249;
+        double longitude = -190.044500;
+
+        //When
+        Coordinates coordinates = new Coordinates(latitude, longitude);
+
+        //Then
+
+    }*/
+
+    @Test
+    public void check_latitude_and_longitude() {
+        //Given
+        Coordinates coordinatesDummy = new Coordinates(190.548203, -167.964066);
+        double testLatitude = 40.689249;
+        double testLongitude = -178.044500;
+
+        //When
+        boolean checkLa = coordinatesDummy.checkLatitude(testLatitude);
+        boolean checkLo = coordinatesDummy.checkLongitude(testLongitude);
+
+        //Then
+        assertTrue(checkLa);
+        assertTrue(checkLo);
+    }
+
 }
 
 

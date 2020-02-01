@@ -29,12 +29,12 @@ public class Money {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
-
+    // TODO JAVADOC
     public Money convert(Currency resultCurrency) {
         ICurrencyConverter converter = CurrencyConverterFactory.create();
         return converter.convert(this, resultCurrency);
     }
-
+    // TODO JAVADOC
     public Money add(Money money)
     {
         Money newMoney;
@@ -47,7 +47,7 @@ public class Money {
         this.setValue(this.getValue().add(newMoney.getValue()));
         return this;
     }
-
+    // TODO JAVADOC
     public Money subtract(Money money)
     {
         Money newMoney;
