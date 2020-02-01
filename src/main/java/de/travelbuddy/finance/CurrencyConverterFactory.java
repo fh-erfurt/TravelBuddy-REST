@@ -1,5 +1,8 @@
 package de.travelbuddy.finance;
-// TODO JAVADOC
+
+/**
+ *  Should be thrown if
+ */
 public class CurrencyConverterFactory {
     public static ICurrencyConverter create()
     {

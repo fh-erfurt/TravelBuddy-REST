@@ -28,15 +28,6 @@ public class CurrencyConverter implements ICurrencyConverter {
     }
 
     /**
-     * Convert the money in the right currency
-     * @param money is the
-     * @param currencyTarget is the currency we want to get
-     * @return The Money with the target currency
-     */
-
-
-
-    /**
      * Get the Rate, between currency source and currency target
      * @param currencySource is the currency we have
      * @param currencyTarget is the currency we want to get
@@ -53,7 +44,12 @@ public class CurrencyConverter implements ICurrencyConverter {
 
         return toResultCurrency.setScale(10,RoundingMode.HALF_UP).divide(toEUR,RoundingMode.HALF_UP);
     }
-    // TODO JAVADOC
+
+    /**
+     * Convert Money
+     * @param resultCurrency
+     * @return
+     */
     public Money convert(Money money, Currency currencyTarget) {
 
         BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
