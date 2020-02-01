@@ -4,6 +4,27 @@ import java.math.BigDecimal;
 import java.util.Currency;
 // TODO JAVADOC
 public interface ICurrencyConverter {
-    Money convert(Money money, Currency currency);
-    BigDecimal getRate(Currency currency_source, Currency currency_target);
+
+    /**
+     * Convert the money in the right currency
+     * @param money is the
+     * @param currency is the currency we want to get
+     * @return The Money with the target currency
+     */
+    Money convert(Money money, Currency currency) throws NotSupportedCurrencyException;
+
+    /**
+     * Get the Rate, between currency source and currency target
+     * @param currencySource is the currency we have
+     * @param currencyTarget is the currency we want to get
+     * @return the currency
+     */
+    BigDecimal getRate(Currency currencySource, Currency currencyTarget) throws NotSupportedCurrencyException;
+
+    /**
+     * Checks if the given currency is supported in the class
+     * @param currency The currency to check
+     * @return True, if the currency is supported, otherwise false
+     */
+    boolean isSupportedCurrency(Currency currency);
 }

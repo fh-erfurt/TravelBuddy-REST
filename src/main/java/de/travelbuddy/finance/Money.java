@@ -30,33 +30,46 @@ public class Money {
         this.value = value;
     }
     // TODO JAVADOC
-    public Money convert(Currency resultCurrency) {
+    public Money convert(Currency resultCurrency) throws NotSupportedCurrencyException {
         ICurrencyConverter converter = CurrencyConverterFactory.create();
         return converter.convert(this, resultCurrency);
     }
     // TODO JAVADOC
     public Money add(Money money)
     {
-        Money newMoney;
+        Money newMoney = null;
 
-        if (money.getCurrency() != this.getCurrency())
-            newMoney = money.convert(this.getCurrency());
+        if (money.getCurrency() != this.getCurrency()) {
+            try {
+                newMoney = money.convert(this.getCurrency());
+            } catch (NotSupportedCurrencyException e) {
+                e.printStackTrace();
+            }
+        }
         else
             newMoney = money;
 
+        assert newMoney != null;
         this.setValue(this.getValue().add(newMoney.getValue()));
         return this;
     }
+
     // TODO JAVADOC
     public Money subtract(Money money)
     {
-        Money newMoney;
+        Money newMoney = null;
 
-        if (money.getCurrency() != this.getCurrency())
-            newMoney = money.convert(this.getCurrency());
+        if (money.getCurrency() != this.getCurrency()) {
+            try {
+                newMoney = money.convert(this.getCurrency());
+            } catch (NotSupportedCurrencyException e) {
+                e.printStackTrace();
+            }
+        }
         else
             newMoney = money;
 
+        assert newMoney != null;
         this.setValue(this.getValue().subtract(newMoney.getValue()));
         return this;
     }

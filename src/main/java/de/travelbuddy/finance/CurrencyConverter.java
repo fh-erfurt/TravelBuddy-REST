@@ -27,23 +27,16 @@ public class CurrencyConverter implements ICurrencyConverter {
         public BigDecimal getConversionRate() { return conversionRate; }
     }
 
-    /**
-     * Convert the money in the right currency
-     * @param money is the
-     * @param currencyTarget is the currency we want to get
-     * @return The Money with the target currency
-     */
+    public BigDecimal getRate(Currency currencySource, Currency currencyTarget) throws NotSupportedCurrencyException {
+        if (!isSupportedCurrency(currencyTarget))
+            throw new NotSupportedCurrencyException(
+                    String.format("The currency '%s' is not supported by this CurrencyConverter-Class",
+                            currencyTarget.getCurrencyCode()));
 
-
-
-    /**
-     * Get the Rate, between currency source and currency target
-     * @param currencySource is the currency we have
-     * @param currencyTarget is the currency we want to get
-     * @return the currency
-     */
-
-    public BigDecimal getRate(Currency currencySource, Currency currencyTarget) {
+        if (!isSupportedCurrency(currencySource))
+            throw new NotSupportedCurrencyException(
+                    String.format("The currency '%s' is not supported by this CurrencyConverter-Class",
+                            currencySource.getCurrencyCode()));
 
         BigDecimal toEUR = ConversionRate.valueOf(currencySource.getCurrencyCode()).getConversionRate();
         BigDecimal toResultCurrency = ConversionRate.valueOf(currencyTarget.getCurrencyCode()).getConversionRate();
@@ -53,11 +46,24 @@ public class CurrencyConverter implements ICurrencyConverter {
 
         return toResultCurrency.setScale(10,RoundingMode.HALF_UP).divide(toEUR,RoundingMode.HALF_UP);
     }
-    // TODO JAVADOC
-    public Money convert(Money money, Currency currencyTarget) {
+
+    public Money convert(Money money, Currency currencyTarget) throws NotSupportedCurrencyException {
+        if (!isSupportedCurrency(currencyTarget))
+            throw new NotSupportedCurrencyException(
+                    String.format("The currency '%s' is not supported by this CurrencyConverter-Class",
+                        currencyTarget.getCurrencyCode()));
 
         BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
 
         return new Money(currencyTarget,money.getValue().multiply(rate).setScale(2,RoundingMode.HALF_UP));
+    }
+
+    public boolean isSupportedCurrency(Currency currency) {
+        for (ConversionRate c : ConversionRate.values()) {
+            if (c.name().equals(currency.getCurrencyCode())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
