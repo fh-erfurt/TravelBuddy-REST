@@ -1,4 +1,4 @@
-package de.travelbuddy;
+package de.travelbuddy.place;
 
 public class Coordinates {
 
@@ -28,12 +28,13 @@ public class Coordinates {
     public void setLongitude(double longitude) {this.longitude = longitude;}
 
     // TODO JAVADOC
-    boolean checkLatitude(double latitude) {
+    public static boolean checkLatitude(double latitude) {
         return latitude >= -90.0 && latitude <= 90.0;
     }
     // TODO JAVADOC
+
     // TODO Warum wolltest du das static machen? @Marcel
-    boolean checkLongitude(double longitude) {
+    public static boolean checkLongitude(double longitude) {
         return longitude >= -180.0 && longitude <= 180.0;
     }
 

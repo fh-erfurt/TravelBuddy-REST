@@ -1,9 +1,8 @@
 package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import de.travelbuddy.place.Coordinates;
+import org.junit.jupiter.api.Test;
 
 
 public class CoordinatesTest {
@@ -49,13 +48,12 @@ public class CoordinatesTest {
     @Test
     public void check_latitude_and_longitude() {
         //Given
-        Coordinates coordinatesDummy = new Coordinates(190.548203, -167.964066);
         double testLatitude = 40.689249;
         double testLongitude = -178.044500;
 
         //When
-        boolean checkLa = coordinatesDummy.checkLatitude(testLatitude);
-        boolean checkLo = coordinatesDummy.checkLongitude(testLongitude);
+        boolean checkLa = Coordinates.checkLatitude(testLatitude);
+        boolean checkLo = Coordinates.checkLongitude(testLongitude);
 
         //Then
         assertTrue(checkLa);

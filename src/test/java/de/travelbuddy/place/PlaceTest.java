@@ -68,8 +68,6 @@ public class PlaceTest {
         place1.addExpense(expense3);
         place1.addExpense(expense4);
 
-        // TODO Money totalMoney = new Money(expense1.getPrice().getCurrency(), expense1.getPrice().getValue());
-        // (Hab ich mal gekürzt @Marcel LG Tim (siehe nächste Zeile))
         Money totalMoney = expense1.getPrice();
 
         totalMoney.add(expense2.getPrice());
@@ -96,8 +94,6 @@ public class PlaceTest {
         place1.addExpense(expense3);
         place1.addExpense(expense4);
 
-        // TODO Money totalMoney = new Money(expense1.getPrice().getCurrency(), expense1.getPrice().getValue());
-        // (Hab ich mal gekürzt @Marcel LG Tim (siehe nächste Zeile))
         Money totalMoney = expense1.getPrice();
 
         totalMoney.add(expense2.getPrice());
@@ -185,5 +181,4 @@ public class PlaceTest {
         assertEquals(expectedMoney.getValue(), calculatedMoney.getValue());
         assertEquals(targetCurrency,calculatedMoney.getCurrency());
     }
-
 }

@@ -1,22 +1,18 @@
 package de.travelbuddy.journey;
 
 import de.travelbuddy.ContactDetails;
-import de.travelbuddy.Coordinates;
 import de.travelbuddy.Person;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
 import de.travelbuddy.place.PlaceNotFoundException;
-import de.travelbuddy.place.Sight;
 import de.travelbuddy.utilities.InstanceHelper;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Currency;
 import java.util.List;
 

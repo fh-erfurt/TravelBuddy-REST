@@ -2,9 +2,7 @@ package de.travelbuddy;
 
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
-import de.travelbuddy.place.Accommodation;
-import de.travelbuddy.place.Place;
-import de.travelbuddy.place.Sight;
+import de.travelbuddy.place.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

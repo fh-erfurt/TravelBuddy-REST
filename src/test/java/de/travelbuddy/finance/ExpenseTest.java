@@ -83,11 +83,7 @@ public class ExpenseTest {
         expense.setPrice(startMoney);
 
         //When
-        // TODO Warning:(85, 88) Statement lambda can be replaced with expression lambda
-        Exception exception = assertThrows(MissingPersonToDivideException.class, () -> {
-            // TODO Warning:(86, 13) Lambda can be replaced with method reference
-            expense.getMoneyPerPerson();
-        });
+        Exception exception = assertThrows(MissingPersonToDivideException.class, expense::getMoneyPerPerson);
 
         //Then
         assertTrue(exception.getMessage().contains("No Persons to divide Expense between"));
