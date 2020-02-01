@@ -34,7 +34,17 @@ public class CurrencyConverter implements ICurrencyConverter {
      * @return the currency
      */
 
-    public BigDecimal getRate(Currency currencySource, Currency currencyTarget) {
+
+    public BigDecimal getRate(Currency currencySource, Currency currencyTarget) throws NotSupportedCurrencyException {
+        if (!isSupportedCurrency(currencyTarget))
+            throw new NotSupportedCurrencyException(
+                    String.format("The currency '%s' is not supported by this CurrencyConverter-Class",
+                            currencyTarget.getCurrencyCode()));
+
+        if (!isSupportedCurrency(currencySource))
+            throw new NotSupportedCurrencyException(
+                    String.format("The currency '%s' is not supported by this CurrencyConverter-Class",
+                            currencySource.getCurrencyCode()));
 
         BigDecimal toEUR = ConversionRate.valueOf(currencySource.getCurrencyCode()).getConversionRate();
         BigDecimal toResultCurrency = ConversionRate.valueOf(currencyTarget.getCurrencyCode()).getConversionRate();
@@ -50,10 +60,20 @@ public class CurrencyConverter implements ICurrencyConverter {
      * @param resultCurrency
      * @return
      */
-    public Money convert(Money money, Currency currencyTarget) {
 
-        BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
+    public Money convert(Money money, Currency currencyTarget) throws NotSupportedCurrencyException {
+        if (!isSupportedCurrency(currencyTarget))
+            throw new NotSupportedCurrencyException(
+                    String.format("The currency '%s' is not supported by this CurrencyConverter-Class",
+                        currencyTarget.getCurrencyCode()));
 
-        return new Money(currencyTarget,money.getValue().multiply(rate).setScale(2,RoundingMode.HALF_UP));
+
+
+    public boolean isSupportedCurrency(Currency currency) {
+        for (ConversionRate c : ConversionRate.values()) {
+            if (c.name().equals(currency.getCurrencyCode())) {
+                return true;
+            }
+        }
+        return false;
     }
-}

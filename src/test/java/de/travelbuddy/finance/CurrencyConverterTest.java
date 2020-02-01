@@ -1,6 +1,10 @@
 package de.travelbuddy.finance;
 
 import de.travelbuddy.finance.Money;
+import de.travelbuddy.journey.Journey;
+import de.travelbuddy.place.DuplicatePlaceException;
+import de.travelbuddy.place.Place;
+import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -8,11 +12,11 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Currency;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CurrencyConverterTest {
     @Test
-    public void shouldConvertRUBToEUR (){
+    public void shouldConvertRUBToEUR () throws NotSupportedCurrencyException {
 
         //Given
         CurrencyConverter CC = new CurrencyConverter();
@@ -30,7 +34,7 @@ public class CurrencyConverterTest {
     }
 
     @Test
-    public void shouldGiveRightConversionRateToEUR (){
+    public void shouldGiveRightConversionRateToEUR () throws NotSupportedCurrencyException {
 
         //Given
         Currency RUB = Currency.getInstance("CHF");
@@ -48,7 +52,7 @@ public class CurrencyConverterTest {
     }
 
     @Test
-    public void shouldGiveRightConversionRateFromEUR (){
+    public void shouldGiveRightConversionRateFromEUR () throws NotSupportedCurrencyException {
 
         //Given
         Currency RUB = Currency.getInstance("EUR");
@@ -66,7 +70,7 @@ public class CurrencyConverterTest {
     }
 
     @Test
-    public void shouldGiveRightConversionRateOtherThenEUR (){
+    public void shouldGiveRightConversionRateOtherThenEUR () throws NotSupportedCurrencyException {
 
         //Given
         Currency RUB = Currency.getInstance("CZK");
@@ -81,5 +85,37 @@ public class CurrencyConverterTest {
 
         assertEquals(Rate,BigDecimal.valueOf(2.7833001988).setScale(10,RoundingMode.HALF_UP));
 
+    }
+
+    @Test
+    public void isSupportedCurrency_should_return_correct_value()
+    {
+        //Given
+        Currency notSupported = Currency.getInstance("NLG");
+        Currency supported = Currency.getInstance("EUR");
+        ICurrencyConverter converter = CurrencyConverterFactory.create();
+
+        //When
+        boolean shouldBeFalse = converter.isSupportedCurrency(notSupported);
+        boolean shouldBeTrue = converter.isSupportedCurrency(supported);
+
+        //Then
+        assertFalse(shouldBeFalse);
+        assertTrue(shouldBeTrue);
+    }
+
+    @Test
+    public void should_throw_NotSupportedCurrencyException()
+    {
+        //Given
+        ICurrencyConverter converter = CurrencyConverterFactory.create();
+
+        //When
+        Exception exception = assertThrows(NotSupportedCurrencyException.class, () -> {
+            converter.getRate(Currency.getInstance("EUR"), Currency.getInstance("NLG") );
+        });
+
+        //Then
+        assertTrue(exception.getMessage().contains("The currency 'NLG' is not supported by this CurrencyConverter-Class"));
     }
 }

@@ -1,8 +1,11 @@
 package de.travelbuddy.place;
-import de.travelbuddy.*;
+
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
+import de.travelbuddy.ContactDetails;
+import de.travelbuddy.Person;
 
+import de.travelbuddy.finance.NotSupportedCurrencyException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
@@ -115,7 +118,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void total_cost_per_person_with_same_currencies () {
+    public void total_cost_per_person_with_same_currencies () throws NotSupportedCurrencyException {
         //Given
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
         Currency targetCurrency = Currency.getInstance("EUR");
@@ -153,7 +156,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void total_cost_per_person_with_different_currencies () {
+    public void total_cost_per_person_with_different_currencies () throws NotSupportedCurrencyException {
         //Given
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
         Currency targetCurrency = Currency.getInstance("EUR");

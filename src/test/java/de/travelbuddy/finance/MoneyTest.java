@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MoneyTest {
 
     @Test
-    public void should_convert_RUB_to_EUR(){
+    public void should_convert_RUB_to_EUR() throws NotSupportedCurrencyException {
 
         //Given
         Currency RUB = Currency.getInstance("RUB");
