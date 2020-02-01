@@ -6,6 +6,8 @@ import de.travelbuddy.finance.Money;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -62,14 +64,19 @@ public class PlaceTest {
         Expense expense3 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
         Expense expense4 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
 
+        expense1.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(10).setScale(2, RoundingMode.HALF_UP)));
+        expense2.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(20).setScale(2, RoundingMode.HALF_UP)));
+        expense3.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(30).setScale(2, RoundingMode.HALF_UP)));
+        expense4.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(40).setScale(2, RoundingMode.HALF_UP)));
+
         //When
         place1.addExpense(expense1);
         place1.addExpense(expense2);
         place1.addExpense(expense3);
         place1.addExpense(expense4);
 
-        Money totalMoney = expense1.getPrice();
-
+        Money totalMoney = new Money(Currency.getInstance("EUR"),BigDecimal.valueOf(0).setScale(2,RoundingMode.HALF_UP));
+        totalMoney.add(expense1.getPrice());
         totalMoney.add(expense2.getPrice());
         totalMoney.add(expense3.getPrice());
         totalMoney.add(expense4.getPrice());
@@ -82,6 +89,7 @@ public class PlaceTest {
     @Test
     public void total_costs_correct_with_different_currencies() {
         //Given
+        Currency targetCurrency = Currency.getInstance("EUR");
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
         Expense expense1 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
         Expense expense2 = InstanceHelper.createExpense(Currency.getInstance("USD"));
@@ -94,12 +102,13 @@ public class PlaceTest {
         place1.addExpense(expense3);
         place1.addExpense(expense4);
 
-        Money totalMoney = expense1.getPrice();
+        Money totalMoney = new Money(targetCurrency,BigDecimal.valueOf(0).setScale(2,RoundingMode.HALF_UP));
 
+        totalMoney.add(expense1.getPrice());
         totalMoney.add(expense2.getPrice());
         totalMoney.add(expense3.getPrice());
         totalMoney.add(expense4.getPrice());
-        Money costs = place1.totalCost(Currency.getInstance("EUR"));
+        Money costs = place1.totalCost(targetCurrency);
 
         //Then
         assertEquals(totalMoney.getValue(), costs.getValue());
