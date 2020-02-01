@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AccommodationTest {
     @Test
-    public void correctly_instantiate_Accommodation() {
+    public void correctly_instantiate_Accommodation() throws InvalidLatitudeException, InvalidLongitudeException {
         String name = "Lee Valley Camping and Caravan Park";
         Coordinates coordinates = new Coordinates(-0.006111, 51.654722);
         ContactDetails contactDetails = new ContactDetails("+ 20 / 85 29 56 89", "scs@leevalleypark.org.uk",

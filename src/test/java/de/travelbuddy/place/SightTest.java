@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SightTest {
     @Test
-    public void correctly_instantiate_Sight_Louvre() {
+    public void correctly_instantiate_Sight_Louvre() throws InvalidLatitudeException, InvalidLongitudeException {
 
         String name = "Louvre";
         Coordinates coordinates = new Coordinates(48.864824, 2.334595);

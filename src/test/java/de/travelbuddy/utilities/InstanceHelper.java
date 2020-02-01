@@ -4,9 +4,7 @@ import de.travelbuddy.*;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.journey.Journey;
-import de.travelbuddy.place.Connection;
-import de.travelbuddy.place.Coordinates;
-import de.travelbuddy.place.Place;
+import de.travelbuddy.place.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -39,7 +37,15 @@ public class InstanceHelper {
 
     public static Coordinates createCoordinate()
     {
-        return new Coordinates(rndDouble(-90, 90), rndDouble(-180, 180));
+        Coordinates ret = null;
+        try {
+            ret = new Coordinates(rndDouble(-90, 90), rndDouble(-180, 180));
+        }
+        catch (InvalidLatitudeException | InvalidLongitudeException ex)
+        {
+            //Can't happen, unless Coordinate Class is broken
+        }
+        return ret;
     }
 
 

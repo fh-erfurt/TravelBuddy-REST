@@ -2,7 +2,7 @@ package de.travelbuddy.journey;
 
 import de.travelbuddy.utilities.InstanceHelper;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

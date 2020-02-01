@@ -6,14 +6,12 @@ public class Coordinates {
     private double longitude;
 
     // TODO JAVADOC
-    public Coordinates(double latitude, double longitude) {
-        if (!checkLatitude(latitude)){
-            //TODO throw exception
-             }
+    public Coordinates(double latitude, double longitude) throws InvalidLatitudeException, InvalidLongitudeException {
+        if (!checkLatitude(latitude))
+            throw new InvalidLatitudeException("Latitude should be between -90 and 90.");
 
-        if (!checkLongitude(longitude)) {
-            //TODO throw exception
-        }
+        if (!checkLongitude(longitude))
+            throw new InvalidLongitudeException("Longitude should be between -180 and 180.");
 
         this.latitude = latitude;
         this.longitude = longitude;
@@ -27,13 +25,20 @@ public class Coordinates {
 
     public void setLongitude(double longitude) {this.longitude = longitude;}
 
-    // TODO JAVADOC
+    /**
+     * Check if the given latitude is valid
+     * @param latitude The latitude to check
+     * @return True, if the given value is valid, otherwise false
+     */
     public static boolean checkLatitude(double latitude) {
         return latitude >= -90.0 && latitude <= 90.0;
     }
-    // TODO JAVADOC
 
-    // TODO Warum wolltest du das static machen? @Marcel
+    /**
+     * Check if the given longitude is valid
+     * @param longitude The longitude to check
+     * @return True, if the given value is valid, otherwise false
+     */
     public static boolean checkLongitude(double longitude) {
         return longitude >= -180.0 && longitude <= 180.0;
     }

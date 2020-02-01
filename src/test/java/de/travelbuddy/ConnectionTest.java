@@ -16,7 +16,7 @@ import java.util.Currency;
 
 public class ConnectionTest {
     @Test
-    public void should_create_connectionBerlin() {
+    public void should_create_connectionBerlin() throws InvalidLatitudeException, InvalidLongitudeException {
         String title = "Berlin";
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45) ;
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5) ;
