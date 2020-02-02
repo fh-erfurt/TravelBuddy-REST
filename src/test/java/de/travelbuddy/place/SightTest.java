@@ -38,7 +38,7 @@ public class SightTest {
         assertEquals(sight.getDeparture(), departure);
         assertEquals(sight.getExpenses(), expenses);
         assertEquals(sight.getConnectionsToNextPlace(), connectionsToNextPlace);
-        assertEquals(sight.getListOfInvolvedPersons(), involvedPersons);
+        assertEquals(sight.getInvolvedPersons(), involvedPersons);
         assertTrue(sight.isIndoor());
     }
 }

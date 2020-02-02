@@ -41,7 +41,7 @@ public class AccommodationTest {
         assertEquals(accommodation.getDeparture(), departure);
         assertEquals(accommodation.getExpenses(), expenses);
         assertEquals(accommodation.getConnectionsToNextPlace(), connectionsToNextPlace);
-        assertEquals(accommodation.getListOfInvolvedPersons(), involvedPersons);
+        assertEquals(accommodation.getInvolvedPersons(), involvedPersons);
         assertEquals(accommodation.getType(), type);
     }
 }

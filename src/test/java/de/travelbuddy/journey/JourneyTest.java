@@ -141,7 +141,7 @@ public class JourneyTest {
 
         //When
         journey.addPlace(place);
-        List<Place> places = journey.getPlace(place.getName());
+        List<Place> places = journey.findPlace(place.getName());
 
         //Then
         assertEquals(places.size(), 1);
@@ -204,9 +204,9 @@ public class JourneyTest {
         journey.addPlace(sight2);
         journey.addPlace(place);
         journey.addPlace(place2);
-        List<Place> listAcco = journey.getPlace(acco.getName(), Accommodation.class);
-        List<Place> listSight = journey.getPlace(sight.getName(), Sight.class);
-        List<Place> listPlace = journey.getPlace(sight.getName(), Place.class);
+        List<Place> listAcco = journey.findPlace(acco.getName(), Accommodation.class);
+        List<Place> listSight = journey.findPlace(sight.getName(), Sight.class);
+        List<Place> listPlace = journey.findPlace(sight.getName(), Place.class);
 
         //then
         assertEquals(1, listAcco.size());

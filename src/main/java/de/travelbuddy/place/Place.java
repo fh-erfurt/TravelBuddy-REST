@@ -94,11 +94,11 @@ public class Place {
         this.connectionsToNextPlace = connectionsToNextPlace;
     }
 
-    public List<Person> getListOfInvolvedPersons() {
+    public List<Person> getInvolvedPersons() {
         return involvedPersons;
     }
 
-    public void setListOfInvolvedPersons(List<Person> involvedPersons) {
+    public void setInvolvedPersons(List<Person> involvedPersons) {
         this.involvedPersons = involvedPersons;
     }
 
@@ -213,7 +213,7 @@ public class Place {
      * @param to The place where the connection should end
      * @return A collection of connections
      */
-    public List<Connection> getConnection(Place from, Place to) {
+    public List<Connection> findConnections(Place from, Place to) {
         return connectionsToNextPlace.stream()
                 .filter(conn -> conn.getStart().equals(from))
                 .filter(conn -> conn.getEnd().equals(to))
@@ -225,7 +225,7 @@ public class Place {
      * @param title Title of the expenses to search for
      * @return A collection of expenses
      */
-    public List<Expense> getExpense(String title) {
+    public List<Expense> findExpenses(String title) {
         return expenses.stream()
                 .filter(exp -> exp.getTitle().equals(title))
                 .collect(Collectors.toList());
@@ -236,7 +236,7 @@ public class Place {
      * @param name Name of the persons to search for
      * @return A collection of persons
      */
-    public List<Person> getPersons(String name) {
+    public List<Person> findPersons(String name) {
         return involvedPersons.stream()
                 .filter(pers -> pers.getName().equals(name))
                 .collect(Collectors.toList());
@@ -249,7 +249,7 @@ public class Place {
      * @param number The limit for connections to look for
      * @return A collection of connections
      */
-    public List<Connection> getPossibleConnectionsTo(Place destination, LocalDateTime startTime, int number)
+    public List<Connection> findPossibleConnectionsTo(Place destination, LocalDateTime startTime, int number)
     {
          return connectionsToNextPlace.stream()
             .filter(conn -> conn.getEnd().equals(destination))

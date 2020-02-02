@@ -53,8 +53,8 @@ public class PlaceTest {
         assertEquals(place.getDeparture(), departure);
         assertEquals(place.getContactDetails(), contact);
         assertEquals(place.getCoordinates(), coordinates);
-        assertTrue(place.getListOfInvolvedPersons().contains(person));
-        assertEquals(place.getListOfInvolvedPersons().size(), persons.size());
+        assertTrue(place.getInvolvedPersons().contains(person));
+        assertEquals(place.getInvolvedPersons().size(), persons.size());
         assertTrue(place.getConnectionsToNextPlace().contains(connection));
         assertEquals(place.getConnectionsToNextPlace().size(), connections.size());
         assertTrue(place.getExpenses().contains(expense));
@@ -207,8 +207,8 @@ public class PlaceTest {
         place.addPerson(person);
 
         //Then
-        assertEquals(place.getListOfInvolvedPersons().size(), 1);
-        assertEquals(place.getListOfInvolvedPersons().get(0), person);
+        assertEquals(place.getInvolvedPersons().size(), 1);
+        assertEquals(place.getInvolvedPersons().get(0), person);
     }
 
     @Test
@@ -222,7 +222,7 @@ public class PlaceTest {
         place.removePerson(person);
 
         //Then
-        assertEquals(place.getListOfInvolvedPersons().size(), 0);
+        assertEquals(place.getInvolvedPersons().size(), 0);
     }
 
     @Test

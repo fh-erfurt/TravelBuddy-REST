@@ -26,9 +26,9 @@ public class JourneyManager {
     }
 
     /**
-     * Add a new Journey
-     * @param journey which should be add
-     * @throws DuplicateJourneyException there is another journey with the same title
+     * Add a new Journey to the manager
+     * @param journey which should be added
+     * @throws DuplicateJourneyException If there is another journey with the same title
      */
     public void addJourney(Journey journey) throws DuplicateJourneyException {
         if (journeys.containsKey(journey.getTitle()))
@@ -38,10 +38,10 @@ public class JourneyManager {
     }
 
     /**
-     * delete Journey
-     * @param journey which should be removed
-     * @return journey is removed with title
-     * @throws JourneyNotFoundException the journey doesn't exists
+     * Deletes a Journey from the manager
+     * @param journey Journey which should be removed
+     * @return journey The removed journey
+     * @throws JourneyNotFoundException If the journey doesn't exists
      */
     public Journey removeJourney(Journey journey) throws JourneyNotFoundException {
         if (!journeys.containsKey(journey.getTitle()))
@@ -51,10 +51,10 @@ public class JourneyManager {
     }
 
     /**
-     * Get the journey you need
-     * @param title is the name of a journey
-     * @return the journey title
-     * @throws JourneyNotFoundException the journey doesn't exist
+     * Get the Journey with the given name
+     * @param title The name of a journey
+     * @return The Journey from the manager
+     * @throws JourneyNotFoundException If the journey doesn't exist
      */
     public Journey getJourney(String title) throws JourneyNotFoundException {
         if (!journeys.containsKey(title))

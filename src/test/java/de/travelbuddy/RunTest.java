@@ -91,7 +91,7 @@ public class RunTest {
         //Removing a journey that exists should not throw an exception
         assertDoesNotThrow(() -> journey1.removePlace(place2));
         assertEquals(journey1.getPlaces().size(), 1);
-        assertDoesNotThrow(() -> journey1.getPlace(place1.getName()));
+        assertDoesNotThrow(() -> journey1.findPlace(place1.getName()));
     }
 
     private void runtest_assert_place_person(Place place)
@@ -101,24 +101,24 @@ public class RunTest {
 
         //Add person, should not throw exception
         assertDoesNotThrow(() -> place.addPerson(person1));
-        assertEquals(place.getListOfInvolvedPersons().size(), 1);
+        assertEquals(place.getInvolvedPersons().size(), 1);
 
         //Add same person, should throw exception
         assertThrows(DuplicatePersonException.class, () -> place.addPerson(person1));
-        assertEquals(place.getListOfInvolvedPersons().size(), 1);
+        assertEquals(place.getInvolvedPersons().size(), 1);
 
         //Adding a new person should not throw an exception
         assertDoesNotThrow(() -> place.addPerson(person2));
-        assertEquals(place.getListOfInvolvedPersons().size(), 2);
+        assertEquals(place.getInvolvedPersons().size(), 2);
 
         //Removing a person that doesn't exist should throw an exception
         assertThrows(PersonNotFoundException.class, () -> place.removePerson(InstanceHelper.createPerson()));
-        assertEquals(place.getListOfInvolvedPersons().size(), 2);
+        assertEquals(place.getInvolvedPersons().size(), 2);
 
         //Removing a person that exists should not throw an exception
         assertDoesNotThrow(() -> place.removePerson(person2));
-        assertEquals(place.getListOfInvolvedPersons().size(), 1);
-        assertTrue(place.getPersons(person1.getName()).contains(person1));
+        assertEquals(place.getInvolvedPersons().size(), 1);
+        assertTrue(place.findPersons(person1.getName()).contains(person1));
     }
 
     private void runtest_assert_place_expense(Place place)

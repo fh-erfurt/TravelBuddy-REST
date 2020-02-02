@@ -119,7 +119,7 @@ public class Journey {
      * @param name Name of the person
      * @return All persons with the given name
      */
-    public List<Person> getPerson(String name) {
+    public List<Person> findPerson(String name) {
         return persons
                 .stream()
                 .filter(person -> person.getName().equals(name))
@@ -131,9 +131,9 @@ public class Journey {
      * @param name Name of the place
      * @return All places with the given name
      */
-    public List<Place> getPlace(String name)
+    public List<Place> findPlace(String name)
     {
-        return getPlace(name, Place.class);
+        return findPlace(name, Place.class);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Journey {
      * @param type Type of the place
      * @return All places with the given name and type
      */
-    public  <T extends Place> List<Place> getPlace(String name, Class<T> type) {
+    public  <T extends Place> List<Place> findPlace(String name, Class<T> type) {
         //Extra für Jonas hinzugefügt, damit wir, wie besprochen, eine 1 bekommen ;)
         return places.stream()
                     .filter(place -> type.equals(place.getClass()))
