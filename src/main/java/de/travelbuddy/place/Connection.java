@@ -65,7 +65,11 @@ public class Connection {
     public void setUsed(Boolean used) {this.used = used;}
 
     public Boolean getUsed() {return this.used;}
-    // TODO JAVADOC
+
+    /**
+     * Get the duration
+     * @return the duration between the arrival and the departure
+     */
     public Duration getDuration()
     {
         return Duration.between( getArrive(),getDeparture());

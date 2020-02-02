@@ -114,7 +114,7 @@ public class Place {
 
     /**
      * Removes a person from this place
-     * @param person THe person to remove
+     * @param person The person to remove
      * @throws IllegalArgumentException When the given person does not exist for this place
      */
     public void removePerson(Person person) throws PersonNotFoundException {

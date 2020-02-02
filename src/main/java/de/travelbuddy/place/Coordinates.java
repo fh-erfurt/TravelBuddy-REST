@@ -8,7 +8,13 @@ public class Coordinates {
     private double latitude;
     private double longitude;
 
-    // TODO JAVADOC
+    /**
+     * coordinates has the exact position from a place
+     * @param latitude is the width coordinate
+     * @param longitude is the length coordinate
+     * @throws InvalidLatitudeException the latitude isn't between -90 and 90
+     * @throws InvalidLongitudeException the logitude isn't between -180 and 180
+     */
     public Coordinates(double latitude, double longitude) throws InvalidLatitudeException, InvalidLongitudeException {
         if (!checkLatitude(latitude))
             throw new InvalidLatitudeException("Latitude should be between -90 and 90.");

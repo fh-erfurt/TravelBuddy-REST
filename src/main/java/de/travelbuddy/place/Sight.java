@@ -6,6 +6,9 @@ import de.travelbuddy.finance.Expense;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Sights is a extension from place
+ */
 public class Sight extends Place {
 
     private boolean indoor;
