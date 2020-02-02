@@ -14,7 +14,7 @@ In einer Übersicht wird geordnet dargestellt, wann eine Aktivität stattfindet,
 
 
 ## Klassendiagramm
-![Alt](UML_Java_neu.png)
+![Alt](UML_Java_old_01.02.2020.png)
 
 # Ausgangssituation
 
