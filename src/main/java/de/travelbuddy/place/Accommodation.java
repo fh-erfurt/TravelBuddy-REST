@@ -5,6 +5,7 @@ package de.travelbuddy.place;
 
         import java.time.LocalDateTime;
         import java.util.List;
+        import java.util.Map;
 
 /**
  * Accommodation is a extension from place
@@ -18,7 +19,7 @@ public class Accommodation extends Place {
     }
 
     public Accommodation(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
-                         LocalDateTime departure, List<Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons,
+                         LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons,
                          accommodationType type) {
         super(name, coordinates, contactDetails, arrive, departure, expenses, connectionsToNextPlace, involvedPersons);
         this.type = type;

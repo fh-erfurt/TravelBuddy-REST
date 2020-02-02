@@ -10,6 +10,7 @@ import de.travelbuddy.place.exception.PlaceNotFoundException;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +23,7 @@ public class Journey {
     private List<Place> places;
     private List<Person> persons;
 
-    private List<Expense> expenses;
+    private Map<String, Expense> expenses;
 
     public Journey(String title, List<Place> places, List<Person> persons) {
         this.title = title;

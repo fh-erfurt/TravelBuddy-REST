@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,12 +23,12 @@ public class Place {
     private ContactDetails contactDetails;
     private LocalDateTime arrive;
     private LocalDateTime departure;
-    private List<Expense> expenses;
+    private Map<String, Expense> expenses;
     private List<Connection> connectionsToNextPlace;
     private List<Person> involvedPersons;
 
     public Place(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
-                 LocalDateTime departure, List<Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons) {
+                 LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons) {
         this.name = name;
         this.coordinates = coordinates;
         this.contactDetails = contactDetails;
@@ -70,11 +71,11 @@ public class Place {
         this.departure = departure;
     }
 
-    public List<Expense> getExpenses() {
+    public Map<String, Expense> getExpenses() {
         return expenses;
     }
 
-    public void setExpenses(List<Expense> expenses) {
+    public void setExpenses(Map<String, Expense> expenses) {
         this.expenses = expenses;
     }
 
@@ -132,10 +133,10 @@ public class Place {
      * @throws IllegalArgumentException When the expense already exists for this place
      */
     public void addExpense(Expense expense) throws DuplicateExpenseException {
-        if (expenses.contains(expense))
+        if (expenses.containsKey(expense.getTitle()))
             throw new DuplicateExpenseException(String.format("Expense '%s' does already exist.", expense.getTitle()));
 
-        expenses.add(expense);
+        expenses.put(expense.getTitle(), expense);
     }
 
     /**
@@ -144,10 +145,10 @@ public class Place {
      * @throws IllegalArgumentException When the given expense does not exist for this place
      */
     public void removeExpense(Expense expense) throws ExpenseNotFoundException {
-        if (!expenses.contains(expense))
+        if (!expenses.containsKey(expense.getTitle()))
             throw new ExpenseNotFoundException(String.format("Expense '%s' does not exist.", expense.getTitle()));
 
-        expenses.remove(expense);
+        expenses.remove(expense.getTitle());
     }
 
     /**
@@ -183,9 +184,9 @@ public class Place {
     public Money totalCost(Currency currency) {
         Money total = new Money(currency, new BigDecimal(0));
 
-        expenses.stream()
-                .filter(x -> x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
-                .forEach((n) -> total.add(n.getPrice()));
+        expenses.values().stream()
+                    .filter(x -> x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
+                    .forEach((n) -> total.add(n.getPrice()));
 
         return total;
     }
@@ -199,10 +200,10 @@ public class Place {
     public Money totalCostOfPerson(Currency currency, Person person) {
         Money total = new Money(currency, new BigDecimal(0));
 
-        expenses.stream()
-                .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED))
-                .filter(x -> x.isInvolved(person))
-                .forEach((n) -> total.add(n.getPrice()));
+        expenses.values().stream()
+                    .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED))
+                    .filter(x -> x.isInvolved(person))
+                    .forEach((n) -> total.add(n.getPrice()));
 
         return total;
     }
@@ -226,7 +227,7 @@ public class Place {
      * @return A collection of expenses
      */
     public List<Expense> findExpenses(String title) {
-        return expenses.stream()
+        return expenses.values().stream()
                 .filter(exp -> exp.getTitle().equals(title))
                 .collect(Collectors.toList());
     }

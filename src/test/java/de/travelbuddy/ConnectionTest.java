@@ -6,15 +6,15 @@ import de.travelbuddy.place.*;
 import de.travelbuddy.place.exception.InvalidLatitudeException;
 import de.travelbuddy.place.exception.InvalidLongitudeException;
 import org.junit.jupiter.api.Test;
+
+import static java.util.Map.entry;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Currency;
+import java.util.*;
 
 public class ConnectionTest {
     @Test
@@ -29,13 +29,13 @@ public class ConnectionTest {
         Place start = new Accommodation("Generator Hostel",
                 new Coordinates(52.516181, 13.376935),
                 contact,
-                arrive,departure, new ArrayList<>(Arrays.asList(expense1)), new ArrayList<>(),
+                arrive,departure, Map.of(expense1.getTitle(), expense1), new ArrayList<>(),
                 new ArrayList<>(), Accommodation.accommodationType.HOSTEL);
 
         Place end = new Sight("Brandenburger Tor", new Coordinates(52.516275, 13.377704),
                 new ContactDetails("9999999", "brandeburger@tor.de", "Berlin",
                         "Pariser Platz", 1, "10117", "Deutschland"), arrive, departure,
-                new ArrayList<>(Arrays.asList(expense1)), new ArrayList<>(), new ArrayList<>(), false);
+                Map.of(expense1.getTitle(), expense1), new ArrayList<>(), new ArrayList<>(), false);
 
 
         Connection connection = new Connection(title, arrive, departure, start, end, expense1);

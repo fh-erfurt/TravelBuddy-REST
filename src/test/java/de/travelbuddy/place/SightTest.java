@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,7 +25,7 @@ public class SightTest {
                 "Paris", "Rue de Rivoli", 1, "75001", "Frankreich");
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
-        List<Expense> expenses = new ArrayList<>();
+        Map<String, Expense> expenses = new HashMap<String, Expense>();
         List<Connection> connectionsToNextPlace = new ArrayList<>();
         List<Person> involvedPersons = new ArrayList<>();
         boolean indoor = true;

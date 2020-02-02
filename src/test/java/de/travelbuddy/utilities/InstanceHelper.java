@@ -32,7 +32,7 @@ public class InstanceHelper {
     public static Place createPlace(LocalDateTime start)
     {
         return new Place(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new ArrayList<Expense>(), new ArrayList<Connection>(),
+                start.plusHours(rndInt(1, 8)), new HashMap<String, Expense>(), new ArrayList<Connection>(),
                 new ArrayList<Person>());
     }
 
@@ -44,7 +44,7 @@ public class InstanceHelper {
     public static Accommodation createAccommodation(LocalDateTime start)
     {
         return new Accommodation(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new ArrayList<Expense>(), new ArrayList<Connection>(),
+                start.plusHours(rndInt(1, 8)), new HashMap<String, Expense>(), new ArrayList<Connection>(),
                 new ArrayList<Person>(), Accommodation.accommodationType.HOSTEL);
     }
 
@@ -56,7 +56,7 @@ public class InstanceHelper {
     public static Sight createSight(LocalDateTime start)
     {
         return new Sight(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new ArrayList<Expense>(), new ArrayList<Connection>(),
+                start.plusHours(rndInt(1, 8)), new HashMap<String, Expense>(), new ArrayList<Connection>(),
                 new ArrayList<Person>(), true);
     }
 

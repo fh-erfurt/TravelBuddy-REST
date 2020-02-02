@@ -18,6 +18,8 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,10 +38,10 @@ public class PlaceTest {
         Person person = InstanceHelper.createPersonMale();
         ArrayList<Person> persons = new ArrayList<>();
         Expense expense = InstanceHelper.createExpense();
-        ArrayList<Expense> expenses = new ArrayList<>();
+        Map<String, Expense> expenses = new HashMap<>();
         Connection connection = InstanceHelper.createConnection();
         ArrayList<Connection> connections = new ArrayList<>();
-        expenses.add(expense);
+        expenses.put(expense.getTitle(), expense);
         persons.add(person);
         connections.add(connection);
 
@@ -57,7 +59,7 @@ public class PlaceTest {
         assertEquals(place.getInvolvedPersons().size(), persons.size());
         assertTrue(place.getConnectionsToNextPlace().contains(connection));
         assertEquals(place.getConnectionsToNextPlace().size(), connections.size());
-        assertTrue(place.getExpenses().contains(expense));
+        assertTrue(place.getExpenses().containsKey(expense.getTitle()));
         assertEquals(place.getExpenses().size(), expenses.size());
     }
 
@@ -236,7 +238,7 @@ public class PlaceTest {
 
         //Then
         assertEquals(place.getExpenses().size(), 1);
-        assertEquals(place.getExpenses().get(0), expense);
+        assertEquals(place.getExpenses().get(expense.getTitle()), expense);
     }
 
     @Test

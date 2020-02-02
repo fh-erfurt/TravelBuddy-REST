@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class AccommodationTest {
     @Test
@@ -24,7 +25,8 @@ public class AccommodationTest {
                 "London", "Sewardstone Road ", 1, "E4 7RA", "England");
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
-        List<Expense> expenses = new ArrayList<>(Arrays.asList(InstanceHelper.createExpense()));
+        Expense expense = InstanceHelper.createExpense();
+        Map<String, Expense> expenses = Map.of(expense.getTitle(), expense);
         List<Connection> connectionsToNextPlace = new ArrayList<>();
         List<Person> involvedPersons = new ArrayList<>(Arrays.asList(InstanceHelper.createPerson()));
         Accommodation.accommodationType type = Accommodation.accommodationType.CAMPING;
