@@ -4,7 +4,11 @@ import de.travelbuddy.finance.exception.NotSupportedCurrencyException;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-// TODO JAVADOC
+
+/**
+ * Interface for currency conversion classes.
+ * Handles the conversion for one currency in the other.
+ */
 public interface ICurrencyConverter {
 
     /**

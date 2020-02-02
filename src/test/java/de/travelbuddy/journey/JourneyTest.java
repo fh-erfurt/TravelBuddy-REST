@@ -143,8 +143,7 @@ public class JourneyTest {
 
         //Then
         assertEquals(places.size(), 1);
-        // TODO Warning:(149, 50) 'Optional.get()' without 'isPresent()' check
-        assertEquals(places.stream().findFirst().get(), place);
+        assertEquals(places.get(0), place);
     }
 
     @Test

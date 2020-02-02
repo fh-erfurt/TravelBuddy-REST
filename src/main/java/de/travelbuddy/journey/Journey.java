@@ -133,10 +133,9 @@ public class Journey {
         return getPlace(name, Place.class);
     }
 
-    // TODO Warning:(135, 15) '@param <T>' tag description is missing
     /**
      * Search for a place of the given type and with the given name.
-     * @param <T>
+     * @param <T> Class of the place
      * @param name Name of the place
      * @param type Type of the place
      * @return All places with the given name and type
