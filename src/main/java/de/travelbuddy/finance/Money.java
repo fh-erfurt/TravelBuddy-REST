@@ -49,8 +49,8 @@ public class Money {
 
     /**
      * Add Money
-     * @param money
-     * @return
+     * @param money to add
+     * @return the new value of money
      */
     public Money add(Money money)
     {
@@ -71,7 +71,11 @@ public class Money {
         return this;
     }
 
-    // TODO JAVADOC
+    /**
+     * subtract money
+     * @param money to subtract
+     * @return the new value of money
+     */
     public Money subtract(Money money)
     {
         Money newMoney = null;
