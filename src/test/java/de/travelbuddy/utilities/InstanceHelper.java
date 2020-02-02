@@ -200,7 +200,4 @@ public class InstanceHelper {
         return title[new Random().nextInt(title.length)];
     }
 }
-/*
-fehlt Connection
-Person funktioniert Geb. nicht
- */
+

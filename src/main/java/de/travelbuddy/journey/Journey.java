@@ -12,6 +12,9 @@ import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class which represents a Journey
+ */
 public class Journey {
 
     private String title;

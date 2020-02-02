@@ -12,7 +12,9 @@ import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Class which represents a Place
+ */
 public class Place {
 
     private String name;
@@ -114,7 +116,7 @@ public class Place {
 
     /**
      * Removes a person from this place
-     * @param person THe person to remove
+     * @param person The person to remove
      * @throws IllegalArgumentException When the given person does not exist for this place
      */
     public void removePerson(Person person) throws PersonNotFoundException {

@@ -6,6 +6,9 @@ package de.travelbuddy.place;
         import java.time.LocalDateTime;
         import java.util.List;
 
+/**
+ * Accommodation is a extension from place
+ */
 public class Accommodation extends Place {
     private accommodationType type;
 

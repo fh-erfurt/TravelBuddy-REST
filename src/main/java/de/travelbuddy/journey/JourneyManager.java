@@ -24,26 +24,43 @@ public class JourneyManager {
     {
         return journeys.keySet().size();
     }
-    // TODO JAVADOC
+
+    /**
+     * Add a new Journey
+     * @param journey which should be add
+     * @throws DuplicateJourneyException there is another journey with the same title
+     */
     public void addJourney(Journey journey) throws DuplicateJourneyException {
         if (journeys.containsKey(journey.getTitle()))
             throw new DuplicateJourneyException(String.format("Journey with the title '%s' already exists", journey.getTitle()));
 
         journeys.put(journey.getTitle(), journey);
     }
-    // TODO JAVADOC
+
+    /**
+     * delete Journey
+     * @param journey which should be removed
+     * @return journey is removed with title
+     * @throws JourneyNotFoundException the journey doesn't exists
+     */
     public Journey removeJourney(Journey journey) throws JourneyNotFoundException {
         if (!journeys.containsKey(journey.getTitle()))
             throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", journey.getTitle()));
 
         return journeys.remove(journey.getTitle());
     }
-    // TODO JAVADOC
-    public Journey getJourney(String name) throws JourneyNotFoundException {
-        if (!journeys.containsKey(name))
-            throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", name));
 
-        return journeys.get(name);
+    /**
+     * Get the journey you need
+     * @param title is the name of a journey
+     * @return the journey title
+     * @throws JourneyNotFoundException the journey doesn't exist
+     */
+    public Journey getJourney(String title) throws JourneyNotFoundException {
+        if (!journeys.containsKey(title))
+            throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", title));
+
+        return journeys.get(title);
     }
 
 
@@ -65,7 +82,7 @@ public class JourneyManager {
     /**
      * Calculate the total costs for the given person for all journeys
      * @param currency Currency in which to costs should be converted
-     * @param person The person dor which the costs should be calculated
+     * @param person The person for which the costs should be calculated
      * @return The calculated total costs in Money
      */
     public Money totalCostOfPerson(Currency currency, Person person) {

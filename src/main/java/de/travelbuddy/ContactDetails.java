@@ -1,5 +1,8 @@
 package de.travelbuddy;
 
+/**
+ * Class which represents the Contact details
+ */
 public class ContactDetails {
 
     private String phone;

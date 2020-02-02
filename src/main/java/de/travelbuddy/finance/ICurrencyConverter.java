@@ -13,7 +13,7 @@ public interface ICurrencyConverter {
 
     /**
      * Convert the money in the right currency
-     * @param money is the
+     * @param money is used
      * @param currency is the currency we want to get
      * @return The Money with the target currency
      */
