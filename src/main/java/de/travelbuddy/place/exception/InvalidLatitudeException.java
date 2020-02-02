@@ -1,4 +1,4 @@
-package de.travelbuddy.place;
+package de.travelbuddy.place.exception;
 
 /**
  * Should be thrown if a latitude value is not in the bounds of -90 and 90

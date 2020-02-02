@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.travelbuddy.*;
 import de.travelbuddy.finance.Expense;
+import de.travelbuddy.place.exception.InvalidLatitudeException;
+import de.travelbuddy.place.exception.InvalidLongitudeException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 

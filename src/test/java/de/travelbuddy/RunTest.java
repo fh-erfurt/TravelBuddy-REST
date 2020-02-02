@@ -1,16 +1,16 @@
 package de.travelbuddy;
 
-import de.travelbuddy.finance.DuplicateExpenseException;
+import de.travelbuddy.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
-import de.travelbuddy.finance.ExpenseNotFoundException;
-import de.travelbuddy.journey.DuplicateJourneyException;
+import de.travelbuddy.finance.exception.ExpenseNotFoundException;
+import de.travelbuddy.journey.exception.DuplicateJourneyException;
 import de.travelbuddy.journey.Journey;
 import de.travelbuddy.journey.JourneyManager;
-import de.travelbuddy.journey.JourneyNotFoundException;
+import de.travelbuddy.journey.exception.JourneyNotFoundException;
 import de.travelbuddy.place.Connection;
-import de.travelbuddy.place.DuplicatePlaceException;
+import de.travelbuddy.place.exception.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
-import de.travelbuddy.place.PlaceNotFoundException;
+import de.travelbuddy.place.exception.PlaceNotFoundException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 

@@ -2,6 +2,8 @@ package de.travelbuddy.journey;
 
 import de.travelbuddy.Person;
 import de.travelbuddy.finance.Money;
+import de.travelbuddy.journey.exception.DuplicateJourneyException;
+import de.travelbuddy.journey.exception.JourneyNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.*;

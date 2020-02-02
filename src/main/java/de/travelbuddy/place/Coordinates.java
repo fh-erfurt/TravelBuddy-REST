@@ -1,5 +1,8 @@
 package de.travelbuddy.place;
 
+import de.travelbuddy.place.exception.InvalidLatitudeException;
+import de.travelbuddy.place.exception.InvalidLongitudeException;
+
 public class Coordinates {
 
     private double latitude;

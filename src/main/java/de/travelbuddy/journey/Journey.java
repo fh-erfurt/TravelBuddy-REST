@@ -3,9 +3,9 @@ package de.travelbuddy.journey;
 import de.travelbuddy.Person;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
-import de.travelbuddy.place.DuplicatePlaceException;
+import de.travelbuddy.place.exception.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
-import de.travelbuddy.place.PlaceNotFoundException;
+import de.travelbuddy.place.exception.PlaceNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.Currency;

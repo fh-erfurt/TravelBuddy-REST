@@ -1,4 +1,4 @@
-package de.travelbuddy.journey;
+package de.travelbuddy.journey.exception;
 
 /**
  * Should be thrown if a Journey already exists

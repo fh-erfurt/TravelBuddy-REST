@@ -1,9 +1,9 @@
 package de.travelbuddy.place;
 
 import de.travelbuddy.*;
-import de.travelbuddy.finance.DuplicateExpenseException;
+import de.travelbuddy.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
-import de.travelbuddy.finance.ExpenseNotFoundException;
+import de.travelbuddy.finance.exception.ExpenseNotFoundException;
 import de.travelbuddy.finance.Money;
 
 import java.math.BigDecimal;

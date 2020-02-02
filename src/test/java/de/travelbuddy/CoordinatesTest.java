@@ -1,11 +1,9 @@
 package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
 
-import de.travelbuddy.finance.MissingPersonToDivideException;
 import de.travelbuddy.place.Coordinates;
-import de.travelbuddy.place.DuplicatePlaceException;
-import de.travelbuddy.place.InvalidLatitudeException;
-import de.travelbuddy.place.InvalidLongitudeException;
+import de.travelbuddy.place.exception.InvalidLatitudeException;
+import de.travelbuddy.place.exception.InvalidLongitudeException;
 import org.junit.jupiter.api.Test;
 
 

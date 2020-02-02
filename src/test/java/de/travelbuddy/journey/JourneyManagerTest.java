@@ -1,5 +1,7 @@
 package de.travelbuddy.journey;
 
+import de.travelbuddy.journey.exception.DuplicateJourneyException;
+import de.travelbuddy.journey.exception.JourneyNotFoundException;
 import de.travelbuddy.utilities.InstanceHelper;
 
 import org.junit.jupiter.api.Test;

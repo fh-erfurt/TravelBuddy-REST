@@ -1,4 +1,4 @@
-package de.travelbuddy.finance;
+package de.travelbuddy.finance.exception;
 
 /**
  * Should be thrown if tried to use a Currency which is not supported/implemented by code

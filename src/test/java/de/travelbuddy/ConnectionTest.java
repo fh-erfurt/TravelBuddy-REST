@@ -3,6 +3,8 @@ package de.travelbuddy;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.*;
+import de.travelbuddy.place.exception.InvalidLatitudeException;
+import de.travelbuddy.place.exception.InvalidLongitudeException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

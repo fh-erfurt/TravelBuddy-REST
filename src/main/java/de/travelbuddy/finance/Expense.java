@@ -1,8 +1,7 @@
 package de.travelbuddy.finance;
 
 import de.travelbuddy.Person;
-import de.travelbuddy.finance.MissingPersonToDivideException;
-import de.travelbuddy.finance.Money;
+import de.travelbuddy.finance.exception.MissingPersonToDivideException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

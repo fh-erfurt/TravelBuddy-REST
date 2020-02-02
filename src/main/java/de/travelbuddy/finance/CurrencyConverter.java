@@ -1,7 +1,8 @@
 package de.travelbuddy.finance;
 
+import de.travelbuddy.finance.exception.NotSupportedCurrencyException;
+
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Currency;
 

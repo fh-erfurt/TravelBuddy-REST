@@ -1,14 +1,9 @@
 package de.travelbuddy.finance;
 
-import de.travelbuddy.finance.Money;
-import de.travelbuddy.journey.Journey;
-import de.travelbuddy.place.DuplicatePlaceException;
-import de.travelbuddy.place.Place;
-import de.travelbuddy.utilities.InstanceHelper;
+import de.travelbuddy.finance.exception.NotSupportedCurrencyException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Currency;
 

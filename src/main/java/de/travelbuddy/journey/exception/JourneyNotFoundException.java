@@ -1,4 +1,4 @@
-package de.travelbuddy.journey;
+package de.travelbuddy.journey.exception;
 
 /**
  * Will be thrown if a Journey could not be found

@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import de.travelbuddy.ContactDetails;
 import de.travelbuddy.Person;
+import de.travelbuddy.finance.exception.MissingPersonToDivideException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

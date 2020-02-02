@@ -2,12 +2,12 @@ package de.travelbuddy.journey;
 
 import de.travelbuddy.ContactDetails;
 import de.travelbuddy.Person;
-import de.travelbuddy.finance.DuplicateExpenseException;
+import de.travelbuddy.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
-import de.travelbuddy.place.DuplicatePlaceException;
+import de.travelbuddy.place.exception.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
-import de.travelbuddy.place.PlaceNotFoundException;
+import de.travelbuddy.place.exception.PlaceNotFoundException;
 import de.travelbuddy.utilities.InstanceHelper;
 
 import org.junit.jupiter.api.Test;

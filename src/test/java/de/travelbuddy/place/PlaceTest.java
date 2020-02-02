@@ -1,12 +1,12 @@
 package de.travelbuddy.place;
 
-import de.travelbuddy.finance.DuplicateExpenseException;
+import de.travelbuddy.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.ContactDetails;
 import de.travelbuddy.Person;
 
-import de.travelbuddy.finance.NotSupportedCurrencyException;
+import de.travelbuddy.finance.exception.NotSupportedCurrencyException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 

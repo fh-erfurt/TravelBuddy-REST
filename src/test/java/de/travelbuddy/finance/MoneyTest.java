@@ -1,6 +1,6 @@
 package de.travelbuddy.finance;
 
-import de.travelbuddy.finance.Money;
+import de.travelbuddy.finance.exception.NotSupportedCurrencyException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
