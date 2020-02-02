@@ -5,6 +5,8 @@ import de.travelbuddy.Person;
 import de.travelbuddy.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
+import de.travelbuddy.place.Accommodation;
+import de.travelbuddy.place.Sight;
 import de.travelbuddy.place.exception.DuplicatePlaceException;
 import de.travelbuddy.place.Place;
 import de.travelbuddy.place.exception.PlaceNotFoundException;
@@ -179,6 +181,42 @@ public class JourneyTest {
 
         //Then
         assertTrue(exception.getMessage().contains("Place 'Blubber' does already exist."));
+    }
+
+    @Test
+    public void journey_search_place_should_return_given_type() throws DuplicatePlaceException {
+        //Given
+        Journey journey = InstanceHelper.createJourney();
+        Accommodation acco = InstanceHelper.createAccommodation();
+        Accommodation acco2 = InstanceHelper.createAccommodation();
+        Sight sight = InstanceHelper.createSight();
+        Sight sight2 = InstanceHelper.createSight();
+        Place place = InstanceHelper.createPlace();
+        Place place2 = InstanceHelper.createPlace();
+
+        //When
+        acco.setName("Blubber");
+        sight.setName("Blubber");
+        place.setName("Blubber");
+        journey.addPlace(acco);
+        journey.addPlace(acco2);
+        journey.addPlace(sight);
+        journey.addPlace(sight2);
+        journey.addPlace(place);
+        journey.addPlace(place2);
+        List<Place> listAcco = journey.getPlace(acco.getName(), Accommodation.class);
+        List<Place> listSight = journey.getPlace(sight.getName(), Sight.class);
+        List<Place> listPlace = journey.getPlace(sight.getName(), Place.class);
+
+        //then
+        assertEquals(1, listAcco.size());
+        assertEquals(acco, listAcco.get(0));
+
+        assertEquals(1, listSight.size());
+        assertEquals(sight, listSight.get(0));
+
+        assertEquals(1, listPlace.size());
+        assertEquals(place, listPlace.get(0));
     }
 }
 

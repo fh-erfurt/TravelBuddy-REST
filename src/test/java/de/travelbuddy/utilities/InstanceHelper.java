@@ -36,6 +36,29 @@ public class InstanceHelper {
                 new ArrayList<Person>());
     }
 
+    public static Accommodation createAccommodation()
+    {
+        return createAccommodation(LocalDateTime.now());
+    }
+
+    public static Accommodation createAccommodation(LocalDateTime start)
+    {
+        return new Accommodation(rndString(), createCoordinate(), createContactDetails(), start,
+                start.plusHours(rndInt(1, 8)), new ArrayList<Expense>(), new ArrayList<Connection>(),
+                new ArrayList<Person>(), Accommodation.accommodationType.HOSTEL);
+    }
+
+    public static Sight createSight()
+    {
+        return createSight(LocalDateTime.now());
+    }
+
+    public static Sight createSight(LocalDateTime start)
+    {
+        return new Sight(rndString(), createCoordinate(), createContactDetails(), start,
+                start.plusHours(rndInt(1, 8)), new ArrayList<Expense>(), new ArrayList<Connection>(),
+                new ArrayList<Person>(), true);
+    }
 
     public static Coordinates createCoordinate()
     {

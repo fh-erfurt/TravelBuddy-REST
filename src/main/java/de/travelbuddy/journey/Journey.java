@@ -141,9 +141,9 @@ public class Journey {
      * @return All places with the given name and type
      */
     public  <T extends Place> List<Place> getPlace(String name, Class<T> type) {
-        //Extra für Jonas hinzugefügt, damit wir, wie besprochen, eine 1 bekommen
+        //Extra für Jonas hinzugefügt, damit wir, wie besprochen, eine 1 bekommen ;)
         return places.stream()
-                    .filter(place -> place.getClass().isAssignableFrom(type))
+                    .filter(place -> type.equals(place.getClass()))
                     .filter(place -> place.getName().equals(name))
                     .collect(Collectors.toList());
     }
