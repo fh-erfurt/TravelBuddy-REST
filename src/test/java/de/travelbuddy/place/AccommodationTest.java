@@ -1,6 +1,7 @@
 package de.travelbuddy.place;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import de.travelbuddy.*;
 import de.travelbuddy.finance.Expense;
@@ -32,6 +33,8 @@ public class AccommodationTest {
                 expenses, connectionsToNextPlace, involvedPersons, type);
 
         assertEquals(accommodation.getName(), name);
+        assertEquals("Lee Valley Camping and Caravan Park", name);
+        assertNotEquals("Lee Valley Park", name);
         assertEquals(accommodation.getCoordinates(), coordinates);
         assertEquals(accommodation.getContactDetails(), contactDetails);
         assertEquals(accommodation.getArrive(), arrive);
