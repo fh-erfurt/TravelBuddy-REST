@@ -5,7 +5,7 @@ import java.awt.*;
 import java.time.LocalDate;
 
 /**
- *
+ *Class which represents a Person with ContactDetails
  */
 public class Person {
 

@@ -6,6 +6,9 @@ import de.travelbuddy.place.Place;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+/**
+ * Class which represents a Connection
+ */
 public class Connection {
 
     private String title;

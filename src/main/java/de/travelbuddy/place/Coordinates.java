@@ -3,6 +3,9 @@ package de.travelbuddy.place;
 import de.travelbuddy.place.exception.InvalidLatitudeException;
 import de.travelbuddy.place.exception.InvalidLongitudeException;
 
+/**
+ * Class which represents Coordinates
+ */
 public class Coordinates {
 
     private double latitude;

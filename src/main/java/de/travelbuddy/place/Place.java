@@ -12,7 +12,9 @@ import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Class which represents a Place
+ */
 public class Place {
 
     private String name;
