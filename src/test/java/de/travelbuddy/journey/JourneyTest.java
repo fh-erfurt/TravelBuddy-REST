@@ -2,6 +2,7 @@ package de.travelbuddy.journey;
 
 import de.travelbuddy.ContactDetails;
 import de.travelbuddy.Person;
+import de.travelbuddy.finance.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.DuplicatePlaceException;
@@ -47,7 +48,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void total_costs_correct_with_same_currency() throws DuplicatePlaceException {
+    public void total_costs_correct_with_same_currency() throws DuplicatePlaceException, DuplicateExpenseException {
         //Given
         Journey journey = InstanceHelper.createJourney();
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
@@ -76,7 +77,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void total_costs_person_correct_with_different_currency() throws DuplicatePlaceException {
+    public void total_costs_person_correct_with_different_currency() throws DuplicatePlaceException, DuplicateExpenseException {
         //Given
         Journey journey = InstanceHelper.createJourney();
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());

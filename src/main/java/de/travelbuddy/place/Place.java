@@ -1,7 +1,9 @@
 package de.travelbuddy.place;
 
 import de.travelbuddy.*;
+import de.travelbuddy.finance.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
+import de.travelbuddy.finance.ExpenseNotFoundException;
 import de.travelbuddy.finance.Money;
 
 import java.math.BigDecimal;
@@ -103,9 +105,9 @@ public class Place {
      * @param person The person to add
      * @throws IllegalArgumentException When the given person already exists for this place
      */
-    public void addPerson(Person person) throws IllegalArgumentException {
+    public void addPerson(Person person) throws DuplicatePersonException {
         if (involvedPersons.contains(person))
-            throw new IllegalArgumentException("Person is already involved.");
+            throw new DuplicatePersonException(String.format("Person '%s' is already involved.", person.getName()));
 
         involvedPersons.add(person);
     }
@@ -115,9 +117,9 @@ public class Place {
      * @param person THe person to remove
      * @throws IllegalArgumentException When the given person does not exist for this place
      */
-    public void removePerson(Person person) throws IllegalArgumentException {
+    public void removePerson(Person person) throws PersonNotFoundException {
         if (!involvedPersons.contains(person))
-            throw new IllegalArgumentException("Person is not involved.");
+            throw new PersonNotFoundException(String.format("Person '%s' is not involved.", person.getName()));
 
         involvedPersons.remove(person);
     }
@@ -127,9 +129,9 @@ public class Place {
      * @param expense The expense to add
      * @throws IllegalArgumentException When the expense already exists for this place
      */
-    public void addExpense(Expense expense) throws IllegalArgumentException {
+    public void addExpense(Expense expense) throws DuplicateExpenseException {
         if (expenses.contains(expense))
-            throw new IllegalArgumentException("Expense does already exist.");
+            throw new DuplicateExpenseException(String.format("Expense '%s' does already exist.", expense.getTitle()));
 
         expenses.add(expense);
     }
@@ -139,9 +141,9 @@ public class Place {
      * @param expense The expense to remove
      * @throws IllegalArgumentException When the given expense does not exist for this place
      */
-    public void removeExpense(Expense expense) throws IllegalArgumentException {
+    public void removeExpense(Expense expense) throws ExpenseNotFoundException {
         if (!expenses.contains(expense))
-            throw new IllegalArgumentException("Expense does not exist.");
+            throw new ExpenseNotFoundException(String.format("Expense '%s' does not exist.", expense.getTitle()));
 
         expenses.remove(expense);
     }

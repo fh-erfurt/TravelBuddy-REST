@@ -1,5 +1,6 @@
 package de.travelbuddy.place;
 
+import de.travelbuddy.finance.DuplicateExpenseException;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.ContactDetails;
@@ -59,7 +60,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void total_costs_correct_with_same_currency() {
+    public void total_costs_correct_with_same_currency() throws DuplicateExpenseException {
         //Given
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
         Expense expense1 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
@@ -90,7 +91,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void total_costs_correct_with_different_currencies() {
+    public void total_costs_correct_with_different_currencies() throws DuplicateExpenseException {
         //Given
         Currency targetCurrency = Currency.getInstance("EUR");
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
@@ -118,7 +119,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void total_cost_per_person_with_same_currencies () throws NotSupportedCurrencyException {
+    public void total_cost_per_person_with_same_currencies () throws NotSupportedCurrencyException, DuplicateExpenseException {
         //Given
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
         Currency targetCurrency = Currency.getInstance("EUR");
@@ -156,7 +157,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void total_cost_per_person_with_different_currencies () throws NotSupportedCurrencyException {
+    public void total_cost_per_person_with_different_currencies () throws NotSupportedCurrencyException, DuplicateExpenseException {
         //Given
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
         Currency targetCurrency = Currency.getInstance("EUR");
