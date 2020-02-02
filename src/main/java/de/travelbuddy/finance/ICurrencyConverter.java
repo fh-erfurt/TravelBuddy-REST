@@ -2,7 +2,8 @@ package de.travelbuddy.finance;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-// TODO JAVADOC
+
+
 public interface ICurrencyConverter {
 
     /**
