@@ -42,7 +42,7 @@ public class Money {
     }
 
     /**
-     * Add Money 
+     * Add Money
      * @param money
      * @return
      */

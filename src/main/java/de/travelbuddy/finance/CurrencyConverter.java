@@ -74,7 +74,7 @@ public class CurrencyConverter implements ICurrencyConverter {
                             currencyTarget.getCurrencyCode()));
         BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
 
-        return new Money(currencyTarget,money.getValue().multiply(rate).setScale(2,RoundingMode.HALF_UP));Should be thrown if there is no Person, to divide withShould be thrown if there is no Person, to divide with
+        return new Money(currencyTarget,money.getValue().multiply(rate).setScale(2,RoundingMode.HALF_UP));
     }
 
     /**
