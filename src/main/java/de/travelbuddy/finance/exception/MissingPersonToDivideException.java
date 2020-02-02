@@ -1,4 +1,4 @@
-package de.travelbuddy.finance;
+package de.travelbuddy.finance.exception;
 /**
  * Should be thrown if there is no Person, to divide with
  */
