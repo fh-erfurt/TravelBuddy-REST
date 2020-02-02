@@ -25,7 +25,7 @@ public class SightTest {
                 "Paris", "Rue de Rivoli", 1, "75001", "Frankreich");
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
-        Map<String, Expense> expenses = new HashMap<String, Expense>();
+        Map<String, Expense> expenses = new HashMap<>();
         List<Connection> connectionsToNextPlace = new ArrayList<>();
         List<Person> involvedPersons = new ArrayList<>();
         boolean indoor = true;

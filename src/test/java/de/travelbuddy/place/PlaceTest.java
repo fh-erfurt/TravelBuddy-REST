@@ -270,7 +270,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void place_should_throw_person_not_found_exception() throws PersonNotFoundException {
+    public void place_should_throw_person_not_found_exception() {
         //Given
         Place place = InstanceHelper.createPlace();
         Person person = InstanceHelper.createPerson();
@@ -284,7 +284,7 @@ public class PlaceTest {
     }
 
     @Test
-    public void place_should_throw_expense_not_found_exception() throws ExpenseNotFoundException {
+    public void place_should_throw_expense_not_found_exception() {
         //Given
         Place place = InstanceHelper.createPlace();
         Expense expense = InstanceHelper.createExpense();

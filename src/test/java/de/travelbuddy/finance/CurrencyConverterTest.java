@@ -106,9 +106,7 @@ public class CurrencyConverterTest {
         ICurrencyConverter converter = CurrencyConverterFactory.create();
 
         //When
-        Exception exception = assertThrows(NotSupportedCurrencyException.class, () -> {
-            converter.getRate(Currency.getInstance("EUR"), Currency.getInstance("NLG") );
-        });
+        Exception exception = assertThrows(NotSupportedCurrencyException.class, () -> converter.getRate(Currency.getInstance("EUR"), Currency.getInstance("NLG") ));
 
         //Then
         assertTrue(exception.getMessage().contains("The currency 'NLG' is not supported by this CurrencyConverter-Class"));

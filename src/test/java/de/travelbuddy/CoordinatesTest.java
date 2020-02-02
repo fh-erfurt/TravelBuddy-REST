@@ -27,9 +27,7 @@ public class CoordinatesTest {
         double longitude = -74.044500;
 
         //When
-        Exception exception = assertThrows(InvalidLatitudeException.class, () -> {
-            new Coordinates(latitude, longitude);
-        });
+        Exception exception = assertThrows(InvalidLatitudeException.class, () -> new Coordinates(latitude, longitude));
 
         //Then
         assertTrue(exception.getMessage().contains("Latitude should be between -90 and 90."));
@@ -42,9 +40,7 @@ public class CoordinatesTest {
         double longitude = -190.044500;
 
         //When
-        Exception exception = assertThrows(InvalidLongitudeException.class, () -> {
-            new Coordinates(latitude, longitude);
-        });
+        Exception exception = assertThrows(InvalidLongitudeException.class, () -> new Coordinates(latitude, longitude));
 
         //Then
         assertTrue(exception.getMessage().contains("Longitude should be between -180 and 180."));

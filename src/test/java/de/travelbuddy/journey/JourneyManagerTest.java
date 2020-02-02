@@ -60,9 +60,7 @@ public class JourneyManagerTest {
         JourneyManager manager = new JourneyManager();
 
         //When
-        Exception exception = assertThrows(JourneyNotFoundException.class, () -> {
-            manager.getJourney("Blubber");
-        });
+        Exception exception = assertThrows(JourneyNotFoundException.class, () -> manager.getJourney("Blubber"));
 
         //Then
         assertTrue(exception.getMessage().contains("Journey with the title 'Blubber' does not exists"));
@@ -97,9 +95,7 @@ public class JourneyManagerTest {
 
         //When
         manager.addJourney(journey);
-        Exception exception = assertThrows(DuplicateJourneyException.class, () -> {
-            manager.addJourney(journey);
-        });
+        Exception exception = assertThrows(DuplicateJourneyException.class, () -> manager.addJourney(journey));
 
         //Then
         assertTrue(exception.getMessage().contains(

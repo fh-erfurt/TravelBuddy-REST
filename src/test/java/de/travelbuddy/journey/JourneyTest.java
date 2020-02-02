@@ -20,7 +20,6 @@ import java.util.Currency;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JourneyTest {
     @Test
@@ -157,9 +156,7 @@ public class JourneyTest {
 
         //When
         // TODO Warning:(177, 81) Statement lambda can be replaced with expression lambda
-        Exception exception = assertThrows(PlaceNotFoundException.class, () -> {
-            journey.removePlace(place);
-        });
+        Exception exception = assertThrows(PlaceNotFoundException.class, () -> journey.removePlace(place));
 
         //Then
         assertTrue(exception.getMessage().contains("Place 'Blubber' does not exist."));
@@ -175,9 +172,7 @@ public class JourneyTest {
         //When
         journey.addPlace(place);
         // TODO Warning:(177, 81) Statement lambda can be replaced with expression lambda
-        Exception exception = assertThrows(DuplicatePlaceException.class, () -> {
-            journey.addPlace(place);
-        });
+        Exception exception = assertThrows(DuplicatePlaceException.class, () -> journey.addPlace(place));
 
         //Then
         assertTrue(exception.getMessage().contains("Place 'Blubber' does already exist."));

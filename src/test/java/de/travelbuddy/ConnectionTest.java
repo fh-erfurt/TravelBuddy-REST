@@ -7,9 +7,7 @@ import de.travelbuddy.place.exception.InvalidLatitudeException;
 import de.travelbuddy.place.exception.InvalidLongitudeException;
 import org.junit.jupiter.api.Test;
 
-import static java.util.Map.entry;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.Duration;

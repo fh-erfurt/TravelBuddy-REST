@@ -17,11 +17,12 @@ import java.util.*;
 /**
  * Creates instances with random values
  */
+@SuppressWarnings("SameParameterValue")
 public class InstanceHelper {
 
     public static Journey createJourney()
     {
-        return new Journey(rndString(), new ArrayList<Place>(), new ArrayList<Person>());
+        return new Journey(rndString(), new ArrayList<>(), new ArrayList<>());
     }
 
     public static Place createPlace()
@@ -32,8 +33,8 @@ public class InstanceHelper {
     public static Place createPlace(LocalDateTime start)
     {
         return new Place(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new HashMap<String, Expense>(), new ArrayList<Connection>(),
-                new ArrayList<Person>());
+                start.plusHours(rndInt(1, 8)), new HashMap<>(), new ArrayList<>(),
+                new ArrayList<>());
     }
 
     public static Accommodation createAccommodation()
@@ -44,8 +45,8 @@ public class InstanceHelper {
     public static Accommodation createAccommodation(LocalDateTime start)
     {
         return new Accommodation(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new HashMap<String, Expense>(), new ArrayList<Connection>(),
-                new ArrayList<Person>(), Accommodation.accommodationType.HOSTEL);
+                start.plusHours(rndInt(1, 8)), new HashMap<>(), new ArrayList<>(),
+                new ArrayList<>(), Accommodation.accommodationType.HOSTEL);
     }
 
     public static Sight createSight()
@@ -56,8 +57,8 @@ public class InstanceHelper {
     public static Sight createSight(LocalDateTime start)
     {
         return new Sight(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new HashMap<String, Expense>(), new ArrayList<Connection>(),
-                new ArrayList<Person>(), true);
+                start.plusHours(rndInt(1, 8)), new HashMap<>(), new ArrayList<>(),
+                new ArrayList<>(), true);
     }
 
     public static Coordinates createCoordinate()
@@ -88,7 +89,7 @@ public class InstanceHelper {
     public static Expense createExpense(Currency currency)
     {
         return new Expense(rndString(), rndString() + rndString() + rndString() + rndString(),
-                createMoney(currency), new ArrayList<Person>(), Expense.planned.PLANNED, false);
+                createMoney(currency), new ArrayList<>(), Expense.planned.PLANNED, false);
     }
 
     public static Money createMoney()

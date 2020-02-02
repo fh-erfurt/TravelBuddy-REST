@@ -48,7 +48,7 @@ public class ExpenseTest {
     }
 
     @Test
-    public void get_money_per_person_should_divide_right ()  {
+    public void get_money_per_person_should_divide_right () throws MissingPersonToDivideException {
 
         //Given
         Expense expense = createExampleExpense1();
@@ -56,18 +56,14 @@ public class ExpenseTest {
         Person Tim = createExamplePersonTim();
         Money startMoney = new Money(null, BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
         Money dividedMoney = new Money(null,null);
+        Exception exception = null;
 
         expense.setPrice(startMoney);
         expense.addPerson(Marcel);
         expense.addPerson(Tim);
 
         //When
-        //TODO Try Catch umbauen und Exception durchreichen
-        try {
-            dividedMoney = expense.getMoneyPerPerson();
-        }
-        catch (MissingPersonToDivideException mp){
-        }
+        dividedMoney = expense.getMoneyPerPerson();
 
         //Then
         assertEquals(BigDecimal.valueOf(15).setScale(2,RoundingMode.HALF_UP),dividedMoney.getValue());

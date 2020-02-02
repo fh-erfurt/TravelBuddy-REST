@@ -22,8 +22,8 @@ public class RunTest {
     public void complete_walkthrough_of_travelbuddy() throws JourneyNotFoundException {
         //Given
         JourneyManager manager = new JourneyManager();
-        Journey journey = null;
-        Place place = null;
+        Journey journey;
+        Place place;
         Person person = null;
         Expense expense1 = InstanceHelper.createExpense();
         Expense expense2 = InstanceHelper.createExpense();

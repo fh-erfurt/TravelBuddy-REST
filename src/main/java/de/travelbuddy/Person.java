@@ -1,7 +1,5 @@
 package de.travelbuddy;
 
-import java.awt.*;
-
 import java.time.LocalDate;
 
 /**

@@ -11,10 +11,7 @@ import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AccommodationTest {
     @Test
@@ -28,7 +25,7 @@ public class AccommodationTest {
         Expense expense = InstanceHelper.createExpense();
         Map<String, Expense> expenses = Map.of(expense.getTitle(), expense);
         List<Connection> connectionsToNextPlace = new ArrayList<>();
-        List<Person> involvedPersons = new ArrayList<>(Arrays.asList(InstanceHelper.createPerson()));
+        List<Person> involvedPersons = new ArrayList<>(Collections.singletonList(InstanceHelper.createPerson()));
         Accommodation.accommodationType type = Accommodation.accommodationType.CAMPING;
 
         Accommodation accommodation = new Accommodation (name, coordinates, contactDetails, arrive, departure,
