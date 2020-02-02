@@ -31,12 +31,23 @@ public class Money {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
-    // TODO JAVADOC
+
+    /**
+     * Convert the money value in the right currency
+     * @param resultCurrency the currency we want to have
+     * @return the money value with the currency
+     * @throws NotSupportedCurrencyException if the currency does not exist in CurrencyConverter
+     */
     public Money convert(Currency resultCurrency) throws NotSupportedCurrencyException {
         ICurrencyConverter converter = CurrencyConverterFactory.create();
         return converter.convert(this, resultCurrency);
     }
-    // TODO JAVADOC
+
+    /**
+     * Add Money
+     * @param money
+     * @return
+     */
     public Money add(Money money)
     {
         Money newMoney = null;

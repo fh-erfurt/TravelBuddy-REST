@@ -57,7 +57,12 @@ public class Expense {
     public boolean getPerPerson() {return perPerson;}
 
     public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
-    // TODO JAVADOC
+
+    /**
+     * Get the Money per Person
+     * @return the money value, with the currency
+     * @throws MissingPersonToDivideException there is no person to divide
+     */
     public Money getMoneyPerPerson() throws MissingPersonToDivideException {
 
         if (involvedPersons.size()!=0)
@@ -65,7 +70,12 @@ public class Expense {
         else
             throw new MissingPersonToDivideException("No Persons to divide Expense between");
     }
-    // TODO JAVADOC
+
+    /**
+     * Create a new person
+     * @param person to add
+     * @throws IllegalArgumentException if the Person already exist
+     */
     public void addPerson(Person person) throws IllegalArgumentException {
 
         if (isInvolved(person)) {
@@ -74,7 +84,12 @@ public class Expense {
 
         involvedPersons.add(person);
     }
-    // TODO JAVADOC
+
+    /**
+     * delete a person
+     * @param person to remove
+     * @throws IllegalArgumentException if the person doesn't exist
+     */
     public void removePerson(Person person) throws IllegalArgumentException {
         if (!isInvolved(person)) {
             throw new IllegalArgumentException("Person does not exist.");
@@ -82,7 +97,12 @@ public class Expense {
 
         involvedPersons.remove(person);
     }
-    // TODO JAVADOC
+
+    /**
+     * Is the person involved
+     * @param person is involved in some journey
+     * @return true / false if the person is involved or not
+     */
     public boolean isInvolved(Person person) {
         return involvedPersons.contains(person);
     }
