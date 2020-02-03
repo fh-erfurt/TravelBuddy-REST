@@ -22,11 +22,12 @@ In einer Übersicht wird geordnet dargestellt, wann eine Aktivität stattfindet,
 ## Musskriterien
 
 Der TravelBuddy kann folgende Kriterien darstellen:
-* Orte (geografisch)
+<br>
 * Fahrten (Bahn, Bus, Flugzeug)
 * Personen (Reisende, aktuell nur als Liste)
+* Orte (geografisch)
 * Sehenswürdigkeiten
-* Unterkunft
+* Unterkünfte
 * Reisedatum
 
 ## Wunschkriterien
