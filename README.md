@@ -60,7 +60,7 @@ Als Privatanwender ist es möglich die Kosten übersichlich zu halten, die Ausga
 
 
 ### Verwendete Tools
-    - IntelliJ Java 13.01
-    - JUnit5.4.2, Maven, JavaDoc
+    - IntelliJ Java 13.0.1
+    - JUnit5.5.2, Maven, JavaDoc
     - Versionskontrollsystem: GitLab
     - Kommunikation: Discord und Signal
