@@ -1,4 +1,4 @@
-package de.travelbuddy;
+package de.travelbuddy.place;
 import static org.junit.jupiter.api.Assertions.*;
 
 import de.travelbuddy.place.Coordinates;
