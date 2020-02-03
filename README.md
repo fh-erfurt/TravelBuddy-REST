@@ -11,7 +11,6 @@ Franziska Schmidt, Frieder Ullmann, Marcel van der Heide, Tim Vogel
 
 TravelBuddy ist ein Planungstool und Begleiter für die nächste Reise.
 In einer Übersicht wird geordnet dargestellt, wann eine Aktivität stattfindet, wo und was sie kostet, sowohl Gesamt und für jede Person einzeln.
-//TODO erweitern
 
 ## Klassendiagramm
 ![Alt](UML_Java_final.png)
