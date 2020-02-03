@@ -5,7 +5,6 @@ import de.travelbuddy.finance.exception.NotSupportedCurrencyException;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-//TODO Exception für nicht verfügbare Währung einbauen
 
 /**
  * Class which represents Money

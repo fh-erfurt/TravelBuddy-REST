@@ -155,7 +155,6 @@ public class JourneyTest {
         place.setName("Blubber");
 
         //When
-        // TODO Warning:(177, 81) Statement lambda can be replaced with expression lambda
         Exception exception = assertThrows(PlaceNotFoundException.class, () -> journey.removePlace(place));
 
         //Then
@@ -171,7 +170,6 @@ public class JourneyTest {
 
         //When
         journey.addPlace(place);
-        // TODO Warning:(177, 81) Statement lambda can be replaced with expression lambda
         Exception exception = assertThrows(DuplicatePlaceException.class, () -> journey.addPlace(place));
 
         //Then

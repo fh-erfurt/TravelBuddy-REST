@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlaceTest {
 
-    // TODO noch einige mögliche Tests zu schreiben (add remove etc.)
     @Test
     public void correctly_instantiate_place(){
 
