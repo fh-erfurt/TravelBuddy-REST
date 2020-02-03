@@ -11,7 +11,6 @@ Franziska Schmidt, Frieder Ullmann, Marcel van der Heide, Tim Vogel
 
 TravelBuddy ist ein Planungstool und Begleiter für die nächste Reise.
 In einer Übersicht wird geordnet dargestellt, wann eine Aktivität stattfindet, wo und was sie kostet, sowohl Gesamt und für jede Person einzeln.
-//TODO erweitern
 
 ## Klassendiagramm
 ![Alt](UML_Java_final.png)
@@ -61,7 +60,7 @@ Als Privatanwender ist es möglich die Kosten übersichlich zu halten, die Ausga
 
 
 ### Verwendete Tools
-    - IntelliJ Java 13.01
-    - JUnit5.4.2, Maven, JavaDoc
+    - IntelliJ Java 13.0.1
+    - JUnit5.5.2, Maven, JavaDoc
     - Versionskontrollsystem: GitLab
     - Kommunikation: Discord und Signal
