@@ -1,5 +1,6 @@
-package de.travelbuddy;
+package de.travelbuddy.place;
 
+import de.travelbuddy.ContactDetails;
 import de.travelbuddy.finance.Expense;
 import de.travelbuddy.finance.Money;
 import de.travelbuddy.place.*;
