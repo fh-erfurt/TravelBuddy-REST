@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"de.travelbuddy"},{"l":"de.travelbuddy.finance"},{"l":"de.travelbuddy.finance.exception"},{"l":"de.travelbuddy.journey"},{"l":"de.travelbuddy.journey.exception"},{"l":"de.travelbuddy.place"},{"l":"de.travelbuddy.place.exception"},{"l":"de.travelbuddy.utilities"}]
