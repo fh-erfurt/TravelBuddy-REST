@@ -42,6 +42,9 @@ Der TravelBuddy kann folgende Kriterien darstellen:
 
 ## Abgrenzungskriterien
 
+* Oberfläche (GUI)
+* Datenbank
+* Input/Output  
 
 ## Aktuere/Stakeholder
 
