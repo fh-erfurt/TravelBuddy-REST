@@ -1,16 +1,19 @@
 package de.travelbuddy;
 
-import de.travelbuddy.finance.exception.DuplicateExpenseException;
-import de.travelbuddy.finance.Expense;
-import de.travelbuddy.finance.exception.ExpenseNotFoundException;
-import de.travelbuddy.journey.exception.DuplicateJourneyException;
-import de.travelbuddy.journey.Journey;
-import de.travelbuddy.journey.JourneyManager;
-import de.travelbuddy.journey.exception.JourneyNotFoundException;
-import de.travelbuddy.place.Connection;
-import de.travelbuddy.place.exception.DuplicatePlaceException;
-import de.travelbuddy.place.Place;
-import de.travelbuddy.place.exception.PlaceNotFoundException;
+import de.travelbuddy.model.DuplicatePersonException;
+import de.travelbuddy.model.Person;
+import de.travelbuddy.model.PersonNotFoundException;
+import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
+import de.travelbuddy.model.finance.Expense;
+import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
+import de.travelbuddy.model.journey.exception.DuplicateJourneyException;
+import de.travelbuddy.model.journey.Journey;
+import de.travelbuddy.model.journey.JourneyManager;
+import de.travelbuddy.model.journey.exception.JourneyNotFoundException;
+import de.travelbuddy.model.place.Connection;
+import de.travelbuddy.model.place.exception.DuplicatePlaceException;
+import de.travelbuddy.model.place.Place;
+import de.travelbuddy.model.place.exception.PlaceNotFoundException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
