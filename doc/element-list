@@ -1,8 +1,8 @@
 de.travelbuddy
-de.travelbuddy.finance
-de.travelbuddy.finance.exception
-de.travelbuddy.journey
-de.travelbuddy.journey.exception
-de.travelbuddy.place
-de.travelbuddy.place.exception
+de.travelbuddy.model.finance
+de.travelbuddy.model.finance.exception
+de.travelbuddy.model.journey
+de.travelbuddy.model.journey.exception
+de.travelbuddy.model.place
+de.travelbuddy.model.place.exception
 de.travelbuddy.utilities

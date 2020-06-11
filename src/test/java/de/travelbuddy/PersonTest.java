@@ -1,6 +1,8 @@
 package de.travelbuddy;
 import static org.junit.jupiter.api.Assertions.*;
 
+import de.travelbuddy.model.ContactDetails;
+import de.travelbuddy.model.Person;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 

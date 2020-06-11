@@ -1,12 +1,13 @@
 package de.travelbuddy.utilities;
 
-import de.travelbuddy.*;
-import de.travelbuddy.finance.Expense;
-import de.travelbuddy.finance.Money;
-import de.travelbuddy.journey.Journey;
-import de.travelbuddy.place.*;
-import de.travelbuddy.place.exception.InvalidLatitudeException;
-import de.travelbuddy.place.exception.InvalidLongitudeException;
+import de.travelbuddy.model.ContactDetails;
+import de.travelbuddy.model.Person;
+import de.travelbuddy.model.finance.Expense;
+import de.travelbuddy.model.finance.Money;
+import de.travelbuddy.model.journey.Journey;
+import de.travelbuddy.model.place.*;
+import de.travelbuddy.model.place.exception.InvalidLatitudeException;
+import de.travelbuddy.model.place.exception.InvalidLongitudeException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

@@ -6,7 +6,7 @@
 <title>Place</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2020-02-03">
-<meta name="description" content="declaration: package: de.travelbuddy.place, class: Place">
+<meta name="description" content="declaration: package: de.travelbuddy.model.place, class: Place">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.css" title="Style">
@@ -88,17 +88,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.travelbuddy.place</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.travelbuddy.model.place</a></div>
 <h1 title="Class Place" class="title">Class Place</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">de.travelbuddy.place.Place</div>
+<div class="inheritance">de.travelbuddy.model.place.Place</div>
 </div>
 <section class="description">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="Accommodation.html" title="class in de.travelbuddy.place">Accommodation</a></code>, <code><a href="Sight.html" title="class in de.travelbuddy.place">Sight</a></code></dd>
+<dd><code><a href="Accommodation.html" title="class in de.travelbuddy.model.place">Accommodation</a></code>, <code><a href="Sight.html" title="class in de.travelbuddy.model.place">Sight</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">Place</span>
@@ -130,7 +130,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#connectionsToNextPlace">connectionsToNextPlace</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -140,7 +140,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a></code></td>
+<td class="colFirst"><code>private <a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#coordinates">coordinates</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -150,7 +150,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#expenses">expenses</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -186,13 +186,13 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,de.travelbuddy.place.Coordinates,de.travelbuddy.ContactDetails,java.time.LocalDateTime,java.time.LocalDateTime,java.util.Map,java.util.List,java.util.List)">Place</a></span>&#8203;(java.lang.String&nbsp;name,
-<a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a>&nbsp;coordinates,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,de.travelbuddy.model.place.Coordinates,de.travelbuddy.ContactDetails,java.time.LocalDateTime,java.time.LocalDateTime,java.util.Map,java.util.List,java.util.List)">Place</a></span>&#8203;(java.lang.String&nbsp;name,
+<a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a>&nbsp;coordinates,
 <a href="../ContactDetails.html" title="class in de.travelbuddy">ContactDetails</a>&nbsp;contactDetails,
 java.time.LocalDateTime&nbsp;arrive,
 java.time.LocalDateTime&nbsp;departure,
-java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;&nbsp;expenses,
-java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;&nbsp;connectionsToNextPlace,
+java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;&nbsp;expenses,
+java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;&nbsp;connectionsToNextPlace,
 java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Person</a>&gt;&nbsp;involvedPersons)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -221,14 +221,14 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addConnection(de.travelbuddy.place.Connection)">addConnection</a></span>&#8203;(<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&nbsp;connection)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addConnection(de.travelbuddy.model.place.Connection)">addConnection</a></span>&#8203;(<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&nbsp;connection)</code></th>
 <td class="colLast">
 <div class="block">Adds a connection to this place</div>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addExpense(de.travelbuddy.finance.Expense)">addExpense</a></span>&#8203;(<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&nbsp;expense)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addExpense(de.travelbuddy.model.finance.Expense)">addExpense</a></span>&#8203;(<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&nbsp;expense)</code></th>
 <td class="colLast">
 <div class="block">Adds an expense to the this place</div>
 </td>
@@ -241,15 +241,15 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 </td>
 </tr>
 <tr class="rowColor" id="i3">
-<td class="colFirst"><code>java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findConnections(de.travelbuddy.place.Place,de.travelbuddy.place.Place)">findConnections</a></span>&#8203;(<a href="Place.html" title="class in de.travelbuddy.place">Place</a>&nbsp;from,
-<a href="Place.html" title="class in de.travelbuddy.place">Place</a>&nbsp;to)</code></th>
+<td class="colFirst"><code>java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findConnections(de.travelbuddy.model.place.Place,de.travelbuddy.model.place.Place)">findConnections</a></span>&#8203;(<a href="Place.html" title="class in de.travelbuddy.model.place">Place</a>&nbsp;from,
+<a href="Place.html" title="class in de.travelbuddy.model.place">Place</a>&nbsp;to)</code></th>
 <td class="colLast">
 <div class="block">Get all connections between two places</div>
 </td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code>java.util.List&lt;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findExpenses(java.lang.String)">findExpenses</a></span>&#8203;(java.lang.String&nbsp;title)</code></th>
 <td class="colLast">
 <div class="block">Get all expenses with the given title</div>
@@ -263,8 +263,8 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 </td>
 </tr>
 <tr class="altColor" id="i6">
-<td class="colFirst"><code>java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findPossibleConnectionsTo(de.travelbuddy.place.Place,java.time.LocalDateTime,int)">findPossibleConnectionsTo</a></span>&#8203;(<a href="Place.html" title="class in de.travelbuddy.place">Place</a>&nbsp;destination,
+<td class="colFirst"><code>java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findPossibleConnectionsTo(de.travelbuddy.model.place.Place,java.time.LocalDateTime,int)">findPossibleConnectionsTo</a></span>&#8203;(<a href="Place.html" title="class in de.travelbuddy.model.place">Place</a>&nbsp;destination,
 java.time.LocalDateTime&nbsp;startTime,
 int&nbsp;number)</code></th>
 <td class="colLast">
@@ -277,7 +277,7 @@ int&nbsp;number)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
-<td class="colFirst"><code>java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConnectionsToNextPlace()">getConnectionsToNextPlace</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -287,7 +287,7 @@ int&nbsp;number)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i10">
-<td class="colFirst"><code><a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a></code></td>
+<td class="colFirst"><code><a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCoordinates()">getCoordinates</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -297,7 +297,7 @@ int&nbsp;number)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i12">
-<td class="colFirst"><code>java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getExpenses()">getExpenses</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -313,14 +313,14 @@ int&nbsp;number)</code></th>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeConnection(de.travelbuddy.place.Connection)">removeConnection</a></span>&#8203;(<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&nbsp;connection)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeConnection(de.travelbuddy.model.place.Connection)">removeConnection</a></span>&#8203;(<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&nbsp;connection)</code></th>
 <td class="colLast">
 <div class="block">Removes a connection from this place</div>
 </td>
 </tr>
 <tr class="altColor" id="i16">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeExpense(de.travelbuddy.finance.Expense)">removeExpense</a></span>&#8203;(<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&nbsp;expense)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeExpense(de.travelbuddy.model.finance.Expense)">removeExpense</a></span>&#8203;(<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&nbsp;expense)</code></th>
 <td class="colLast">
 <div class="block">Removes an expense from this place</div>
 </td>
@@ -339,7 +339,7 @@ int&nbsp;number)</code></th>
 </tr>
 <tr class="rowColor" id="i19">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setConnectionsToNextPlace(java.util.List)">setConnectionsToNextPlace</a></span>&#8203;(java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;&nbsp;connectionsToNextPlace)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setConnectionsToNextPlace(java.util.List)">setConnectionsToNextPlace</a></span>&#8203;(java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;&nbsp;connectionsToNextPlace)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i20">
@@ -349,7 +349,7 @@ int&nbsp;number)</code></th>
 </tr>
 <tr class="rowColor" id="i21">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoordinates(de.travelbuddy.place.Coordinates)">setCoordinates</a></span>&#8203;(<a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a>&nbsp;coordinates)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCoordinates(de.travelbuddy.model.place.Coordinates)">setCoordinates</a></span>&#8203;(<a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a>&nbsp;coordinates)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i22">
@@ -359,7 +359,7 @@ int&nbsp;number)</code></th>
 </tr>
 <tr class="rowColor" id="i23">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setExpenses(java.util.Map)">setExpenses</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;&nbsp;expenses)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setExpenses(java.util.Map)">setExpenses</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;&nbsp;expenses)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i24">
@@ -373,14 +373,14 @@ int&nbsp;number)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i26">
-<td class="colFirst"><code><a href="../finance/Money.html" title="class in de.travelbuddy.finance">Money</a></code></td>
+<td class="colFirst"><code><a href="../finance/Money.html" title="class in de.travelbuddy.model.finance">Money</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#totalCost(java.util.Currency)">totalCost</a></span>&#8203;(java.util.Currency&nbsp;currency)</code></th>
 <td class="colLast">
 <div class="block">Calculate the total costs for this place</div>
 </td>
 </tr>
 <tr class="rowColor" id="i27">
-<td class="colFirst"><code><a href="../finance/Money.html" title="class in de.travelbuddy.finance">Money</a></code></td>
+<td class="colFirst"><code><a href="../finance/Money.html" title="class in de.travelbuddy.model.finance">Money</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#totalCostOfPerson(java.util.Currency,de.travelbuddy.Person)">totalCostOfPerson</a></span>&#8203;(java.util.Currency&nbsp;currency,
 <a href="../Person.html" title="class in de.travelbuddy">Person</a>&nbsp;person)</code></th>
 <td class="colLast">
@@ -418,7 +418,7 @@ int&nbsp;number)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="coordinates">coordinates</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a></span>&nbsp;<span class="memberName">coordinates</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a></span>&nbsp;<span class="memberName">coordinates</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -442,13 +442,13 @@ int&nbsp;number)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="expenses">expenses</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;</span>&nbsp;<span class="memberName">expenses</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;</span>&nbsp;<span class="memberName">expenses</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="connectionsToNextPlace">connectionsToNextPlace</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">connectionsToNextPlace</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">connectionsToNextPlace</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -469,14 +469,14 @@ int&nbsp;number)</code></th>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(java.lang.String,de.travelbuddy.place.Coordinates,de.travelbuddy.ContactDetails,java.time.LocalDateTime,java.time.LocalDateTime,java.util.Map,java.util.List,java.util.List)">Place</a></h3>
+<h3><a id="&lt;init&gt;(java.lang.String,de.travelbuddy.model.place.Coordinates,de.travelbuddy.ContactDetails,java.time.LocalDateTime,java.time.LocalDateTime,java.util.Map,java.util.List,java.util.List)">Place</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">Place</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name,
-<a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a>&nbsp;coordinates,
+<a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a>&nbsp;coordinates,
 <a href="../ContactDetails.html" title="class in de.travelbuddy">ContactDetails</a>&nbsp;contactDetails,
 java.time.LocalDateTime&nbsp;arrive,
 java.time.LocalDateTime&nbsp;departure,
-java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;&nbsp;expenses,
-java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;&nbsp;connectionsToNextPlace,
+java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;&nbsp;expenses,
+java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;&nbsp;connectionsToNextPlace,
 java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Person</a>&gt;&nbsp;involvedPersons)</span></div>
 </section>
 </li>
@@ -505,13 +505,13 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCoordinates()">getCoordinates</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a></span>&nbsp;<span class="memberName">getCoordinates</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a></span>&nbsp;<span class="memberName">getCoordinates</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setCoordinates(de.travelbuddy.place.Coordinates)">setCoordinates</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCoordinates</span>&#8203;(<span class="arguments"><a href="Coordinates.html" title="class in de.travelbuddy.place">Coordinates</a>&nbsp;coordinates)</span></div>
+<h3><a id="setCoordinates(de.travelbuddy.model.place.Coordinates)">setCoordinates</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCoordinates</span>&#8203;(<span class="arguments"><a href="Coordinates.html" title="class in de.travelbuddy.model.place">Coordinates</a>&nbsp;coordinates)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -541,13 +541,13 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <li class="blockList">
 <section class="detail">
 <h3><a id="getExpenses()">getExpenses</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;</span>&nbsp;<span class="memberName">getExpenses</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;</span>&nbsp;<span class="memberName">getExpenses</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setExpenses(java.util.Map)">setExpenses</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setExpenses</span>&#8203;(<span class="arguments">java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;&nbsp;expenses)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setExpenses</span>&#8203;(<span class="arguments">java.util.Map&lt;java.lang.String,&#8203;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;&nbsp;expenses)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -565,13 +565,13 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <li class="blockList">
 <section class="detail">
 <h3><a id="getConnectionsToNextPlace()">getConnectionsToNextPlace</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">getConnectionsToNextPlace</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">getConnectionsToNextPlace</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setConnectionsToNextPlace(java.util.List)">setConnectionsToNextPlace</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setConnectionsToNextPlace</span>&#8203;(<span class="arguments">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;&nbsp;connectionsToNextPlace)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setConnectionsToNextPlace</span>&#8203;(<span class="arguments">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;&nbsp;connectionsToNextPlace)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -618,38 +618,38 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addExpense(de.travelbuddy.finance.Expense)">addExpense</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addExpense</span>&#8203;(<span class="arguments"><a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&nbsp;expense)</span>
-                throws <span class="exceptions"><a href="../finance/exception/DuplicateExpenseException.html" title="class in de.travelbuddy.finance.exception">DuplicateExpenseException</a></span></div>
+<h3><a id="addExpense(de.travelbuddy.model.finance.Expense)">addExpense</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addExpense</span>&#8203;(<span class="arguments"><a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&nbsp;expense)</span>
+                throws <span class="exceptions"><a href="../finance/exception/DuplicateExpenseException.html" title="class in de.travelbuddy.model.finance.exception">DuplicateExpenseException</a></span></div>
 <div class="block">Adds an expense to the this place</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>expense</code> - The expense to add</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.IllegalArgumentException</code> - When the expense already exists for this place</dd>
-<dd><code><a href="../finance/exception/DuplicateExpenseException.html" title="class in de.travelbuddy.finance.exception">DuplicateExpenseException</a></code></dd>
+<dd><code><a href="../finance/exception/DuplicateExpenseException.html" title="class in de.travelbuddy.model.finance.exception">DuplicateExpenseException</a></code></dd>
 </dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeExpense(de.travelbuddy.finance.Expense)">removeExpense</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeExpense</span>&#8203;(<span class="arguments"><a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&nbsp;expense)</span>
-                   throws <span class="exceptions"><a href="../finance/exception/ExpenseNotFoundException.html" title="class in de.travelbuddy.finance.exception">ExpenseNotFoundException</a></span></div>
+<h3><a id="removeExpense(de.travelbuddy.model.finance.Expense)">removeExpense</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeExpense</span>&#8203;(<span class="arguments"><a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&nbsp;expense)</span>
+                   throws <span class="exceptions"><a href="../finance/exception/ExpenseNotFoundException.html" title="class in de.travelbuddy.model.finance.exception">ExpenseNotFoundException</a></span></div>
 <div class="block">Removes an expense from this place</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>expense</code> - The expense to remove</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.IllegalArgumentException</code> - When the given expense does not exist for this place</dd>
-<dd><code><a href="../finance/exception/ExpenseNotFoundException.html" title="class in de.travelbuddy.finance.exception">ExpenseNotFoundException</a></code></dd>
+<dd><code><a href="../finance/exception/ExpenseNotFoundException.html" title="class in de.travelbuddy.model.finance.exception">ExpenseNotFoundException</a></code></dd>
 </dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addConnection(de.travelbuddy.place.Connection)">addConnection</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addConnection</span>&#8203;(<span class="arguments"><a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&nbsp;connection)</span>
+<h3><a id="addConnection(de.travelbuddy.model.place.Connection)">addConnection</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addConnection</span>&#8203;(<span class="arguments"><a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&nbsp;connection)</span>
                    throws <span class="exceptions">java.lang.IllegalArgumentException</span></div>
 <div class="block">Adds a connection to this place</div>
 <dl>
@@ -662,8 +662,8 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeConnection(de.travelbuddy.place.Connection)">removeConnection</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeConnection</span>&#8203;(<span class="arguments"><a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&nbsp;connection)</span>
+<h3><a id="removeConnection(de.travelbuddy.model.place.Connection)">removeConnection</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeConnection</span>&#8203;(<span class="arguments"><a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&nbsp;connection)</span>
                       throws <span class="exceptions">java.lang.IllegalArgumentException</span></div>
 <div class="block">Removes a connection from this place</div>
 <dl>
@@ -677,7 +677,7 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <li class="blockList">
 <section class="detail">
 <h3><a id="totalCost(java.util.Currency)">totalCost</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../finance/Money.html" title="class in de.travelbuddy.finance">Money</a></span>&nbsp;<span class="memberName">totalCost</span>&#8203;(<span class="arguments">java.util.Currency&nbsp;currency)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../finance/Money.html" title="class in de.travelbuddy.model.finance">Money</a></span>&nbsp;<span class="memberName">totalCost</span>&#8203;(<span class="arguments">java.util.Currency&nbsp;currency)</span></div>
 <div class="block">Calculate the total costs for this place</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -690,7 +690,7 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <li class="blockList">
 <section class="detail">
 <h3><a id="totalCostOfPerson(java.util.Currency,de.travelbuddy.Person)">totalCostOfPerson</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../finance/Money.html" title="class in de.travelbuddy.finance">Money</a></span>&nbsp;<span class="memberName">totalCostOfPerson</span>&#8203;(<span class="arguments">java.util.Currency&nbsp;currency,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../finance/Money.html" title="class in de.travelbuddy.model.finance">Money</a></span>&nbsp;<span class="memberName">totalCostOfPerson</span>&#8203;(<span class="arguments">java.util.Currency&nbsp;currency,
 <a href="../Person.html" title="class in de.travelbuddy">Person</a>&nbsp;person)</span></div>
 <div class="block">Calculate the total costs for the given person for this place</div>
 <dl>
@@ -704,9 +704,9 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="findConnections(de.travelbuddy.place.Place,de.travelbuddy.place.Place)">findConnections</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">findConnections</span>&#8203;(<span class="arguments"><a href="Place.html" title="class in de.travelbuddy.place">Place</a>&nbsp;from,
-<a href="Place.html" title="class in de.travelbuddy.place">Place</a>&nbsp;to)</span></div>
+<h3><a id="findConnections(de.travelbuddy.model.place.Place,de.travelbuddy.model.place.Place)">findConnections</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">findConnections</span>&#8203;(<span class="arguments"><a href="Place.html" title="class in de.travelbuddy.model.place">Place</a>&nbsp;from,
+<a href="Place.html" title="class in de.travelbuddy.model.place">Place</a>&nbsp;to)</span></div>
 <div class="block">Get all connections between two places</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -720,7 +720,7 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 <li class="blockList">
 <section class="detail">
 <h3><a id="findExpenses(java.lang.String)">findExpenses</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../finance/Expense.html" title="class in de.travelbuddy.finance">Expense</a>&gt;</span>&nbsp;<span class="memberName">findExpenses</span>&#8203;(<span class="arguments">java.lang.String&nbsp;title)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../finance/Expense.html" title="class in de.travelbuddy.model.finance">Expense</a>&gt;</span>&nbsp;<span class="memberName">findExpenses</span>&#8203;(<span class="arguments">java.lang.String&nbsp;title)</span></div>
 <div class="block">Get all expenses with the given title</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -745,8 +745,8 @@ java.util.List&lt;<a href="../Person.html" title="class in de.travelbuddy">Perso
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="findPossibleConnectionsTo(de.travelbuddy.place.Place,java.time.LocalDateTime,int)">findPossibleConnectionsTo</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">findPossibleConnectionsTo</span>&#8203;(<span class="arguments"><a href="Place.html" title="class in de.travelbuddy.place">Place</a>&nbsp;destination,
+<h3><a id="findPossibleConnectionsTo(de.travelbuddy.model.place.Place,java.time.LocalDateTime,int)">findPossibleConnectionsTo</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="Connection.html" title="class in de.travelbuddy.model.place">Connection</a>&gt;</span>&nbsp;<span class="memberName">findPossibleConnectionsTo</span>&#8203;(<span class="arguments"><a href="Place.html" title="class in de.travelbuddy.model.place">Place</a>&nbsp;destination,
 java.time.LocalDateTime&nbsp;startTime,
 int&nbsp;number)</span></div>
 <div class="block">Get possible connections to the desired destination, at a given start time</div>

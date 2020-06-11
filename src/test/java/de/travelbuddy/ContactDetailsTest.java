@@ -1,5 +1,6 @@
 package de.travelbuddy;
 
+import de.travelbuddy.model.ContactDetails;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
