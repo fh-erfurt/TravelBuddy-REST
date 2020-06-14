@@ -7,6 +7,7 @@ import de.travelbuddy.model.place.exception.DuplicatePlaceException;
 import de.travelbuddy.model.place.Place;
 import de.travelbuddy.model.place.exception.PlaceNotFoundException;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
@@ -16,7 +17,16 @@ import java.util.stream.Collectors;
 /**
  * Class which represents a Journey
  */
+
+//TODO Add/Remove Expense seems to be missing
+
+@Entity
+@Table(name = "JOURNEY")
 public class Journey {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
 
@@ -24,6 +34,9 @@ public class Journey {
     private List<Person> persons;
 
     private Map<String, Expense> expenses;
+
+    // Required for JPA
+    public Journey() {};
 
     public Journey(String title, List<Place> places, List<Person> persons) {
         this.title = title;
@@ -38,6 +51,11 @@ public class Journey {
     public List<Person> getPersons() { return persons; }
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getId() {return id;}
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
