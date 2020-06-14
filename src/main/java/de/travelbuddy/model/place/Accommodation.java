@@ -20,6 +20,8 @@ public class Accommodation extends Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated()
+    @Column(columnDefinition = "smallint")
     private accommodationType type;
 
     public enum accommodationType

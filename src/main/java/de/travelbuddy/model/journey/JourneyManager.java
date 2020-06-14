@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class JourneyManager {
+
     private Map<String, Journey> journeys = new HashMap<>();
 
     public JourneyManager()

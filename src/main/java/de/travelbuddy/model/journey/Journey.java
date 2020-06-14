@@ -30,9 +30,13 @@ public class Journey {
 
     private String title;
 
+    @OneToMany
     private List<Place> places;
+
+    @OneToMany
     private List<Person> persons;
 
+    @OneToMany
     private Map<String, Expense> expenses;
 
     // Required for JPA

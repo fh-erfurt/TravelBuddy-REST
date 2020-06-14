@@ -1,5 +1,6 @@
 package de.travelbuddy.storage.core;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
@@ -23,7 +24,13 @@ public class DataController
     }
     private DataController()
     {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+        try {
+            this.entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        }
+        catch (Exception ex)
+        {
+           String x = ex.getMessage();
+        }
     }
 
     public JpaGenericDao<Journey,Long> getJourneyDao()

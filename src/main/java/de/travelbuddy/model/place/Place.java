@@ -30,12 +30,23 @@ public class Place {
     private Long id;
 
     private String name;
+
+    @OneToOne
     private Coordinates coordinates;
+
+    @OneToOne
     private ContactDetails contactDetails;
+
     private LocalDateTime arrive;
     private LocalDateTime departure;
+
+    @OneToMany
     private Map<String, Expense> expenses;
+
+    @OneToMany
     private List<Connection> connectionsToNextPlace;
+
+    @OneToMany
     private List<Person> involvedPersons;
 
     // Required for JPA

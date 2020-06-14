@@ -21,9 +21,16 @@ public class Connection {
     private String title;
     private LocalDateTime arrive;
     private LocalDateTime departure;
+
+    @OneToOne
     private Place start;
+
+    @OneToOne
     private Place end;
+
+    @OneToOne
     private Expense expense;
+
     private Boolean used;
 
     // Required for JPA

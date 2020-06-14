@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class PersonRepo {
 
-    private static final Logger LOG = (Logger) LoggerFactory.getLogger(PersonRepo.class);
+    //private static final Logger LOG = (Logger) LoggerFactory.getLogger(PersonRepo.class);
 
     public void savePerson(Person person) throws StorageError {
 

@@ -20,7 +20,11 @@ public class Expense {
 
     private String title;
     private String description;
+
+    @Transient
     private Money price;
+
+    @OneToMany
     private List<Person> involvedPersons;
     private planned status;
     private boolean perPerson;

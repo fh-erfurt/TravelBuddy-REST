@@ -18,6 +18,8 @@ public class Person {
     private String firstName;
     private String name;
     private LocalDate birthdate;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private ContactDetails contactDetails;
 
     // Required for JPA
