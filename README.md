@@ -5,7 +5,7 @@
 
 ## Teammitglieder
 
-Franziska Schmidt, Frieder Ullmann, Marcel van der Heide, Tim Vogel
+Frieder Ullmann, Tim Vogel, Marcel van der Heide
 
 ## Beschreibung
 
