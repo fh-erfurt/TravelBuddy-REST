@@ -31,8 +31,8 @@ public class TravelBuddyConfiguration {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("de.travelbuddy.controller.v1.api"))
                 .paths(PathSelectors.any())
-                .build();
-                //.apiInfo(apiInfo());
+                .build()
+                .apiInfo(apiInfo());
                 //securitySchemes(Arrays.asList(apiKey()));
     }
 
