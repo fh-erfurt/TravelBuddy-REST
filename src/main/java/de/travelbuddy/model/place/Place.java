@@ -9,6 +9,7 @@ import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
 import de.travelbuddy.model.finance.Money;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -19,7 +20,14 @@ import java.util.stream.Collectors;
 /**
  * Class which represents a Place
  */
+
+@Entity
+@Table(name = "PLACE")
 public class Place {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private Coordinates coordinates;
@@ -29,6 +37,9 @@ public class Place {
     private Map<String, Expense> expenses;
     private List<Connection> connectionsToNextPlace;
     private List<Person> involvedPersons;
+
+    // Required for JPA
+    public Place() {};
 
     public Place(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
                  LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons) {
@@ -45,7 +56,6 @@ public class Place {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -53,7 +63,6 @@ public class Place {
     public Coordinates getCoordinates() {
         return coordinates;
     }
-
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
@@ -61,7 +70,6 @@ public class Place {
     public LocalDateTime getArrive() {
         return arrive;
     }
-
     public void setArrive(LocalDateTime arrive) {
         this.arrive = arrive;
     }
@@ -69,7 +77,6 @@ public class Place {
     public LocalDateTime getDeparture() {
         return departure;
     }
-
     public void setDeparture(LocalDateTime departure) {
         this.departure = departure;
     }
@@ -77,7 +84,6 @@ public class Place {
     public Map<String, Expense> getExpenses() {
         return expenses;
     }
-
     public void setExpenses(Map<String, Expense> expenses) {
         this.expenses = expenses;
     }
@@ -85,7 +91,6 @@ public class Place {
     public ContactDetails getContactDetails() {
         return contactDetails;
     }
-
     public void setContactDetails(ContactDetails contactDetails) {
         this.contactDetails = contactDetails;
     }
@@ -93,7 +98,6 @@ public class Place {
     public List<Connection> getConnectionsToNextPlace() {
         return connectionsToNextPlace;
     }
-
     public void setConnectionsToNextPlace(List<Connection> connectionsToNextPlace) {
         this.connectionsToNextPlace = connectionsToNextPlace;
     }
@@ -101,9 +105,13 @@ public class Place {
     public List<Person> getInvolvedPersons() {
         return involvedPersons;
     }
-
     public void setInvolvedPersons(List<Person> involvedPersons) {
         this.involvedPersons = involvedPersons;
+    }
+
+    public Long getId() {return id;}
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

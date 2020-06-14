@@ -1,9 +1,18 @@
 package de.travelbuddy.model;
 
+import javax.persistence.*;
+
 /**
  * Class which represents the Contact details
  */
+
+@Entity
+@Table(name = "CONTACTDETAILS")
 public class ContactDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String phone;
     private String email;
@@ -12,6 +21,9 @@ public class ContactDetails {
     private int streetNumber;
     private String ZIP;
     private String country;
+
+    // Required for JPA
+    public ContactDetails() {};
 
     /**
      * combines the contact details
@@ -23,6 +35,7 @@ public class ContactDetails {
      * @param ZIP the zip from the town, its more accurate then town only
      * @param country it's important, if the journey takes place in several countries
      */
+
     public ContactDetails(String phone, String email,String town, String street, int streetNumber, String ZIP, String country) {
         this.phone = phone;
         this.email = email;
@@ -34,30 +47,27 @@ public class ContactDetails {
     }
 
     public String getPhone() {return phone;}
-
     public void setPhone(String phone) {this.phone = phone;}
 
     public String getEmail() {return email;}
-
     public void setEmail(String email) {this.email = email;}
 
     public String getTown() {return town;}
-
     public void setTown(String town) {this.town = town;}
 
     public String getStreet() {return street;}
-
     public void setStreet(String street) {this.street = street;}
 
     public int getStreetNumber() {return streetNumber;}
-
     public void setStreetNumber(int streetNumber) {this.streetNumber = streetNumber;}
 
     public String getZIP() {return ZIP;}
-
     public void setZIP(String ZIP) {this.ZIP = ZIP;}
 
     public String getCountry() {return country;}
-
     public void setCountry(String country) {this.country = country;}
+
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
+
 }

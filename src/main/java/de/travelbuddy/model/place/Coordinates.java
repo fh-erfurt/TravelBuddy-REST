@@ -3,13 +3,25 @@ package de.travelbuddy.model.place;
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
 
+import javax.persistence.*;
+
 /**
  * Class which represents Coordinates
  */
+
+@Entity
+@Table(name = "COORDINATES")
 public class Coordinates {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private double latitude;
     private double longitude;
+
+    // Required for JPA
+    public Coordinates() {};
 
     /**
      * coordinates has the exact position from a place
@@ -18,6 +30,7 @@ public class Coordinates {
      * @throws InvalidLatitudeException the latitude isn't between -90 and 90
      * @throws InvalidLongitudeException the logitude isn't between -180 and 180
      */
+
     public Coordinates(double latitude, double longitude) throws InvalidLatitudeException, InvalidLongitudeException {
         if (!checkLatitude(latitude))
             throw new InvalidLatitudeException("Latitude should be between -90 and 90.");
@@ -36,6 +49,9 @@ public class Coordinates {
     public double getLongitude() {return longitude;}
 
     public void setLongitude(double longitude) {this.longitude = longitude;}
+
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
 
     /**
      * Check if the given latitude is valid
