@@ -3,7 +3,6 @@ package de.travelbuddy;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.storage.exceptions.StorageError;
-import de.travelbuddy.storage.repositorys.PersonRepo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
