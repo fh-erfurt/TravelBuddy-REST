@@ -1,6 +1,9 @@
 package de.travelbuddy.controller.v1.api.journey;
 
+import de.travelbuddy.model.Person;
+import de.travelbuddy.model.journey.Journey;
 import de.travelbuddy.model.journey.exception.JourneyNotFoundException;
+import de.travelbuddy.storage.core.JpaGenericStream;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,11 @@ public class JourneyController {
     @GetMapping("/{journeyId}/locations")
     @ResponseStatus(code = HttpStatus.OK)
     public List<String> getJourneys(@PathVariable long journeyId) throws JourneyNotFoundAPIException {
+
+        JpaGenericStream<Person> s = new JpaGenericStream(Person.class);
+        List<Person> persons = s.getStream().where(p -> p.getId().equals(1)).toList();
+
+
         if (journeyId == 42)
             return Arrays.asList("Magrathea", "Beteigeuze 5", "Beteigeuze 7", "Erde");
         else
