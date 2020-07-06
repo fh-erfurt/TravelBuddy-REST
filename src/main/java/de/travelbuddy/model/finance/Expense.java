@@ -2,6 +2,8 @@ package de.travelbuddy.model.finance;
 
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.exception.MissingPersonToDivideException;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,6 +14,7 @@ import java.util.List;
 // Kosten können momentan nur zu gleichen Teilen aufgeteilt werden!!!
 @Entity
 @Table(name = "EXPENSE")
+@Getter @Setter
 public class Expense {
 
     @Id
@@ -48,26 +51,9 @@ public class Expense {
         this.perPerson = perPerson;
     }
 
-    public String getTitle() {return title;}
-    public void setTitle(String title) {this.title = title;}
-
-    public String getDescription() {return description;}
-    public void setDescription(String description) {this.description = description;}
-
-    public Money getPrice() {return price;}
-    public void setPrice(Money price) {this.price = price;}
-
-    public List<Person> getInvolvedPersons() {return involvedPersons;}
-    public void setInvolvedPersons(List<Person> involvedPersons) {this.involvedPersons = involvedPersons;}
-
-    public planned getStatus() {return status;}
-    public void setStatus(planned status) {this.status = status;}
-
     public boolean getPerPerson() {return perPerson;}
     public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
 
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
 
     /**
      * Get the Money per Person

@@ -4,6 +4,8 @@ import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.journey.exception.DuplicateJourneyException;
 import de.travelbuddy.model.journey.exception.JourneyNotFoundException;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.*;

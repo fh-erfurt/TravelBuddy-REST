@@ -5,6 +5,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
+          <factory-entry name="travel-pu" />
           <factory-entry name="travel_pu" />
         </datasource-mapping>
         <naming-strategy-map />
@@ -62,28 +63,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spi:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-core:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-schema:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-common:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.2.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spi:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-core:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-schema:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-common:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.2.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.4.16.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.4.1.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />
@@ -179,5 +158,6 @@
     <orderEntry type="library" name="Maven: org.jinq:jinq-asm-rebased:1.8.30" level="project" />
     <orderEntry type="library" name="Maven: org.jinq:api:1.8.30" level="project" />
     <orderEntry type="library" name="Maven: org.jinq:analysis:1.8.30" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
   </component>
 </module>

@@ -3,6 +3,8 @@ package de.travelbuddy.model.place;
         import de.travelbuddy.model.ContactDetails;
         import de.travelbuddy.model.Person;
         import de.travelbuddy.model.finance.Expense;
+        import lombok.Getter;
+        import lombok.Setter;
 
         import javax.persistence.*;
         import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ package de.travelbuddy.model.place;
  */
 @Entity
 @Table(name = "ACCOMMODATION")
+@Getter @Setter
 public class Accommodation extends Place {
 
     @Id
@@ -38,11 +41,4 @@ public class Accommodation extends Place {
         super(name, coordinates, contactDetails, arrive, departure, expenses, connectionsToNextPlace, involvedPersons);
         this.type = type;
     }
-
-    public accommodationType getType() {return type;}
-
-    public void setType(accommodationType type) {this.type = type;}
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
 }

@@ -3,6 +3,8 @@ package de.travelbuddy.model.place;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +17,8 @@ import java.util.Map;
 
 @Entity
 @Table(name = "SIGHT")
+@Getter
+@Setter
 public class Sight extends Place {
 
     @Id
@@ -33,11 +37,4 @@ public class Sight extends Place {
         super(name, coordinates, contactDetails, arrive, departure, expenses, connectionsToNextPlace, involvedPersons);
         this.indoor = indoor;
     }
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-
-    public boolean isIndoor() {return indoor;}
-
-    public void setIndoor(boolean indoor) {this.indoor = indoor;}
 }
