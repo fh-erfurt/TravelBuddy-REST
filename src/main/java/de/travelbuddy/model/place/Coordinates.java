@@ -2,6 +2,8 @@ package de.travelbuddy.model.place;
 
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -11,6 +13,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "COORDINATES")
+@Getter
+@Setter
 public class Coordinates {
 
     @Id
@@ -41,17 +45,6 @@ public class Coordinates {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-    public double getLatitude() {return latitude;}
-
-    public void setLatitude(double latitude) {this.latitude = latitude;}
-
-    public double getLongitude() {return longitude;}
-
-    public void setLongitude(double longitude) {this.longitude = longitude;}
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
 
     /**
      * Check if the given latitude is valid

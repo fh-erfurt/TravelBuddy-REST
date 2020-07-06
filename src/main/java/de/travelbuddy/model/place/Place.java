@@ -8,6 +8,8 @@ import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
 import de.travelbuddy.model.finance.Money;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "PLACE")
+@Getter
+@Setter
 public class Place {
 
     @Id
@@ -62,67 +66,6 @@ public class Place {
         this.expenses = expenses;
         this.connectionsToNextPlace = connectionsToNextPlace;
         this.involvedPersons = involvedPersons;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public LocalDateTime getArrive() {
-        return arrive;
-    }
-    public void setArrive(LocalDateTime arrive) {
-        this.arrive = arrive;
-    }
-
-    public LocalDateTime getDeparture() {
-        return departure;
-    }
-    public void setDeparture(LocalDateTime departure) {
-        this.departure = departure;
-    }
-
-    public Map<String, Expense> getExpenses() {
-        return expenses;
-    }
-    public void setExpenses(Map<String, Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    public ContactDetails getContactDetails() {
-        return contactDetails;
-    }
-    public void setContactDetails(ContactDetails contactDetails) {
-        this.contactDetails = contactDetails;
-    }
-
-    public List<Connection> getConnectionsToNextPlace() {
-        return connectionsToNextPlace;
-    }
-    public void setConnectionsToNextPlace(List<Connection> connectionsToNextPlace) {
-        this.connectionsToNextPlace = connectionsToNextPlace;
-    }
-
-    public List<Person> getInvolvedPersons() {
-        return involvedPersons;
-    }
-    public void setInvolvedPersons(List<Person> involvedPersons) {
-        this.involvedPersons = involvedPersons;
-    }
-
-    public Long getId() {return id;}
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**

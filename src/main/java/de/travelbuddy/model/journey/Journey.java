@@ -6,6 +6,9 @@ import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.place.exception.DuplicatePlaceException;
 import de.travelbuddy.model.place.Place;
 import de.travelbuddy.model.place.exception.PlaceNotFoundException;
+import lombok.Generated;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "JOURNEY")
+@Getter @Setter
 public class Journey {
 
     @Id
@@ -46,20 +50,6 @@ public class Journey {
         this.title = title;
         this.places = places;
         this.persons = persons;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public List<Place> getPlaces() { return places; }
-    public List<Person> getPersons() { return persons; }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getId() {return id;}
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
@@ -167,7 +157,6 @@ public class Journey {
      * @return All places with the given name and type
      */
     public  <T extends Place> List<Place> findPlace(String name, Class<T> type) {
-        //Extra für Jonas hinzugefügt, damit wir, wie besprochen, eine 1 bekommen ;)
         return places.stream()
                     .filter(place -> type.equals(place.getClass()))
                     .filter(place -> place.getName().equals(name))

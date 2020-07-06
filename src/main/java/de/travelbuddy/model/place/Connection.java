@@ -1,6 +1,8 @@
 package de.travelbuddy.model.place;
 
 import de.travelbuddy.model.finance.Expense;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "CONNECTION")
+@Getter
+@Setter
 public class Connection {
 
     @Id
@@ -57,30 +61,6 @@ public class Connection {
         this.expense = expense;
         this.used = used;
     }
-
-    public String getTitle() {return title;}
-    public void setTitle(String title) {this.title = title;}
-
-    public LocalDateTime getArrive() {return arrive;}
-    public void setArrive(LocalDateTime arrive) {this.arrive = arrive;}
-
-    public LocalDateTime getDeparture() {return departure;}
-    public void setDeparture(LocalDateTime departure) {this.departure = departure;}
-
-    public Place getStart() {return start;}
-    public void setStart(Place start) {this.start = start;}
-
-    public Place getEnd() {return end;}
-    public void setEnd(Place end) {this.end = end;}
-
-    public Expense getExpense() {return expense;}
-    public void setExpense(Expense expense) {this.expense = expense;}
-
-    public void setUsed(Boolean used) {this.used = used;}
-    public Boolean getUsed() {return this.used;}
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
 
     /**
      * Get the duration

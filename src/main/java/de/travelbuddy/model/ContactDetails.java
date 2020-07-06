@@ -1,5 +1,8 @@
 package de.travelbuddy.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
@@ -8,6 +11,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CONTACTDETAILS")
+@Getter
+@Setter
 public class ContactDetails {
 
     @Id
@@ -45,29 +50,4 @@ public class ContactDetails {
         this.ZIP = ZIP;
         this.country = country;
     }
-
-    public String getPhone() {return phone;}
-    public void setPhone(String phone) {this.phone = phone;}
-
-    public String getEmail() {return email;}
-    public void setEmail(String email) {this.email = email;}
-
-    public String getTown() {return town;}
-    public void setTown(String town) {this.town = town;}
-
-    public String getStreet() {return street;}
-    public void setStreet(String street) {this.street = street;}
-
-    public int getStreetNumber() {return streetNumber;}
-    public void setStreetNumber(int streetNumber) {this.streetNumber = streetNumber;}
-
-    public String getZIP() {return ZIP;}
-    public void setZIP(String ZIP) {this.ZIP = ZIP;}
-
-    public String getCountry() {return country;}
-    public void setCountry(String country) {this.country = country;}
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-
 }

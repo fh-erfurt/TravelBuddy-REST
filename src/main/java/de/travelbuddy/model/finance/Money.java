@@ -1,6 +1,8 @@
 package de.travelbuddy.model.finance;
 
 import de.travelbuddy.model.finance.exception.NotSupportedCurrencyException;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -9,6 +11,7 @@ import java.util.Currency;
 /**
  * Class which represents Money
  */
+@Getter @Setter
 public class Money {
 
     private Currency currency;
@@ -16,22 +19,6 @@ public class Money {
 
     public Money (Currency currency, BigDecimal value){
         this.currency = currency;
-        this.value = value;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
         this.value = value;
     }
 

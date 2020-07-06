@@ -1,5 +1,8 @@
 package de.travelbuddy.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -9,6 +12,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "PERSON")
+@Getter
+@Setter
 public class Person {
 
     @Id
@@ -30,33 +35,5 @@ public class Person {
         this.name = name;
         this.birthdate = birthdate;
         this.contactDetails = contactDetails;
-    }
-
-    public String getFirstName() {return firstName;}
-
-    public void setFirstName(String firstName) {this.firstName = firstName;}
-
-    public String getName() {return name;}
-
-    public void setName(String name) {this.name = name;}
-
-    public LocalDate getBirthdate() {return birthdate;}
-
-    public void setBirthdate(LocalDate birthdate) {this.birthdate = birthdate;}
-
-    public ContactDetails getContactDetails() {
-        return contactDetails;
-    }
-
-    public void setContactDetails(ContactDetails contactDetails) {
-        this.contactDetails = contactDetails;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
