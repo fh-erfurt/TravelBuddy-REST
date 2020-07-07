@@ -26,7 +26,7 @@ public class ExpenseTest {
         assertEquals(expense.getPrice(), expense.getPrice());
         assertEquals(expense.getInvolvedPersons(), new ArrayList<>());
         assertEquals(expense.getStatus(), Expense.planned.PLANNED);
-        assertTrue(expense.getPerPerson());
+        assertTrue(expense.isPerPerson());
     }
 
     @Test
