@@ -35,10 +35,10 @@ public class Accommodation extends Place {
     // Required for JPA
     public Accommodation() {};
 
-    public Accommodation(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
-                         LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons,
-                         accommodationType type) {
-        super(name, coordinates, contactDetails, arrive, departure, expenses, connectionsToNextPlace, involvedPersons);
-        this.type = type;
-    }
+    public accommodationType getType() {return type;}
+
+    public void setType(accommodationType type) {this.type = type;}
+
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class Expense {
     private Money price;
 
     @OneToMany
-    private List<Person> involvedPersons;
+    private List<Person> involvedPersons = new ArrayList<>();
     private planned status;
     private boolean perPerson;
 
@@ -40,21 +41,6 @@ public class Expense {
     // Required for JPA
     public Expense() {};
 
-    public Expense(String title, String description, Money price,
-                   List<Person> involvedPersons, planned status, boolean perPerson) {
-
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.involvedPersons = involvedPersons;
-        this.status = status;
-        this.perPerson = perPerson;
-    }
-
-    public boolean getPerPerson() {return perPerson;}
-    public void setPerPerson(boolean perPerson) {this.perPerson = perPerson;}
-
-
     /**
      * Get the Money per Person
      * @return the money value, with the currency
@@ -62,8 +48,12 @@ public class Expense {
      */
     public Money getMoneyPerPerson() throws MissingPersonToDivideException {
 
-        if (involvedPersons.size()!=0)
-            return new Money(price.getCurrency(), this.price.getValue().divide(BigDecimal.valueOf(involvedPersons.size()),2, RoundingMode.HALF_UP));
+        if (involvedPersons.size()!=0) {
+            Money mon = new Money();
+            mon.setCurrency(price.getCurrency());
+            mon.setValue(this.price.getValue().divide(BigDecimal.valueOf(involvedPersons.size()), 2, RoundingMode.HALF_UP));
+            return mon;
+        }
         else
             throw new MissingPersonToDivideException("No Persons to divide Expense between");
     }

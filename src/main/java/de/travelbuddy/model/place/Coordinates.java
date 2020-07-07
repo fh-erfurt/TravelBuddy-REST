@@ -27,18 +27,17 @@ public class Coordinates {
     // Required for JPA
     public Coordinates() {};
 
-    /**
-     * coordinates has the exact position from a place
-     * @param latitude is the width coordinate
-     * @param longitude is the length coordinate
-     * @throws InvalidLatitudeException the latitude isn't between -90 and 90
-     * @throws InvalidLongitudeException the logitude isn't between -180 and 180
-     */
+    public double getLatitude() {return latitude;}
 
-    public Coordinates(double latitude, double longitude) throws InvalidLatitudeException, InvalidLongitudeException {
+    public void setLatitude(double latitude) throws InvalidLatitudeException {
         if (!checkLatitude(latitude))
             throw new InvalidLatitudeException("Latitude should be between -90 and 90.");
+        this.latitude = latitude;
+    }
 
+    public double getLongitude() {return longitude;}
+
+    public void setLongitude(double longitude) throws InvalidLongitudeException {
         if (!checkLongitude(longitude))
             throw new InvalidLongitudeException("Longitude should be between -180 and 180.");
 

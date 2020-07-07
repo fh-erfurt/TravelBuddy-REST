@@ -1,6 +1,7 @@
 package de.travelbuddy.model.journey;
 
 import de.travelbuddy.model.ContactDetails;
+import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.model.finance.Expense;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JourneyTest {
     @Test
-    public void correctly_instantiate_journey(){
+    public void correctly_instantiate_journey() throws DuplicatePlaceException, DuplicatePersonException {
 
         //Given
         String title = "Berlin";
@@ -37,7 +38,10 @@ public class JourneyTest {
         persons.add(person);
 
         //When
-        Journey journey = new Journey(title, places, persons);
+        Journey journey = new Journey();
+        journey.setTitle(title);
+        journey.addPlaces(places);
+        journey.addPersons(persons);
 
 
         //Then
@@ -67,10 +71,13 @@ public class JourneyTest {
         place2.addExpense(expense3);
         place2.addExpense(expense4);
 
-        Money totalMoney = new Money(expense1.getPrice().getCurrency(), expense1.getPrice().getValue());
-        totalMoney.add(new Money(expense2.getPrice().getCurrency(), expense2.getPrice().getValue()));
-        totalMoney.add(new Money(expense3.getPrice().getCurrency(), expense3.getPrice().getValue()));
-        totalMoney.add(new Money(expense4.getPrice().getCurrency(), expense4.getPrice().getValue()));
+        Money totalMoney = new Money();
+        totalMoney.setCurrency(expense1.getPrice().getCurrency());
+        totalMoney.setValue(expense1.getPrice().getValue());
+
+        totalMoney.add(expense2.getPrice().getCurrency(), expense2.getPrice().getValue());
+        totalMoney.add(expense3.getPrice().getCurrency(), expense3.getPrice().getValue());
+        totalMoney.add(expense4.getPrice().getCurrency(), expense4.getPrice().getValue());
         Money costs = journey.totalCost(Currency.getInstance("EUR"));
 
         //Then
@@ -96,7 +103,9 @@ public class JourneyTest {
         place2.addExpense(expense3);
         place2.addExpense(expense4);
 
-        Money totalMoney = new Money(expense1.getPrice().getCurrency(), expense1.getPrice().getValue());
+        Money totalMoney = new Money();
+        totalMoney.setCurrency(expense1.getPrice().getCurrency());
+        totalMoney.setValue(expense1.getPrice().getValue());
         totalMoney.add(expense2.getPrice());
         totalMoney.add(expense3.getPrice());
         totalMoney.add(expense4.getPrice());

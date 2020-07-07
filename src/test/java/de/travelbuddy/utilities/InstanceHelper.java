@@ -23,7 +23,9 @@ public class InstanceHelper {
 
     public static Journey createJourney()
     {
-        return new Journey(rndString(), new ArrayList<>(), new ArrayList<>());
+        Journey journey = new Journey();
+        journey.setTitle(rndString());
+        return journey;
     }
 
     public static Place createPlace()
@@ -33,9 +35,13 @@ public class InstanceHelper {
 
     public static Place createPlace(LocalDateTime start)
     {
-        return new Place(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new HashMap<>(), new ArrayList<>(),
-                new ArrayList<>());
+        Place pl = new Place();
+        pl.setName(rndString());
+        pl.setCoordinates(createCoordinate());
+        pl.setContactDetails(createContactDetails());
+        pl.setArrive(start);
+        pl.setDeparture(start.plusHours(rndInt(1, 8)));
+        return pl;
     }
 
     public static Accommodation createAccommodation()
@@ -45,9 +51,14 @@ public class InstanceHelper {
 
     public static Accommodation createAccommodation(LocalDateTime start)
     {
-        return new Accommodation(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new HashMap<>(), new ArrayList<>(),
-                new ArrayList<>(), Accommodation.accommodationType.HOSTEL);
+        Accommodation pl = new Accommodation();
+        pl.setName(rndString());
+        pl.setCoordinates(createCoordinate());
+        pl.setContactDetails(createContactDetails());
+        pl.setArrive(start);
+        pl.setDeparture(start.plusHours(rndInt(1, 8)));
+        pl.setType(Accommodation.accommodationType.HOSTEL);
+        return pl;
     }
 
     public static Sight createSight()
@@ -57,16 +68,23 @@ public class InstanceHelper {
 
     public static Sight createSight(LocalDateTime start)
     {
-        return new Sight(rndString(), createCoordinate(), createContactDetails(), start,
-                start.plusHours(rndInt(1, 8)), new HashMap<>(), new ArrayList<>(),
-                new ArrayList<>(), true);
+        Sight pl = new Sight();
+        pl.setName(rndString());
+        pl.setCoordinates(createCoordinate());
+        pl.setContactDetails(createContactDetails());
+        pl.setArrive(start);
+        pl.setDeparture(start.plusHours(rndInt(1, 8)));
+        pl.setIndoor(true);
+        return pl;
     }
 
     public static Coordinates createCoordinate()
     {
         Coordinates ret = null;
         try {
-            ret = new Coordinates(rndDouble(-90, 90), rndDouble(-180, 180));
+            ret = new Coordinates();
+            ret.setLatitude(rndDouble(-90, 90));
+            ret.setLongitude(rndDouble(-180, 180));
         }
         catch (InvalidLatitudeException | InvalidLongitudeException ex)
         {
@@ -78,8 +96,15 @@ public class InstanceHelper {
 
     public static ContactDetails createContactDetails()
     {
-        return new ContactDetails(String.valueOf(rndLong(111111, 9999999)), rndEmail(), rndString(), rndString(),
-                rndInt(1,100), rndString(), rndCountry());
+        ContactDetails cd = new ContactDetails();
+        cd.setEmail(rndEmail());
+        cd.setPhone(String.valueOf(rndLong(111111, 9999999)));
+        cd.setTown(rndString());
+        cd.setStreet(rndString());
+        cd.setStreetNumber(rndInt(1,100));
+        cd.setZIP(rndString());
+        cd.setCountry(rndString());
+        return cd;
     }
 
     public static Expense createExpense()
@@ -89,8 +114,13 @@ public class InstanceHelper {
 
     public static Expense createExpense(Currency currency)
     {
-        return new Expense(rndString(), rndString() + rndString() + rndString() + rndString(),
-                createMoney(currency), new ArrayList<>(), Expense.planned.PLANNED, false);
+        Expense exp = new Expense();
+        exp.setTitle(rndString());
+        exp.setDescription(rndString() + rndString() + rndString() + rndString());
+        exp.setPrice(createMoney(currency));
+        exp.setStatus(Expense.planned.PLANNED);
+        exp.setPerPerson(false);
+        return exp;
     }
 
     public static Money createMoney()
@@ -100,21 +130,30 @@ public class InstanceHelper {
 
     public static Money createMoney(Currency currency)
     {
-        return new Money(currency, BigDecimal.valueOf(rndDouble(0, 100)).setScale(2, RoundingMode.HALF_UP));
+        Money mon = new Money();
+        mon.setCurrency(currency);
+        mon.setValue(BigDecimal.valueOf(rndDouble(0, 100)).setScale(2, RoundingMode.HALF_UP));
+        return mon;
     }
 
     public static Person createPersonMale()
     {
-        return new Person(rndFirstname(false),rndLastname(),
-                rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()),
-                createContactDetails());
+        Person p = new Person();
+        p.setFirstName(rndFirstname(false));
+        p.setName(rndLastname());
+        p.setBirthdate(rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()));
+        p.setContactDetails(createContactDetails());
+        return p;
     }
 
     public static Person createPersonFemale()
     {
-        return new Person(rndFirstname(true),rndLastname(),
-                rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()),
-                createContactDetails());
+        Person p = new Person();
+        p.setFirstName(rndFirstname(true));
+        p.setName(rndLastname());
+        p.setBirthdate(rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()));
+        p.setContactDetails(createContactDetails());
+        return p;
     }
 
     public static Person createPerson()
@@ -134,7 +173,14 @@ public class InstanceHelper {
 
     public static Connection createConnection(Place from, Place to)
     {
-        return new Connection(rndString(), to.getArrive(), from.getDeparture(), from, to, createExpense());
+        Connection con = new Connection();
+        con.setTitle(rndString());
+        con.setArrive(to.getArrive());
+        con.setDeparture(from.getDeparture());
+        con.setEnd(to);
+        con.setStart(from);
+        con.setExpense(createExpense());
+        return con;
     }
 
     /* ######### HELPERS ####### */

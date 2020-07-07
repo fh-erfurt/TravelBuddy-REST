@@ -14,9 +14,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Currency;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,28 +43,16 @@ public class Place {
     private LocalDateTime departure;
 
     @OneToMany
-    private Map<String, Expense> expenses;
+    private Map<String, Expense> expenses = new HashMap<>();
 
     @OneToMany
-    private List<Connection> connectionsToNextPlace;
+    private List<Connection> connectionsToNextPlace = new ArrayList<>();
 
     @OneToMany
-    private List<Person> involvedPersons;
+    private List<Person> involvedPersons = new ArrayList<>();
 
     // Required for JPA
     public Place() {};
-
-    public Place(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
-                 LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons) {
-        this.name = name;
-        this.coordinates = coordinates;
-        this.contactDetails = contactDetails;
-        this.arrive = arrive;
-        this.departure = departure;
-        this.expenses = expenses;
-        this.connectionsToNextPlace = connectionsToNextPlace;
-        this.involvedPersons = involvedPersons;
-    }
 
     /**
      * Add a person to this place
@@ -147,7 +133,9 @@ public class Place {
      * @return The calculated total costs in Money
      */
     public Money totalCost(Currency currency) {
-        Money total = new Money(currency, new BigDecimal(0));
+        Money total = new Money();
+        total.setCurrency(currency);
+        total.setValue(new BigDecimal(0));
 
         expenses.values().stream()
                     .filter(x -> x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
@@ -163,7 +151,9 @@ public class Place {
      * @return The calculated total costs in Money
      */
     public Money totalCostOfPerson(Currency currency, Person person) {
-        Money total = new Money(currency, new BigDecimal(0));
+        Money total = new Money();
+        total.setCurrency(currency);
+        total.setValue(new BigDecimal(0));
 
         expenses.values().stream()
                     .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED))

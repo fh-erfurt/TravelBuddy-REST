@@ -75,7 +75,10 @@ public class CurrencyConverter implements ICurrencyConverter {
                             currencyTarget.getCurrencyCode()));
         BigDecimal rate = getRate(money.getCurrency(),currencyTarget);
 
-        return new Money(currencyTarget,money.getValue().multiply(rate).setScale(2,RoundingMode.HALF_UP));
+        Money total = new Money();
+        total.setCurrency(currencyTarget);
+        total.setValue(money.getValue().multiply(rate).setScale(2,RoundingMode.HALF_UP));
+        return total;
     }
 
     /**

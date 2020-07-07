@@ -15,11 +15,9 @@ import java.util.Currency;
 public class Money {
 
     private Currency currency;
-    private BigDecimal value;
+    private BigDecimal value = new BigDecimal(0);
 
-    public Money (Currency currency, BigDecimal value){
-        this.currency = currency;
-        this.value = value;
+    public Money () {
     }
 
     /**
@@ -58,6 +56,21 @@ public class Money {
     }
 
     /**
+     * Add money
+     * @param currency Currency of the money to add
+     * @param value Value of the money to add
+     * @return The new value of the money
+     */
+    public Money add(Currency currency, BigDecimal value)
+    {
+        Money newMoney = new Money();
+        newMoney.setCurrency(currency);
+        newMoney.setValue(value);
+
+        return add(newMoney);
+    }
+
+    /**
      * subtract money
      * @param money to subtract
      * @return the new value of money
@@ -79,5 +92,20 @@ public class Money {
         assert newMoney != null;
         this.setValue(this.getValue().subtract(newMoney.getValue()));
         return this;
+    }
+
+    /**
+     * Subtract money
+     * @param currency Currency of the money to subtract
+     * @param value Value of the money to subtract
+     * @return The new value of the money
+     */
+    public Money subtract(Currency currency, BigDecimal value)
+    {
+        Money newMoney = new Money();
+        newMoney.setCurrency(currency);
+        newMoney.setValue(value);
+
+        return subtract(newMoney);
     }
 }

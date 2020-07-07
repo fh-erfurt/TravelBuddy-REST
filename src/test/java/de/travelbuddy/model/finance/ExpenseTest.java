@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.exception.MissingPersonToDivideException;
+import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -33,8 +34,8 @@ public class ExpenseTest {
 
         //Given
         Expense expense = createExampleExpense1();
-        Person Marcel = createExamplePersonMarcel();
-        Person Tim = createExamplePersonTim();
+        Person Marcel = InstanceHelper.createPerson();
+        Person Tim = InstanceHelper.createPerson();
 
 
         //When
@@ -52,10 +53,14 @@ public class ExpenseTest {
 
         //Given
         Expense expense = createExampleExpense1();
-        Person Marcel = createExamplePersonMarcel();
-        Person Tim = createExamplePersonTim();
-        Money startMoney = new Money(null, BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
-        Money dividedMoney = new Money(null,null);
+        Person Marcel = InstanceHelper.createPerson();
+        Person Tim = InstanceHelper.createPerson();
+        Money startMoney = new Money();
+        startMoney.setCurrency(null);
+        startMoney.setValue(BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
+        Money dividedMoney = new Money();
+        dividedMoney.setCurrency(null);
+        dividedMoney.setValue(null);
         Exception exception = null;
 
         expense.setPrice(startMoney);
@@ -75,7 +80,9 @@ public class ExpenseTest {
 
         //Given
         Expense expense = createExampleExpense1();
-        Money startMoney = new Money(null, BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
+        Money startMoney = new Money();
+        startMoney.setCurrency(null);
+        startMoney.setValue(BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
 
         expense.setPrice(startMoney);
 
@@ -91,42 +98,23 @@ public class ExpenseTest {
 
         String title = "Curry Wurscht";
         String description = "Curry mit Wurscht für alle";
-        Money price = new Money(Currency.getInstance("EUR"),BigDecimal.valueOf(4).setScale(2, RoundingMode.HALF_UP));
+        Money price = new Money();
+        price.setCurrency(Currency.getInstance("EUR"));
+        price.setValue(BigDecimal.valueOf(4).setScale(2, RoundingMode.HALF_UP));
         List<Person> involvedPersons = new ArrayList<>();
         Expense.planned status = Expense.planned.PLANNED;
         boolean perPerson = true;
 
-        return new Expense(title, description, price, involvedPersons, status, true);
+        Expense exp = new Expense();
+        exp.setTitle(title);
+        exp.setDescription(description);
+        exp.setPrice(price);
+        exp.setInvolvedPersons(involvedPersons);
+        exp.setStatus(status);
+        exp.setPerPerson(true);
+        return exp;
 
     }
-
-    public Person createExamplePersonMarcel () {
-
-        String firstname = "Marcel";
-        String name = "van der Heide";
-        LocalDate bday = LocalDate.of(1990,5,2);
-
-        ContactDetails contact = new ContactDetails("9999999", "max@musterman.de", "Erfurt",
-                "Altonaer Str.", 25, "99086", "Germany" );
-
-        return new Person(firstname, name, bday, contact);
-
-    }
-
-    public Person createExamplePersonTim () {
-
-        String firstname = "Tim";
-        String name = "Vogel";
-        LocalDate bday = LocalDate.of(1997,2,2);
-
-        ContactDetails contact = new ContactDetails("015788888888", "Tim@musterman.de", "Erfurt",
-                "Altonaer Str.", 25, "99086", "Germany" );
-
-        return new Person(firstname, name, bday, contact);
-
-
-    }
-
 }
 
 

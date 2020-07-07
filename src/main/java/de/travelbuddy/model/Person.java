@@ -29,11 +29,4 @@ public class Person {
 
     // Required for JPA
     public Person() {};
-
-    public Person(String firstName, String name, LocalDate birthdate, ContactDetails contactDetails) {
-        this.firstName = firstName;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.contactDetails = contactDetails;
-    }
 }

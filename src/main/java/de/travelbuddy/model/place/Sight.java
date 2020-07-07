@@ -29,12 +29,4 @@ public class Sight extends Place {
 
     // Required for JPA
     public Sight() {};
-
-    public Sight(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
-                 LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons,
-                 boolean indoor) {
-
-        super(name, coordinates, contactDetails, arrive, departure, expenses, connectionsToNextPlace, involvedPersons);
-        this.indoor = indoor;
-    }
 }

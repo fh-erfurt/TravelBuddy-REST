@@ -40,28 +40,6 @@ public class Connection {
     // Required for JPA
     public Connection() {};
 
-    public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
-                      Place end, Expense expense) {
-        init(title, arrive, departure, start, end, expense, false);
-    }
-
-    public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
-                      Place end, Expense expense, Boolean used) {
-        init(title, arrive, departure, start, end, expense, used);
-    }
-
-    private void init(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
-                      Place end, Expense expense, Boolean used)
-    {
-        this.title = title;
-        this.arrive = arrive;
-        this.departure = departure;
-        this.start = start;
-        this.end = end;
-        this.expense = expense;
-        this.used = used;
-    }
-
     /**
      * Get the duration
      * @return the duration between the arrival and the departure
