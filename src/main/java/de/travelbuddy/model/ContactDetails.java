@@ -13,11 +13,7 @@ import javax.persistence.*;
 @Table(name = "CONTACTDETAILS")
 @Getter
 @Setter
-public class ContactDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ContactDetails extends BaseModel{
 
     private String phone;
     private String email;

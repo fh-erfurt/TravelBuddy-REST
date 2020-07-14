@@ -1,13 +1,5 @@
 package de.travelbuddy.storage.core;
 
-import de.travelbuddy.model.ContactDetails;
-import de.travelbuddy.model.Person;
-import de.travelbuddy.model.finance.Expense;
-import de.travelbuddy.model.journey.Journey;
-import de.travelbuddy.model.place.*;
-import org.jinq.jpa.JPAJinqStream;
-import org.jinq.jpa.JinqJPAStreamProvider;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -39,4 +31,13 @@ public class DataController
     {
         return entityManagerFactory;
     }
+
+    public <T> JpaGenericDao<T,Long> getGenericDao(Class<T> tClass)
+    {
+        // Todo DI
+        JpaGenericDao<T, Long> dao = new JpaGenericDao<T,Long>(this.entityManagerFactory.createEntityManager(), new JpaGenericStream<>() );
+        dao.setType(tClass);
+        return dao;
+    }
+
 }

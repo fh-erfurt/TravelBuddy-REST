@@ -14,11 +14,7 @@ import java.time.LocalDate;
 @Table(name = "PERSON")
 @Getter
 @Setter
-public class Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Person extends BaseModel {
 
     private String firstName;
     private String name;

@@ -2,6 +2,7 @@ package de.travelbuddy.model.finance;
 
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.exception.MissingPersonToDivideException;
+import de.travelbuddy.storage.core.IJpaGenericStream;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,17 +22,18 @@ public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String description;
-
-    @Transient
-    private Money price;
+    private planned status;
+    private boolean perPerson;
 
     @OneToMany
     private List<Person> involvedPersons = new ArrayList<>();
-    private planned status;
-    private boolean perPerson;
+
+    @Transient
+    private Money price;
+    @Transient
+    private final IJpaGenericStream<Expense> expenseStream = null;
 
     public enum planned
     {
@@ -39,7 +41,8 @@ public class Expense {
     }
 
     // Required for JPA
-    public Expense() {};
+    public Expense() {
+    };
 
     /**
      * Get the Money per Person

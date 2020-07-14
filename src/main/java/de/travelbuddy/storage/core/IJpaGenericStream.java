@@ -10,8 +10,10 @@ public interface IJpaGenericStream<T> {
 
     /**
      * Creates a stream to retrieve and alter data
-     * @param type The class of the model
      * @return The queryable stream
      */
-    JinqStream<T> getStream(Class<T> type);
+    JinqStream<T> getStream();
+
+    IJpaGenericStream<T> setType(Class<T> type);
+    Class<T> getType();
 }

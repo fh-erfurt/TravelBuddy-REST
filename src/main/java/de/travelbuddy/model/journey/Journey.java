@@ -4,10 +4,9 @@ import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
-import de.travelbuddy.model.place.exception.DuplicatePlaceException;
 import de.travelbuddy.model.place.Place;
+import de.travelbuddy.model.place.exception.DuplicatePlaceException;
 import de.travelbuddy.model.place.exception.PlaceNotFoundException;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
