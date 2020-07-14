@@ -17,7 +17,9 @@ public class CurrencyConverterTest {
         CurrencyConverter CC = new CurrencyConverter();
         Currency RUB = Currency.getInstance("RUB");
         Currency EUR = Currency.getInstance("EUR");
-        Money testMoney = new Money(RUB, BigDecimal.valueOf(70));
+        Money testMoney = new Money();
+        testMoney.setCurrency(RUB);
+        testMoney.setValue(BigDecimal.valueOf(70));
 
         //When
         Money newMoney = CC.convert(testMoney,EUR);

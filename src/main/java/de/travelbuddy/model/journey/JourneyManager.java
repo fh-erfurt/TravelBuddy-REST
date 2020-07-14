@@ -16,6 +16,7 @@ public class JourneyManager {
 
     public JourneyManager()
     {
+
     }
 
     public List<String> getJourneyNames()
@@ -75,7 +76,9 @@ public class JourneyManager {
      * @return The calculated total costs in Money
      */
     public Money totalCost(Currency currency) {
-        Money total = new Money(currency, new BigDecimal(0));
+        Money total = new Money();
+        total.setCurrency(currency);
+        total.setValue(new BigDecimal(0));
 
         journeys.forEach((i, n) -> total.add(n.totalCost(currency)));
 
@@ -89,7 +92,9 @@ public class JourneyManager {
      * @return The calculated total costs in Money
      */
     public Money totalCostOfPerson(Currency currency, Person person) {
-        Money total = new Money(currency, new BigDecimal(0));
+        Money total = new Money();
+        total.setCurrency(currency);
+        total.setValue(new BigDecimal(0));
 
         journeys.forEach((i, n) -> total.add(n.totalCostOfPerson(currency, person)));
 

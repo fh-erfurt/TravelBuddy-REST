@@ -45,8 +45,15 @@ public class PlaceTest {
         connections.add(connection);
 
         //When
-        Place place = new Place(title, coordinates, contact, arrival, departure,
-                expenses, connections, persons);
+        Place place = new Place();
+        place.setName(title);
+        place.setCoordinates(coordinates);
+        place.setContactDetails(contact);
+        place.setArrive(arrival);
+        place.setDeparture(departure);
+        place.setExpenses(expenses);
+        place.setConnectionsToNextPlace(connections);
+        place.setInvolvedPersons(persons);
 
         //Then
         assertEquals(place.getName(), title);
@@ -66,15 +73,21 @@ public class PlaceTest {
     public void total_costs_correct_with_same_currency() throws DuplicateExpenseException {
         //Given
         Place place1 = InstanceHelper.createPlace(LocalDateTime.now());
-        Expense expense1 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
-        Expense expense2 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
-        Expense expense3 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
-        Expense expense4 = InstanceHelper.createExpense(Currency.getInstance("EUR"));
+        Currency currency = Currency.getInstance("EUR");
+        Expense expense1 = InstanceHelper.createExpense(currency);
+        Expense expense2 = InstanceHelper.createExpense(currency);
+        Expense expense3 = InstanceHelper.createExpense(currency);
+        Expense expense4 = InstanceHelper.createExpense(currency);
 
-        expense1.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(10).setScale(2, RoundingMode.HALF_UP)));
-        expense2.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(20).setScale(2, RoundingMode.HALF_UP)));
-        expense3.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(30).setScale(2, RoundingMode.HALF_UP)));
-        expense4.setPrice(new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(40).setScale(2, RoundingMode.HALF_UP)));
+        Money money1 = new Money(); money1.setCurrency(currency); money1.setValue(BigDecimal.valueOf(10).setScale(2, RoundingMode.HALF_UP));
+        Money money2 = new Money(); money2.setCurrency(currency); money2.setValue(BigDecimal.valueOf(20).setScale(2, RoundingMode.HALF_UP));
+        Money money3 = new Money(); money3.setCurrency(currency); money3.setValue(BigDecimal.valueOf(30).setScale(2, RoundingMode.HALF_UP));
+        Money money4 = new Money(); money4.setCurrency(currency); money4.setValue(BigDecimal.valueOf(40).setScale(2, RoundingMode.HALF_UP));
+
+        expense1.setPrice(money1);
+        expense2.setPrice(money2);
+        expense3.setPrice(money3);
+        expense4.setPrice(money4);
 
         //When
         place1.addExpense(expense1);
@@ -82,7 +95,9 @@ public class PlaceTest {
         place1.addExpense(expense3);
         place1.addExpense(expense4);
 
-        Money totalMoney = new Money(Currency.getInstance("EUR"),BigDecimal.valueOf(0).setScale(2,RoundingMode.HALF_UP));
+        Money totalMoney = new Money();
+        totalMoney.setCurrency(Currency.getInstance("EUR"));
+        totalMoney.setValue(BigDecimal.valueOf(0).setScale(2,RoundingMode.HALF_UP));
         totalMoney.add(expense1.getPrice());
         totalMoney.add(expense2.getPrice());
         totalMoney.add(expense3.getPrice());
@@ -109,7 +124,9 @@ public class PlaceTest {
         place1.addExpense(expense3);
         place1.addExpense(expense4);
 
-        Money totalMoney = new Money(targetCurrency,BigDecimal.valueOf(0).setScale(2,RoundingMode.HALF_UP));
+        Money totalMoney = new Money();
+        totalMoney.setCurrency(targetCurrency);
+        totalMoney.setValue(BigDecimal.valueOf(0).setScale(2,RoundingMode.HALF_UP));
 
         totalMoney.add(expense1.getPrice());
         totalMoney.add(expense2.getPrice());

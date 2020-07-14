@@ -1,9 +1,6 @@
 package de.travelbuddy.model.place;
 
-import de.travelbuddy.model.ContactDetails;
-import de.travelbuddy.model.DuplicatePersonException;
-import de.travelbuddy.model.Person;
-import de.travelbuddy.model.PersonNotFoundException;
+import de.travelbuddy.model.*;
 import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
@@ -14,9 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Currency;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,11 +22,7 @@ import java.util.stream.Collectors;
 @Table(name = "PLACE")
 @Getter
 @Setter
-public class Place {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Place extends BaseModel {
 
     private String name;
 
@@ -45,28 +36,16 @@ public class Place {
     private LocalDateTime departure;
 
     @OneToMany
-    private Map<String, Expense> expenses;
+    private Map<String, Expense> expenses = new HashMap<>();
 
     @OneToMany
-    private List<Connection> connectionsToNextPlace;
+    private List<Connection> connectionsToNextPlace = new ArrayList<>();
 
     @OneToMany
-    private List<Person> involvedPersons;
+    private List<Person> involvedPersons = new ArrayList<>();
 
     // Required for JPA
     public Place() {};
-
-    public Place(String name, Coordinates coordinates, ContactDetails contactDetails, LocalDateTime arrive,
-                 LocalDateTime departure, Map<String, Expense> expenses, List<Connection> connectionsToNextPlace, List<Person> involvedPersons) {
-        this.name = name;
-        this.coordinates = coordinates;
-        this.contactDetails = contactDetails;
-        this.arrive = arrive;
-        this.departure = departure;
-        this.expenses = expenses;
-        this.connectionsToNextPlace = connectionsToNextPlace;
-        this.involvedPersons = involvedPersons;
-    }
 
     /**
      * Add a person to this place
@@ -147,7 +126,9 @@ public class Place {
      * @return The calculated total costs in Money
      */
     public Money totalCost(Currency currency) {
-        Money total = new Money(currency, new BigDecimal(0));
+        Money total = new Money();
+        total.setCurrency(currency);
+        total.setValue(new BigDecimal(0));
 
         expenses.values().stream()
                     .filter(x -> x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED)
@@ -163,7 +144,9 @@ public class Place {
      * @return The calculated total costs in Money
      */
     public Money totalCostOfPerson(Currency currency, Person person) {
-        Money total = new Money(currency, new BigDecimal(0));
+        Money total = new Money();
+        total.setCurrency(currency);
+        total.setValue(new BigDecimal(0));
 
         expenses.values().stream()
                     .filter(x -> (x.getStatus() == Expense.planned.ISSUED || x.getStatus() == Expense.planned.PLANNED))

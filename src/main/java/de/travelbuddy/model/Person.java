@@ -14,11 +14,7 @@ import java.time.LocalDate;
 @Table(name = "PERSON")
 @Getter
 @Setter
-public class Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Person extends BaseModel {
 
     private String firstName;
     private String name;
@@ -29,11 +25,4 @@ public class Person {
 
     // Required for JPA
     public Person() {};
-
-    public Person(String firstName, String name, LocalDate birthdate, ContactDetails contactDetails) {
-        this.firstName = firstName;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.contactDetails = contactDetails;
-    }
 }

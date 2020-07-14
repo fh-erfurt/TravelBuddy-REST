@@ -17,7 +17,9 @@ class MoneyTest {
         //Given
         Currency RUB = Currency.getInstance("RUB");
         Currency EUR = Currency.getInstance("EUR");
-        Money testMoney = new Money(RUB, BigDecimal.valueOf(70));
+        Money testMoney = new Money();
+        testMoney.setCurrency(RUB);
+        testMoney.setValue(BigDecimal.valueOf(70));
 
         //When
         Money newMoney = testMoney.convert(EUR);
@@ -29,8 +31,13 @@ class MoneyTest {
     @Test
     public void subtract_with_same_currency(){
         //Given
-        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100));
-        Money subtrVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(25));
+        Money startVal = new Money();
+        startVal.setCurrency(Currency.getInstance("EUR"));
+        startVal.setValue(BigDecimal.valueOf(100));
+
+        Money subtrVal = new Money();
+        subtrVal.setCurrency(Currency.getInstance("EUR"));
+        subtrVal.setValue(BigDecimal.valueOf(25));
 
         //When
         Money newVal = startVal.subtract(subtrVal);
@@ -43,8 +50,13 @@ class MoneyTest {
     @Test
     public void subtract_with_different_currency(){
         //Given
-        Money startMoney = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
-        Money subtrMoney = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(1750).setScale(2,RoundingMode.HALF_UP));
+        Money startMoney = new Money();
+        startMoney.setCurrency(Currency.getInstance("EUR"));
+        startMoney.setValue(BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
+
+        Money subtrMoney = new Money();
+        subtrMoney.setCurrency(Currency.getInstance("RUB"));
+        subtrMoney.setValue(BigDecimal.valueOf(1750).setScale(2,RoundingMode.HALF_UP));
 
         //When
         Money newMoney = startMoney.subtract(subtrMoney);
@@ -57,8 +69,13 @@ class MoneyTest {
     @Test
     public void add_with_same_currency(){
         //Given
-        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
-        Money subtrVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(25).setScale(2,RoundingMode.HALF_UP));
+        Money startVal = new Money();
+        startVal.setCurrency(Currency.getInstance("EUR"));
+        startVal.setValue(BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
+
+        Money subtrVal = new Money();
+        subtrVal.setCurrency(Currency.getInstance("EUR"));
+        subtrVal.setValue(BigDecimal.valueOf(25).setScale(2,RoundingMode.HALF_UP));
 
         //When
         Money newVal = startVal.add(subtrVal);
@@ -71,8 +88,13 @@ class MoneyTest {
     @Test
     public void add_with_different_currency(){
         //Given
-        Money startVal = new Money(Currency.getInstance("EUR"), BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
-        Money subtrVal = new Money(Currency.getInstance("RUB"), BigDecimal.valueOf(1750).setScale(2,RoundingMode.HALF_UP));
+        Money startVal = new Money();
+        startVal.setCurrency(Currency.getInstance("EUR"));
+        startVal.setValue(BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP));
+
+        Money subtrVal = new Money();
+        subtrVal.setCurrency(Currency.getInstance("RUB"));
+        subtrVal.setValue(BigDecimal.valueOf(1750).setScale(2,RoundingMode.HALF_UP));
 
         //When
         Money newVal = startVal.add(subtrVal);

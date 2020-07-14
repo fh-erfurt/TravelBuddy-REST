@@ -1,5 +1,6 @@
 package de.travelbuddy.model.place;
 
+import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.finance.Expense;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,11 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "CONNECTION")
 @Getter
 @Setter
-public class Connection {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Connection extends BaseModel {
 
     private String title;
     private LocalDateTime arrive;
@@ -39,28 +36,6 @@ public class Connection {
 
     // Required for JPA
     public Connection() {};
-
-    public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
-                      Place end, Expense expense) {
-        init(title, arrive, departure, start, end, expense, false);
-    }
-
-    public Connection(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
-                      Place end, Expense expense, Boolean used) {
-        init(title, arrive, departure, start, end, expense, used);
-    }
-
-    private void init(String title, LocalDateTime arrive, LocalDateTime departure, Place start,
-                      Place end, Expense expense, Boolean used)
-    {
-        this.title = title;
-        this.arrive = arrive;
-        this.departure = departure;
-        this.start = start;
-        this.end = end;
-        this.expense = expense;
-        this.used = used;
-    }
 
     /**
      * Get the duration

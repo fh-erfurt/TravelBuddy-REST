@@ -18,9 +18,8 @@ public class AccommodationTest {
     @Test
     public void correctly_instantiate_Accommodation() throws InvalidLatitudeException, InvalidLongitudeException {
         String name = "Lee Valley Camping and Caravan Park";
-        Coordinates coordinates = new Coordinates(-0.006111, 51.654722);
-        ContactDetails contactDetails = new ContactDetails("+ 20 / 85 29 56 89", "scs@leevalleypark.org.uk",
-                "London", "Sewardstone Road ", 1, "E4 7RA", "England");
+        Coordinates coordinates = InstanceHelper.createCoordinate();
+        ContactDetails contactDetails = InstanceHelper.createContactDetails();
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
         Expense expense = InstanceHelper.createExpense();
@@ -29,8 +28,16 @@ public class AccommodationTest {
         List<Person> involvedPersons = new ArrayList<>(Collections.singletonList(InstanceHelper.createPerson()));
         Accommodation.accommodationType type = Accommodation.accommodationType.CAMPING;
 
-        Accommodation accommodation = new Accommodation (name, coordinates, contactDetails, arrive, departure,
-                expenses, connectionsToNextPlace, involvedPersons, type);
+        Accommodation accommodation = new Accommodation();
+        accommodation.setName(name);
+        accommodation.setType(type);
+        accommodation.setCoordinates(coordinates);
+        accommodation.setArrive(arrive);
+        accommodation.setDeparture(departure);
+        accommodation.setExpenses(expenses);
+        accommodation.setConnectionsToNextPlace(connectionsToNextPlace);
+        accommodation.setInvolvedPersons(involvedPersons);
+        accommodation.setContactDetails(contactDetails);
 
         assertEquals(accommodation.getName(), name);
         assertEquals("Lee Valley Camping and Caravan Park", name);
