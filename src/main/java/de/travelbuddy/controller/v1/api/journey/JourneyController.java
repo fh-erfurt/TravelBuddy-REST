@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("api/v1/journey")
 public class JourneyController {
 
-
     @GetMapping("/{journeyId}/locations")
     @ResponseStatus(code = HttpStatus.OK)
     public List<String> getJourneys(@PathVariable long journeyId) throws JourneyNotFoundAPIException {

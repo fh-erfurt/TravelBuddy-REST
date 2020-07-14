@@ -8,6 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jinq.orm.stream.JinqStream;
 
+/**
+ * Allows data access
+ * @param <T> Type of the model
+ */
 @Setter @Getter
 public class GenericRepo<T extends BaseModel> {
 

@@ -9,7 +9,7 @@ import org.jinq.orm.stream.JinqStream;
 public interface IJpaGenericStream<T> {
 
     /**
-     * Creates a stream to retrieve and alter data
+     * Creates a stream to retrieve data
      * @return The queryable stream
      */
     JinqStream<T> getStream();
