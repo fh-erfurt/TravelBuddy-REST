@@ -1,5 +1,6 @@
 package de.travelbuddy.model.place;
 
+import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
 import lombok.Getter;
@@ -15,11 +16,7 @@ import javax.persistence.*;
 @Table(name = "COORDINATES")
 @Getter
 @Setter
-public class Coordinates {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Coordinates extends BaseModel {
 
     private double latitude;
     private double longitude;

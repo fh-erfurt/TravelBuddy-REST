@@ -1,5 +1,6 @@
 package de.travelbuddy.model.journey;
 
+import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
@@ -24,11 +25,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "JOURNEY")
 @Getter @Setter
-public class Journey {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Journey extends BaseModel {
 
     private String title;
 

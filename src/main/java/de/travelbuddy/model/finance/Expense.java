@@ -1,5 +1,6 @@
 package de.travelbuddy.model.finance;
 
+import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.exception.MissingPersonToDivideException;
 import de.travelbuddy.storage.core.IJpaGenericStream;
@@ -17,11 +18,8 @@ import java.util.List;
 @Entity
 @Table(name = "EXPENSE")
 @Getter @Setter
-public class Expense {
+public class Expense extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String title;
     private String description;
     private planned status;

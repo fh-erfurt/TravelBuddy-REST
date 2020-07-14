@@ -1,15 +1,12 @@
 package de.travelbuddy.model.place;
 
-        import de.travelbuddy.model.ContactDetails;
-        import de.travelbuddy.model.Person;
-        import de.travelbuddy.model.finance.Expense;
         import lombok.Getter;
-        import lombok.Setter;
+import lombok.Setter;
 
-        import javax.persistence.*;
-        import java.time.LocalDateTime;
-        import java.util.List;
-        import java.util.Map;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 /**
  * Accommodation is a extension from place
@@ -18,10 +15,6 @@ package de.travelbuddy.model.place;
 @Table(name = "ACCOMMODATION")
 @Getter @Setter
 public class Accommodation extends Place {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Enumerated()
     @Column(columnDefinition = "smallint")
@@ -39,6 +32,4 @@ public class Accommodation extends Place {
 
     public void setType(accommodationType type) {this.type = type;}
 
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
 }

@@ -1,9 +1,6 @@
 package de.travelbuddy.model.place;
 
-import de.travelbuddy.model.ContactDetails;
-import de.travelbuddy.model.DuplicatePersonException;
-import de.travelbuddy.model.Person;
-import de.travelbuddy.model.PersonNotFoundException;
+import de.travelbuddy.model.*;
 import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
@@ -25,11 +22,7 @@ import java.util.stream.Collectors;
 @Table(name = "PLACE")
 @Getter
 @Setter
-public class Place {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Place extends BaseModel {
 
     private String name;
 
