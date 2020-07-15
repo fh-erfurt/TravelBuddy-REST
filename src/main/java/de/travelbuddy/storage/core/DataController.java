@@ -1,5 +1,7 @@
 package de.travelbuddy.storage.core;
 
+import de.travelbuddy.model.BaseModel;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -32,7 +34,7 @@ public class DataController
         return entityManagerFactory;
     }
 
-    public <T> JpaGenericDao<T,Long> getGenericDao(Class<T> tClass)
+    public <T extends BaseModel> JpaGenericDao<T,Long> getGenericDao(Class<T> tClass)
     {
         // Todo DI
         JpaGenericDao<T, Long> dao = new JpaGenericDao<T,Long>(this.entityManagerFactory.createEntityManager(), new JpaGenericStream<>() );

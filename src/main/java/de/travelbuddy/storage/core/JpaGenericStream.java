@@ -1,5 +1,6 @@
 package de.travelbuddy.storage.core;
 
+import de.travelbuddy.model.BaseModel;
 import org.jinq.jpa.JinqJPAStreamProvider;
 import org.jinq.orm.stream.JinqStream;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import javax.persistence.EntityManagerFactory;
  * @param <T> Type class of the model
  */
 @Component
-public class JpaGenericStream<T> implements IJpaGenericStream<T> {
+public class JpaGenericStream<T extends BaseModel> implements IJpaGenericStream<T> {
 
     private Class<T> type;
     private final EntityManager entityManager;
