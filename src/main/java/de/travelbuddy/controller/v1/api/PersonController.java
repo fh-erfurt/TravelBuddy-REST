@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("api/v1/person")
 public class PersonController {
@@ -24,14 +22,11 @@ public class PersonController {
     }
 
     private Person fetchPerson(Long personId) {
-        Optional<Person> ret = repo
+        return repo
                 .getStream()
-                .where(Person -> Person.getId().equals(personId)).findOne();
-
-        if (!ret.isPresent())
-            throw new PersonNotFoundAPIException();
-
-        return ret.get();
+                .where(Person -> Person.getId().equals(personId))
+                .findOne()
+                .orElseThrow(PersonNotFoundAPIException::new);
     }
 
     //<editor-fold desc="CRUD">
@@ -40,7 +35,7 @@ public class PersonController {
     //###################
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Person createPerson(@RequestBody Person Person) throws PersonNotFoundAPIException {
+    public Person createPerson(@RequestBody Person Person) {
         return repo.save(Person);
     }
 
@@ -58,7 +53,10 @@ public class PersonController {
     //###################
     @PutMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Person updatePerson(@PathVariable Long personId, @RequestBody Person Person) {
+    public Person updatePerson(@PathVariable Long personId, @RequestBody Person Person) throws PersonNotFoundAPIException {
+        //Check if exist
+        fetchPerson(personId);
+
         return repo.save(Person);
     }
 
@@ -67,7 +65,7 @@ public class PersonController {
     //###################
     @DeleteMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
-    void deleteEmployee(@PathVariable Long personId) {
+    void deleteEmployee(@PathVariable Long personId) throws PersonNotFoundAPIException {
         //Check if exist
         fetchPerson(personId);
 

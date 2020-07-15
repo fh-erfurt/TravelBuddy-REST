@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/journey")
@@ -25,14 +24,11 @@ public class JourneyController {
     }
 
     private Journey fetchJourney(Long journeyId) {
-        Optional<Journey> ret = repo
-                                .getStream()
-                                .where(journey -> journey.getId().equals(journeyId)).findOne();
-
-        if (!ret.isPresent())
-            throw new JourneyNotFoundAPIException();
-
-        return ret.get();
+        return repo
+                .getStream()
+                .where(journey -> journey.getId().equals(journeyId))
+                .findOne()
+                .orElseThrow(JourneyNotFoundAPIException::new);
     }
 
     //<editor-fold desc="CRUD">
@@ -41,7 +37,7 @@ public class JourneyController {
     //###################
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Journey createJourney(@RequestBody Journey journey) throws JourneyNotFoundAPIException {
+    public Journey createJourney(@RequestBody Journey journey) {
         return repo.save(journey);
     }
 
@@ -59,7 +55,10 @@ public class JourneyController {
     //###################
     @PutMapping("/{journeyId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Journey updateJourney(@PathVariable Long journeyId, @RequestBody Journey journey) {
+    public Journey updateJourney(@PathVariable Long journeyId, @RequestBody Journey journey) throws JourneyNotFoundAPIException {
+        //Check if exist
+        fetchJourney(journeyId);
+
         return repo.save(journey);
     }
 
@@ -68,7 +67,7 @@ public class JourneyController {
     //###################
     @DeleteMapping("/{journeyId}")
     @ResponseStatus(code = HttpStatus.OK)
-    void deleteEmployee(@PathVariable Long journeyId) {
+    void deleteEmployee(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
         //Check if exist
         fetchJourney(journeyId);
 

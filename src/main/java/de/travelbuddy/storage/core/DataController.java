@@ -37,7 +37,7 @@ public class DataController
     public <T extends BaseModel> JpaGenericDao<T,Long> getGenericDao(Class<T> tClass)
     {
         // Todo DI
-        JpaGenericDao<T, Long> dao = new JpaGenericDao<T,Long>(this.entityManagerFactory.createEntityManager(), new JpaGenericStream<>() );
+        JpaGenericDao<T, Long> dao = new JpaGenericDao<T,Long>(new JpaGenericStream<>() );
         dao.setType(tClass);
         return dao;
     }

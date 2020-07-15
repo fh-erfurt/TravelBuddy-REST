@@ -4,6 +4,8 @@ import de.travelbuddy.model.BaseModel;
 import lombok.Getter;
 import org.jinq.orm.stream.JinqStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -16,20 +18,20 @@ import java.util.List;
  * @param <T> Type class of the model
  * @param <ID>
  */
-
+@Service
+@Scope("prototype")
 public class JpaGenericDao< T extends BaseModel, ID extends Serializable>
         implements IJpaGenericDao< T, ID> {
 
     @Getter
     private Class<T> type = null;
-    private EntityManager entityManager;
-    private IJpaGenericStream<T> stream;
+    private EntityManager entityManager = null;
+    private IJpaGenericStream<T> stream = null;
 
     @Autowired
-    public JpaGenericDao(EntityManager entityManager, IJpaGenericStream<T> jpaGenericStream){
+    public JpaGenericDao(IJpaGenericStream<T> jpaGenericStream){
+        entityManager = DataController.getInstance().getEntityManagerFactory().createEntityManager();
         stream = jpaGenericStream;
-        stream.setType(type);
-        this.entityManager= entityManager;
     }
 
     public JpaGenericDao< T , ID> setType(Class<T> type) {

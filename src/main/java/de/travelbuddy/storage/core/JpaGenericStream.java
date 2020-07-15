@@ -4,7 +4,8 @@ import de.travelbuddy.model.BaseModel;
 import org.jinq.jpa.JinqJPAStreamProvider;
 import org.jinq.orm.stream.JinqStream;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,17 +14,19 @@ import javax.persistence.EntityManagerFactory;
  * Allows the retrieval of data with complex queries
  * @param <T> Type class of the model
  */
-@Component @Primary
+@Service
+@Primary
+@Scope("prototype")
 public class JpaGenericStream<T extends BaseModel> implements IJpaGenericStream<T> {
 
     private Class<T> type;
     private final EntityManager entityManager;
     private JinqJPAStreamProvider streams = null;
-    private EntityManagerFactory emf = DataController.getInstance().getEntityManagerFactory();
 
     public JpaGenericStream()
     {
-        this.entityManager= emf.createEntityManager();
+        EntityManagerFactory emf = DataController.getInstance().getEntityManagerFactory();
+        this.entityManager = emf.createEntityManager();
         streams = new JinqJPAStreamProvider(entityManager.getMetamodel());
     }
 

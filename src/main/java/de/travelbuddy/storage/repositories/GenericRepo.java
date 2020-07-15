@@ -6,13 +6,16 @@ import de.travelbuddy.storage.core.DataController;
 import de.travelbuddy.storage.core.JpaGenericDao;
 import org.jinq.orm.stream.JinqStream;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * Allows data access
  * @param <T> Type of the model
  */
-@Component @Primary
+@Component
+@Primary
+@Scope("prototype")
 public class GenericRepo<T extends BaseModel> implements IGenericRepo<T> {
 
     private Class<T> type = null;

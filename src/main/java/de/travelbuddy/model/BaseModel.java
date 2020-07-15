@@ -5,30 +5,29 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Getter
+@Setter(AccessLevel.PRIVATE)
 public abstract class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Setter(AccessLevel.PRIVATE)
-    private Date created;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime created;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Setter(AccessLevel.PRIVATE)
-    private Date modified;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime modified;
 
     @PrePersist
     void onCreate(){
-        this.setCreated(new Date());
+        this.setCreated(LocalDateTime.now());
     }
 
     @PreUpdate
     void onUpdate(){
-        this.setModified(new Date());
+        this.setModified(LocalDateTime.now());
     }
 }
