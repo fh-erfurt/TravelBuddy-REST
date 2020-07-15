@@ -35,8 +35,8 @@ public class PersonController {
     //###################
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Person createPerson(@RequestBody Person Person) {
-        return repo.save(Person);
+    public Person createPerson(@RequestBody Person person) {
+        return repo.save(person);
     }
 
     //###################
@@ -53,11 +53,11 @@ public class PersonController {
     //###################
     @PutMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Person updatePerson(@PathVariable Long personId, @RequestBody Person Person) throws PersonNotFoundAPIException {
+    public Person updatePerson(@PathVariable Long personId, @RequestBody Person person) throws PersonNotFoundAPIException {
         //Check if exist
         fetchPerson(personId);
 
-        return repo.save(Person);
+        return repo.save(person);
     }
 
     //###################
@@ -65,7 +65,7 @@ public class PersonController {
     //###################
     @DeleteMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
-    void deleteEmployee(@PathVariable Long personId) throws PersonNotFoundAPIException {
+    void deletePerson(@PathVariable Long personId) throws PersonNotFoundAPIException {
         //Check if exist
         fetchPerson(personId);
 

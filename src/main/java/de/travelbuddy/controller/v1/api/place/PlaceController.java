@@ -1,6 +1,6 @@
 package de.travelbuddy.controller.v1.api.place;
 
-import de.travelbuddy.controller.v1.api.place.exceptions.PlaceNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.place.Place;
 import de.travelbuddy.storage.repositories.IGenericRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class PlaceController {
                 .getStream()
                 .where(Place -> Place.getId().equals(placeId))
                 .findOne()
-                .orElseThrow(PlaceNotFoundAPIException::new);
+                .orElseThrow(LocationNotFoundAPIException::new);
     }
 
     //<editor-fold desc="CRUD">
@@ -40,7 +40,7 @@ public class PlaceController {
     //###################
     @GetMapping("/{placeId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Place getPlace(@PathVariable Long placeId) throws PlaceNotFoundAPIException {
+    public Place getPlace(@PathVariable Long placeId) throws LocationNotFoundAPIException {
         return fetchPlace(placeId);
     }
 
@@ -49,7 +49,7 @@ public class PlaceController {
     //###################
     @PutMapping("/{placeId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Place updatePlace(@PathVariable Long placeId, @RequestBody Place Place) throws PlaceNotFoundAPIException {
+    public Place updatePlace(@PathVariable Long placeId, @RequestBody Place Place) throws LocationNotFoundAPIException {
         //Check if exist
         fetchPlace(placeId);
 
@@ -61,7 +61,7 @@ public class PlaceController {
     //###################
     @DeleteMapping("/{placeId}")
     @ResponseStatus(code = HttpStatus.OK)
-    void deleteEmployee(@PathVariable Long placeId) throws PlaceNotFoundAPIException {
+    void deleteEmployee(@PathVariable Long placeId) throws LocationNotFoundAPIException {
         //Check if exist
         fetchPlace(placeId);
 

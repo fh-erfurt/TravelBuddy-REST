@@ -2,12 +2,14 @@ package de.travelbuddy.model.finance;
 
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.model.finance.exception.MissingPersonToDivideException;
 import de.travelbuddy.storage.core.IJpaGenericStream;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -39,15 +41,13 @@ public class Expense extends BaseModel {
     }
 
     // Required for JPA
-    public Expense() {
-    };
+    public Expense() { };
 
     /**
      * Get the Money per Person
      * @return the money value, with the currency
-     * @throws MissingPersonToDivideException there is no person to divide
      */
-    public Money getMoneyPerPerson() throws MissingPersonToDivideException {
+    public Money getMoneyPerPerson() {
 
         if (involvedPersons.size()!=0) {
             Money mon = new Money();
@@ -55,12 +55,11 @@ public class Expense extends BaseModel {
             mon.setValue(this.price.getValue().divide(BigDecimal.valueOf(involvedPersons.size()), 2, RoundingMode.HALF_UP));
             return mon;
         }
-        else
-            throw new MissingPersonToDivideException("No Persons to divide Expense between");
+        return this.price;
     }
 
     /**
-     * Create a new person
+     * Add a new person
      * @param person to add
      * @throws IllegalArgumentException if the Person already exist
      */
@@ -74,7 +73,7 @@ public class Expense extends BaseModel {
     }
 
     /**
-     * delete a person
+     * Remove a person
      * @param person to remove
      * @throws IllegalArgumentException if the person doesn't exist
      */
