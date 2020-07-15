@@ -1,6 +1,7 @@
 package de.travelbuddy.storage.core;
 
 import de.travelbuddy.model.BaseModel;
+import lombok.Getter;
 import org.jinq.orm.stream.JinqStream;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,8 +16,11 @@ import java.util.List;
  * @param <T> Type class of the model
  * @param <ID>
  */
-public class JpaGenericDao< T extends BaseModel, ID extends Serializable> {
 
+public class JpaGenericDao< T extends BaseModel, ID extends Serializable>
+        implements IJpaGenericDao< T, ID> {
+
+    @Getter
     private Class<T> type = null;
     private EntityManager entityManager;
     private IJpaGenericStream<T> stream;

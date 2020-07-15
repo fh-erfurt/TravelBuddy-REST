@@ -3,6 +3,7 @@ package de.travelbuddy.storage.core;
 import de.travelbuddy.model.BaseModel;
 import org.jinq.jpa.JinqJPAStreamProvider;
 import org.jinq.orm.stream.JinqStream;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -12,7 +13,7 @@ import javax.persistence.EntityManagerFactory;
  * Allows the retrieval of data with complex queries
  * @param <T> Type class of the model
  */
-@Component
+@Component @Primary
 public class JpaGenericStream<T extends BaseModel> implements IJpaGenericStream<T> {
 
     private Class<T> type;

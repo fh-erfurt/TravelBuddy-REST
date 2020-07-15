@@ -1,16 +1,15 @@
 package de.travelbuddy.storage.core;
 
-import de.travelbuddy.model.BaseModel;
 import org.jinq.orm.stream.JinqStream;
 
 /**
  * Todo Text
  * @param <T>
  */
-public interface IJpaGenericStream<T extends BaseModel> {
+public interface IJpaGenericStream<T> {
 
     /**
-     * Creates a stream to retrieve data
+     * Creates a stream to retrieve and alter data
      * @return The queryable stream
      */
     JinqStream<T> getStream();
