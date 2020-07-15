@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("api/v1/journey")
 public class JourneyController {
 
-    GenericRepo<Journey> repo = null;
+    GenericRepo<Journey> repo;
 
     @Autowired
     public JourneyController(GenericRepo<Journey> repo) {

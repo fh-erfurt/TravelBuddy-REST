@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/person")
 public class PersonController {
 
-    IGenericRepo<Person> repo = null;
+    IGenericRepo<Person> repo;
 
     @Autowired
     public PersonController(IGenericRepo<Person> repo) {
