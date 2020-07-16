@@ -4,6 +4,7 @@ import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -16,13 +17,12 @@ import javax.persistence.*;
 @Table(name = "COORDINATES")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Coordinates extends BaseModel {
 
     private double latitude;
     private double longitude;
 
-    // Required for JPA
-    public Coordinates() {};
 
     public double getLatitude() {return latitude;}
 

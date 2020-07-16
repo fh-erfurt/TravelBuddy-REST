@@ -1,6 +1,7 @@
 package de.travelbuddy.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "CONTACTDETAILS")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ContactDetails extends BaseModel{
 
     private String phone;
@@ -22,7 +24,4 @@ public class ContactDetails extends BaseModel{
     private int streetNumber;
     private String ZIP;
     private String country;
-
-    // Required for JPA
-    public ContactDetails() {};
 }

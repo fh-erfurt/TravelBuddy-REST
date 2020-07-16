@@ -1,11 +1,12 @@
 package de.travelbuddy.model.place;
 
 import de.travelbuddy.model.*;
-import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.model.finance.Expense;
-import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
 import de.travelbuddy.model.finance.Money;
+import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
+import de.travelbuddy.model.finance.exception.ExpenseNotFoundException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @Table(name = "PLACE")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Place extends BaseModel {
 
     private String name;
@@ -35,17 +37,14 @@ public class Place extends BaseModel {
     private LocalDateTime arrive;
     private LocalDateTime departure;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Map<String, Expense> expenses = new HashMap<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Connection> connectionsToNextPlace = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Person> involvedPersons = new ArrayList<>();
-
-    // Required for JPA
-    public Place() {};
 
     /**
      * Add a person to this place

@@ -4,12 +4,10 @@ import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.storage.core.IJpaGenericStream;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "EXPENSE")
 @Getter @Setter
+@NoArgsConstructor
 public class Expense extends BaseModel {
 
     private String title;
@@ -27,7 +26,7 @@ public class Expense extends BaseModel {
     private planned status;
     private boolean perPerson;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Person> involvedPersons = new ArrayList<>();
 
     @Transient
@@ -39,9 +38,6 @@ public class Expense extends BaseModel {
     {
         PLANNED,ISSUED,CANCELED
     }
-
-    // Required for JPA
-    public Expense() { };
 
     /**
      * Get the Money per Person

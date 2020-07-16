@@ -2,12 +2,12 @@ package de.travelbuddy.controller.v1.api.journey;
 
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
-import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.DuplicateLocationAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
+import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.journey.Journey;
 import de.travelbuddy.model.place.Place;
 import de.travelbuddy.model.place.exception.DuplicatePlaceException;
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Currency;
 import java.util.List;
 
 @RestController
@@ -26,18 +27,15 @@ public class JourneyController {
 
     IGenericRepo<Journey> repo;
     IGenericRepo<Person> repoPerson = null;
-    IGenericRepo<Expense> repoExpense = null;
     IGenericRepo<Place> repoPlace = null;
 
     @Autowired
     public JourneyController(IGenericRepo<Journey> repo, IGenericRepo<Person> repoPerson,
-                             IGenericRepo<Expense> repoExpense, IGenericRepo<Place> repoPlace) {
+                             IGenericRepo<Place> repoPlace) {
         this.repo = repo;
         this.repo.setType(Journey.class);
         this.repoPerson = repoPerson;
         this.repoPerson.setType(Person.class);
-        this.repoExpense = repoExpense;
-        this.repoExpense.setType(Expense.class);
         this.repoPlace = repoPlace;
         this.repoPlace.setType(Place.class);
     }
@@ -122,7 +120,6 @@ public class JourneyController {
     }
     //</editor-fold>
 
-
     //<editor-fold desc="Get/Add/Remove locations">
     /**
      * Retrieve all locations of a journey
@@ -168,13 +165,13 @@ public class JourneyController {
      * Remove a location from the journey
      * @param journeyId id of the journey
      * @param locationId id of the location
-     * @throws ExpenseNotFoundAPIException If the expense does not exist
+     * @throws LocationNotFoundAPIException If the location was not found
      */
     @SneakyThrows(PlaceNotFoundException.class)
     @DeleteMapping("/{journeyId}/location/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removeLocation(@PathVariable Long journeyId, @PathVariable Long locationId)
-            throws ExpenseNotFoundAPIException {
+            throws LocationNotFoundAPIException {
         //Check if exist
         Journey journey = fetchJourney(journeyId);
 
@@ -198,6 +195,39 @@ public class JourneyController {
     @ResponseStatus(code = HttpStatus.OK)
     public List<Expense> getExpenses(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
         return (List<Expense>) fetchJourney(journeyId).getExpenses().values();
+    }
+
+    /**
+     * Retrieve the cost of a journey
+     * @param journeyId Id of the journey
+     * @param currency Currency code
+     * @return The total cost of the given journey
+     * @throws JourneyNotFoundAPIException If the journey was not found
+     */
+    @GetMapping("/{journeyId}/cost")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Money getCost(@PathVariable Long journeyId, @RequestParam String currency) throws JourneyNotFoundAPIException {
+        return fetchJourney(journeyId).totalCost(Currency.getInstance(currency));
+    }
+
+    /**
+     * Retrieve the cost of a journey
+     * @param journeyId Id of the journey
+     * @param currency Currency code
+     * @return The total cost of the given journey
+     * @throws JourneyNotFoundAPIException If the journey was not found
+     */
+    @GetMapping("/{journeyId}/costpp")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
+            throws JourneyNotFoundAPIException {
+        return fetchJourney(journeyId)
+                .totalCostOfPerson(Currency.getInstance(currency),
+                        repoPerson.getStream()
+                                    .where(p -> p.getId().equals(personId))
+                                    .findOne()
+                                    .orElseThrow(PersonNotFoundAPIException::new))
+                ;
     }
     //</editor-fold>
 

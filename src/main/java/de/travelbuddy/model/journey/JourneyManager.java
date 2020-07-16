@@ -4,20 +4,15 @@ import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.journey.exception.DuplicateJourneyException;
 import de.travelbuddy.model.journey.exception.JourneyNotFoundException;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.*;
 
+@NoArgsConstructor
 public class JourneyManager {
 
     private Map<String, Journey> journeys = new HashMap<>();
-
-    public JourneyManager()
-    {
-
-    }
 
     public List<String> getJourneyNames()
     {

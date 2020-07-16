@@ -22,18 +22,19 @@ public class PersonController {
     }
 
     private Person fetchPerson(Long personId) {
-        return repo
+        return repo.read(personId);
+        /*return repo
                 .getStream()
                 .where(Person -> Person.getId().equals(personId))
                 .findOne()
-                .orElseThrow(PersonNotFoundAPIException::new);
+                .orElseThrow(PersonNotFoundAPIException::new);*/
     }
 
     //<editor-fold desc="CRUD">
     //###################
     //##### CREATE ######
     //###################
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Person createPerson(@RequestBody Person person) {
         return repo.save(person);
@@ -82,6 +83,8 @@ public class PersonController {
     @GetMapping("/{personId}/contact")
     @ResponseStatus(code = HttpStatus.OK)
     public ContactDetails getContact(@PathVariable Long personId) throws JourneyNotFoundAPIException {
-        return fetchPerson(personId).getContactDetails();
+        ContactDetails cd = fetchPerson(personId).getContactDetails();
+        String c = cd.getCountry();
+        return cd;
     }
 }

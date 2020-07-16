@@ -3,6 +3,7 @@ package de.travelbuddy.model.place;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.finance.Expense;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @Table(name = "CONNECTION")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Connection extends BaseModel {
 
     private String title;
@@ -33,9 +35,6 @@ public class Connection extends BaseModel {
     private Expense expense;
 
     private Boolean used;
-
-    // Required for JPA
-    public Connection() {};
 
     /**
      * Get the duration

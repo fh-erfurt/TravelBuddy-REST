@@ -2,6 +2,7 @@ package de.travelbuddy.model.finance;
 
 import de.travelbuddy.model.finance.exception.NotSupportedCurrencyException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -12,13 +13,11 @@ import java.util.Currency;
  * Class which represents Money
  */
 @Getter @Setter
+@NoArgsConstructor
 public class Money {
 
     private Currency currency;
     private BigDecimal value = new BigDecimal(0);
-
-    public Money () {
-    }
 
     /**
      * Convert the money value in the right currency

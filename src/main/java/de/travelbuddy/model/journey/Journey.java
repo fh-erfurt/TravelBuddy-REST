@@ -9,6 +9,7 @@ import de.travelbuddy.model.place.Place;
 import de.travelbuddy.model.place.exception.DuplicatePlaceException;
 import de.travelbuddy.model.place.exception.PlaceNotFoundException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -25,21 +26,19 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "JOURNEY")
 @Getter @Setter
+@NoArgsConstructor
 public class Journey extends BaseModel {
 
     private String title;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Place> places = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Person> persons = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Map<String, Expense> expenses = new HashMap<String, Expense>();
-
-    // Required for JPA
-    public Journey() {};
 
     /**
      * Adds a new place to this journey

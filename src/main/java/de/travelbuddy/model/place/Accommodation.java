@@ -1,7 +1,8 @@
 package de.travelbuddy.model.place;
 
         import lombok.Getter;
-import lombok.Setter;
+        import lombok.NoArgsConstructor;
+        import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ACCOMMODATION")
 @Getter @Setter
+@NoArgsConstructor
 public class Accommodation extends Place {
 
     @Enumerated()
@@ -24,9 +26,6 @@ public class Accommodation extends Place {
     {
         HOTEL,HOSTEL,CAMPING,COUCHSURF,AIRBNB
     }
-
-    // Required for JPA
-    public Accommodation() {};
 
     public accommodationType getType() {return type;}
 

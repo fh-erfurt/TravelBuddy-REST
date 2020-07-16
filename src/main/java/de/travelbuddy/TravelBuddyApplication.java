@@ -1,12 +1,7 @@
 package de.travelbuddy;
 
-import de.travelbuddy.model.ContactDetails;
-import de.travelbuddy.model.Person;
-import de.travelbuddy.storage.exceptions.StorageError;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
-
-import java.time.LocalDate;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class TravelBuddyApplication {
