@@ -8,9 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
-//TODO contactDetails or contactdetails? - Discussion
 @RestController
-@RequestMapping("api/v1/contactDetails")
+@RequestMapping("api/v1/contact")
 public class ContactDetailsController {
 
     IGenericRepo<ContactDetails> repo;
@@ -33,11 +32,10 @@ public class ContactDetailsController {
     //###################
     //##### CREATE ######
     //###################
-    @PostMapping("/")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public ContactDetails createContactDetails(@RequestBody ContactDetails ContactDetails) {
-        return repo.save(ContactDetails);
-    }
+    /*
+        No creation of ContactDetails at this point!
+        ContactDetails are only created, during the creation off the parent object!
+     */
 
     //###################
     //###### READ #######
@@ -63,14 +61,10 @@ public class ContactDetailsController {
     //###################
     //##### DELETE ######
     //###################
-    @DeleteMapping("/{contactDetailsId}")
-    @ResponseStatus(code = HttpStatus.OK)
-    void deleteEmployee(@PathVariable Long contactDetailsId) throws ContactDetailsNotFoundAPIException {
-        //Check if exist
-        fetchContactDetails(contactDetailsId);
-
-        repo.remove(contactDetailsId);
-    }
+    /*
+        No deletion of ContactDetails at this point!
+        ContactDetails are only deleted, during the deletion off the parent object!
+     */
     //</editor-fold>
 
 }

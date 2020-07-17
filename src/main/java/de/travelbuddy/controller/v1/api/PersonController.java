@@ -1,7 +1,6 @@
 package de.travelbuddy.controller.v1.api;
 
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
-import de.travelbuddy.controller.v1.api.journey.JourneyNotFoundAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.storage.repositories.IGenericRepo;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
     IGenericRepo<Person> repo;
+    IGenericRepo<ContactDetails> repoContact;
 
     @Autowired
     public PersonController(IGenericRepo<Person> repo) {
@@ -23,11 +23,6 @@ public class PersonController {
 
     private Person fetchPerson(Long personId) {
         return repo.read(personId);
-        /*return repo
-                .getStream()
-                .where(Person -> Person.getId().equals(personId))
-                .findOne()
-                .orElseThrow(PersonNotFoundAPIException::new);*/
     }
 
     //<editor-fold desc="CRUD">
@@ -78,11 +73,11 @@ public class PersonController {
      * Retrieve the contact details
      * @param personId Id of the person
      * @return Contact details of given person
-     * @throws JourneyNotFoundAPIException
+     * @throws PersonNotFoundAPIException
      */
     @GetMapping("/{personId}/contact")
     @ResponseStatus(code = HttpStatus.OK)
-    public ContactDetails getContact(@PathVariable Long personId) throws JourneyNotFoundAPIException {
+    public ContactDetails getContact(@PathVariable Long personId) throws PersonNotFoundAPIException {
         ContactDetails cd = fetchPerson(personId).getContactDetails();
         String c = cd.getCountry();
         return cd;
