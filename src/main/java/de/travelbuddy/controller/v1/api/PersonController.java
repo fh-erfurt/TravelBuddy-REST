@@ -22,7 +22,10 @@ public class PersonController {
     }
 
     private Person fetchPerson(Long personId) {
-        return repo.read(personId);
+        return repo.getStream()
+                .where(p -> p.getId().equals(personId))
+                .findOne()
+                .orElseThrow(() -> new PersonNotFoundAPIException("sadd"));
     }
 
     //<editor-fold desc="CRUD">

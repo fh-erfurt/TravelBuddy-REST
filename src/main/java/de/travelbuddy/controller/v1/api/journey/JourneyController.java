@@ -2,6 +2,7 @@ package de.travelbuddy.controller.v1.api.journey;
 
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.finance.exceptions.CurrencyNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.DuplicateLocationAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.DuplicatePersonException;
@@ -203,10 +204,12 @@ public class JourneyController {
      * @param currency Currency code
      * @return The total cost of the given journey
      * @throws JourneyNotFoundAPIException If the journey was not found
+     * @throws CurrencyNotFoundAPIException If the given currency was not found
      */
     @GetMapping("/{journeyId}/cost")
     @ResponseStatus(code = HttpStatus.OK)
-    public Money getCost(@PathVariable Long journeyId, @RequestParam String currency) throws JourneyNotFoundAPIException {
+    public Money getCost(@PathVariable Long journeyId, @RequestParam String currency)
+            throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
         return fetchJourney(journeyId).totalCost(Currency.getInstance(currency));
     }
 
@@ -216,11 +219,13 @@ public class JourneyController {
      * @param currency Currency code
      * @return The total cost of the given journey
      * @throws JourneyNotFoundAPIException If the journey was not found
+     * @throws CurrencyNotFoundAPIException If the given currency was not found
+     * @throws PersonNotFoundAPIException If the given person was not found
      */
     @GetMapping("/{journeyId}/costpp")
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
-            throws JourneyNotFoundAPIException {
+            throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
         return fetchJourney(journeyId)
                 .totalCostOfPerson(Currency.getInstance(currency),
                         repoPerson.getStream()
