@@ -2,18 +2,17 @@ package de.travelbuddy.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
-import javax.servlet.ServletContext;
 import java.text.SimpleDateFormat;
 
 @Configuration
+@EnableOpenApi
 public class TravelBuddyConfiguration {
-    @Autowired
-    private ServletContext servletContext;
 
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
@@ -26,5 +25,9 @@ public class TravelBuddyConfiguration {
         return converter;
     }
 
+    @Bean
+    public InternalResourceViewResolver defaultViewResolver() {
+        return new InternalResourceViewResolver();
+    }
 }
 

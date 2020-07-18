@@ -26,6 +26,8 @@
         <jacksonhibernate5.version>2.11.1</jacksonhibernate5.version>
         <lombok.version>1.18.12</lombok.version>
         <h2.version>1.4.194</h2.version>
+        <springfox.version>3.0.0</springfox.version>
+        <junitjupiter.version>5.5.2</junitjupiter.version>
     </properties>
 
     <dependencies>
@@ -68,20 +70,26 @@
             <version>${lombok.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
         <!-- ############################### -->
         <!-- ######### SCOPE: TEST ######### -->
         <!-- ############################### -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.5.2</version>
+            <version>${junitjupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.2</version>
+            <version>${junitjupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -103,7 +111,6 @@
             <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <groupId>groupId</groupId>
