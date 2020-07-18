@@ -1,18 +1,16 @@
 package de.travelbuddy.model.finance;
-import static org.junit.jupiter.api.Assertions.*;
-
-import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.model.finance.exception.MissingPersonToDivideException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExpenseTest {
 
@@ -49,7 +47,7 @@ public class ExpenseTest {
     }
 
     @Test
-    public void get_money_per_person_should_divide_right () throws MissingPersonToDivideException {
+    public void get_money_per_person_should_divide_right ()  {
 
         //Given
         Expense expense = createExampleExpense1();
@@ -72,25 +70,6 @@ public class ExpenseTest {
 
         //Then
         assertEquals(BigDecimal.valueOf(15).setScale(2,RoundingMode.HALF_UP),dividedMoney.getValue());
-
-    }
-
-    @Test
-    public void get_money_per_person_should_throw_exception (){
-
-        //Given
-        Expense expense = createExampleExpense1();
-        Money startMoney = new Money();
-        startMoney.setCurrency(null);
-        startMoney.setValue(BigDecimal.valueOf(30).setScale(2,RoundingMode.HALF_UP));
-
-        expense.setPrice(startMoney);
-
-        //When
-        Exception exception = assertThrows(MissingPersonToDivideException.class, expense::getMoneyPerPerson);
-
-        //Then
-        assertTrue(exception.getMessage().contains("No Persons to divide Expense between"));
 
     }
 
