@@ -60,7 +60,7 @@ public class JourneyController {
      * @param journey The journey to create
      * @return The saved journey
      */
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Journey createJourney(@RequestBody Journey journey) {
         return repo.save(journey);

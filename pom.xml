@@ -111,6 +111,7 @@
             <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <groupId>groupId</groupId>
@@ -137,6 +138,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
     </build>
 
 </project>

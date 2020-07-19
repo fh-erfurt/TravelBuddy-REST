@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/Expense")
+@RequestMapping("api/v1/expenses")
 public class ExpenseController {
 
     IGenericRepo<Expense> repo = null;
@@ -46,7 +46,7 @@ public class ExpenseController {
      * @param expense The expense to create
      * @return The saved expense
      */
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Expense createExpense(@RequestBody Expense expense) {
         return repo.save(expense);
@@ -116,7 +116,7 @@ public class ExpenseController {
      * @return All persons
      * @throws ExpenseNotFoundAPIException If the expense does not exist
      */
-    @GetMapping("/{expenseId}/person")
+    @GetMapping("/{expenseId}/persons")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons(@PathVariable Long expenseId) throws ExpenseNotFoundAPIException {
         return fetchExpense(expenseId).getInvolvedPersons();
@@ -128,7 +128,7 @@ public class ExpenseController {
      * @param personId id of the person
      * @throws ExpenseNotFoundAPIException If the expense does not exist
      */
-    @DeleteMapping("/{expenseId}/person/{personId}")
+    @DeleteMapping("/{expenseId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removePerson(@PathVariable Long expenseId, @PathVariable Long personId)
             throws ExpenseNotFoundAPIException {
@@ -150,7 +150,7 @@ public class ExpenseController {
      * @param personId Id of the person
      * @throws ExpenseNotFoundAPIException If the expense does not exist
      */
-    @PutMapping("/{expenseId}/person/{personId}")
+    @PutMapping("/{expenseId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void addPerson(@PathVariable Long expenseId, @PathVariable Long personId)
             throws ExpenseNotFoundAPIException {
