@@ -3,10 +3,14 @@ package de.travelbuddy.controller.v1.api;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
+import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.storage.repositories.IGenericRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/person")
@@ -14,6 +18,7 @@ public class PersonController {
 
     IGenericRepo<Person> repo;
     IGenericRepo<ContactDetails> repoContact;
+    IGenericRepo<Expense> expenseRepo;
 
     @Autowired
     public PersonController(IGenericRepo<Person> repo) {

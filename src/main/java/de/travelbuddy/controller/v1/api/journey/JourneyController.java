@@ -3,6 +3,7 @@ package de.travelbuddy.controller.v1.api.journey;
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.CurrencyNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.journey.exceptions.JourneyNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.DuplicateLocationAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.DuplicatePersonException;
@@ -27,8 +28,8 @@ import java.util.List;
 public class JourneyController {
 
     IGenericRepo<Journey> repo;
-    IGenericRepo<Person> repoPerson = null;
-    IGenericRepo<Place> repoPlace = null;
+    IGenericRepo<Person> repoPerson;
+    IGenericRepo<Place> repoPlace;
 
     @Autowired
     public JourneyController(IGenericRepo<Journey> repo, IGenericRepo<Person> repoPerson,
@@ -201,7 +202,7 @@ public class JourneyController {
     /**
      * Retrieve the cost of a journey
      * @param journeyId Id of the journey
-     * @param currency Currency code
+     * @param currency desired target currency code
      * @return The total cost of the given journey
      * @throws JourneyNotFoundAPIException If the journey was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
@@ -214,10 +215,10 @@ public class JourneyController {
     }
 
     /**
-     * Retrieve the cost of a journey
+     * Retrieve the cost of a journey for one person
      * @param journeyId Id of the journey
-     * @param currency Currency code
-     * @return The total cost of the given journey
+     * @param currency desired target currency code
+     * @return The total cost of the given journey for one person
      * @throws JourneyNotFoundAPIException If the journey was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      * @throws PersonNotFoundAPIException If the given person was not found
@@ -231,8 +232,7 @@ public class JourneyController {
                         repoPerson.getStream()
                                     .where(p -> p.getId().equals(personId))
                                     .findOne()
-                                    .orElseThrow(PersonNotFoundAPIException::new))
-                ;
+                                    .orElseThrow(PersonNotFoundAPIException::new));
     }
     //</editor-fold>
 
@@ -249,6 +249,8 @@ public class JourneyController {
         return fetchJourney(journeyId).getPersons();
     }
 
+
+    // Todo: throws DuplicatePersonAPIException in java doc mit rein schreiben (wahrscheinlich noch an anderen Stellen) @Marcel
     /**
      * Add a person to the journey
      * @param journeyId Id of the journey

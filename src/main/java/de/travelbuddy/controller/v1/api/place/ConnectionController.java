@@ -1,24 +1,27 @@
 package de.travelbuddy.controller.v1.api.place;
 
 import de.travelbuddy.controller.v1.api.place.exceptions.ConnectionNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.place.Connection;
 import de.travelbuddy.storage.repositories.IGenericRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 public class ConnectionController {
 
-    IGenericRepo<Connection> repo;
+    IGenericRepo<Connection> repoConnection;
 
     @Autowired
-    public ConnectionController(IGenericRepo<Connection> repo) {
-        this.repo = repo;
-        this.repo.setType(Connection.class);
+    public ConnectionController(IGenericRepo<Connection> repoConnection) {
+        this.repoConnection = repoConnection;
+        this.repoConnection.setType(Connection.class);
     }
 
     private Connection fetchConnection(Long connectionId) {
-        return repo
+        return repoConnection
                 .getStream()
                 .where(Connection -> Connection.getId().equals(connectionId))
                 .findOne()
@@ -32,7 +35,7 @@ public class ConnectionController {
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Connection createConnection(@RequestBody Connection Connection) {
-        return repo.save(Connection);
+        return repoConnection.save(Connection);
     }
 
     //###################
@@ -44,6 +47,12 @@ public class ConnectionController {
         return fetchConnection(connectionId);
     }
 
+    @GetMapping("")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Connection> getConnections() throws LocationNotFoundAPIException {
+        return repoConnection.getStream().toList();
+    }
+
     //###################
     //##### UPDATE ######
     //###################
@@ -53,7 +62,7 @@ public class ConnectionController {
         //Check if exist
         fetchConnection(connectionId);
 
-        return repo.save(Connection);
+        return repoConnection.save(Connection);
     }
 
     //###################
@@ -65,7 +74,7 @@ public class ConnectionController {
         //Check if exist
         fetchConnection(connectionId);
 
-        repo.remove(connectionId);
+        repoConnection.remove(connectionId);
     }
     //</editor-fold>
 

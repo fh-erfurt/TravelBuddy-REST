@@ -20,10 +20,10 @@ public class ContactDetailsController {
         this.repo.setType(ContactDetails.class);
     }
 
-    private ContactDetails fetchContactDetails(Long contactDetailsId) {
+    private ContactDetails fetchContactDetails(Long contactId) {
         return repo
                 .getStream()
-                .where(ContactDetails -> ContactDetails.getId().equals(contactDetailsId))
+                .where(ContactDetails -> ContactDetails.getId().equals(contactId))
                 .findOne()
                 .orElseThrow(ContactDetailsNotFoundAPIException::new);
     }
@@ -40,20 +40,20 @@ public class ContactDetailsController {
     //###################
     //###### READ #######
     //###################
-    @GetMapping("/{contactDetailsId}")
+    @GetMapping("/{contactId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ContactDetails getContactDetails(@PathVariable Long contactDetailsId) throws ContactDetailsNotFoundAPIException {
-        return fetchContactDetails(contactDetailsId);
+    public ContactDetails getContactDetails(@PathVariable Long contactId) throws ContactDetailsNotFoundAPIException {
+        return fetchContactDetails(contactId);
     }
 
     //###################
     //##### UPDATE ######
     //###################
-    @PutMapping("/{contactDetailsId}")
+    @PutMapping("/{contactId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ContactDetails updateContactDetails(@PathVariable Long contactDetailsId, @RequestBody ContactDetails ContactDetails) throws ContactDetailsNotFoundAPIException {
+    public ContactDetails updateContactDetails(@PathVariable Long contactId, @RequestBody ContactDetails ContactDetails) throws ContactDetailsNotFoundAPIException {
         //Check if exist
-        fetchContactDetails(contactDetailsId);
+        fetchContactDetails(contactId);
 
         return repo.save(ContactDetails);
     }

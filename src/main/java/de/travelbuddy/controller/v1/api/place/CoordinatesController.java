@@ -1,11 +1,15 @@
 package de.travelbuddy.controller.v1.api.place;
 
 import de.travelbuddy.controller.v1.api.place.exceptions.CoordinatesNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.place.Coordinates;
+import de.travelbuddy.model.place.Place;
 import de.travelbuddy.storage.repositories.IGenericRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 public class CoordinatesController {
 
@@ -42,6 +46,12 @@ public class CoordinatesController {
     @ResponseStatus(code = HttpStatus.OK)
     public Coordinates getCoordinates(@PathVariable Long coordinatesId) throws CoordinatesNotFoundAPIException {
         return fetchCoordinates(coordinatesId);
+    }
+
+    @GetMapping("")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Coordinates> getCoordinates() throws LocationNotFoundAPIException {
+        return repo.getStream().toList();
     }
 
     //###################
