@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/person")
+@RequestMapping("api/v1/persons")
 public class PersonController {
 
     IGenericRepo<Person> repo;
@@ -81,7 +81,7 @@ public class PersonController {
      * Retrieve the contact details
      * @param personId Id of the person
      * @return Contact details of given person
-     * @throws PersonNotFoundAPIException
+     * @throws PersonNotFoundAPIException If the given Person does not exist
      */
     @GetMapping("/{personId}/contact")
     @ResponseStatus(code = HttpStatus.OK)
