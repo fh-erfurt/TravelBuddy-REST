@@ -2,7 +2,6 @@ package de.travelbuddy.model.finance;
 
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.storage.core.IJpaGenericStream;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,8 +30,6 @@ public class Expense extends BaseModel {
 
     @Transient
     private Money price;
-    @Transient
-    private final IJpaGenericStream<Expense> expenseStream = null;
 
     public enum planned
     {

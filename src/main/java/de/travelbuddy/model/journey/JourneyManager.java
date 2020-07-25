@@ -8,15 +8,16 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class JourneyManager {
 
-    private Map<String, Journey> journeys = new HashMap<>();
+    private Map<Long, Journey> journeys = new HashMap<>();
 
     public List<String> getJourneyNames()
     {
-        return new ArrayList<>(journeys.keySet());
+        return journeys.values().stream().map(Journey::getTitle).collect((Collectors.toList()));
     }
 
     public int journeyCount()
@@ -30,10 +31,10 @@ public class JourneyManager {
      * @throws DuplicateJourneyException If there is another journey with the same title
      */
     public void addJourney(Journey journey) throws DuplicateJourneyException {
-        if (journeys.containsKey(journey.getTitle()))
+        if (journeys.containsKey(journey.getId()))
             throw new DuplicateJourneyException(String.format("Journey with the title '%s' already exists", journey.getTitle()));
 
-        journeys.put(journey.getTitle(), journey);
+        journeys.put(journey.getId(), journey);
     }
 
     /**

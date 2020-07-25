@@ -1,8 +1,5 @@
 package de.travelbuddy.model.place;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
@@ -12,7 +9,13 @@ import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class AccommodationTest {
     @Test
@@ -23,7 +26,7 @@ public class AccommodationTest {
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
         Expense expense = InstanceHelper.createExpense();
-        Map<String, Expense> expenses = Map.of(expense.getTitle(), expense);
+        Map<Long, Expense> expenses = Map.of(expense.getId(), expense);
         List<Connection> connectionsToNextPlace = new ArrayList<>();
         List<Person> involvedPersons = new ArrayList<>(Collections.singletonList(InstanceHelper.createPerson()));
         Accommodation.accommodationType type = Accommodation.accommodationType.CAMPING;

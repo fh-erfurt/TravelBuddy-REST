@@ -1,8 +1,8 @@
 package de.travelbuddy.storage.repositories;
 
 
+import com.querydsl.jpa.impl.JPAQuery;
 import de.travelbuddy.model.BaseModel;
-import org.jinq.orm.stream.JinqStream;
 
 /**
  * Allows data access
@@ -10,7 +10,7 @@ import org.jinq.orm.stream.JinqStream;
  */
 public interface IGenericRepo<T extends BaseModel> {
 
-    IGenericRepo<T> setType(Class<T> type);
+    IGenericRepo<T> setType(Class<T> type) ;//throws InvalidEntityTypeException;
 
     Class<T> getType();
 
@@ -20,5 +20,5 @@ public interface IGenericRepo<T extends BaseModel> {
 
     void remove(Long Id);
 
-    JinqStream<T> getStream();
+    JPAQuery<T> getSelectQuery();
 }

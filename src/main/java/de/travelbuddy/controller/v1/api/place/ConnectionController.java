@@ -21,11 +21,12 @@ public class ConnectionController {
     }
 
     private Connection fetchConnection(Long connectionId) {
-        return repoConnection
-                .getStream()
-                .where(Connection -> Connection.getId().equals(connectionId))
-                .findOne()
-                .orElseThrow(ConnectionNotFoundAPIException::new);
+        Connection conn = repoConnection.read(connectionId);
+
+        if (conn == null)
+            throw new ConnectionNotFoundAPIException();
+
+        return conn;
     }
 
     //<editor-fold desc="CRUD">
@@ -50,7 +51,7 @@ public class ConnectionController {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Connection> getConnections() throws LocationNotFoundAPIException {
-        return repoConnection.getStream().toList();
+        return repoConnection.getSelectQuery().fetch();
     }
 
     //###################

@@ -28,7 +28,7 @@ public class SightTest {
         ContactDetails contactDetails = InstanceHelper.createContactDetails();
         LocalDateTime arrive = LocalDateTime.of(2020,7,25,16,45);
         LocalDateTime departure = LocalDateTime.of(2020,7,28,20,5);
-        Map<String, Expense> expenses = new HashMap<>();
+        Map<Long, Expense> expenses = new HashMap<>();
         List<Connection> connectionsToNextPlace = new ArrayList<>();
         List<Person> involvedPersons = new ArrayList<>();
         boolean indoor = true;

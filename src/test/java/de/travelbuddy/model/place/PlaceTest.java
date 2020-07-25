@@ -37,10 +37,10 @@ public class PlaceTest {
         Person person = InstanceHelper.createPersonMale();
         ArrayList<Person> persons = new ArrayList<>();
         Expense expense = InstanceHelper.createExpense();
-        Map<String, Expense> expenses = new HashMap<>();
+        Map<Long, Expense> expenses = new HashMap<>();
         Connection connection = InstanceHelper.createConnection();
         ArrayList<Connection> connections = new ArrayList<>();
-        expenses.put(expense.getTitle(), expense);
+        expenses.put(expense.getId(), expense);
         persons.add(person);
         connections.add(connection);
 

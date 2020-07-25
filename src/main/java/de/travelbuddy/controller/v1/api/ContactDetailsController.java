@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("api/v1/contact")
+@RequestMapping("api/v1/contacts")
 public class ContactDetailsController {
 
     IGenericRepo<ContactDetails> repo;
@@ -21,11 +21,12 @@ public class ContactDetailsController {
     }
 
     private ContactDetails fetchContactDetails(Long contactId) {
-        return repo
-                .getStream()
-                .where(ContactDetails -> ContactDetails.getId().equals(contactId))
-                .findOne()
-                .orElseThrow(ContactDetailsNotFoundAPIException::new);
+        ContactDetails cd = repo.read(contactId);
+
+        if (cd == null)
+            throw new ContactDetailsNotFoundAPIException();
+
+        return cd;
     }
 
     //<editor-fold desc="CRUD">

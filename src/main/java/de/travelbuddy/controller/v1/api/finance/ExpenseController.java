@@ -1,5 +1,6 @@
 package de.travelbuddy.controller.v1.api.finance;
 
+import com.querydsl.core.NonUniqueResultException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
 import de.travelbuddy.model.Person;
@@ -28,11 +29,12 @@ public class ExpenseController {
     }
 
     private Expense fetchExpense(Long expenseId) {
-        return repo
-                .getStream()
-                .where(Expense -> Expense.getId().equals(expenseId))
-                .findOne()
-                .orElseThrow(ExpenseNotFoundAPIException::new);
+        Expense expense = repo.read(expenseId);
+
+        if (expense == null)
+            throw new ExpenseNotFoundAPIException();
+
+        return expense;
     }
 
     //<editor-fold desc="CRUD">
@@ -135,12 +137,19 @@ public class ExpenseController {
         //Check if exist
         Expense expense = fetchExpense(expenseId);
 
-        Person person = repoPerson.getStream()
-                            .where(p -> p.getId().equals(personId))
-                            .findOne()
-                            .orElseThrow(PersonNotFoundAPIException::new);
+        try {
 
-        expense.removePerson(person);
+            Person p = repoPerson.read(personId);
+
+            if (p == null)
+                throw new PersonNotFoundAPIException();
+
+            expense.removePerson(p);
+        }
+        catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new PersonNotFoundAPIException();
+        }
+
         repo.save(expense);
     }
 
@@ -157,12 +166,19 @@ public class ExpenseController {
         //Check if exist
         Expense expense = fetchExpense(expenseId);
 
-        Person person = repoPerson.getStream()
-                .where(p -> p.getId().equals(personId))
-                .findOne()
-                .orElseThrow(PersonNotFoundAPIException::new);
+        try {
 
-        expense.addPerson(person);
+            Person p = repoPerson.read(personId);
+
+            if (p == null)
+                throw new PersonNotFoundAPIException();
+
+            expense.addPerson(p);
+        }
+        catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new PersonNotFoundAPIException();
+        }
+
         repo.save(expense);
     }
 

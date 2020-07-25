@@ -1,8 +1,8 @@
 package de.travelbuddy.model.place;
 
         import lombok.Getter;
-        import lombok.NoArgsConstructor;
-        import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,5 +30,4 @@ public class Accommodation extends Place {
     public accommodationType getType() {return type;}
 
     public void setType(accommodationType type) {this.type = type;}
-
 }

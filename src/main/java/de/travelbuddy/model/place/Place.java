@@ -38,13 +38,23 @@ public class Place extends BaseModel {
     private LocalDateTime departure;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Map<String, Expense> expenses = new HashMap<>();
+    private Map<Long, Expense> expenses = new HashMap<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Connection> connectionsToNextPlace = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Person> involvedPersons = new ArrayList<>();
+
+    /**
+     * Check if the given person is mapped to this location
+     * @param person The person to check
+     * @return Whether or not this person is mapped to this location
+     */
+    public boolean hasPerson(Person person)
+    {
+        return involvedPersons.contains(person);
+    }
 
     /**
      * Add a person to this place
@@ -71,15 +81,25 @@ public class Place extends BaseModel {
     }
 
     /**
+     * Check if the given Expense is mapped to this location
+     * @param expense The expense to check
+     * @return Whether or not this expense is mapped to this location
+     */
+    public boolean hasExpense(Expense expense)
+    {
+        return expenses.containsKey(expense.getId());
+    }
+
+    /**
      * Adds an expense to the this place
      * @param expense The expense to add
      * @throws IllegalArgumentException When the expense already exists for this place
      */
     public void addExpense(Expense expense) throws DuplicateExpenseException {
-        if (expenses.containsKey(expense.getTitle()))
+        if (expenses.containsKey(expense.getId()))
             throw new DuplicateExpenseException(String.format("Expense '%s' does already exist.", expense.getTitle()));
 
-        expenses.put(expense.getTitle(), expense);
+        expenses.put(expense.getId(), expense);
     }
 
     /**
@@ -88,10 +108,10 @@ public class Place extends BaseModel {
      * @throws IllegalArgumentException When the given expense does not exist for this place
      */
     public void removeExpense(Expense expense) throws ExpenseNotFoundException {
-        if (!expenses.containsKey(expense.getTitle()))
+        if (!expenses.containsKey(expense.getId()))
             throw new ExpenseNotFoundException(String.format("Expense '%s' does not exist.", expense.getTitle()));
 
-        expenses.remove(expense.getTitle());
+        expenses.remove(expense.getId());
     }
 
     /**
