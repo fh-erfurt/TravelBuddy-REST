@@ -1,21 +1,30 @@
 image: maven:3.6-jdk-13
  
+ variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
 compile:
   stage: build
   only: 
     - master
     - rest
   script:
-    - mvn compile --batch-mode
-    - mvn package --batch-mode
-  artifacts:
-    name: "$CI_JOB_NAME"
-    paths:
-        - ./target/*.jar
+    - mvn $MAVEN_CLI_OPTS compile
  
 verify:
   only: 
     - master
     - rest
   script:
-    - mvn verify --batch-mode
+    - mvn $MAVEN_CLI_OPTS verify
+    - mvn $MAVEN_CLI_OPTS package
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+        - ./target/*.jar
