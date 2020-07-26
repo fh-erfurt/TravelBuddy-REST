@@ -3,7 +3,6 @@ package de.travelbuddy.model.journey;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.place.Place;
 import de.travelbuddy.model.place.exception.DuplicatePlaceException;
@@ -14,7 +13,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -36,9 +37,6 @@ public class Journey extends BaseModel {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Person> persons = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Map<String, Expense> expenses = new HashMap<String, Expense>();
 
     /**
      * Adds a new place to this journey

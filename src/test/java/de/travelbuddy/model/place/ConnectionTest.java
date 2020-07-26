@@ -1,19 +1,16 @@
 package de.travelbuddy.model.place;
 
-import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.finance.Expense;
-import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConnectionTest {
     @Test
@@ -38,7 +35,7 @@ public class ConnectionTest {
         start.setContactDetails(InstanceHelper.createContactDetails());
         start.setArrive(arrive);
         start.setDeparture(departure);
-        start.setExpenses(Map.of(expense1.getTitle(), expense1));
+        start.setExpenses(Map.of(expense1.getId(), expense1));
         start.setType(Accommodation.accommodationType.HOSTEL);
 
         //End
@@ -48,7 +45,7 @@ public class ConnectionTest {
         end.setContactDetails(InstanceHelper.createContactDetails());
         end.setArrive(arrive);
         end.setDeparture(departure);
-        end.setExpenses(Map.of(expense1.getTitle(), expense1));
+        end.setExpenses(Map.of(expense1.getId(), expense1));
 
 
         Connection connection = new Connection();

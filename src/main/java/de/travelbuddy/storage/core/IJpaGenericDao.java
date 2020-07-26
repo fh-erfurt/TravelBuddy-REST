@@ -1,7 +1,7 @@
 package de.travelbuddy.storage.core;
 
 import de.travelbuddy.model.BaseModel;
-import org.jinq.orm.stream.JinqStream;
+/*import org.jinq.orm.stream.JinqStream;*/
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -27,7 +27,7 @@ public interface IJpaGenericDao< T extends BaseModel, ID extends Serializable> {
      * Get a stream of the given model type
      * @return The queryable stream
      */
-    JinqStream<T> getStream();
+    /*JinqStream<T> getStream();*/
 
     T create(T entity);
 

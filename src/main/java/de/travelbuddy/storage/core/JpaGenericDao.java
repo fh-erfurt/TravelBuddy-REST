@@ -2,7 +2,7 @@ package de.travelbuddy.storage.core;
 
 import de.travelbuddy.model.BaseModel;
 import lombok.Getter;
-import org.jinq.orm.stream.JinqStream;
+/*import org.jinq.orm.stream.JinqStream;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -26,17 +26,17 @@ public class JpaGenericDao< T extends BaseModel, ID extends Serializable>
     @Getter
     private Class<T> type = null;
     private EntityManager entityManager = null;
-    private IJpaGenericStream<T> stream = null;
+    /*private IJpaGenericStream<T> stream = null;*/
 
     @Autowired
-    public JpaGenericDao(IJpaGenericStream<T> jpaGenericStream){
+    public JpaGenericDao(){
         entityManager = DataController.getInstance().getEntityManagerFactory().createEntityManager();
-        stream = jpaGenericStream;
+
     }
 
     public JpaGenericDao< T , ID> setType(Class<T> type) {
         this.type = type;
-        stream.setType(type);
+
         return this;
     }
 
@@ -58,14 +58,6 @@ public class JpaGenericDao< T extends BaseModel, ID extends Serializable>
         return (Collection<T>) query.getResultList();
     }
 
-    /**
-     * Get a stream of the given model type
-     * @return The queryable stream
-     */
-    public JinqStream<T> getStream()
-    {
-        return stream.getStream();
-    }
 
     public T create(T entity){
         entityManager.getTransaction().begin();

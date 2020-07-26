@@ -1,5 +1,6 @@
 package de.travelbuddy.controller.v1.api.finance;
 
+import com.querydsl.core.NonUniqueResultException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
 import de.travelbuddy.model.Person;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/Expense")
+@RequestMapping("api/v1/expenses")
 public class ExpenseController {
 
     IGenericRepo<Expense> repo = null;
@@ -28,11 +29,12 @@ public class ExpenseController {
     }
 
     private Expense fetchExpense(Long expenseId) {
-        return repo
-                .getStream()
-                .where(Expense -> Expense.getId().equals(expenseId))
-                .findOne()
-                .orElseThrow(ExpenseNotFoundAPIException::new);
+        Expense expense = repo.read(expenseId);
+
+        if (expense == null)
+            throw new ExpenseNotFoundAPIException();
+
+        return expense;
     }
 
     //<editor-fold desc="CRUD">
@@ -46,7 +48,7 @@ public class ExpenseController {
      * @param expense The expense to create
      * @return The saved expense
      */
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Expense createExpense(@RequestBody Expense expense) {
         return repo.save(expense);
@@ -116,7 +118,7 @@ public class ExpenseController {
      * @return All persons
      * @throws ExpenseNotFoundAPIException If the expense does not exist
      */
-    @GetMapping("/{expenseId}/person")
+    @GetMapping("/{expenseId}/persons")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons(@PathVariable Long expenseId) throws ExpenseNotFoundAPIException {
         return fetchExpense(expenseId).getInvolvedPersons();
@@ -128,19 +130,26 @@ public class ExpenseController {
      * @param personId id of the person
      * @throws ExpenseNotFoundAPIException If the expense does not exist
      */
-    @DeleteMapping("/{expenseId}/person/{personId}")
+    @DeleteMapping("/{expenseId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removePerson(@PathVariable Long expenseId, @PathVariable Long personId)
             throws ExpenseNotFoundAPIException {
         //Check if exist
         Expense expense = fetchExpense(expenseId);
 
-        Person person = repoPerson.getStream()
-                            .where(p -> p.getId().equals(personId))
-                            .findOne()
-                            .orElseThrow(PersonNotFoundAPIException::new);
+        try {
 
-        expense.removePerson(person);
+            Person p = repoPerson.read(personId);
+
+            if (p == null)
+                throw new PersonNotFoundAPIException();
+
+            expense.removePerson(p);
+        }
+        catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new PersonNotFoundAPIException();
+        }
+
         repo.save(expense);
     }
 
@@ -150,19 +159,26 @@ public class ExpenseController {
      * @param personId Id of the person
      * @throws ExpenseNotFoundAPIException If the expense does not exist
      */
-    @PutMapping("/{expenseId}/person/{personId}")
+    @PutMapping("/{expenseId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void addPerson(@PathVariable Long expenseId, @PathVariable Long personId)
             throws ExpenseNotFoundAPIException {
         //Check if exist
         Expense expense = fetchExpense(expenseId);
 
-        Person person = repoPerson.getStream()
-                .where(p -> p.getId().equals(personId))
-                .findOne()
-                .orElseThrow(PersonNotFoundAPIException::new);
+        try {
 
-        expense.addPerson(person);
+            Person p = repoPerson.read(personId);
+
+            if (p == null)
+                throw new PersonNotFoundAPIException();
+
+            expense.addPerson(p);
+        }
+        catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new PersonNotFoundAPIException();
+        }
+
         repo.save(expense);
     }
 

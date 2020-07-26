@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("api/v1/contact")
+@RequestMapping("api/v1/contacts")
 public class ContactDetailsController {
 
     IGenericRepo<ContactDetails> repo;
@@ -20,12 +20,13 @@ public class ContactDetailsController {
         this.repo.setType(ContactDetails.class);
     }
 
-    private ContactDetails fetchContactDetails(Long contactDetailsId) {
-        return repo
-                .getStream()
-                .where(ContactDetails -> ContactDetails.getId().equals(contactDetailsId))
-                .findOne()
-                .orElseThrow(ContactDetailsNotFoundAPIException::new);
+    private ContactDetails fetchContactDetails(Long contactId) {
+        ContactDetails cd = repo.read(contactId);
+
+        if (cd == null)
+            throw new ContactDetailsNotFoundAPIException();
+
+        return cd;
     }
 
     //<editor-fold desc="CRUD">
@@ -40,20 +41,20 @@ public class ContactDetailsController {
     //###################
     //###### READ #######
     //###################
-    @GetMapping("/{contactDetailsId}")
+    @GetMapping("/{contactId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ContactDetails getContactDetails(@PathVariable Long contactDetailsId) throws ContactDetailsNotFoundAPIException {
-        return fetchContactDetails(contactDetailsId);
+    public ContactDetails getContactDetails(@PathVariable Long contactId) throws ContactDetailsNotFoundAPIException {
+        return fetchContactDetails(contactId);
     }
 
     //###################
     //##### UPDATE ######
     //###################
-    @PutMapping("/{contactDetailsId}")
+    @PutMapping("/{contactId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ContactDetails updateContactDetails(@PathVariable Long contactDetailsId, @RequestBody ContactDetails ContactDetails) throws ContactDetailsNotFoundAPIException {
+    public ContactDetails updateContactDetails(@PathVariable Long contactId, @RequestBody ContactDetails ContactDetails) throws ContactDetailsNotFoundAPIException {
         //Check if exist
-        fetchContactDetails(contactDetailsId);
+        fetchContactDetails(contactId);
 
         return repo.save(ContactDetails);
     }

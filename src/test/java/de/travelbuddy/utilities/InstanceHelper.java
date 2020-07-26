@@ -1,5 +1,6 @@
 package de.travelbuddy.utilities;
 
+import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
@@ -9,11 +10,15 @@ import de.travelbuddy.model.place.*;
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Currency;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Creates instances with random values
@@ -25,6 +30,7 @@ public class InstanceHelper {
     {
         Journey journey = new Journey();
         journey.setTitle(rndString());
+        rndId(journey);
         return journey;
     }
 
@@ -41,6 +47,7 @@ public class InstanceHelper {
         pl.setContactDetails(createContactDetails());
         pl.setArrive(start);
         pl.setDeparture(start.plusHours(rndInt(1, 8)));
+        rndId(pl);
         return pl;
     }
 
@@ -58,6 +65,7 @@ public class InstanceHelper {
         pl.setArrive(start);
         pl.setDeparture(start.plusHours(rndInt(1, 8)));
         pl.setType(Accommodation.accommodationType.HOSTEL);
+        rndId(pl);
         return pl;
     }
 
@@ -75,6 +83,7 @@ public class InstanceHelper {
         pl.setArrive(start);
         pl.setDeparture(start.plusHours(rndInt(1, 8)));
         pl.setIndoor(true);
+        rndId(pl);
         return pl;
     }
 
@@ -85,6 +94,7 @@ public class InstanceHelper {
             ret = new Coordinates();
             ret.setLatitude(rndDouble(-90, 90));
             ret.setLongitude(rndDouble(-180, 180));
+            rndId(ret);
         }
         catch (InvalidLatitudeException | InvalidLongitudeException ex)
         {
@@ -104,6 +114,7 @@ public class InstanceHelper {
         cd.setStreetNumber(rndInt(1,100));
         cd.setZIP(rndString());
         cd.setCountry(rndString());
+        rndId(cd);
         return cd;
     }
 
@@ -120,6 +131,7 @@ public class InstanceHelper {
         exp.setPrice(createMoney(currency));
         exp.setStatus(Expense.planned.PLANNED);
         exp.setPerPerson(false);
+        rndId(exp);
         return exp;
     }
 
@@ -143,6 +155,7 @@ public class InstanceHelper {
         p.setName(rndLastname());
         p.setBirthdate(rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()));
         p.setContactDetails(createContactDetails());
+        rndId(p);
         return p;
     }
 
@@ -153,6 +166,7 @@ public class InstanceHelper {
         p.setName(rndLastname());
         p.setBirthdate(rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()));
         p.setContactDetails(createContactDetails());
+        rndId(p);
         return p;
     }
 
@@ -180,6 +194,7 @@ public class InstanceHelper {
         con.setEnd(to);
         con.setStart(from);
         con.setExpense(createExpense());
+        rndId(con);
         return con;
     }
 
@@ -246,6 +261,16 @@ public class InstanceHelper {
     {
         String[] title = {"Erfurter Dom", "Kölner Dom", "Brandenburger Tor", "Berlin Mitte", "FH-Erfurt", "Uni Erfurt", "Veste Coburg", "Nürnberger Flughafen", "Erfurter HBF", "Münchner HBF", "Berlin HBF", "Berlin Westbahnhof"};
         return title[new Random().nextInt(title.length)];
+    }
+
+    private static <T extends BaseModel> void rndId(T inst)  {
+        try {
+            Method privMeth = inst.getClass().getSuperclass().getDeclaredMethod("setId", Long.class);
+            privMeth.setAccessible(true);
+            privMeth.invoke(inst, (Long)rndLong(1,99999));
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
 
