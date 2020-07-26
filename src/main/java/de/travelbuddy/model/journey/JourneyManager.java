@@ -44,10 +44,10 @@ public class JourneyManager {
      * @throws JourneyNotFoundException If the journey doesn't exists
      */
     public Journey removeJourney(Journey journey) throws JourneyNotFoundException {
-        if (!journeys.containsKey(journey.getTitle()))
+        if (!journeys.containsValue(journey))
             throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", journey.getTitle()));
 
-        return journeys.remove(journey.getTitle());
+        return journeys.remove(journey.getId());
     }
 
     /**
@@ -57,10 +57,11 @@ public class JourneyManager {
      * @throws JourneyNotFoundException If the journey doesn't exist
      */
     public Journey getJourney(String title) throws JourneyNotFoundException {
-        if (!journeys.containsKey(title))
-            throw new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", title));
-
-        return journeys.get(title);
+        return journeys.values()
+                .stream()
+                .filter(j -> j.getTitle().equals(title))
+                .findFirst()
+                .orElseThrow(() -> new JourneyNotFoundException(String.format("Journey with the title '%s' does not exists", title)));
     }
 
 

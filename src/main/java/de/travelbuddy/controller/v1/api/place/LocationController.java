@@ -73,6 +73,7 @@ public class LocationController<T extends Place> {
         return fetchLocation(locationId);
     }
 
+
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<T> getLocation() throws LocationNotFoundAPIException {

@@ -27,7 +27,7 @@ import static de.travelbuddy.model.journey.QJourney.journey;
 import static de.travelbuddy.model.place.QPlace.place;
 
 @RestController
-@RequestMapping("api/v1/journey")
+@RequestMapping("api/v1/journeys")
 public class JourneyController {
 
     IGenericRepo<Journey> repo;
@@ -93,8 +93,8 @@ public class JourneyController {
      */
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
-    public Journey getJourneys() throws JourneyNotFoundAPIException { //TODO asda
-    return new Journey();
+    public List<Journey> getJourneys() throws JourneyNotFoundAPIException {
+        return repo.getSelectQuery().fetch();
     }
 
     /**

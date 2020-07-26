@@ -65,7 +65,7 @@ public class PlaceTest {
         assertEquals(place.getInvolvedPersons().size(), persons.size());
         assertTrue(place.getConnectionsToNextPlace().contains(connection));
         assertEquals(place.getConnectionsToNextPlace().size(), connections.size());
-        assertTrue(place.getExpenses().containsKey(expense.getTitle()));
+        assertTrue(place.getExpenses().containsKey(expense.getId()));
         assertEquals(place.getExpenses().size(), expenses.size());
     }
 
@@ -254,7 +254,7 @@ public class PlaceTest {
 
         //Then
         assertEquals(place.getExpenses().size(), 1);
-        assertEquals(place.getExpenses().get(expense.getTitle()), expense);
+        assertEquals(place.getExpenses().get(expense.getId()), expense);
     }
 
     @Test
