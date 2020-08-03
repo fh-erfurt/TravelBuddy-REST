@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Constructor;
 
@@ -21,6 +22,7 @@ import java.lang.reflect.Constructor;
 @Component
 @Primary
 @Scope("prototype")
+@Repository
 public class GenericRepo<T extends BaseModel> implements IGenericRepo<T> {
 
     private Class<T> type = null;
