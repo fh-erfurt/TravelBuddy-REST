@@ -216,7 +216,6 @@ public class LocationController<T extends Place> {
      * @param locationId id of the place
      * @param personId id of the person
      */
-    //TODO @Sneakythrows notwendig? @Marcel bekomms sonst nicht weg.
     @SneakyThrows
     @DeleteMapping("/{locationId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)

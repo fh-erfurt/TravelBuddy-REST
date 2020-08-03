@@ -1,5 +1,6 @@
 package de.travelbuddy.model.finance;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.Person;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class Expense extends BaseModel {
     private boolean perPerson;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Person> involvedPersons = new ArrayList<>();
 
     @Transient
