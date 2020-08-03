@@ -20,7 +20,6 @@
 
         <!-- Dependency versions -->
         <hibernate.version>5.4.16.Final</hibernate.version>
-        <jinq.version>1.8.30</jinq.version>
         <mariadbjdbc.version>2.6.0</mariadbjdbc.version>
         <springbootstarterweb.version>2.3.1.RELEASE</springbootstarterweb.version>
         <jacksonhibernate5.version>2.11.1</jacksonhibernate5.version>
@@ -30,6 +29,7 @@
         <junitjupiter.version>5.5.2</junitjupiter.version>
         <querydsl.version>4.3.1</querydsl.version>
         <slf4j.version>1.7.16</slf4j.version>
+        <restassured.version>4.3.1</restassured.version>
     </properties>
 
     <dependencies>
@@ -127,6 +127,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${restassured.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <groupId>groupId</groupId>

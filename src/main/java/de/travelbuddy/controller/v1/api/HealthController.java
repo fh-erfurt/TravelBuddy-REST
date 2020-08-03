@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/v1/health")
+@RequestMapping("api/v1/health")
 public class HealthController {
 
     protected static final String HEALTH_RESPONSE = "Yep, I'am here!";
