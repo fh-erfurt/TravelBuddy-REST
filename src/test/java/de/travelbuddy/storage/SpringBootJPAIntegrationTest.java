@@ -3,13 +3,16 @@ package de.travelbuddy.storage;
 import de.travelbuddy.model.place.Coordinates;
 import de.travelbuddy.storage.repositories.GenericRepo;
 import de.travelbuddy.utilities.InstanceHelper;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@DataJpaTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SpringBootJPAIntegrationTest {
 

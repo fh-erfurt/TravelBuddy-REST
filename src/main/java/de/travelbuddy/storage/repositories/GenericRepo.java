@@ -83,6 +83,11 @@ public class GenericRepo<T extends BaseModel> implements IGenericRepo<T> {
         genericDao.delete(Id);
     }
 
+    @Override
+    public boolean exists(Long Id) {
+        return read(Id) != null;
+    }
+
     @SneakyThrows
     public JPAQuery getSelectQuery()
     {
