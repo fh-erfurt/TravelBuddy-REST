@@ -162,7 +162,7 @@ public class JourneyController {
      * @return All locations matching the criteria
      * @throws JourneyNotFoundAPIException If the journey was not found
      */
-    @GetMapping("/{journeyId}/location")
+    @GetMapping("/{journeyId}/locations")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Place> getLocations(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
         return fetchJourney(journeyId).getPlaces();
@@ -176,7 +176,7 @@ public class JourneyController {
      * @throws LocationNotFoundAPIException If the location was not found
      * @throws DuplicateLocationAPIException If the location already exist in the journey
      */
-    @PutMapping("/{journeyId}/location/{locationId}")
+    @PutMapping("/{journeyId}/locations/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void addLocation(@PathVariable Long journeyId, @PathVariable Long locationId)
             throws JourneyNotFoundAPIException, LocationNotFoundAPIException, DuplicateLocationAPIException {
@@ -210,7 +210,7 @@ public class JourneyController {
      * @throws LocationNotFoundAPIException If the location was not found
      */
     //@SneakyThrows(PlaceNotFoundException.class)
-    @DeleteMapping("/{journeyId}/location/{locationId}")
+    @DeleteMapping("/{journeyId}/locations/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removeLocation(@PathVariable Long journeyId, @PathVariable Long locationId)
             throws LocationNotFoundAPIException {
@@ -246,7 +246,7 @@ public class JourneyController {
      * @throws JourneyNotFoundAPIException If the journey was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      */
-    @GetMapping("/{journeyId}/cost")
+    @GetMapping("/{journeyId}/costs")
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCost(@PathVariable Long journeyId, @RequestParam String currency)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
@@ -262,7 +262,7 @@ public class JourneyController {
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      * @throws PersonNotFoundAPIException If the given person was not found
      */
-    @GetMapping("/{journeyId}/costpp")
+    @GetMapping("/{journeyId}/costspp")
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
@@ -286,7 +286,7 @@ public class JourneyController {
      * @return All persons matching the criteria
      * @throws JourneyNotFoundAPIException If the journey was not found
      */
-    @GetMapping("/{journeyId}/person")
+    @GetMapping("/{journeyId}/persons")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
         return fetchJourney(journeyId).getPersons();
@@ -299,7 +299,7 @@ public class JourneyController {
      * @throws JourneyNotFoundAPIException If the journey was not found
      * @throws PersonNotFoundAPIException If the person was not found
      */
-    @PutMapping("/{journeyId}/person/{personId}")
+    @PutMapping("/{journeyId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void addPerson(@PathVariable Long journeyId, @PathVariable Long personId)
             throws JourneyNotFoundAPIException, PersonNotFoundAPIException, DuplicatePersonAPIException {
@@ -329,7 +329,7 @@ public class JourneyController {
      * @param journeyId id of the journey
      * @param personId id of the person
      */
-    @DeleteMapping("/{journeyId}/person/{personId}")
+    @DeleteMapping("/{journeyId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removePerson(@PathVariable Long journeyId, @PathVariable Long personId) {
         //Check if exist
