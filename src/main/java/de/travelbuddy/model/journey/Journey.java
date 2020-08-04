@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @Table(name = "JOURNEY")
 @Getter @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_journey", name = "seq_gen_base")
 public class Journey extends BaseModel {
 
     private String title;

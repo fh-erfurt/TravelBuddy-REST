@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_place", name = "seq_gen_base")
 public class Place extends BaseModel {
 
     private String name;

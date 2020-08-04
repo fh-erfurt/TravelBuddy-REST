@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_connections", name = "seq_gen_base")
 public class Connection extends BaseModel {
 
     private String title;

@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_coordinates", name = "seq_gen_base")
 public class Coordinates extends BaseModel {
 
     private double latitude;

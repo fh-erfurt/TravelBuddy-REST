@@ -19,6 +19,7 @@ import java.util.List;
 @Table(name = "EXPENSE")
 @Getter @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_expense", name = "seq_gen_expense")
 public class Expense extends BaseModel {
 
     private String title;
