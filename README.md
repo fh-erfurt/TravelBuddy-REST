@@ -1,5 +1,5 @@
 
-![Logo](https://gitl4b.dutches.de/fhe/java1-2/travelbuddy/-/raw/09602b1c1e2d512495568601810f0f4b3cfaa390/Logo/Travelbuddy_Logo_ohne_Schrift.png )
+![Logo](https://gitl4b.dutches.de/fhe/java1-2/travelbuddy/-/raw/09602b1c1e2d512495568601810f0f4b3cfaa390/Logo/Travelbuddy_Logo_ohne_Schrift.png )<br>
 [![pipline status](https://gitl4b.dutches.de/fhe/java1-2/travelbuddy/badges/master/pipeline.svg)](https://gitl4b.dutches.de/fhe/java1-2/travelbuddy/commits/master) <br><br>  
 [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/as-seen-on-tv.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/winter-is-coming.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/designed-in-ms-paint.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/compatibility-betamax.svg)](https://forthebadge.com)  
   
