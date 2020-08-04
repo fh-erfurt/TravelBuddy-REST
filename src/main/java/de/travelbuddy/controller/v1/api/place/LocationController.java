@@ -107,8 +107,8 @@ public class LocationController<T extends Place> {
     //</editor-fold>
 
     /**
-     * Retrieve the persons at a place
-     * @param  locationId Id of the place
+     * Retrieve the persons at a location
+     * @param  locationId Id of the location
      * @return List of Persons
      * @throws LocationNotFoundAPIException
      */
@@ -120,8 +120,8 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Retrieve the connections of a place
-     * @param   locationId if of the Location
+     * Retrieve the connections of a location
+     * @param   locationId id of the location
      * @return  List of connections
      * @throws  LocationNotFoundAPIException
      */
@@ -133,7 +133,7 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Retrieve the expenses of a place
+     * Retrieve the expenses of a location
      * @param   locationId if of the Location
      * @return  Map of expenses
      * @throws  LocationNotFoundAPIException
@@ -145,11 +145,11 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Retrieve the cost of a place
-     * @param locationId Id of the place
+     * Retrieve the cost of a location
+     * @param locationId Id of the location
      * @param currency desired target currency code
-     * @return The total cost of the given place
-     * @throws LocationNotFoundAPIException If the place was not found
+     * @return The total cost of the given location
+     * @throws LocationNotFoundAPIException If the location was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      */
     @GetMapping("/{locationId}/costs")
@@ -161,10 +161,10 @@ public class LocationController<T extends Place> {
 
     /**
      * Retrieve the cost of a place for one person
-     * @param locationId Id of the place
+     * @param locationId Id of the location
      * @param currency desired target currency code
-     * @return The total cost of the given place for one person
-     * @throws LocationNotFoundAPIException If the place was not found
+     * @return The total cost of the given location for one person
+     * @throws LocationNotFoundAPIException If the location was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      * @throws PersonNotFoundAPIException If the given person was not found
      */
@@ -183,10 +183,10 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Add a person to the place
-     * @param locationId Id of the place
+     * Add a person to the location
+     * @param locationId Id of the location
      * @param personId Id of the person
-     * @throws LocationNotFoundAPIException If the place was not found
+     * @throws LocationNotFoundAPIException If the location was not found
      * @throws PersonNotFoundAPIException If the person was not found
      */
     @PutMapping("/{locationId}/persons/{personId}")
@@ -212,8 +212,8 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Remove a person from the place
-     * @param locationId id of the place
+     * Remove a person from the location
+     * @param locationId id of the location
      * @param personId id of the person
      */
     @SneakyThrows
@@ -234,10 +234,10 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Add a expense to the place
-     * @param locationId Id of the place
+     * Add a expense to the location
+     * @param locationId Id of the location
      * @param expenseId Id of the expense
-     * @throws LocationNotFoundAPIException If the place was not found
+     * @throws LocationNotFoundAPIException If the location was not found
      * @throws ExpenseNotFoundAPIException If the expense was not found
      * @throws DuplicateExpenseAPIException If the expense already exists
      */
@@ -264,8 +264,8 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Remove a expense from the place
-     * @param locationId id of the place
+     * Remove a expense from the location
+     * @param locationId id of the location
      * @param expenseId id of the expense
      */
     @SneakyThrows
@@ -287,10 +287,10 @@ public class LocationController<T extends Place> {
 
 
     /**
-     * Add a connection to the place
-     * @param locationId Id of the place
+     * Add a connection to the location
+     * @param locationId Id of the location
      * @param connectionId Id of the connection
-     * @throws LocationNotFoundAPIException If the place was not found
+     * @throws LocationNotFoundAPIException If the location was not found
      * @throws ConnectionNotFoundAPIException If the expense was not found
      * @throws DuplicateConnectionAPIException If the expense already exists
      */
@@ -317,8 +317,8 @@ public class LocationController<T extends Place> {
     }
 
     /**
-     * Remove a connection from the place
-     * @param locationId id of the place
+     * Remove a connection from the location
+     * @param locationId id of the location
      * @param connectionId id of the connection
      */
     @DeleteMapping("/{locationId}/connections/{connectionId}")
