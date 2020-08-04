@@ -3,12 +3,14 @@ package de.travelbuddy.storage.repositories;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import de.travelbuddy.model.BaseModel;
+import org.springframework.data.repository.Repository;
+
 
 /**
  * Allows data access
  * @param <T> Type of the model
  */
-public interface IGenericRepo<T extends BaseModel> {
+public interface IGenericRepo<T extends BaseModel> extends Repository<T, Long> {
 
     IGenericRepo<T> setType(Class<T> type) ;//throws InvalidEntityTypeException;
 
@@ -19,6 +21,8 @@ public interface IGenericRepo<T extends BaseModel> {
     T read(Long Id);
 
     void remove(Long Id);
+
+    boolean exists(Long Id);
 
     JPAQuery<T> getSelectQuery();
 }

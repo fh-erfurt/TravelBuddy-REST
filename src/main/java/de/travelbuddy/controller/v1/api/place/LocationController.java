@@ -19,12 +19,13 @@ import de.travelbuddy.storage.repositories.IGenericRepo;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Currency;
 import java.util.List;
 
-@RestController
+@Component
 public class LocationController<T extends Place> {
 
     IGenericRepo<T> repoLocation;
@@ -215,7 +216,6 @@ public class LocationController<T extends Place> {
      * @param locationId id of the place
      * @param personId id of the person
      */
-    //TODO @Sneakythrows notwendig? @Marcel bekomms sonst nicht weg.
     @SneakyThrows
     @DeleteMapping("/{locationId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)

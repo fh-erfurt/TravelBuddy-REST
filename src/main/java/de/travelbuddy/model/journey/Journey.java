@@ -1,5 +1,6 @@
 package de.travelbuddy.model.journey;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
@@ -33,9 +34,11 @@ public class Journey extends BaseModel {
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Place> places = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Person> persons = new ArrayList<>();
 
     /**
