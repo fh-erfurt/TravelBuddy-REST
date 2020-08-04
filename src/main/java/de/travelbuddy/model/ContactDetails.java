@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_contactdetails", name = "seq_gen_base")
 public class ContactDetails extends BaseModel{
 
     private String phone;

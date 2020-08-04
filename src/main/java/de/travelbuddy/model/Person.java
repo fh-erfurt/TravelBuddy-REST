@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_expense", name = "seq_gen_base")
 public class Person extends BaseModel {
 
     private String firstName;

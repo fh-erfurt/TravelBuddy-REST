@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter(AccessLevel.PRIVATE)
 public abstract class BaseModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gen_base")
     private Long id;
 
     @Column(columnDefinition = "TIMESTAMP")
