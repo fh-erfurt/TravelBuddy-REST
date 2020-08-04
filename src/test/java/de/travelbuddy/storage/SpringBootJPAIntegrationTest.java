@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
-@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SpringBootJPAIntegrationTest {
 
@@ -42,7 +42,7 @@ public class SpringBootJPAIntegrationTest {
         //Then retrieve it again
 
         //When
-        Coordinates coord = genericRepo.save(InstanceHelper.createCoordinate());
+        Coordinates coord = genericRepo.save(InstanceHelper.clearId(InstanceHelper.createCoordinate()));
         Coordinates coord2 = genericRepo.read(coord.getId());
 
         //Then

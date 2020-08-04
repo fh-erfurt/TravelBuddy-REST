@@ -24,6 +24,7 @@ public abstract class BaseModel {
     @PrePersist
     void onCreate(){
         this.setCreated(LocalDateTime.now());
+        this.setModified(this.getCreated());
     }
 
     @PreUpdate

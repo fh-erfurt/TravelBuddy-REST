@@ -1,6 +1,7 @@
 package de.travelbuddy.storage.core;
 
 import de.travelbuddy.model.BaseModel;
+import javassist.NotFoundException;
 import lombok.Getter;
 /*import org.jinq.orm.stream.JinqStream;*/
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,9 @@ public class JpaGenericDao< T extends BaseModel, ID extends Serializable>
      * Find all records of given type
      * @return All models of type T
      */
-    public Collection<T> findAll(){
+    public Iterable<T> findAll(){
         Query query = entityManager.createQuery("SELECT e FROM " + type.getCanonicalName() + " e");
-        return (Collection<T>) query.getResultList();
+        return query.getResultStream()::iterator;
     }
 
 
@@ -66,10 +67,23 @@ public class JpaGenericDao< T extends BaseModel, ID extends Serializable>
         return entity;
     }
 
-    public T update(T entity){
+    public T update(T entity) throws NotFoundException {
         entityManager.getTransaction().begin();
-        final T savedEntity = entityManager.merge(entity);
-        entityManager.getTransaction().commit();
+        T savedEntity = entityManager.merge(entity);
+        if (!savedEntity.getId().equals(entity.getId()))
+        {
+            // entity with provided id did not exist!
+            // Hibernate passed a new id
+            // rollback
+            entityManager.getTransaction().rollback();
+            throw new NotFoundException("Object with given id could not be found for update!");
+        }
+        else
+        {
+            // Everything is fine
+            entityManager.getTransaction().commit();
+        }
+
         return savedEntity;
     }
 

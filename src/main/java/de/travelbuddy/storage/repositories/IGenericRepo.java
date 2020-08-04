@@ -3,6 +3,7 @@ package de.travelbuddy.storage.repositories;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import de.travelbuddy.model.BaseModel;
+import javassist.NotFoundException;
 //import org.springframework.data.repository.Repository;
 
 

@@ -7,6 +7,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.storage.core.DataController;
 import de.travelbuddy.storage.core.JpaGenericDao;
+import javassist.NotFoundException;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
@@ -59,8 +60,18 @@ public class GenericRepo<T extends BaseModel> implements IGenericRepo<T> {
         return this.type;
     }
 
-    public T save(T element)
-    {
+    /**
+     * Creates or updates the given entity in the database
+     * Entity will be created if no id is given (id == null), otherwise
+     * an update will be executed.
+     *
+     * Note: If an update is executed with an invalid id, the update will be aborted and
+     * an exception of type "NotFoundException" is thrown!
+     * @param element Entity to create or update
+     * @return The created or updated entity
+     */
+    @SneakyThrows
+    public T save(T element) {
         // Todo throw exception if tClass = null
         JpaGenericDao<T,Long> genericDao = DataController.getInstance().getGenericDao(type);
 

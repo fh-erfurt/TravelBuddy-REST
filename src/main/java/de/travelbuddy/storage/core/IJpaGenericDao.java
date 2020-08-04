@@ -1,6 +1,7 @@
 package de.travelbuddy.storage.core;
 
 import de.travelbuddy.model.BaseModel;
+import javassist.NotFoundException;
 /*import org.jinq.orm.stream.JinqStream;*/
 
 import java.io.Serializable;
@@ -21,17 +22,11 @@ public interface IJpaGenericDao< T extends BaseModel, ID extends Serializable> {
      * Find all records of given type
      * @return All models of type T
      */
-    Collection<T> findAll();
-
-    /**
-     * Get a stream of the given model type
-     * @return The queryable stream
-     */
-    /*JinqStream<T> getStream();*/
+    Iterable<T> findAll();
 
     T create(T entity);
 
-    T update(T entity);
+    T update(T entity) throws NotFoundException;
 
     void delete(ID id);
 }
