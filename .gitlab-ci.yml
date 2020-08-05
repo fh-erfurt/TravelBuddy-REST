@@ -4,6 +4,7 @@ compile:
   stage: build
   only: 
     - master
+    - tmp-docker
   script:
     - mvn compile --batch-mode
     - mvn package --batch-mode
@@ -15,5 +16,6 @@ compile:
 verify:
   only: 
     - master
+    - tmp-docker
   script:
     - mvn verify --batch-mode
