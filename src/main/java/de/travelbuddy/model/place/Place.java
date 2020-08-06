@@ -32,10 +32,10 @@ public class Place extends BaseModel {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Coordinates coordinates;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ContactDetails contactDetails;
 
     private LocalDateTime arrive;

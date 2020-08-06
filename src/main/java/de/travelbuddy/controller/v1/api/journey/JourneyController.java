@@ -222,8 +222,6 @@ public class JourneyController extends BaseController<Journey> {
         //Check if exist
         Journey journey = fetchJourney(journeyId);
 
-
-
         try {
             Place p = repoPlace.getSelectQuery(Place.class)
                     .where(place.id.eq(locationId))

@@ -35,7 +35,6 @@ public class Expense extends BaseModel {
     @JsonIgnore
     private List<Person> involvedPersons = new ArrayList<>();
 
-    @Transient
     private Money price;
 
     public enum planned
