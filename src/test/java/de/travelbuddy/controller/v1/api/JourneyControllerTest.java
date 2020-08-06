@@ -1,4 +1,4 @@
-package de.travelbuddy.controller.v1.api.DONE;
+package de.travelbuddy.controller.v1.api;
 
 import de.travelbuddy.controller.v1.api.RestAssuredTestBase;
 

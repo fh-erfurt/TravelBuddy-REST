@@ -1,4 +1,4 @@
-package de.travelbuddy.controller.v1.api.DONE;
+package de.travelbuddy.controller.v1.api;
 
 import de.travelbuddy.controller.v1.api.RestAssuredTestBase;
 
@@ -13,6 +13,7 @@ import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Currency;
 
@@ -21,6 +22,7 @@ import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
 
 //erst mal auf Place getrimmt
+@SpringBootTest
 public class LocationControllerTest extends RestAssuredTestBase {
 
     @Autowired
