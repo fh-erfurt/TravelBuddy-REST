@@ -17,7 +17,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class Coordinates extends BaseModel {
+
+public class Coordinates {
 
     @Column(nullable = false)
     private double latitude;
@@ -38,8 +39,6 @@ public class Coordinates extends BaseModel {
     public void setLongitude(double longitude) throws InvalidLongitudeException {
         if (!checkLongitude(longitude))
             throw new InvalidLongitudeException("Longitude should be between -180 and 180.");
-
-        this.latitude = latitude;
         this.longitude = longitude;
     }
 

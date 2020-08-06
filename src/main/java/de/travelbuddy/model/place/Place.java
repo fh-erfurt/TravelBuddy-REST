@@ -31,6 +31,7 @@ public class Place extends BaseModel {
 
     @Column(nullable = false)
     private String name;
+
     private Coordinates coordinates;
 
     @OneToOne(cascade = CascadeType.ALL)

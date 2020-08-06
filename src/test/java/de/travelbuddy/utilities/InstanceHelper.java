@@ -90,7 +90,7 @@ public class InstanceHelper {
             ret = new Coordinates();
             ret.setLatitude(rndDouble(-90, 90));
             ret.setLongitude(rndDouble(-180, 180));
-            rndId(ret);
+            //rndId(ret);
         }
         catch (InvalidLatitudeException | InvalidLongitudeException ex)
         {

@@ -39,7 +39,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         //Create
         Expense post = InstanceHelper.createExpense();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(post).
                 when().
                 post("/expenses").
@@ -58,6 +58,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Expense inital = InstanceHelper.createExpense();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/expenses/" + inital.getId()).
                 then().
@@ -75,6 +76,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         repo.save(inital1);
         repo.save(inital2);
 
+        given().log().all().
         when().
                 get("/expenses" ).
                 then().
@@ -93,7 +95,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         repo.save(inital);
         Expense update = InstanceHelper.createExpense();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(update).
                 when().
                 put("/expenses/" + inital.getId()).
@@ -113,6 +115,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Expense inital = InstanceHelper.createExpense();
         repo.save(inital);
 
+        given().log().all().
         when().
                 delete("/expenses/" + inital.getId()).
                 then().
@@ -132,6 +135,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Expense inital = InstanceHelper.createExpense();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/expenses/"+inital.getId()+"/persons").
                 then().
@@ -148,6 +152,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 put("/expenses/" + inital.getId() + "/persons/" + person.getId()).
                 then().
@@ -168,11 +173,13 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 delete("/expenses/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/expenses/" + inital.getId() + "/persons/" + person.getId()).
                 then().
@@ -188,6 +195,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 get("/expenses/" + inital.getId() + "/costpp").
                 then().
@@ -203,6 +211,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         Expense inital = InstanceHelper.createExpense();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/expenses/" + inital.getId() + "/money").
                 then().
