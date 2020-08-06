@@ -6,7 +6,10 @@ import de.travelbuddy.controller.v1.api.journey.JourneyController;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.journey.Journey;
 import de.travelbuddy.model.place.Place;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+
+import de.travelbuddy.storage.repositories.JourneyRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import de.travelbuddy.storage.repositories.PlaceRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
@@ -27,9 +30,9 @@ public class JourneyControllerTest extends RestAssuredTestBase {
     JourneyController journeyController;
 
     @Autowired
-    IGenericRepo<Journey> repo;
-    IGenericRepo<Person> repoPerson;
-    IGenericRepo<Place> repoPlace;
+    JourneyRepo repo;
+    PersonRepo repoPerson;
+    PlaceRepo repoPlace;
 
 
     //<editor-fold desc="CRUD">

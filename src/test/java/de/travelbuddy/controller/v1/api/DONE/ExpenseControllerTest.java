@@ -10,7 +10,7 @@ import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;

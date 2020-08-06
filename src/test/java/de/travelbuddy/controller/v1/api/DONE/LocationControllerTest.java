@@ -1,14 +1,14 @@
-package de.travelbuddy.controller.v1.api.TODO;
+package de.travelbuddy.controller.v1.api.DONE;
 
 import de.travelbuddy.controller.v1.api.RestAssuredTestBase;
-import de.travelbuddy.controller.v1.api.journey.JourneyController;
+
 import de.travelbuddy.controller.v1.api.place.LocationController;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
-import de.travelbuddy.model.journey.Journey;
-import de.travelbuddy.model.place.Connection;
 import de.travelbuddy.model.place.Place;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.ExpenseRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import de.travelbuddy.storage.repositories.PlaceRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
@@ -27,10 +27,9 @@ public class LocationControllerTest extends RestAssuredTestBase {
     LocationController locationController;
 
     @Autowired
-    IGenericRepo<Place> repo;
-    IGenericRepo<Person> repoPerson;
-    IGenericRepo<Expense> repoExpense;
-    IGenericRepo<Connection> repoConnection;
+    PlaceRepo repo;
+    PersonRepo repoPerson;
+    ExpenseRepo repoExpense;
 
 
     //<editor-fold desc="CRUD">

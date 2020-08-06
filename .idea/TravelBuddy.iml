@@ -6,6 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="TravelBuddy" />
           <factory-entry name="entityManagerFactory" />
           <factory-entry name="travel_pu" />
         </datasource-mapping>

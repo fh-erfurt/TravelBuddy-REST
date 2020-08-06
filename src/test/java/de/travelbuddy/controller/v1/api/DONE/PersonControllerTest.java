@@ -3,7 +3,7 @@ package de.travelbuddy.controller.v1.api.DONE;
 import de.travelbuddy.controller.v1.api.PersonController;
 import de.travelbuddy.controller.v1.api.RestAssuredTestBase;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ public class PersonControllerTest extends RestAssuredTestBase {
     PersonController personController;
 
     @Autowired
-    IGenericRepo<Person> repo;
+    PersonRepo repo;
 
     //<editor-fold desc="CRUD">
 
