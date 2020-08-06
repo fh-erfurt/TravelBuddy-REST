@@ -31,7 +31,9 @@ public class JourneyControllerTest extends RestAssuredTestBase {
 
     @Autowired
     JourneyRepo repo;
+    @Autowired
     PersonRepo repoPerson;
+    @Autowired
     PlaceRepo repoPlace;
 
 
@@ -52,7 +54,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
                 when().
                 post("/journeys").
                 then().
-                statusCode(201).assertThat().body("id", equalTo(post.getId()));
+                statusCode(201).assertThat().body("id", equalTo(post.getId().intValue()));
     }
 
     //###################
@@ -63,14 +65,14 @@ public class JourneyControllerTest extends RestAssuredTestBase {
     public void read_journey_test () {
 
         //Read
-        Journey inital = InstanceHelper.createJourney();
-        repo.save(inital);
+        Journey inital = InstanceHelper.clearId(InstanceHelper.createJourney());
+        inital = repo.save(inital);
 
         given().log().all().
         when().
                 get("/journeys/" + inital.getId()).
                 then().
-                statusCode(200).assertThat().body("id", equalTo(inital.getId()));
+                statusCode(200).assertThat().body("id", equalTo(inital.getId().intValue()));
     }
 
 
@@ -132,7 +134,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/journeys/" + inital.getId()).then().statusCode(404);
+                get("/journeys/" + inital.getId().intValue()).then().statusCode(404);
 
     }
     //</editor-fold>
@@ -156,9 +158,17 @@ public class JourneyControllerTest extends RestAssuredTestBase {
     public void add_person_to_journey_test (){
 
         Journey inital = InstanceHelper.createJourney();
-        repo.save(inital);
+
+        given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post("/journeys").then().statusCode(201);
+
         Person person = InstanceHelper.createPerson();
-        repoPerson.save(person);
+        given().log().all().
+                contentType(ContentType.JSON).body(person).
+                when().
+                post("/persons").then().statusCode(201);
 
         given().log().all().
         when().
@@ -215,9 +225,11 @@ public class JourneyControllerTest extends RestAssuredTestBase {
     public void add_location_to_journey_test (){
 
         Journey inital = InstanceHelper.createJourney();
-        repo.save(inital);
+        inital = repo.save(inital);
         Place place = InstanceHelper.createPlace();
         repoPlace.save(place);
+
+
 
         given().log().all().
         when().

@@ -24,6 +24,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
     @Autowired
     ExpenseRepo repo;
+    @Autowired
     PersonRepo repoPerson;
 
 
