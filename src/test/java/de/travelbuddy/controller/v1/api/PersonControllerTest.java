@@ -33,7 +33,7 @@ public class PersonControllerTest extends RestAssuredTestBase {
         //Create
         Person post = InstanceHelper.createPerson();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(post).
         when().
                 post("/persons").
@@ -52,6 +52,7 @@ public class PersonControllerTest extends RestAssuredTestBase {
         Person inital = InstanceHelper.createPerson();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/persons/" + inital.getId()).
         then().
@@ -69,6 +70,7 @@ public class PersonControllerTest extends RestAssuredTestBase {
         repo.save(inital1);
         repo.save(inital2);
 
+        given().log().all().
         when().
                 get("/persons" ).
         then().
@@ -87,7 +89,7 @@ public class PersonControllerTest extends RestAssuredTestBase {
         repo.save(inital);
         Person update = InstanceHelper.createPerson();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(update).
         when().
                 put("/persons/" + inital.getId()).
@@ -107,11 +109,13 @@ public class PersonControllerTest extends RestAssuredTestBase {
         Person inital = InstanceHelper.createPerson();
         repo.save(inital);
 
+        given().log().all().
         when().
                 delete("/persons/" + inital.getId()).
         then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/persons/" + inital.getId()).then().statusCode(404);
 

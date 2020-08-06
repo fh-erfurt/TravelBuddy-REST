@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class LocationControllerTest extends RestAssuredTestBase {
 
     @Autowired
-    LocationController locationController;
+    LocationController<Place> locationController;
 
     @Autowired
     PlaceRepo repo;
@@ -46,7 +46,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         //Create
         Place post = InstanceHelper.createPlace();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(post).
         when().
                 post("/places").
@@ -65,6 +65,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Place inital = InstanceHelper.createPlace();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/places/" + inital.getId()).
                 then().
@@ -82,6 +83,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         repo.save(inital1);
         repo.save(inital2);
 
+        given().log().all().
         when().
                 get("/places" ).
         then().
@@ -101,7 +103,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         repo.save(inital);
         Place update = InstanceHelper.createPlace();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(update).
         when().
                 put("/places/" + inital.getId()).
@@ -121,11 +123,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Place inital = InstanceHelper.createPlace();
         repo.save(inital);
 
+        given().log().all().
         when().
                 delete("/places/" + inital.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/places/" + inital.getId()).
         then().
@@ -141,6 +145,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Place inital = InstanceHelper.createPlace();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/places/"+inital.getId()+"/persons").
         then().
@@ -156,10 +161,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 put("/places/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
+
+        given().log().all().
         when().
                 get("/places/" + inital.getId() + "/persons/" + person.getId()).
                 then().
@@ -175,11 +183,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 delete("/places/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/places/" + inital.getId() + "/persons/" + person.getId()).
                 then().
@@ -195,6 +205,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Place inital = InstanceHelper.createPlace();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/places/"+inital.getId()+"/expenses").
                 then().
@@ -210,10 +221,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Expense expense = InstanceHelper.createExpense();
         repoExpense.save(expense);
 
+        given().log().all().
         when().
                 put("/places/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
                 statusCode(200);
+
+        given().log().all().
         when().
                 get("/places/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
@@ -229,11 +243,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Expense expense = InstanceHelper.createExpense();
         repoExpense.save(expense);
 
+        given().log().all().
         when().
                 delete("/places/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/places/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
@@ -250,6 +266,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 get("/places/" + inital.getId() + "/costspp" + person.getId() +"/EUR").
                 then().
@@ -267,6 +284,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
         Place inital = InstanceHelper.createPlace();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/places/" + inital.getId() + "/money").
                 then().

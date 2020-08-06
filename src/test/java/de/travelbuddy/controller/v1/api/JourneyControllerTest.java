@@ -47,7 +47,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         //Create
         Journey post = InstanceHelper.createJourney();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(post).
                 when().
                 post("/journeys").
@@ -66,6 +66,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Journey inital = InstanceHelper.createJourney();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId()).
                 then().
@@ -83,6 +84,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         repo.save(inital1);
         repo.save(inital2);
 
+        given().log().all().
         when().
                 get("/journeys" ).
                 then().
@@ -102,7 +104,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         repo.save(inital);
         Journey update = InstanceHelper.createJourney();
 
-        given().
+        given().log().all().
                 contentType(ContentType.JSON).body(update).
                 when().
                 put("/journeys/" + inital.getId()).
@@ -122,11 +124,13 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Journey inital = InstanceHelper.createJourney();
         repo.save(inital);
 
+        given().log().all().
         when().
                 delete("/journeys/" + inital.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId()).then().statusCode(404);
 
@@ -140,6 +144,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Journey inital = InstanceHelper.createJourney();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/journeys/"+inital.getId()+"/persons").
                 then().
@@ -155,10 +160,13 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 put("/journeys/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
+
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId() + "/persons/" + person.getId()).
         then().
@@ -174,11 +182,13 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 delete("/journeys/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId() + "/persons/" + person.getId()).
                 then().
@@ -193,6 +203,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Journey inital = InstanceHelper.createJourney();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/journeys/"+inital.getId()+"/places").
                 then().
@@ -208,10 +219,13 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Place place = InstanceHelper.createPlace();
         repoPlace.save(place);
 
+        given().log().all().
         when().
                 put("/journeys/" + inital.getId() + "/places/" + place.getId()).
                 then().
                 statusCode(200);
+
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId() + "/places/" + place.getId()).
                 then().
@@ -227,11 +241,13 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Place place = InstanceHelper.createPlace();
         repoPlace.save(place);
 
+        given().log().all().
         when().
                 delete("/journeys/" + inital.getId() + "/places/" + place.getId()).
                 then().
                 statusCode(200);
 
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId() + "/places/" + place.getId()).
                 then().
@@ -247,6 +263,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Person person = InstanceHelper.createPerson();
         repoPerson.save(person);
 
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId() + "/costspp" + person.getId() +"/EUR").
                 then().
@@ -264,6 +281,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
         Journey inital = InstanceHelper.createJourney();
         repo.save(inital);
 
+        given().log().all().
         when().
                 get("/journeys/" + inital.getId() + "/money").
                 then().
