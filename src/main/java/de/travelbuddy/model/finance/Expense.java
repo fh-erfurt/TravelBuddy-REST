@@ -31,7 +31,7 @@ public class Expense extends BaseModel {
     private planned status = planned.PLANNED;
     private boolean perPerson;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Person> involvedPersons = new ArrayList<>();
 
