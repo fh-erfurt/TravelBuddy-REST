@@ -1,6 +1,7 @@
 package de.travelbuddy.model.place;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import de.travelbuddy.model.*;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
@@ -22,12 +23,14 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "PLACE")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @NoArgsConstructor
 @SequenceGenerator(sequenceName = "seq_gen_place", name = "seq_gen_base")
 public class Place extends BaseModel {
 
+    @Column(nullable = false)
     private String name;
 
     @OneToOne

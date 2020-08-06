@@ -1,5 +1,6 @@
 package de.travelbuddy.model.place;
 
+import com.sun.istack.NotNull;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.place.exception.InvalidLatitudeException;
 import de.travelbuddy.model.place.exception.InvalidLongitudeException;
@@ -21,7 +22,9 @@ import javax.persistence.*;
 @SequenceGenerator(sequenceName = "seq_gen_coordinates", name = "seq_gen_base")
 public class Coordinates extends BaseModel {
 
+    @Column(nullable = false)
     private double latitude;
+    @Column(nullable = false)
     private double longitude;
 
 

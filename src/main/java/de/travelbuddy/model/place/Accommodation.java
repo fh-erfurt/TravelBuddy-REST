@@ -1,5 +1,6 @@
 package de.travelbuddy.model.place;
 
+        import com.sun.istack.NotNull;
         import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,13 +14,13 @@ import javax.persistence.Table;
  * Accommodation is a extension from place
  */
 @Entity
-@Table(name = "ACCOMMODATION")
+
 @Getter @Setter
 @NoArgsConstructor
 public class Accommodation extends Place {
 
     @Enumerated()
-    @Column(columnDefinition = "smallint")
+    @Column(columnDefinition = "smallint", nullable = false)
     private accommodationType type;
 
     public enum accommodationType

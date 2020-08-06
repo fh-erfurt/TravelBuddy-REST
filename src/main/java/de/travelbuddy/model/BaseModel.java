@@ -15,10 +15,10 @@ public abstract class BaseModel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gen_base")
     private Long id;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime created;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime modified;
 
     @PrePersist

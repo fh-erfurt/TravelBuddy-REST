@@ -19,6 +19,8 @@ import javax.persistence.*;
 public class ContactDetails extends BaseModel{
 
     private String phone;
+
+    @Column(nullable = false)
     private String email;
     private String town;
     private String street;

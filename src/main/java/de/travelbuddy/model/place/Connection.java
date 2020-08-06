@@ -1,5 +1,6 @@
 package de.travelbuddy.model.place;
 
+import com.sun.istack.NotNull;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.finance.Expense;
 import lombok.Getter;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 @SequenceGenerator(sequenceName = "seq_gen_connections", name = "seq_gen_base")
 public class Connection extends BaseModel {
 
+    @Column(nullable = false)
     private String title;
     private LocalDateTime arrive;
     private LocalDateTime departure;

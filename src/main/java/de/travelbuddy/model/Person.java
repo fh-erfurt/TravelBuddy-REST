@@ -1,5 +1,6 @@
 package de.travelbuddy.model;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,9 @@ import java.time.LocalDate;
 @SequenceGenerator(sequenceName = "seq_gen_expense", name = "seq_gen_base")
 public class Person extends BaseModel {
 
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String name;
     private LocalDate birthdate;
 
