@@ -6,6 +6,8 @@ import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.storage.repositories.PersonRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import static de.travelbuddy.model.QPerson.person;
 public class PersonController extends BaseController<Person> {
 
     PersonRepo repo;
+    private static final Logger LOG = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
     public PersonController(PersonRepo repo) {
@@ -29,11 +32,14 @@ public class PersonController extends BaseController<Person> {
     }
 
     private Person fetchPerson(Long personId) throws PersonNotFoundAPIException {
+        LOG.info("Find person: " + personId);
+
         Optional<Person> person = repo.findById(personId);
 
         if (!person.isPresent())
             throw new PersonNotFoundAPIException();
 
+        LOG.info("Person found: " + personId);
         return person.get();
     }
 
@@ -50,7 +56,13 @@ public class PersonController extends BaseController<Person> {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Person createPerson(@RequestBody Person person) {
-        return repo.save(person);
+        LOG.info("Save person...");
+
+        Person p = repo.save(person);
+
+        LOG.info("Person saved..." + person.toString());
+
+        return p;
     }
 
     //###################
@@ -89,6 +101,7 @@ public class PersonController extends BaseController<Person> {
     @GetMapping("/search/{searchQ}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> findJourneys(@PathVariable String searchQ) throws PersonNotFoundAPIException {
+        LOG.info("Search persons with query: " + searchQ);
         return toListT(repo.findAll(person.id.stringValue().contains(searchQ)
                         .or(person.name.contains(searchQ))
                         .or(person.firstName.contains(searchQ))));
@@ -107,7 +120,8 @@ public class PersonController extends BaseController<Person> {
     @PutMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public Person updatePerson(@PathVariable Long personId, @RequestBody Person person) {
-        //Check if exist
+        LOG.info("Update person: " + personId);
+
         fetchPerson(personId);
 
         if (person.getId() == null)
@@ -116,7 +130,9 @@ public class PersonController extends BaseController<Person> {
         if (!person.getId().equals(personId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", personId, person.getId()));
 
-        return repo.save(person);
+        Person p = repo.save(person);
+        LOG.info("Person updated: " + personId);
+        return p;
     }
 
     //###################
@@ -131,7 +147,7 @@ public class PersonController extends BaseController<Person> {
     @DeleteMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     void deletePerson(@PathVariable Long personId) throws PersonNotFoundAPIException {
-        //Check if exist
+        LOG.info("Delete person: " + personId);
         repo.delete(fetchPerson(personId));
     }
     //</editor-fold>
@@ -145,8 +161,7 @@ public class PersonController extends BaseController<Person> {
     @GetMapping("/{personId}/contact")
     @ResponseStatus(code = HttpStatus.OK)
     public ContactDetails getContact(@PathVariable Long personId) throws PersonNotFoundAPIException {
-        ContactDetails cd = fetchPerson(personId).getContactDetails();
-        String c = cd.getCountry();
-        return cd;
+        LOG.info("Find contact of person: " + personId);
+        return fetchPerson(personId).getContactDetails();
     }
 }

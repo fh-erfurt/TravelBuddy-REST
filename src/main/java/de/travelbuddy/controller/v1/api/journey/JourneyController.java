@@ -20,6 +20,8 @@ import de.travelbuddy.model.place.exception.PlaceNotFoundException;
 import de.travelbuddy.storage.repositories.JourneyRepo;
 import de.travelbuddy.storage.repositories.PersonRepo;
 import de.travelbuddy.storage.repositories.PlaceRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static de.travelbuddy.model.journey.QJourney.journey;
 
 @RestController
 @RequestMapping("api/v1/journeys")
@@ -35,6 +41,7 @@ public class JourneyController extends BaseController<Journey> {
     JourneyRepo repo;
     PersonRepo repoPerson = null;
     PlaceRepo repoPlace = null;
+    private static final Logger LOG = LoggerFactory.getLogger(JourneyController.class);
 
     @Autowired
     JourneyRepo rep;
@@ -51,11 +58,14 @@ public class JourneyController extends BaseController<Journey> {
 
 
     private Journey fetchJourney(Long journeyId) {
+        LOG.info("Find journey: " + journeyId);
+
         Optional<Journey> journey = rep.findById(journeyId);
 
         if (!journey.isPresent())
             throw new JourneyNotFoundAPIException();
 
+        LOG.info("Journey found: " + journeyId);
         return journey.get();
     }
 
@@ -73,7 +83,10 @@ public class JourneyController extends BaseController<Journey> {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Journey createJourney(@RequestBody Journey journey) {
-        return repo.save(journey);
+        LOG.info("Create journey...");
+        Journey per = repo.save(journey);
+        LOG.info("Journey saved...");
+        return per;
     }
 
     //###################
@@ -89,7 +102,10 @@ public class JourneyController extends BaseController<Journey> {
     @GetMapping("/{journeyId}")
     @ResponseStatus(code = HttpStatus.OK)
     public Journey getJourney(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
-        return fetchJourney(journeyId);
+        LOG.info("Read journey: " + journeyId);
+        Journey jour =  fetchJourney(journeyId);
+        LOG.info("Journey found: " + journeyId);
+        return jour;
     }
 
     /**
@@ -99,6 +115,7 @@ public class JourneyController extends BaseController<Journey> {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Journey> getJourneys() throws JourneyNotFoundAPIException {
+        LOG.info("Read all journeys");
         return toListT(repo.findAll());
     }
 
@@ -112,11 +129,12 @@ public class JourneyController extends BaseController<Journey> {
     @GetMapping("/search/{searchQ}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Journey> findJourneys(@PathVariable String searchQ) throws JourneyNotFoundAPIException {
-        return null;/*StreamSupport.stream(
+        LOG.info("Seach journeys with query: " + searchQ);
+        return StreamSupport.stream(
                 repo.findAll(
                     journey.id.stringValue().contains(searchQ)
                     .or(journey.title.contains(searchQ))).spliterator(), false)
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
     }
 
 
@@ -135,7 +153,7 @@ public class JourneyController extends BaseController<Journey> {
     @PutMapping("/{journeyId}")
     @ResponseStatus(code = HttpStatus.OK)
     public Journey updateJourney(@PathVariable Long journeyId, @RequestBody Journey journey) throws JourneyNotFoundAPIException {
-        //Check if exist
+        LOG.info("Update journey: " + journeyId);
         fetchJourney(journeyId);
 
         if (journey.getId() == null)
@@ -144,7 +162,9 @@ public class JourneyController extends BaseController<Journey> {
         if (!journey.getId().equals(journeyId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", journeyId, journey.getId()));
 
-        return repo.save(journey);
+        Journey jour =  repo.save(journey);
+        LOG.info("Journey updated: " + journeyId);
+        return jour;
     }
 
     //###################
@@ -159,8 +179,9 @@ public class JourneyController extends BaseController<Journey> {
     @DeleteMapping("/{journeyId}")
     @ResponseStatus(code = HttpStatus.OK)
     void deleteJourney(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
-        //Check if exist
+        LOG.info("Remove journey: " + journeyId);
         repo.delete(fetchJourney(journeyId));
+        LOG.info("Journey removed: " + journeyId);
     }
     //</editor-fold>
 
@@ -174,6 +195,7 @@ public class JourneyController extends BaseController<Journey> {
     @GetMapping("/{journeyId}/locations")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Place> getLocations(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
+        LOG.info("Read all locations of journey: " + journeyId);
         return fetchJourney(journeyId).getPlaces();
     }
 
@@ -189,7 +211,7 @@ public class JourneyController extends BaseController<Journey> {
     @ResponseStatus(code = HttpStatus.OK)
     public void addLocation(@PathVariable Long journeyId, @PathVariable Long locationId)
             throws JourneyNotFoundAPIException, LocationNotFoundAPIException, DuplicateLocationAPIException {
-        //Check if exist
+        LOG.info("Add location " + locationId + " to journey: " + journeyId);
         Journey journey = fetchJourney(journeyId);
 
         try {
@@ -206,6 +228,7 @@ public class JourneyController extends BaseController<Journey> {
         }
 
         repo.save(journey);
+        LOG.info("Place " + locationId + " added to journey: " + journeyId);
     }
 
     /**
@@ -219,7 +242,7 @@ public class JourneyController extends BaseController<Journey> {
     @ResponseStatus(code = HttpStatus.OK)
     public void removeLocation(@PathVariable Long journeyId, @PathVariable Long locationId)
             throws LocationNotFoundAPIException {
-        //Check if exist
+        LOG.info("Remove location " + locationId + " from journey: " + journeyId);
         Journey journey = fetchJourney(journeyId);
 
         try {
@@ -234,6 +257,7 @@ public class JourneyController extends BaseController<Journey> {
         }
 
         repo.save(journey);
+        LOG.info("Location " + locationId + " removed from journey: " + journeyId);
     }
     //</editor-fold>
 
@@ -251,6 +275,7 @@ public class JourneyController extends BaseController<Journey> {
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCost(@PathVariable Long journeyId, @RequestParam String currency)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
+        LOG.info("Read cost of journey: " + journeyId);
         return fetchJourney(journeyId).totalCost(Currency.getInstance(currency));
     }
 
@@ -267,7 +292,7 @@ public class JourneyController extends BaseController<Journey> {
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
-
+        LOG.info("Read cost of journey " + journeyId + " for person " + personId);
         Optional<Person> p = repoPerson.findById(personId);
 
         if (!p.isPresent())
@@ -288,6 +313,7 @@ public class JourneyController extends BaseController<Journey> {
     @GetMapping("/{journeyId}/persons")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
+        LOG.info("Read persons of journey: " + journeyId);
         return fetchJourney(journeyId).getPersons();
     }
 
@@ -302,7 +328,7 @@ public class JourneyController extends BaseController<Journey> {
     @ResponseStatus(code = HttpStatus.OK)
     public void addPerson(@PathVariable Long journeyId, @PathVariable Long personId)
             throws JourneyNotFoundAPIException, PersonNotFoundAPIException, DuplicatePersonAPIException {
-        //Check if exist
+        LOG.info("Add person " + personId + " to journey: " + journeyId);
         Journey journey = fetchJourney(journeyId);
 
         try {
@@ -319,6 +345,7 @@ public class JourneyController extends BaseController<Journey> {
         }
 
         repo.save(journey);
+        LOG.info("Person " + personId + " added to journey: " + journeyId);
     }
 
     /**
@@ -329,7 +356,7 @@ public class JourneyController extends BaseController<Journey> {
     @DeleteMapping("/{journeyId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removePerson(@PathVariable Long journeyId, @PathVariable Long personId) {
-        //Check if exist
+        LOG.info("Remove person " + personId + " from journey: " + journeyId);
         Journey journey = fetchJourney(journeyId);
 
         try {
@@ -345,6 +372,7 @@ public class JourneyController extends BaseController<Journey> {
             throw new PersonNotFoundAPIException();
         }
         repo.save(journey);
+        LOG.info("Person " + personId + " removed from journey: " + journeyId);
     }
     //</editor-fold>
 }

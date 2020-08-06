@@ -22,6 +22,8 @@ import de.travelbuddy.storage.repositories.ExpenseRepo;
 import de.travelbuddy.storage.repositories.PersonRepo;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -34,6 +36,8 @@ import java.util.Optional;
 
 @Component
 public class LocationController<T extends Place> extends BaseController<T> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LocationController.class);
 
     @Setter
     CrudRepository<T, Long> repoLocation;
@@ -49,11 +53,14 @@ public class LocationController<T extends Place> extends BaseController<T> {
     }
 
     private T fetchLocation(Long locationId) {
+        LOG.info("Find location: " + locationId);
+
         Optional<T> location = repoLocation.findById(locationId);
 
         if (!location.isPresent())
             throw new LocationNotFoundAPIException();
 
+        LOG.info("Location found: " + locationId);
         return location.get();
     }
 
@@ -64,7 +71,12 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public T createLocation(@RequestBody T Location) {
-        return repoLocation.save(Location);
+        LOG.info("Create location...");
+
+        T loc = repoLocation.save(Location);
+
+        LOG.debug("Location saved: " + loc.getId());
+        return loc;
     }
 
     //###################
@@ -73,6 +85,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @GetMapping("/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
     public T getLocation(@PathVariable Long locationId) throws LocationNotFoundAPIException {
+        LOG.info("Read location: " + locationId);
         return fetchLocation(locationId);
     }
 
@@ -80,7 +93,8 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<T> getLocation() throws LocationNotFoundAPIException {
-        return null;
+        LOG.info("Read all locations...");
+        return toListT(repoLocation.findAll());
     }
 
     //###################
@@ -89,7 +103,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @PutMapping("/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
     public T updateLocation(@PathVariable Long locationId, @RequestBody T location) throws LocationNotFoundAPIException {
-        //Check if exist
+        LOG.info("Update location: " + locationId);
         fetchLocation(locationId);
 
         if (location.getId() == null)
@@ -98,7 +112,9 @@ public class LocationController<T extends Place> extends BaseController<T> {
         if (!location.getId().equals(locationId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", locationId, location.getId()));
 
-        return repoLocation.save(location);
+        T loc = repoLocation.save(location);
+        LOG.info("Updated location: " + locationId);
+        return loc;
     }
 
     //###################
@@ -107,8 +123,9 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @DeleteMapping("/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
     void deleteEmployee(@PathVariable Long locationId) throws LocationNotFoundAPIException {
-        //Check if exist
+        LOG.info("Delete location: " + locationId);
         repoLocation.delete(fetchLocation(locationId));
+        LOG.info("Deleted location: " + locationId);
     }
     //</editor-fold>
 
@@ -121,7 +138,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @GetMapping("{locationId}/persons")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons(@PathVariable Long locationId) throws LocationNotFoundAPIException {
-
+        LOG.info("Read persons of location: " + locationId);
         return fetchLocation(locationId).getInvolvedPersons();
     }
 
@@ -134,7 +151,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @GetMapping("{locationId}/connections")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Connection> getConnections(@PathVariable Long locationId) throws LocationNotFoundAPIException {
-
+        LOG.info("Read connections of location: " + locationId);
         return fetchLocation(locationId).getConnectionsToNextPlace();
     }
 
@@ -142,11 +159,12 @@ public class LocationController<T extends Place> extends BaseController<T> {
      * Retrieve the expenses of a location
      * @param   locationId if of the Location
      * @return  Map of expenses
-     * @throws  LocationNotFoundAPIException
+     * @throws  LocationNotFoundAPIException if location does not exist
      */
     @GetMapping("{locationId}/expenses")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Expense> getExpenses(@PathVariable Long locationId) throws LocationNotFoundAPIException {
+        LOG.info("Read expenses of location: " + locationId);
         return (List<Expense>) fetchLocation(locationId).getExpenses().values();
     }
 
@@ -162,6 +180,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCost(@PathVariable Long locationId, @RequestParam String currency)
             throws LocationNotFoundAPIException, CurrencyNotFoundAPIException {
+        LOG.info("Read cost of location: " + locationId);
         return fetchLocation(locationId).totalCost(Currency.getInstance(currency));
     }
 
@@ -178,7 +197,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @ResponseStatus(code = HttpStatus.OK)
     public Money getCostpP(@PathVariable Long locationId, @RequestParam String currency, @RequestParam Long personId)
             throws LocationNotFoundAPIException, CurrencyNotFoundAPIException {
-
+        LOG.info("Read cost of location: " + locationId + " for person " + personId);
         Optional<Person> pers = repoPerson.findById(personId);
 
         if (!pers.isPresent())
@@ -199,7 +218,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @ResponseStatus(code = HttpStatus.OK)
     public void addPerson(@PathVariable Long locationId, @PathVariable Long personId)
             throws LocationNotFoundAPIException, PersonNotFoundAPIException, DuplicatePersonAPIException {
-        //Check if exist
+        LOG.info("Add person " + personId + " to location: " + locationId);
         T location = fetchLocation(locationId);
 
         Optional<Person> pers = repoPerson.findById(personId);
@@ -215,6 +234,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
         }
 
         repoLocation.save(location);
+        LOG.info("Person " + personId + " added to location: " + locationId);
     }
 
     /**
@@ -226,7 +246,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @DeleteMapping("/{locationId}/persons/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removePerson(@PathVariable Long locationId, @PathVariable Long personId) {
-        //Check if exist
+        LOG.info("Remove person " + personId + " from location: " + locationId);
         T location = fetchLocation(locationId);
 
         Optional<Person> pers = repoPerson.findById(personId);
@@ -237,6 +257,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
         location.removePerson(pers.get());
 
         repoLocation.save(location);
+        LOG.info("Person " + personId + " removed from location: " + locationId);
     }
 
     /**
@@ -251,7 +272,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @ResponseStatus(code = HttpStatus.OK)
     public void addExpense(@PathVariable Long locationId, @PathVariable Long expenseId)
             throws LocationNotFoundAPIException, ExpenseNotFoundAPIException, DuplicateExpenseAPIException {
-        //Check if exist
+        LOG.info("Add expense " + expenseId + " to location: " + locationId);
         T location = fetchLocation(locationId);
 
         Optional<Expense> exp = repoExpense.findById(expenseId);
@@ -267,6 +288,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
         }
 
         repoLocation.save(location);
+        LOG.info("Added expense " + expenseId + " to location: " + locationId);
     }
 
     /**
@@ -278,7 +300,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @DeleteMapping("/{locationId}/expenses/{expenseId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removeExpense(@PathVariable Long locationId, @PathVariable Long expenseId) {
-        //Check if exist
+        LOG.info("Remoce expense " + expenseId + " from location: " + locationId);
         T location = fetchLocation(locationId);
 
         Optional<Expense> exp = repoExpense.findById(expenseId);
@@ -289,6 +311,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
         location.removeExpense(exp.get());
 
         repoLocation.save(location);
+        LOG.info("Expense " + expenseId + " removed from location: " + locationId);
     }
 
 
@@ -304,7 +327,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @ResponseStatus(code = HttpStatus.OK)
     public void addConnection(@PathVariable Long locationId, @PathVariable Long connectionId)
             throws LocationNotFoundAPIException, ConnectionNotFoundAPIException, DuplicateConnectionAPIException {
-        //Check if exist
+        LOG.info("Add connection " + connectionId + " to location: " + locationId);
         T location = fetchLocation(locationId);
 
         Optional<Connection> conn = location.getConnectionsToNextPlace()
@@ -321,6 +344,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
         }
 
         repoLocation.save(location);
+        LOG.info("Connection " + locationId + " added to location: " + locationId);
     }
 
     /**
@@ -331,7 +355,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @DeleteMapping("/{locationId}/connections/{connectionId}")
     @ResponseStatus(code = HttpStatus.OK)
     public void removeConnection(@PathVariable Long locationId, @PathVariable Long connectionId) {
-        //Check if exist
+        LOG.info("Remove connection " + connectionId + " from location: " + locationId);
         T location = fetchLocation(locationId);
 
         Optional<Connection> conn = location.getConnectionsToNextPlace()
@@ -342,5 +366,6 @@ public class LocationController<T extends Place> extends BaseController<T> {
 
         location.removeConnection(conn.get());
         repoLocation.save(location);
+        LOG.info("Connection " + connectionId + " to location: " + locationId);
     }
 }
