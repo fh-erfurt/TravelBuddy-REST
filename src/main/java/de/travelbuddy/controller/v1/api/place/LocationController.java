@@ -1,6 +1,8 @@
 package de.travelbuddy.controller.v1.api.place;
 
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.CurrencyNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.DuplicateExpenseAPIException;
@@ -86,11 +88,17 @@ public class LocationController<T extends Place> {
     //###################
     @PutMapping("/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public T updateLocation(@PathVariable Long locationId, @RequestBody T Location) throws LocationNotFoundAPIException {
+    public T updateLocation(@PathVariable Long locationId, @RequestBody T location) throws LocationNotFoundAPIException {
         //Check if exist
         fetchLocation(locationId);
 
-        return repoLocation.save(Location);
+        if (location.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!location.getId().equals(locationId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", locationId, location.getId()));
+
+        return repoLocation.save(location);
     }
 
     //###################

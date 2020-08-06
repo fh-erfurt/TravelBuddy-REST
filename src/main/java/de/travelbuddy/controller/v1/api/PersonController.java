@@ -1,5 +1,7 @@
 package de.travelbuddy.controller.v1.api;
 
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
@@ -108,6 +110,12 @@ public class PersonController {
     public Person updatePerson(@PathVariable Long personId, @RequestBody Person person) {
         //Check if exist
         fetchPerson(personId);
+
+        if (person.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!person.getId().equals(personId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", personId, person.getId()));
 
         return repo.save(person);
     }

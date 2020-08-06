@@ -1,6 +1,8 @@
 package de.travelbuddy.controller.v1.api;
 
 import de.travelbuddy.controller.v1.api.exceptions.ContactDetailsNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.storage.repositories.IGenericRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +54,17 @@ public class ContactDetailsController {
     //###################
     @PutMapping("/{contactId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ContactDetails updateContactDetails(@PathVariable Long contactId, @RequestBody ContactDetails ContactDetails) throws ContactDetailsNotFoundAPIException {
+    public ContactDetails updateContactDetails(@PathVariable Long contactId, @RequestBody ContactDetails contactDetails) throws ContactDetailsNotFoundAPIException {
         //Check if exist
         fetchContactDetails(contactId);
 
-        return repo.save(ContactDetails);
+        if (contactDetails.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!contactDetails.getId().equals(contactId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", contactId, contactDetails.getId()));
+
+        return repo.save(contactDetails);
     }
 
     //###################

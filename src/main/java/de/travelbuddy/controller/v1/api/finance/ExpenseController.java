@@ -1,6 +1,8 @@
 package de.travelbuddy.controller.v1.api.finance;
 
 import com.querydsl.core.NonUniqueResultException;
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
 import de.travelbuddy.model.Person;
@@ -86,6 +88,12 @@ public class ExpenseController {
     public Expense updateExpense(@PathVariable Long expenseId, @RequestBody Expense expense) throws ExpenseNotFoundAPIException {
         //Check if exist
         fetchExpense(expenseId);
+
+        if (expense.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!expense.getId().equals(expenseId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", expenseId, expense.getId()));
 
         return repo.save(expense);
     }

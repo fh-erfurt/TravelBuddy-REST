@@ -2,6 +2,8 @@ package de.travelbuddy.controller.v1.api.journey;
 
 import com.querydsl.core.NonUniqueResultException;
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.CurrencyNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.journey.exceptions.JourneyNotFoundAPIException;
@@ -133,6 +135,12 @@ public class JourneyController {
         //Check if exist
         fetchJourney(journeyId);
 
+        if (journey.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!journey.getId().equals(journeyId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", journeyId, journey.getId()));
+
         return repo.save(journey);
     }
 
@@ -185,7 +193,7 @@ public class JourneyController {
 
         try {
             Place p = repoPlace.getSelectQuery()
-                    .where(place.id.eq(journeyId))
+                    .where(place.id.eq(locationId))
                     .fetchOne();
 
             if (p == null)
@@ -221,7 +229,7 @@ public class JourneyController {
 
         try {
             Place p = repoPlace.getSelectQuery()
-                    .where(place.id.eq(journeyId))
+                    .where(place.id.eq(locationId))
                     .fetchOne();
 
             if (p == null)

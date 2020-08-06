@@ -1,5 +1,7 @@
 package de.travelbuddy.controller.v1.api.place;
 
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.CoordinatesNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.place.Coordinates;
@@ -61,11 +63,17 @@ public class CoordinatesController {
     //###################
     @PutMapping("/{coordinatesId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Coordinates updateCoordinates(@PathVariable Long coordinatesId, @RequestBody Coordinates Coordinates) throws CoordinatesNotFoundAPIException {
+    public Coordinates updateCoordinates(@PathVariable Long coordinatesId, @RequestBody Coordinates coordinates) throws CoordinatesNotFoundAPIException {
         //Check if exist
         fetchCoordinates(coordinatesId);
 
-        return repo.save(Coordinates);
+        if (coordinates.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!coordinates.getId().equals(coordinatesId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", coordinatesId, coordinates.getId()));
+
+        return repo.save(coordinates);
     }
 
     //###################

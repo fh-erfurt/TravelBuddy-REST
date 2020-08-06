@@ -1,5 +1,7 @@
 package de.travelbuddy.controller.v1.api.place;
 
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.ConnectionNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.LocationNotFoundAPIException;
 import de.travelbuddy.model.place.Connection;
@@ -61,11 +63,17 @@ public class ConnectionController {
     //###################
     @PutMapping("/{connectionId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Connection updateConnection(@PathVariable Long connectionId, @RequestBody Connection Connection) throws ConnectionNotFoundAPIException {
+    public Connection updateConnection(@PathVariable Long connectionId, @RequestBody Connection connection) throws ConnectionNotFoundAPIException {
         //Check if exist
         fetchConnection(connectionId);
 
-        return repoConnection.save(Connection);
+        if (connection.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!connection.getId().equals(connectionId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", connectionId, connection.getId()));
+
+        return repoConnection.save(connection);
     }
 
     //###################
