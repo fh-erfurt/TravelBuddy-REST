@@ -18,9 +18,12 @@ import de.travelbuddy.model.finance.Money;
 import de.travelbuddy.model.finance.exception.DuplicateExpenseException;
 import de.travelbuddy.model.place.Connection;
 import de.travelbuddy.model.place.Place;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.ExpenseRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -32,19 +35,17 @@ import java.util.Optional;
 @Component
 public class LocationController<T extends Place> extends BaseController<T> {
 
-    IGenericRepo<T> repoLocation;
-    IGenericRepo<Person> repoPerson;
-    IGenericRepo<Expense> repoExpense;
-    IGenericRepo<Connection> repoConnection;
+    @Setter
+    CrudRepository<T, Long> repoLocation;
+    PersonRepo repoPerson;
+    ExpenseRepo repoExpense;
 
     @Autowired
-    public LocationController(IGenericRepo<T> repoLocation, IGenericRepo<Person> repoPerson,
-                           IGenericRepo<Expense> repoExpense, IGenericRepo<Connection> repoConnection) {
+    public LocationController(PersonRepo repoPerson,
+                              ExpenseRepo repoExpense) {
 
-        this.repoLocation = repoLocation;
         this.repoPerson = repoPerson;
         this.repoExpense = repoExpense;
-        this.repoConnection = repoConnection;
     }
 
     private T fetchLocation(Long locationId) {
@@ -79,7 +80,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<T> getLocation() throws LocationNotFoundAPIException {
-        return repoLocation.getSelectQuery(type).fetch();
+        return null;
     }
 
     //###################
@@ -306,7 +307,8 @@ public class LocationController<T extends Place> extends BaseController<T> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Optional<Connection> conn = repoConnection.findById(connectionId);
+        Optional<Connection> conn = location.getConnectionsToNextPlace()
+                .stream().filter(c -> c.getId().equals(connectionId)).findFirst();
 
         if (!conn.isPresent())
             throw new ConnectionNotFoundAPIException();
@@ -332,7 +334,8 @@ public class LocationController<T extends Place> extends BaseController<T> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Optional<Connection> conn = repoConnection.findById(connectionId);
+        Optional<Connection> conn = location.getConnectionsToNextPlace()
+                .stream().filter(c -> c.getId().equals(connectionId)).findFirst();
 
         if (!conn.isPresent())
             throw new ConnectionNotFoundAPIException();

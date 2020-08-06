@@ -1,6 +1,6 @@
 package de.travelbuddy.controller.v1.api.journey;
 
-import com.querydsl.core.NonUniqueResultException;
+
 import de.travelbuddy.controller.v1.api.BaseController;
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
@@ -17,7 +17,9 @@ import de.travelbuddy.model.journey.Journey;
 import de.travelbuddy.model.place.Place;
 import de.travelbuddy.model.place.exception.DuplicatePlaceException;
 import de.travelbuddy.model.place.exception.PlaceNotFoundException;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.JourneyRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import de.travelbuddy.storage.repositories.PlaceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,28 +28,30 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 
-import static de.travelbuddy.model.QPerson.person;
-import static de.travelbuddy.model.place.QPlace.place;
-
 @RestController
 @RequestMapping("api/v1/journeys")
 public class JourneyController extends BaseController<Journey> {
 
-    IGenericRepo<Journey> repo;
-    IGenericRepo<Person> repoPerson ;
-    IGenericRepo<Place> repoPlace ;
+    JourneyRepo repo;
+    PersonRepo repoPerson = null;
+    PlaceRepo repoPlace = null;
 
     @Autowired
-    public JourneyController(IGenericRepo<Journey> repo, IGenericRepo<Person> repoPerson,
-                             IGenericRepo<Place> repoPlace) {
+    JourneyRepo rep;
+
+    @Autowired
+    public JourneyController(JourneyRepo repo, PersonRepo repoPerson,
+                             PlaceRepo repoPlace) {
         this.type = Journey.class;
         this.repo = repo;
         this.repoPerson = repoPerson;
         this.repoPlace = repoPlace;
     }
 
+
+
     private Journey fetchJourney(Long journeyId) {
-        Optional<Journey> journey = repo.findById(journeyId);
+        Optional<Journey> journey = rep.findById(journeyId);
 
         if (!journey.isPresent())
             throw new JourneyNotFoundAPIException();
@@ -189,18 +193,14 @@ public class JourneyController extends BaseController<Journey> {
         Journey journey = fetchJourney(journeyId);
 
         try {
-            Place p = repoPlace.getSelectQuery(Place.class)
-                    .where(place.id.eq(locationId))
-                    .fetchOne();
+            Optional<Place> p = repoPlace.findById(locationId);
 
-            if (p == null)
+            if (!p.isPresent())
                 throw new LocationNotFoundAPIException();
 
-            journey.addPlace(p);
+            journey.addPlace(p.get());
         }
-        catch (NonUniqueResultException ex) {
-            throw new LocationNotFoundAPIException();
-        }
+
         catch (DuplicatePlaceException ex) {
             throw new DuplicateLocationAPIException();
         }
@@ -223,14 +223,12 @@ public class JourneyController extends BaseController<Journey> {
         Journey journey = fetchJourney(journeyId);
 
         try {
-            Place p = repoPlace.getSelectQuery(Place.class)
-                    .where(place.id.eq(locationId))
-                    .fetchOne();
+            Optional<Place> p = repoPlace.findById(locationId);
 
-            if (p == null)
+            if (!p.isPresent())
                 throw new PlaceNotFoundException();
 
-            journey.removePlace(p);
+            journey.removePlace(p.get());
         } catch (PlaceNotFoundException e) {
             throw new LocationNotFoundAPIException();
         }
@@ -259,27 +257,24 @@ public class JourneyController extends BaseController<Journey> {
     /**
      * Retrieve the cost of a journey for one person
      * @param journeyId Id of the journey
-     * @param personId Id of the person
      * @param currency desired target currency code
      * @return The total cost of the given journey for one person
      * @throws JourneyNotFoundAPIException If the journey was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      * @throws PersonNotFoundAPIException If the given person was not found
      */
-    @GetMapping("/{journeyId}/costspp/{personId}/{currency}")
+    @GetMapping("/{journeyId}/costspp")
     @ResponseStatus(code = HttpStatus.OK)
-    public Money getCostpP(@PathVariable Long journeyId, @PathVariable String currency, @PathVariable Long personId)
+    public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
 
-        Person p = repoPerson.getSelectQuery(Person.class)
-                .where(person.id.eq(personId))
-                .fetchOne();
+        Optional<Person> p = repoPerson.findById(personId);
 
-        if (p == null)
+        if (!p.isPresent())
             throw new PersonNotFoundAPIException();
 
         return fetchJourney(journeyId)
-                .totalCostOfPerson(Currency.getInstance(currency), p);
+                .totalCostOfPerson(Currency.getInstance(currency), p.get());
     }
     //</editor-fold>
 
@@ -312,14 +307,12 @@ public class JourneyController extends BaseController<Journey> {
 
         try {
 
-            Person p = repoPerson.getSelectQuery(Person.class)
-                    .where(person.id.eq(personId))
-                    .fetchOne();
+            Optional<Person> p = repoPerson.findById(personId);
 
-            journey.addPerson(p);
-        }
-        catch (NonUniqueResultException ex) {
-            throw new PersonNotFoundAPIException();
+            if (!p.isPresent())
+                throw new PersonNotFoundAPIException();
+
+            journey.addPerson(p.get());
         }
         catch (DuplicatePersonException ex) {
             throw new DuplicatePersonAPIException();
@@ -341,13 +334,14 @@ public class JourneyController extends BaseController<Journey> {
 
         try {
 
-            Person p = repoPerson.getSelectQuery(Person.class)
-                    .where(person.id.eq(personId))
-                    .fetchOne();
+            Optional<Person> p = repoPerson.findById(personId);
 
-            journey.removePerson(p);
+            if (!p.isPresent())
+                throw new PersonNotFoundAPIException();
+
+            journey.removePerson(p.get());
         }
-        catch (NonUniqueResultException | IllegalArgumentException ex) {
+        catch (IllegalArgumentException ex) {
             throw new PersonNotFoundAPIException();
         }
         repo.save(journey);

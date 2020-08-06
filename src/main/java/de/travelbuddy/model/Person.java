@@ -1,6 +1,5 @@
 package de.travelbuddy.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +25,6 @@ public class Person extends BaseModel {
     private String name;
     private LocalDate birthdate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ContactDetails contactDetails;
 }

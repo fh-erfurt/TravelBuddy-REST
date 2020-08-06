@@ -1,10 +1,9 @@
 package de.travelbuddy.controller.v1.api.place;
 
-import de.travelbuddy.model.Person;
-import de.travelbuddy.model.finance.Expense;
-import de.travelbuddy.model.place.Connection;
 import de.travelbuddy.model.place.Place;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.ExpenseRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import de.travelbuddy.storage.repositories.PlaceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlaceController extends LocationController<Place> {
 
     @Autowired
-    public PlaceController(IGenericRepo<Place> repoPlace, IGenericRepo<Person> repoPerson,
-                           IGenericRepo<Expense> repoExpense, IGenericRepo<Connection> repoConnection) {
-        super(repoPlace, repoPerson, repoExpense, repoConnection);
+    public PlaceController(PlaceRepo repoPlace, PersonRepo repoPerson,
+                           ExpenseRepo repoExpense) {
+        super(repoPerson, repoExpense);
+        this.repoLocation = repoPlace;
         this.type = Place.class;
     }
 }

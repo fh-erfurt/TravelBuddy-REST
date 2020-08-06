@@ -1,7 +1,7 @@
 package de.travelbuddy.storage;
 
-import de.travelbuddy.model.place.Coordinates;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.model.Person;
+import de.travelbuddy.storage.repositories.PersonRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,20 +15,18 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @Component
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SpringBootJPAIntegrationTest {
 
-    private IGenericRepo<Coordinates> genericRepo = null;
+    private PersonRepo genericRepo = null;
 
     @Autowired
     EntityManager em;
 
     @Autowired
-    public SpringBootJPAIntegrationTest(IGenericRepo<Coordinates> genericRepo)
+    public SpringBootJPAIntegrationTest(PersonRepo genericRepo)
     {
         this.genericRepo = genericRepo;
     }
@@ -44,13 +42,13 @@ public class SpringBootJPAIntegrationTest {
         //Then retrieve it again
 
         //When
-        Coordinates coord = genericRepo.save(InstanceHelper.clearId(InstanceHelper.createCoordinate()));
-        Optional<Coordinates> coord2 = genericRepo.findById(coord.getId());
+        Person coord = genericRepo.save(InstanceHelper.clearId(InstanceHelper.createPerson()));
+        Optional<Person> coord2 = genericRepo.findById(coord.getId());
 
         //Then
         Assertions.assertNotNull(coord);
         Assertions.assertTrue(coord2.isPresent());
-        assertEquals(coord.getLatitude(), coord2.get().getLatitude());
-        assertEquals(coord.getLongitude(), coord2.get().getLongitude());
+        Assertions.assertEquals(coord.getId(), coord2.get().getId());
+        Assertions.assertEquals(coord.getContactDetails(), coord2.get().getContactDetails());
     }
 }
