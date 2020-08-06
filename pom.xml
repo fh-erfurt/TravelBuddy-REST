@@ -7,21 +7,18 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <version>2.3.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <!-- Package versions to use -->
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependency versions -->
-        <hibernate.version>5.4.16.Final</hibernate.version>
+        <hibernate.version>5.4.19.Final</hibernate.version>
         <mariadbjdbc.version>2.6.0</mariadbjdbc.version>
-        <springbootstarterweb.version>2.3.1.RELEASE</springbootstarterweb.version>
         <jacksonhibernate5.version>2.11.1</jacksonhibernate5.version>
         <lombok.version>1.18.12</lombok.version>
         <h2.version>1.4.194</h2.version>
@@ -38,9 +35,10 @@
 
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
+            <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
@@ -51,7 +49,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${springbootstarterweb.version}</version>
         </dependency>
 
         <dependency>
@@ -87,7 +84,6 @@
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>${querydsl.version}</version>
         </dependency>
 
         <!-- ############################### -->
@@ -141,24 +137,25 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>${restassured.version}</version>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>xml-path</artifactId>
-            <version>${restassured.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.2</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>3.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 

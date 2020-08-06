@@ -1,5 +1,6 @@
 package de.travelbuddy.controller.v1.api.place;
 
+import de.travelbuddy.controller.v1.api.BaseController;
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
@@ -26,9 +27,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Currency;
 import java.util.List;
+import java.util.Optional;
 
 @Component
-public class LocationController<T extends Place> {
+public class LocationController<T extends Place> extends BaseController<T> {
 
     IGenericRepo<T> repoLocation;
     IGenericRepo<Person> repoPerson;
@@ -41,20 +43,17 @@ public class LocationController<T extends Place> {
 
         this.repoLocation = repoLocation;
         this.repoPerson = repoPerson;
-        this.repoPerson.setType(Person.class);
         this.repoExpense = repoExpense;
-        this.repoExpense.setType(Expense.class);
         this.repoConnection = repoConnection;
-        this.repoConnection.setType(Connection.class);
     }
 
     private T fetchLocation(Long locationId) {
-        T location = repoLocation.read(locationId);
+        Optional<T> location = repoLocation.findById(locationId);
 
-        if (location == null)
+        if (!location.isPresent())
             throw new LocationNotFoundAPIException();
 
-        return location;
+        return location.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -80,7 +79,7 @@ public class LocationController<T extends Place> {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<T> getLocation() throws LocationNotFoundAPIException {
-        return repoLocation.getSelectQuery().fetch();
+        return repoLocation.getSelectQuery(type).fetch();
     }
 
     //###################
@@ -108,9 +107,7 @@ public class LocationController<T extends Place> {
     @ResponseStatus(code = HttpStatus.OK)
     void deleteEmployee(@PathVariable Long locationId) throws LocationNotFoundAPIException {
         //Check if exist
-        fetchLocation(locationId);
-
-        repoLocation.remove(locationId);
+        repoLocation.delete(fetchLocation(locationId));
     }
     //</editor-fold>
 
@@ -181,13 +178,13 @@ public class LocationController<T extends Place> {
     public Money getCostpP(@PathVariable Long locationId, @RequestParam String currency, @RequestParam Long personId)
             throws LocationNotFoundAPIException, CurrencyNotFoundAPIException {
 
-        Person pers = repoPerson.read(personId);
+        Optional<Person> pers = repoPerson.findById(personId);
 
-        if (pers == null)
+        if (!pers.isPresent())
             throw new PersonNotFoundAPIException();
 
         return fetchLocation(locationId)
-                .totalCostOfPerson(Currency.getInstance(currency),pers);
+                .totalCostOfPerson(Currency.getInstance(currency),pers.get());
     }
 
     /**
@@ -204,13 +201,13 @@ public class LocationController<T extends Place> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Person pers = repoPerson.read(personId);
+        Optional<Person> pers = repoPerson.findById(personId);
 
-        if (pers == null)
+        if (!pers.isPresent())
             throw new PersonNotFoundAPIException();
 
         try {
-            location.addPerson(pers);
+            location.addPerson(pers.get());
         }
         catch (DuplicatePersonException ex) {
             throw new DuplicatePersonAPIException();
@@ -231,12 +228,12 @@ public class LocationController<T extends Place> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Person pers = repoPerson.read(personId);
+        Optional<Person> pers = repoPerson.findById(personId);
 
-        if (pers == null)
+        if (!pers.isPresent())
             throw new PersonNotFoundAPIException();
 
-        location.removePerson(pers);
+        location.removePerson(pers.get());
 
         repoLocation.save(location);
     }
@@ -256,13 +253,13 @@ public class LocationController<T extends Place> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Expense exp = repoExpense.read(expenseId);
+        Optional<Expense> exp = repoExpense.findById(expenseId);
 
-        if (exp == null)
+        if (!exp.isPresent())
             throw new ExpenseNotFoundAPIException();
 
         try {
-            location.addExpense(exp);
+            location.addExpense(exp.get());
         }
         catch (DuplicateExpenseException ex) {
             throw new DuplicateExpenseAPIException();
@@ -283,12 +280,12 @@ public class LocationController<T extends Place> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Expense exp = repoExpense.read(expenseId);
+        Optional<Expense> exp = repoExpense.findById(expenseId);
 
-        if (exp == null)
+        if (!exp.isPresent())
             throw new ExpenseNotFoundAPIException();
 
-        location.removeExpense(exp);
+        location.removeExpense(exp.get());
 
         repoLocation.save(location);
     }
@@ -309,13 +306,13 @@ public class LocationController<T extends Place> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Connection conn = repoConnection.read(connectionId);
+        Optional<Connection> conn = repoConnection.findById(connectionId);
 
-        if (conn == null)
+        if (!conn.isPresent())
             throw new ConnectionNotFoundAPIException();
 
         try {
-            location.addConnection(conn);
+            location.addConnection(conn.get());
         }
         catch (IllegalArgumentException ex) {
             throw new DuplicateConnectionAPIException();
@@ -335,12 +332,12 @@ public class LocationController<T extends Place> {
         //Check if exist
         T location = fetchLocation(locationId);
 
-        Connection conn = repoConnection.read(connectionId);
+        Optional<Connection> conn = repoConnection.findById(connectionId);
 
-        if (conn == null)
+        if (!conn.isPresent())
             throw new ConnectionNotFoundAPIException();
 
-        location.removeConnection(conn);
+        location.removeConnection(conn.get());
         repoLocation.save(location);
     }
 }

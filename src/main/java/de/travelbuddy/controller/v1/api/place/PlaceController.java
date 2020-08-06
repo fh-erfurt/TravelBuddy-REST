@@ -18,6 +18,6 @@ public class PlaceController extends LocationController<Place> {
     public PlaceController(IGenericRepo<Place> repoPlace, IGenericRepo<Person> repoPerson,
                            IGenericRepo<Expense> repoExpense, IGenericRepo<Connection> repoConnection) {
         super(repoPlace, repoPerson, repoExpense, repoConnection);
-        repoPlace.setType(Place.class);
+        this.type = Place.class;
     }
 }

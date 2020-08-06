@@ -1,27 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
-    <persistence-unit name="travel-pu"
-                      transaction-type="RESOURCE_LOCAL">
-
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://dutches.de:8306/DUTCHMAN;create=true" />
-            <property name="javax.persistence.jdbc.user" value="fried" />
-            <property name="javax.persistence.jdbc.password" value="FmzD7fgwF17tqE5r7832" />
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB53Dialect" />
-            <property name="hibernate.connection.driver_class" value="org.mariadb.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:mariadb://dutches.de:8306/DUTCHMAN" />
-            <property name="hibernate.id.new_generator_mappings" value="true" />
-        </properties>
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="">
+        <class>de.travelbuddy.model.BaseModel</class>
     </persistence-unit>
 </persistence>
-
-
-
-

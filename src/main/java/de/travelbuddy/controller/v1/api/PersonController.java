@@ -11,28 +11,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static de.travelbuddy.model.QPerson.person;
 
 @RestController
 @RequestMapping("api/v1/persons")
-public class PersonController {
+public class PersonController extends BaseController<Person> {
 
     IGenericRepo<Person> repo;
 
     @Autowired
     public PersonController(IGenericRepo<Person> repo) {
+        this.type = Person.class;
         this.repo = repo;
-        this.repo.setType(Person.class);
     }
 
     private Person fetchPerson(Long personId) throws PersonNotFoundAPIException {
-        Person person = repo.read(personId);
+        Optional<Person> person = repo.findById(personId);
 
-        if (person == null)
+        if (!person.isPresent())
             throw new PersonNotFoundAPIException();
 
-        return person;
+        return person.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -74,7 +75,7 @@ public class PersonController {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons() {
-        return repo.getSelectQuery().fetch();
+        return repo.getSelectQuery(Person.class).fetch();
     }
 
     /**
@@ -87,7 +88,7 @@ public class PersonController {
     @GetMapping("/search/{searchQ}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> findJourneys(@PathVariable String searchQ) throws PersonNotFoundAPIException {
-        return repo.getSelectQuery()
+        return repo.getSelectQuery(type)
                 .where(person.id.stringValue().contains(searchQ)
                         .or(person.name.contains(searchQ))
                         .or(person.firstName.contains(searchQ)))
@@ -133,9 +134,7 @@ public class PersonController {
     @ResponseStatus(code = HttpStatus.OK)
     void deletePerson(@PathVariable Long personId) throws PersonNotFoundAPIException {
         //Check if exist
-        fetchPerson(personId);
-
-        repo.remove(personId);
+        repo.delete(fetchPerson(personId));
     }
     //</editor-fold>
 

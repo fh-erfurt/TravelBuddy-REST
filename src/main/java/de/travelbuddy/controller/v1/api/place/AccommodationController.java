@@ -19,6 +19,6 @@ public class AccommodationController extends LocationController<Accommodation> {
                                    IGenericRepo<Expense> repoExpense, IGenericRepo<Connection> repoConnection) {
         super(repoAccommodation, repoPerson, repoExpense, repoConnection);
 
-        repoLocation.setType(Accommodation.class);
+        this.type = Accommodation.class;
     }
 }

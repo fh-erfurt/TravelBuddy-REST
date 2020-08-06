@@ -1,6 +1,7 @@
 package de.travelbuddy.controller.v1.api.journey;
 
 import com.querydsl.core.NonUniqueResultException;
+import de.travelbuddy.controller.v1.api.BaseController;
 import de.travelbuddy.controller.v1.api.exceptions.DuplicatePersonAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
@@ -23,14 +24,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Currency;
 import java.util.List;
+import java.util.Optional;
 
 import static de.travelbuddy.model.QPerson.person;
-import static de.travelbuddy.model.journey.QJourney.journey;
 import static de.travelbuddy.model.place.QPlace.place;
 
 @RestController
 @RequestMapping("api/v1/journeys")
-public class JourneyController {
+public class JourneyController extends BaseController<Journey> {
 
     IGenericRepo<Journey> repo;
     IGenericRepo<Person> repoPerson = null;
@@ -39,21 +40,19 @@ public class JourneyController {
     @Autowired
     public JourneyController(IGenericRepo<Journey> repo, IGenericRepo<Person> repoPerson,
                              IGenericRepo<Place> repoPlace) {
+        this.type = Journey.class;
         this.repo = repo;
-        this.repo.setType(Journey.class);
         this.repoPerson = repoPerson;
-        this.repoPerson.setType(Person.class);
         this.repoPlace = repoPlace;
-        this.repoPlace.setType(Place.class);
     }
 
     private Journey fetchJourney(Long journeyId) {
-        Journey journey = repo.read(journeyId);
+        Optional<Journey> journey = repo.findById(journeyId);
 
-        if (journey == null)
+        if (!journey.isPresent())
             throw new JourneyNotFoundAPIException();
 
-        return journey;
+        return journey.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -96,7 +95,7 @@ public class JourneyController {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Journey> getJourneys() throws JourneyNotFoundAPIException {
-        return repo.getSelectQuery().fetch();
+        return toListT(repo.findAll());
     }
 
     /**
@@ -109,11 +108,11 @@ public class JourneyController {
     @GetMapping("/search/{searchQ}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Journey> findJourneys(@PathVariable String searchQ) throws JourneyNotFoundAPIException {
-        return repo.getSelectQuery()
-                .where(journey.id.stringValue().contains(searchQ)
-                        .or(journey.title.contains(searchQ)))
-                .fetchResults()
-                .getResults();
+        return null;/*StreamSupport.stream(
+                repo.findAll(
+                    journey.id.stringValue().contains(searchQ)
+                    .or(journey.title.contains(searchQ))).spliterator(), false)
+                .collect(Collectors.toList());*/
     }
 
 
@@ -157,9 +156,7 @@ public class JourneyController {
     @ResponseStatus(code = HttpStatus.OK)
     void deleteJourney(@PathVariable Long journeyId) throws JourneyNotFoundAPIException {
         //Check if exist
-        fetchJourney(journeyId);
-
-        repo.remove(journeyId);
+        repo.delete(fetchJourney(journeyId));
     }
     //</editor-fold>
 
@@ -192,7 +189,7 @@ public class JourneyController {
         Journey journey = fetchJourney(journeyId);
 
         try {
-            Place p = repoPlace.getSelectQuery()
+            Place p = repoPlace.getSelectQuery(Place.class)
                     .where(place.id.eq(locationId))
                     .fetchOne();
 
@@ -228,7 +225,7 @@ public class JourneyController {
 
 
         try {
-            Place p = repoPlace.getSelectQuery()
+            Place p = repoPlace.getSelectQuery(Place.class)
                     .where(place.id.eq(locationId))
                     .fetchOne();
 
@@ -275,7 +272,7 @@ public class JourneyController {
     public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
 
-        Person p = repoPerson.getSelectQuery()
+        Person p = repoPerson.getSelectQuery(Person.class)
                 .where(person.id.eq(personId))
                 .fetchOne();
 
@@ -316,7 +313,7 @@ public class JourneyController {
 
         try {
 
-            Person p = repoPerson.getSelectQuery()
+            Person p = repoPerson.getSelectQuery(Person.class)
                     .where(person.id.eq(personId))
                     .fetchOne();
 
@@ -345,7 +342,7 @@ public class JourneyController {
 
         try {
 
-            Person p = repoPerson.getSelectQuery()
+            Person p = repoPerson.getSelectQuery(Person.class)
                     .where(person.id.eq(personId))
                     .fetchOne();
 

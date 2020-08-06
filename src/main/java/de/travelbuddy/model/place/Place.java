@@ -1,7 +1,6 @@
 package de.travelbuddy.model.place;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 import de.travelbuddy.model.*;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;

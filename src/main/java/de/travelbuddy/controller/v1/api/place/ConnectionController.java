@@ -1,5 +1,6 @@
 package de.travelbuddy.controller.v1.api.place;
 
+import de.travelbuddy.controller.v1.api.BaseController;
 import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.ConnectionNotFoundAPIException;
@@ -11,26 +12,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/connections")
-public class ConnectionController {
+public class ConnectionController extends BaseController<Connection> {
 
     IGenericRepo<Connection> repoConnection;
 
     @Autowired
     public ConnectionController(IGenericRepo<Connection> repoConnection) {
         this.repoConnection = repoConnection;
-        this.repoConnection.setType(Connection.class);
+        this.type = Connection.class;
     }
 
     private Connection fetchConnection(Long connectionId) {
-        Connection conn = repoConnection.read(connectionId);
+        Optional<Connection> conn = repoConnection.findById(connectionId);
 
-        if (conn == null)
+        if (!conn.isPresent())
             throw new ConnectionNotFoundAPIException();
 
-        return conn;
+        return conn.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -55,7 +57,7 @@ public class ConnectionController {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Connection> getConnections() throws LocationNotFoundAPIException {
-        return repoConnection.getSelectQuery().fetch();
+        return repoConnection.getSelectQuery(type).fetch();
     }
 
     //###################
@@ -83,9 +85,7 @@ public class ConnectionController {
     @ResponseStatus(code = HttpStatus.OK)
     void deleteEmployee(@PathVariable Long connectionId) throws ConnectionNotFoundAPIException {
         //Check if exist
-        fetchConnection(connectionId);
-
-        repoConnection.remove(connectionId);
+        repoConnection.delete(fetchConnection(connectionId));
     }
     //</editor-fold>
 

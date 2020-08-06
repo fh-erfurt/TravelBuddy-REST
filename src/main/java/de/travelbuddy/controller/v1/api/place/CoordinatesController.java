@@ -1,5 +1,6 @@
 package de.travelbuddy.controller.v1.api.place;
 
+import de.travelbuddy.controller.v1.api.BaseController;
 import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.place.exceptions.CoordinatesNotFoundAPIException;
@@ -11,26 +12,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/coordinates")
-public class CoordinatesController {
+public class CoordinatesController extends BaseController<Coordinates> {
 
     IGenericRepo<Coordinates> repo;
 
     @Autowired
     public CoordinatesController(IGenericRepo<Coordinates> repo) {
         this.repo = repo;
-        this.repo.setType(Coordinates.class);
+        this.type = Coordinates.class;
     }
 
     private Coordinates fetchCoordinates(Long coordinatesId) {
-        Coordinates coord = repo.read(coordinatesId);
+        Optional<Coordinates> coord = repo.findById(coordinatesId);
 
-        if (coord == null)
+        if (!coord.isPresent())
             throw new CoordinatesNotFoundAPIException();
 
-        return coord;
+        return coord.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -55,7 +57,7 @@ public class CoordinatesController {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Coordinates> getCoordinates() throws LocationNotFoundAPIException {
-        return repo.getSelectQuery().fetch();
+        return repo.getSelectQuery(type).fetch();
     }
 
     //###################
@@ -83,9 +85,7 @@ public class CoordinatesController {
     @ResponseStatus(code = HttpStatus.OK)
     void deleteEmployee(@PathVariable Long coordinatesId) throws CoordinatesNotFoundAPIException {
         //Check if exist
-        fetchCoordinates(coordinatesId);
-
-        repo.remove(coordinatesId);
+        repo.delete(fetchCoordinates(coordinatesId));
     }
     //</editor-fold>
 

@@ -9,26 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("api/v1/contacts")
-public class ContactDetailsController {
+public class ContactDetailsController extends BaseController<ContactDetails> {
 
     IGenericRepo<ContactDetails> repo;
 
     @Autowired
     public ContactDetailsController(IGenericRepo<ContactDetails> repo) {
+        this.type = ContactDetails.class;
         this.repo = repo;
-        this.repo.setType(ContactDetails.class);
     }
 
     private ContactDetails fetchContactDetails(Long contactId) {
-        ContactDetails cd = repo.read(contactId);
+        Optional<ContactDetails> cd = repo.findById(contactId);
 
-        if (cd == null)
+        if (!cd.isPresent())
             throw new ContactDetailsNotFoundAPIException();
 
-        return cd;
+        return cd.get();
     }
 
     //<editor-fold desc="CRUD">

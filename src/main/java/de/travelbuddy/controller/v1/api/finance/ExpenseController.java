@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/expenses")
@@ -25,18 +26,16 @@ public class ExpenseController {
     @Autowired
     public ExpenseController(IGenericRepo<Expense> repo, IGenericRepo<Person> repoPerson) {
         this.repo = repo;
-        this.repo.setType(Expense.class);
         this.repoPerson = repoPerson;
-        this.repoPerson.setType(Person.class);
     }
 
     private Expense fetchExpense(Long expenseId) {
-        Expense expense = repo.read(expenseId);
+        Optional<Expense> expense = repo.findById(expenseId);
 
-        if (expense == null)
+        if (!expense.isPresent())
             throw new ExpenseNotFoundAPIException();
 
-        return expense;
+        return expense.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -111,9 +110,7 @@ public class ExpenseController {
     @ResponseStatus(code = HttpStatus.OK)
     void deleteExpense(@PathVariable Long expenseId) throws ExpenseNotFoundAPIException {
         //Check if exist
-        fetchExpense(expenseId);
-
-        repo.remove(expenseId);
+        repo.delete(fetchExpense(expenseId));
     }
 
     //</editor-fold>
@@ -147,12 +144,12 @@ public class ExpenseController {
 
         try {
 
-            Person p = repoPerson.read(personId);
+            Optional<Person> p = repoPerson.findById(personId);
 
-            if (p == null)
+            if (!p.isPresent())
                 throw new PersonNotFoundAPIException();
 
-            expense.removePerson(p);
+            expense.removePerson(p.get());
         }
         catch (NonUniqueResultException | IllegalArgumentException ex) {
             throw new PersonNotFoundAPIException();
@@ -176,12 +173,12 @@ public class ExpenseController {
 
         try {
 
-            Person p = repoPerson.read(personId);
+            Optional<Person> p = repoPerson.findById(personId);
 
-            if (p == null)
+            if (!p.isPresent())
                 throw new PersonNotFoundAPIException();
 
-            expense.addPerson(p);
+            expense.addPerson(p.get());
         }
         catch (NonUniqueResultException | IllegalArgumentException ex) {
             throw new PersonNotFoundAPIException();

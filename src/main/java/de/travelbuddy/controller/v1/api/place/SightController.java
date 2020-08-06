@@ -17,7 +17,6 @@ public class SightController extends LocationController<Sight> {
     public SightController(IGenericRepo<Sight> repoSight, IGenericRepo<Person> repoPerson,
                            IGenericRepo<Expense> repoExpense, IGenericRepo<Connection> repoConnection) {
         super(repoSight, repoPerson,repoExpense,repoConnection);
-
-        repoSight.setType(Sight.class);
+        this.type = Sight.class;
     }
 }

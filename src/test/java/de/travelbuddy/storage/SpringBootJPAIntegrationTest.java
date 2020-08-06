@@ -1,7 +1,7 @@
 package de.travelbuddy.storage;
 
 import de.travelbuddy.model.place.Coordinates;
-import de.travelbuddy.storage.repositories.GenericRepo;
+import de.travelbuddy.storage.repositories.IGenericRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,25 +10,27 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.EntityManager;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Component
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SpringBootJPAIntegrationTest {
 
-    private GenericRepo<Coordinates> genericRepo = null;
+    private IGenericRepo<Coordinates> genericRepo = null;
 
     @Autowired
-    public SpringBootJPAIntegrationTest(GenericRepo<Coordinates> genericRepo)
+    EntityManager em;
+
+    @Autowired
+    public SpringBootJPAIntegrationTest(IGenericRepo<Coordinates> genericRepo)
     {
         this.genericRepo = genericRepo;
-        this.genericRepo.setType(Coordinates.class);
     }
 
     @BeforeAll
@@ -43,12 +45,12 @@ public class SpringBootJPAIntegrationTest {
 
         //When
         Coordinates coord = genericRepo.save(InstanceHelper.clearId(InstanceHelper.createCoordinate()));
-        Coordinates coord2 = genericRepo.read(coord.getId());
+        Optional<Coordinates> coord2 = genericRepo.findById(coord.getId());
 
         //Then
         Assertions.assertNotNull(coord);
-        Assertions.assertNotNull(coord2);
-        assertEquals(coord.getLatitude(), coord2.getLatitude());
-        assertEquals(coord.getLongitude(), coord2.getLongitude());
+        Assertions.assertTrue(coord2.isPresent());
+        assertEquals(coord.getLatitude(), coord2.get().getLatitude());
+        assertEquals(coord.getLongitude(), coord2.get().getLongitude());
     }
 }
