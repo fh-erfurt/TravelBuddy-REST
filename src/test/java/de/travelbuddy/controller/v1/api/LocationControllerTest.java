@@ -30,7 +30,9 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
     @Autowired
     PlaceRepo repo;
+    @Autowired
     PersonRepo repoPerson;
+    @Autowired
     ExpenseRepo repoExpense;
 
 
