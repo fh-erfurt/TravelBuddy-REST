@@ -1,0 +1,104 @@
+Testfälle:
+
+ExpenseController:
+
+. - erstellen
+. - auslesen ---> http://localhost:8080/api/v1/expenses -- geht nicht, man kann nur nach bestimmter Expense Suchen
+. - updaten
+. - löschen
+ 
+. - show_persons
+. - add_person
+. - remove_person
+ - check_if_person_is_involved ---> TODO(brauch ich das überhaupt? )
+
+. - get_cost_Pp ---> gibt nicht die Kosten zurück
+. (- get_money) ---> muss noch im Controller geschrieben werden
+
+JourneyController:
+
+. - erstellen
+. - auslesen
+. - updaten
+. - löschen
+ 
+. - show_persons
+. - add_person
+. - remove_person ---> http://localhost:8080/api/v1/journeys/1/persons/1 -- geht nicht (404)
+ - search_person
+ 
+. - show_expenses
+. - add_expense
+. - remove_expense
+ - search_expense
+ 
+. - show_locations
+. - add_location
+. - remove_location
+ - search_location
+ 
+. - total_cost
+. - total_cost_Pp
+
+LocationController:
+
+. - erstellen
+. - auslesen
+. - updaten
+. - löschen 
+ 
+. - show_persons
+. - add_person
+. - remove_person
+. - search_person
+ 
+ - show_expenses
+ - add_expense
+ - remove_expense
+ - search_expense
+ 
+ - show_connections
+ - add_connection
+ - remove_connection
+ - search_connection
+ 
+ #- get_contactDetails
+ #- set_contactDetails
+ 
+ - get_coordinates
+ - set_coordinates
+ 
+. - total_cost
+. - total_cost_Pp
+ 
+ 
+AccomodationController:
+ 
+PlaceController:
+ 
+SightController:
+
+
+
+ConnectionController:
+ - erstellen
+ - auslesen
+ - updaten
+ - löschen
+ 
+ - get_duration
+ - get_expense
+ - set_expense
+ 
+ PersonController:
+. - erstellen
+. - auslesen
+. - updaten
+. - löschen
+ 
+ 
+ 
+ Legende:
+ . Test ist geschrieben
+ # sollte nicht gebraucht werden
+ sonst noch offen
