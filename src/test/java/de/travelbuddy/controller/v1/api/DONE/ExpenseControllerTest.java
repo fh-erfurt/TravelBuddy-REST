@@ -1,5 +1,6 @@
-package de.travelbuddy.controller.v1.api;
+package de.travelbuddy.controller.v1.api.DONE;
 
+import de.travelbuddy.controller.v1.api.RestAssuredTestBase;
 import de.travelbuddy.controller.v1.api.finance.ExpenseController;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
@@ -18,7 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.in;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+
 public class ExpenseControllerTest extends RestAssuredTestBase {
 
     @Autowired
@@ -29,7 +30,12 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
     IGenericRepo<Person> repoPerson;
 
 
-    //CRUD - begin
+    //<editor-fold desc="CRUD">
+
+    //###################
+    //##### CREATE ######
+    //###################
+
     @Test
     public void create_expense_test () {
 
@@ -43,6 +49,10 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
                 then().
                 statusCode(201).assertThat().body("id", equalTo(post.getId()));
     }
+
+    //###################
+    //###### READ #######
+    //###################
 
     @Test
     public void read_expense_test () {
@@ -74,6 +84,9 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
                 statusCode(200);
     }
 
+    //###################
+    //##### UPDATE ######
+    //###################
 
     @Test
     public void update_expense_test () {
@@ -88,9 +101,13 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
                 when().
                 put("/expenses/" + inital.getId()).
                 then().
-                statusCode(202).assertThat().body("title", equalTo(update.getTitle()));
+                statusCode(200).assertThat().body("title", equalTo(update.getTitle()));
 
     }
+
+    //###################
+    //##### DELETE ######
+    //###################
 
     @Test
     public void delete_expense_test () {
@@ -109,7 +126,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
 
     }
-    //CRUD - end
+    //</editor-fold>
 
 
     @Test
@@ -139,6 +156,11 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
                 then().
                 statusCode(200);
 
+        when().
+                get("/expenses/" + inital.getId() + "/persons/" + person.getId()).
+                then().
+                statusCode(200);
+
     }
 
     @Test
@@ -162,7 +184,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
     }
 
     @Test
-    public void get_cost_Pp_for_expense (){
+    public void get_cost_Pp_for_expense_test (){
 
         Expense inital = InstanceHelper.createExpense();
         repo.save(inital);
@@ -179,7 +201,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
     //TODO muss noch gebaut werden
     @Test
-    public void get_money_of_expense (){
+    public void get_cost_of_expense_test (){
 
         Expense inital = InstanceHelper.createExpense();
         repo.save(inital);

@@ -34,8 +34,8 @@ import static de.travelbuddy.model.place.QPlace.place;
 public class JourneyController extends BaseController<Journey> {
 
     IGenericRepo<Journey> repo;
-    IGenericRepo<Person> repoPerson = null;
-    IGenericRepo<Place> repoPlace = null;
+    IGenericRepo<Person> repoPerson ;
+    IGenericRepo<Place> repoPlace ;
 
     @Autowired
     public JourneyController(IGenericRepo<Journey> repo, IGenericRepo<Person> repoPerson,
@@ -259,15 +259,16 @@ public class JourneyController extends BaseController<Journey> {
     /**
      * Retrieve the cost of a journey for one person
      * @param journeyId Id of the journey
+     * @param personId Id of the person
      * @param currency desired target currency code
      * @return The total cost of the given journey for one person
      * @throws JourneyNotFoundAPIException If the journey was not found
      * @throws CurrencyNotFoundAPIException If the given currency was not found
      * @throws PersonNotFoundAPIException If the given person was not found
      */
-    @GetMapping("/{journeyId}/costspp")
+    @GetMapping("/{journeyId}/costspp/{personId}/{currency}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Money getCostpP(@PathVariable Long journeyId, @RequestParam String currency, @RequestParam Long personId)
+    public Money getCostpP(@PathVariable Long journeyId, @PathVariable String currency, @PathVariable Long personId)
             throws JourneyNotFoundAPIException, CurrencyNotFoundAPIException {
 
         Person p = repoPerson.getSelectQuery(Person.class)
