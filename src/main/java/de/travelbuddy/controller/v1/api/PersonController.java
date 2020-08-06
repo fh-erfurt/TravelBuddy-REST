@@ -88,7 +88,7 @@ public class PersonController extends BaseController<Person> {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons() {
-        return null;
+        return toListT(repo.findAll());
     }
 
     /**
