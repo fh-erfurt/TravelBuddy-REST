@@ -30,6 +30,5 @@ public abstract class RestAssuredTestBase {
         }
         RestAssured.baseURI = baseHost;
     }
-
-    public abstract void pingTest_should_return_200();
+    
 }
