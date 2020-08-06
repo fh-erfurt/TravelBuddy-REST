@@ -1,3 +1,4 @@
+/*
 package de.travelbuddy.storage.core;
 
 import com.querydsl.core.types.dsl.EntityPathBase;
@@ -56,3 +57,4 @@ public class QuerydslNameResolver {
         return new String(charTypeName);
     }
 }
+*/

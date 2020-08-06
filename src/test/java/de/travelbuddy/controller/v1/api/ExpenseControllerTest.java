@@ -3,20 +3,17 @@ package de.travelbuddy.controller.v1.api;
 import de.travelbuddy.controller.v1.api.finance.ExpenseController;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.ExpenseRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.in;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class ExpenseControllerTest extends RestAssuredTestBase {
@@ -25,8 +22,8 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
     ExpenseController expenseController;
 
     @Autowired
-    IGenericRepo<Expense> repo;
-    IGenericRepo<Person> repoPerson;
+    ExpenseRepo repo;
+    PersonRepo repoPerson;
 
 
     //CRUD - begin

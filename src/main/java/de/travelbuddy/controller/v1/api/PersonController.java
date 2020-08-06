@@ -5,7 +5,7 @@ import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,15 @@ import java.util.Optional;
 
 import static de.travelbuddy.model.QPerson.person;
 
+
 @RestController
 @RequestMapping("api/v1/persons")
 public class PersonController extends BaseController<Person> {
 
-    IGenericRepo<Person> repo;
+    PersonRepo repo;
 
     @Autowired
-    public PersonController(IGenericRepo<Person> repo) {
+    public PersonController(PersonRepo repo) {
         this.type = Person.class;
         this.repo = repo;
     }
@@ -75,7 +76,7 @@ public class PersonController extends BaseController<Person> {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons() {
-        return repo.getSelectQuery(Person.class).fetch();
+        return null;
     }
 
     /**
@@ -88,12 +89,9 @@ public class PersonController extends BaseController<Person> {
     @GetMapping("/search/{searchQ}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> findJourneys(@PathVariable String searchQ) throws PersonNotFoundAPIException {
-        return repo.getSelectQuery(type)
-                .where(person.id.stringValue().contains(searchQ)
+        return toListT(repo.findAll(person.id.stringValue().contains(searchQ)
                         .or(person.name.contains(searchQ))
-                        .or(person.firstName.contains(searchQ)))
-                .fetchResults()
-                .getResults();
+                        .or(person.firstName.contains(searchQ))));
     }
 
     //###################

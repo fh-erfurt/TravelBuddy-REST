@@ -1,14 +1,14 @@
 package de.travelbuddy.controller.v1.api.finance;
 
-import com.querydsl.core.NonUniqueResultException;
+import de.travelbuddy.controller.v1.api.BaseController;
 import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
-import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.ExpenseRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +18,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/expenses")
-public class ExpenseController {
+public class ExpenseController extends BaseController<Expense> {
 
-    IGenericRepo<Expense> repo = null;
-    IGenericRepo<Person> repoPerson = null;
+    ExpenseRepo repo = null;
+    PersonRepo repoPerson = null;
 
     @Autowired
-    public ExpenseController(IGenericRepo<Expense> repo, IGenericRepo<Person> repoPerson) {
+    public ExpenseController(ExpenseRepo repo, PersonRepo repoPerson) {
         this.repo = repo;
         this.repoPerson = repoPerson;
+        this.type = Expense.class;
     }
 
     private Expense fetchExpense(Long expenseId) {
@@ -142,20 +143,7 @@ public class ExpenseController {
         //Check if exist
         Expense expense = fetchExpense(expenseId);
 
-        try {
 
-            Optional<Person> p = repoPerson.findById(personId);
-
-            if (!p.isPresent())
-                throw new PersonNotFoundAPIException();
-
-            expense.removePerson(p.get());
-        }
-        catch (NonUniqueResultException | IllegalArgumentException ex) {
-            throw new PersonNotFoundAPIException();
-        }
-
-        repo.save(expense);
     }
 
     /**
@@ -171,20 +159,7 @@ public class ExpenseController {
         //Check if exist
         Expense expense = fetchExpense(expenseId);
 
-        try {
-
-            Optional<Person> p = repoPerson.findById(personId);
-
-            if (!p.isPresent())
-                throw new PersonNotFoundAPIException();
-
-            expense.addPerson(p.get());
-        }
-        catch (NonUniqueResultException | IllegalArgumentException ex) {
-            throw new PersonNotFoundAPIException();
-        }
-
-        repo.save(expense);
+        return;
     }
 
     //</editor-fold>
