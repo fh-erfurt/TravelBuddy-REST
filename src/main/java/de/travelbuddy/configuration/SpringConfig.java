@@ -49,7 +49,7 @@ public class SpringConfig implements WebMvcConfigurer {
         return new ApiInfoBuilder()
                 .title("API documentation for TravelBuddy")
                 .description("This documentation provides you with information about all the available methods in this API.")
-                .contact(new Contact("TravelBuddy", "travelbuddy.de", "info@travelbuddy.de"))
+                .contact(new Contact("TravelBuddy", "http://travelbuddy.de", "info@travelbuddy.de"))
                 .license("GNU General Public License v3.0")
                 .licenseUrl("https://gitl4b.dutches.de/fhe/java1-2/travelbuddy/-/blob/master/LICENSE")
                 .version("1.0")
