@@ -122,7 +122,7 @@ public class PersonController extends BaseController<Person> {
     public Person updatePerson(@PathVariable Long personId, @RequestBody Person person) {
         LOG.info("Update person: " + personId);
 
-        fetchPerson(personId);
+        Person p1 = fetchPerson(personId);
 
         if (person.getId() == null)
             throw new MissingValuesAPIException("Missing values: id");
@@ -130,7 +130,8 @@ public class PersonController extends BaseController<Person> {
         if (!person.getId().equals(personId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", personId, person.getId()));
 
-        Person p = repo.save(person);
+        copyNonNullProperties(person, p1);
+        Person p = repo.save(p1);
         LOG.info("Person updated: " + personId);
         return p;
     }

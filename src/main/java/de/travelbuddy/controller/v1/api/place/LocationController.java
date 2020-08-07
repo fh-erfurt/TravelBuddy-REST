@@ -104,7 +104,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @ResponseStatus(code = HttpStatus.OK)
     public T updateLocation(@PathVariable Long locationId, @RequestBody T location) throws LocationNotFoundAPIException {
         LOG.info("Update location: " + locationId);
-        fetchLocation(locationId);
+        T loc1 = fetchLocation(locationId);
 
         if (location.getId() == null)
             throw new MissingValuesAPIException("Missing values: id");
@@ -112,7 +112,8 @@ public class LocationController<T extends Place> extends BaseController<T> {
         if (!location.getId().equals(locationId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", locationId, location.getId()));
 
-        T loc = repoLocation.save(location);
+        copyNonNullProperties(location, loc1);
+        T loc = repoLocation.save(loc1);
         LOG.info("Updated location: " + locationId);
         return loc;
     }

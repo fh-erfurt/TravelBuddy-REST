@@ -110,7 +110,7 @@ public class ExpenseController extends BaseController<Expense> {
     @ResponseStatus(code = HttpStatus.OK)
     public Expense updateExpense(@PathVariable Long expenseId, @RequestBody Expense expense) throws ExpenseNotFoundAPIException {
         LOG.info("Update expense: " + expenseId);
-        fetchExpense(expenseId);
+        Expense exp1 = fetchExpense(expenseId);
 
         if (expense.getId() == null)
             throw new MissingValuesAPIException("Missing values: id");
@@ -118,7 +118,8 @@ public class ExpenseController extends BaseController<Expense> {
         if (!expense.getId().equals(expenseId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", expenseId, expense.getId()));
 
-        Expense exp = repo.save(expense);
+        copyNonNullProperties(expense, exp1);
+        Expense exp = repo.save(exp1);
         LOG.info("Updated expense: " + expenseId);
         return  exp;
     }

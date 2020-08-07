@@ -154,7 +154,7 @@ public class JourneyController extends BaseController<Journey> {
     @ResponseStatus(code = HttpStatus.OK)
     public Journey updateJourney(@PathVariable Long journeyId, @RequestBody Journey journey) throws JourneyNotFoundAPIException {
         LOG.info("Update journey: " + journeyId);
-        fetchJourney(journeyId);
+        Journey j1 = fetchJourney(journeyId);
 
         if (journey.getId() == null)
             throw new MissingValuesAPIException("Missing values: id");
@@ -162,7 +162,8 @@ public class JourneyController extends BaseController<Journey> {
         if (!journey.getId().equals(journeyId))
             throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", journeyId, journey.getId()));
 
-        Journey jour =  repo.save(journey);
+        copyNonNullProperties(journey, j1);
+        Journey jour =  repo.save(j1);
         LOG.info("Journey updated: " + journeyId);
         return jour;
     }
