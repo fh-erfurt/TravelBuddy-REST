@@ -1,5 +1,6 @@
 package de.travelbuddy.model.place;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.travelbuddy.model.*;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
@@ -21,29 +22,34 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "PLACE")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_place", name = "seq_gen_base")
 public class Place extends BaseModel {
 
+    @Column(nullable = false)
     private String name;
 
-    @OneToOne
     private Coordinates coordinates;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ContactDetails contactDetails;
 
     private LocalDateTime arrive;
     private LocalDateTime departure;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Map<Long, Expense> expenses = new HashMap<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Connection> connectionsToNextPlace = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Person> involvedPersons = new ArrayList<>();
 
     /**

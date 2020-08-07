@@ -30,8 +30,7 @@ public class InstanceHelper {
     {
         Journey journey = new Journey();
         journey.setTitle(rndString());
-        rndId(journey);
-        return journey;
+        return rndId(journey);
     }
 
     public static Place createPlace()
@@ -47,8 +46,7 @@ public class InstanceHelper {
         pl.setContactDetails(createContactDetails());
         pl.setArrive(start);
         pl.setDeparture(start.plusHours(rndInt(1, 8)));
-        rndId(pl);
-        return pl;
+        return rndId(pl);
     }
 
     public static Accommodation createAccommodation()
@@ -65,8 +63,7 @@ public class InstanceHelper {
         pl.setArrive(start);
         pl.setDeparture(start.plusHours(rndInt(1, 8)));
         pl.setType(Accommodation.accommodationType.HOSTEL);
-        rndId(pl);
-        return pl;
+        return rndId(pl);
     }
 
     public static Sight createSight()
@@ -83,8 +80,7 @@ public class InstanceHelper {
         pl.setArrive(start);
         pl.setDeparture(start.plusHours(rndInt(1, 8)));
         pl.setIndoor(true);
-        rndId(pl);
-        return pl;
+        return rndId(pl);
     }
 
     public static Coordinates createCoordinate()
@@ -94,7 +90,7 @@ public class InstanceHelper {
             ret = new Coordinates();
             ret.setLatitude(rndDouble(-90, 90));
             ret.setLongitude(rndDouble(-180, 180));
-            rndId(ret);
+            //rndId(ret);
         }
         catch (InvalidLatitudeException | InvalidLongitudeException ex)
         {
@@ -114,8 +110,7 @@ public class InstanceHelper {
         cd.setStreetNumber(rndInt(1,100));
         cd.setZIP(rndString());
         cd.setCountry(rndString());
-        rndId(cd);
-        return cd;
+        return rndId(cd);
     }
 
     public static Expense createExpense()
@@ -131,8 +126,7 @@ public class InstanceHelper {
         exp.setPrice(createMoney(currency));
         exp.setStatus(Expense.planned.PLANNED);
         exp.setPerPerson(false);
-        rndId(exp);
-        return exp;
+        return rndId(exp);
     }
 
     public static Money createMoney()
@@ -155,8 +149,7 @@ public class InstanceHelper {
         p.setName(rndLastname());
         p.setBirthdate(rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()));
         p.setContactDetails(createContactDetails());
-        rndId(p);
-        return p;
+        return rndId(p);
     }
 
     public static Person createPersonFemale()
@@ -166,8 +159,7 @@ public class InstanceHelper {
         p.setName(rndLastname());
         p.setBirthdate(rndLocalDate(LocalDate.now().minusYears(60).getYear(), LocalDate.now().minusYears(20).getYear()));
         p.setContactDetails(createContactDetails());
-        rndId(p);
-        return p;
+        return rndId(p);
     }
 
     public static Person createPerson()
@@ -194,8 +186,7 @@ public class InstanceHelper {
         con.setEnd(to);
         con.setStart(from);
         con.setExpense(createExpense());
-        rndId(con);
-        return con;
+        return rndId(con);
     }
 
     /* ######### HELPERS ####### */
@@ -263,14 +254,30 @@ public class InstanceHelper {
         return title[new Random().nextInt(title.length)];
     }
 
-    private static <T extends BaseModel> void rndId(T inst)  {
+    private static <T extends BaseModel> T initId(T inst, Long value)  {
         try {
             Method privMeth = inst.getClass().getSuperclass().getDeclaredMethod("setId", Long.class);
             privMeth.setAccessible(true);
-            privMeth.invoke(inst, (Long)rndLong(1,99999));
+            privMeth.invoke(inst, value);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
+        return inst;
+    }
+
+    public static <T extends BaseModel> T rndId(T inst)
+    {
+        return initId(inst, rndLong(1,99999));
+    }
+
+    public static <T extends BaseModel> T clearId(T inst)
+    {
+        return initId(inst, null);
+    }
+
+    public static <T extends BaseModel> T definedId(T inst,Long value)
+    {
+        return initId(inst, value);
     }
 }
 

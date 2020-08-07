@@ -16,12 +16,15 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_expense", name = "seq_gen_base")
 public class Person extends BaseModel {
 
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String name;
     private LocalDate birthdate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ContactDetails contactDetails;
 }

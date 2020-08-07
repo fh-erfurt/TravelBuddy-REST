@@ -1,5 +1,7 @@
 package de.travelbuddy.model.finance;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.Person;
 import lombok.Getter;
@@ -18,17 +20,21 @@ import java.util.List;
 @Table(name = "EXPENSE")
 @Getter @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_expense", name = "seq_gen_expense")
 public class Expense extends BaseModel {
 
+    @Column(nullable = false)
     private String title;
     private String description;
-    private planned status;
+
+    @Column(columnDefinition = "smallint", nullable = false)
+    private planned status = planned.PLANNED;
     private boolean perPerson;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Person> involvedPersons = new ArrayList<>();
 
-    @Transient
     private Money price;
 
     public enum planned

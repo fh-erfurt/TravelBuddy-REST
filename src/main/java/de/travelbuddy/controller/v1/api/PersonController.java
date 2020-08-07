@@ -1,36 +1,46 @@
 package de.travelbuddy.controller.v1.api;
 
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.model.ContactDetails;
 import de.travelbuddy.model.Person;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static de.travelbuddy.model.QPerson.person;
 
+
 @RestController
 @RequestMapping("api/v1/persons")
-public class PersonController {
+public class PersonController extends BaseController<Person> {
 
-    IGenericRepo<Person> repo;
+    PersonRepo repo;
+    private static final Logger LOG = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
-    public PersonController(IGenericRepo<Person> repo) {
+    public PersonController(PersonRepo repo) {
+        this.type = Person.class;
         this.repo = repo;
-        this.repo.setType(Person.class);
     }
 
     private Person fetchPerson(Long personId) throws PersonNotFoundAPIException {
-        Person person = repo.read(personId);
+        LOG.info("Find person: " + personId);
 
-        if (person == null)
+        Optional<Person> person = repo.findById(personId);
+
+        if (!person.isPresent())
             throw new PersonNotFoundAPIException();
 
-        return person;
+        LOG.info("Person found: " + personId);
+        return person.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -46,7 +56,13 @@ public class PersonController {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Person createPerson(@RequestBody Person person) {
-        return repo.save(person);
+        LOG.info("Save person...");
+
+        Person p = repo.save(person);
+
+        LOG.info("Person saved..." + person.toString());
+
+        return p;
     }
 
     //###################
@@ -72,7 +88,7 @@ public class PersonController {
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons() {
-        return repo.getSelectQuery().fetch();
+        return toListT(repo.findAll());
     }
 
     /**
@@ -85,12 +101,10 @@ public class PersonController {
     @GetMapping("/search/{searchQ}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> findJourneys(@PathVariable String searchQ) throws PersonNotFoundAPIException {
-        return repo.getSelectQuery()
-                .where(person.id.stringValue().contains(searchQ)
+        LOG.info("Search persons with query: " + searchQ);
+        return toListT(repo.findAll(person.id.stringValue().contains(searchQ)
                         .or(person.name.contains(searchQ))
-                        .or(person.firstName.contains(searchQ)))
-                .fetchResults()
-                .getResults();
+                        .or(person.firstName.contains(searchQ))));
     }
 
     //###################
@@ -106,10 +120,20 @@ public class PersonController {
     @PutMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     public Person updatePerson(@PathVariable Long personId, @RequestBody Person person) {
-        //Check if exist
-        fetchPerson(personId);
+        LOG.info("Update person: " + personId);
 
-        return repo.save(person);
+        Person p1 = fetchPerson(personId);
+
+        if (person.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!person.getId().equals(personId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", personId, person.getId()));
+
+        copyNonNullProperties(person, p1);
+        Person p = repo.save(p1);
+        LOG.info("Person updated: " + personId);
+        return p;
     }
 
     //###################
@@ -124,10 +148,8 @@ public class PersonController {
     @DeleteMapping("/{personId}")
     @ResponseStatus(code = HttpStatus.OK)
     void deletePerson(@PathVariable Long personId) throws PersonNotFoundAPIException {
-        //Check if exist
-        fetchPerson(personId);
-
-        repo.remove(personId);
+        LOG.info("Delete person: " + personId);
+        repo.delete(fetchPerson(personId));
     }
     //</editor-fold>
 
@@ -140,8 +162,7 @@ public class PersonController {
     @GetMapping("/{personId}/contact")
     @ResponseStatus(code = HttpStatus.OK)
     public ContactDetails getContact(@PathVariable Long personId) throws PersonNotFoundAPIException {
-        ContactDetails cd = fetchPerson(personId).getContactDetails();
-        String c = cd.getCountry();
-        return cd;
+        LOG.info("Find contact of person: " + personId);
+        return fetchPerson(personId).getContactDetails();
     }
 }

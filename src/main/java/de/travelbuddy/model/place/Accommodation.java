@@ -13,13 +13,13 @@ import javax.persistence.Table;
  * Accommodation is a extension from place
  */
 @Entity
-@Table(name = "ACCOMMODATION")
+@Table(name = "ACCOMODATION")
 @Getter @Setter
 @NoArgsConstructor
 public class Accommodation extends Place {
 
     @Enumerated()
-    @Column(columnDefinition = "smallint")
+    @Column(columnDefinition = "smallint", nullable = false)
     private accommodationType type;
 
     public enum accommodationType

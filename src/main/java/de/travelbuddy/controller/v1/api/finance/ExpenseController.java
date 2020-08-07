@@ -1,40 +1,51 @@
 package de.travelbuddy.controller.v1.api.finance;
 
-import com.querydsl.core.NonUniqueResultException;
+import de.travelbuddy.controller.v1.api.BaseController;
+import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
+import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.journey.exceptions.JourneyNotFoundAPIException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
-import de.travelbuddy.storage.repositories.IGenericRepo;
+import de.travelbuddy.model.journey.Journey;
+import de.travelbuddy.storage.repositories.ExpenseRepo;
+import de.travelbuddy.storage.repositories.PersonRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/expenses")
-public class ExpenseController {
+public class ExpenseController extends BaseController<Expense> {
 
-    IGenericRepo<Expense> repo = null;
-    IGenericRepo<Person> repoPerson = null;
+    ExpenseRepo repo;
+    PersonRepo repoPerson;
+    private static final Logger LOG = LoggerFactory.getLogger(ExpenseController.class);
 
     @Autowired
-    public ExpenseController(IGenericRepo<Expense> repo, IGenericRepo<Person> repoPerson) {
+    public ExpenseController(ExpenseRepo repo, PersonRepo repoPerson) {
         this.repo = repo;
-        this.repo.setType(Expense.class);
         this.repoPerson = repoPerson;
-        this.repoPerson.setType(Person.class);
+        this.type = Expense.class;
     }
 
     private Expense fetchExpense(Long expenseId) {
-        Expense expense = repo.read(expenseId);
+        LOG.info("Find expense: " + expenseId);
 
-        if (expense == null)
+        Optional<Expense> expense = repo.findById(expenseId);
+
+        if (!expense.isPresent())
             throw new ExpenseNotFoundAPIException();
 
-        return expense;
+        LOG.info("expense found: " + expenseId);
+        return expense.get();
     }
 
     //<editor-fold desc="CRUD">
@@ -51,7 +62,10 @@ public class ExpenseController {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Expense createExpense(@RequestBody Expense expense) {
-        return repo.save(expense);
+        LOG.info("Create expense...");
+        Expense exp = repo.save(expense);
+        LOG.info("Expense saved:" + expense.getId());
+        return exp;
     }
 
     //###################
@@ -70,6 +84,17 @@ public class ExpenseController {
         return fetchExpense(expenseId);
     }
 
+    /**
+     * Read all existing expenses
+     * @return The found expenses
+     */
+    @GetMapping("")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Expense> getExpense() throws ExpenseNotFoundAPIException {
+        LOG.info("Read all expenses");
+        return toListT(repo.findAll());
+    }
+
     //###################
     //##### UPDATE ######
     //###################
@@ -78,16 +103,25 @@ public class ExpenseController {
      * Update an existing expense
      * @param expenseId The expense to update
      * @param expense The new expense
-     * @return
+     * @return updated expense
      * @throws ExpenseNotFoundAPIException If the expense was not found
      */
     @PutMapping("/{expenseId}")
     @ResponseStatus(code = HttpStatus.OK)
     public Expense updateExpense(@PathVariable Long expenseId, @RequestBody Expense expense) throws ExpenseNotFoundAPIException {
-        //Check if exist
-        fetchExpense(expenseId);
+        LOG.info("Update expense: " + expenseId);
+        Expense exp1 = fetchExpense(expenseId);
 
-        return repo.save(expense);
+        if (expense.getId() == null)
+            throw new MissingValuesAPIException("Missing values: id");
+
+        if (!expense.getId().equals(expenseId))
+            throw new IdMismatchAPIException(String.format("Ids %d and %d do not match.", expenseId, expense.getId()));
+
+        copyNonNullProperties(expense, exp1);
+        Expense exp = repo.save(exp1);
+        LOG.info("Updated expense: " + expenseId);
+        return  exp;
     }
 
     //###################
@@ -102,10 +136,9 @@ public class ExpenseController {
     @DeleteMapping("/{expenseId}")
     @ResponseStatus(code = HttpStatus.OK)
     void deleteExpense(@PathVariable Long expenseId) throws ExpenseNotFoundAPIException {
-        //Check if exist
-        fetchExpense(expenseId);
-
-        repo.remove(expenseId);
+        LOG.info("Delete expense: " + expenseId);
+        repo.delete(fetchExpense(expenseId));
+        LOG.info("Expense deleted: " + expenseId);
     }
 
     //</editor-fold>
@@ -121,6 +154,7 @@ public class ExpenseController {
     @GetMapping("/{expenseId}/persons")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Person> getPersons(@PathVariable Long expenseId) throws ExpenseNotFoundAPIException {
+        LOG.info("Get all involved persons of expense: " + expenseId);
         return fetchExpense(expenseId).getInvolvedPersons();
     }
 
@@ -134,23 +168,22 @@ public class ExpenseController {
     @ResponseStatus(code = HttpStatus.OK)
     public void removePerson(@PathVariable Long expenseId, @PathVariable Long personId)
             throws ExpenseNotFoundAPIException {
-        //Check if exist
+        LOG.info("Remove person from expense expense: " + expenseId);
+
         Expense expense = fetchExpense(expenseId);
 
         try {
+            Optional<Person> per = repoPerson.findById(personId);
 
-            Person p = repoPerson.read(personId);
-
-            if (p == null)
+            if (!per.isPresent())
                 throw new PersonNotFoundAPIException();
 
-            expense.removePerson(p);
-        }
-        catch (NonUniqueResultException | IllegalArgumentException ex) {
+            expense.removePerson(per.get());
+        } catch (IllegalArgumentException e) {
             throw new PersonNotFoundAPIException();
         }
 
-        repo.save(expense);
+        LOG.info("Person " + personId + " removed from expense " + expenseId);
     }
 
     /**
@@ -163,23 +196,23 @@ public class ExpenseController {
     @ResponseStatus(code = HttpStatus.OK)
     public void addPerson(@PathVariable Long expenseId, @PathVariable Long personId)
             throws ExpenseNotFoundAPIException {
-        //Check if exist
+
+        LOG.info("Add person " + personId + " to expense expense: " + expenseId);
+
         Expense expense = fetchExpense(expenseId);
 
         try {
+            Optional<Person> per = repoPerson.findById(personId);
 
-            Person p = repoPerson.read(personId);
-
-            if (p == null)
+            if (!per.isPresent())
                 throw new PersonNotFoundAPIException();
 
-            expense.addPerson(p);
-        }
-        catch (NonUniqueResultException | IllegalArgumentException ex) {
+            expense.addPerson(per.get());
+        } catch (IllegalArgumentException e) {
             throw new PersonNotFoundAPIException();
         }
 
-        repo.save(expense);
+        LOG.info("Person " + personId + " added to expense " + expenseId);
     }
 
     //</editor-fold>
@@ -193,6 +226,7 @@ public class ExpenseController {
     @GetMapping("/{expenseId}/costpp")
     @ResponseStatus(code = HttpStatus.OK)
     public Money getMoneyPp(@PathVariable Long expenseId) throws ExpenseNotFoundAPIException {
+        LOG.info("Calculate costs per person of expense: " + expenseId);
         return fetchExpense(expenseId).getMoneyPerPerson();
     }
 }

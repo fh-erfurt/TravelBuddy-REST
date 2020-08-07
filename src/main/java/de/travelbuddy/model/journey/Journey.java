@@ -1,5 +1,7 @@
 package de.travelbuddy.model.journey;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import de.travelbuddy.model.BaseModel;
 import de.travelbuddy.model.DuplicatePersonException;
 import de.travelbuddy.model.Person;
@@ -28,14 +30,18 @@ import java.util.stream.Collectors;
 @Table(name = "JOURNEY")
 @Getter @Setter
 @NoArgsConstructor
+@SequenceGenerator(sequenceName = "seq_gen_journey", name = "seq_gen_base")
 public class Journey extends BaseModel {
 
+    @Column(nullable = false)
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Place> places = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Person> persons = new ArrayList<>();
 
     /**

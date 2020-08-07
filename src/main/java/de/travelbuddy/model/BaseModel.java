@@ -12,18 +12,19 @@ import java.time.LocalDateTime;
 @Setter(AccessLevel.PRIVATE)
 public abstract class BaseModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gen_base")
     private Long id;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime created;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime modified;
 
     @PrePersist
     void onCreate(){
         this.setCreated(LocalDateTime.now());
+        this.setModified(this.getCreated());
     }
 
     @PreUpdate
