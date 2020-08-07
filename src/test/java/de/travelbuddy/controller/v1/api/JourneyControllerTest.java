@@ -148,7 +148,7 @@ public class JourneyControllerTest extends RestAssuredTestBase {
                 when().
                 post(controllerBasePath).
                 then().
-                statusCode(201).assertThat().body("titel", equalTo(inital.getTitle())).extract().response();
+                statusCode(201).assertThat().body("title", equalTo(inital.getTitle())).extract().response();
 
         given().log().all().
                 when().

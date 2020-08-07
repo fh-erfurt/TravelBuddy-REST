@@ -122,7 +122,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     //###################
     @DeleteMapping("/{locationId}")
     @ResponseStatus(code = HttpStatus.OK)
-    void deleteEmployee(@PathVariable Long locationId) throws LocationNotFoundAPIException {
+    void deleteLocation(@PathVariable Long locationId) throws LocationNotFoundAPIException {
         LOG.info("Delete location: " + locationId);
         repoLocation.delete(fetchLocation(locationId));
         LOG.info("Deleted location: " + locationId);
