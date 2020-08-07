@@ -5,9 +5,11 @@ import de.travelbuddy.controller.v1.api.exceptions.IdMismatchAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.MissingValuesAPIException;
 import de.travelbuddy.controller.v1.api.exceptions.PersonNotFoundAPIException;
 import de.travelbuddy.controller.v1.api.finance.exceptions.ExpenseNotFoundAPIException;
+import de.travelbuddy.controller.v1.api.journey.exceptions.JourneyNotFoundAPIException;
 import de.travelbuddy.model.Person;
 import de.travelbuddy.model.finance.Expense;
 import de.travelbuddy.model.finance.Money;
+import de.travelbuddy.model.journey.Journey;
 import de.travelbuddy.storage.repositories.ExpenseRepo;
 import de.travelbuddy.storage.repositories.PersonRepo;
 import org.slf4j.Logger;
@@ -23,8 +25,8 @@ import java.util.Optional;
 @RequestMapping("api/v1/expenses")
 public class ExpenseController extends BaseController<Expense> {
 
-    ExpenseRepo repo = null;
-    PersonRepo repoPerson = null;
+    ExpenseRepo repo;
+    PersonRepo repoPerson;
     private static final Logger LOG = LoggerFactory.getLogger(ExpenseController.class);
 
     @Autowired
@@ -82,6 +84,17 @@ public class ExpenseController extends BaseController<Expense> {
         return fetchExpense(expenseId);
     }
 
+    /**
+     * Read all existing expenses
+     * @return The found expenses
+     */
+    @GetMapping("")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Expense> getExpense() throws ExpenseNotFoundAPIException {
+        LOG.info("Read all expenses");
+        return toListT(repo.findAll());
+    }
+
     //###################
     //##### UPDATE ######
     //###################
@@ -90,7 +103,7 @@ public class ExpenseController extends BaseController<Expense> {
      * Update an existing expense
      * @param expenseId The expense to update
      * @param expense The new expense
-     * @return
+     * @return updated expense
      * @throws ExpenseNotFoundAPIException If the expense was not found
      */
     @PutMapping("/{expenseId}")

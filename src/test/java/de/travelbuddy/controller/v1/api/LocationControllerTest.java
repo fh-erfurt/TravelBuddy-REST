@@ -11,6 +11,7 @@ import de.travelbuddy.storage.repositories.PersonRepo;
 import de.travelbuddy.storage.repositories.PlaceRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,6 @@ import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
 
 //erst mal auf Place getrimmt
-@SpringBootTest
 public class LocationControllerTest extends RestAssuredTestBase {
 
     @Autowired
@@ -35,6 +35,8 @@ public class LocationControllerTest extends RestAssuredTestBase {
     @Autowired
     ExpenseRepo repoExpense;
 
+    String controllerBasePath = "/places";
+
 
     //<editor-fold desc="CRUD">
 
@@ -43,7 +45,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
     //###################
 
     @Test
-    public void create_location_test () {
+    public void create_place_test () {
 
         //Create
         Place post = InstanceHelper.createPlace();
@@ -51,9 +53,10 @@ public class LocationControllerTest extends RestAssuredTestBase {
         given().log().all().
                 contentType(ContentType.JSON).body(post).
         when().
-                post("/places").
+                post(controllerBasePath).
         then().
-                statusCode(201).assertThat().body("id", equalTo(post.getId()));
+                statusCode(201).assertThat().body("name", equalTo(post.getName()));
+
     }
 
     //###################
@@ -65,13 +68,18 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         //Read
         Place inital = InstanceHelper.createPlace();
-        repo.save(inital);
+        Response response;
+
+        response = given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).then().statusCode(201).extract().response();
 
         given().log().all().
         when().
-                get("/places/" + inital.getId()).
-                then().
-                statusCode(200).assertThat().body("id", equalTo(inital.getId()));
+                get(controllerBasePath + "/" + response.jsonPath().getInt("id") ).
+                then().log().body().
+                statusCode(200);
     }
 
 
@@ -82,12 +90,24 @@ public class LocationControllerTest extends RestAssuredTestBase {
         //Read
         Place inital1 = InstanceHelper.createPlace();
         Place inital2 = InstanceHelper.createPlace();
-        repo.save(inital1);
-        repo.save(inital2);
+
+        given().log().all().
+                contentType(ContentType.JSON).body(inital1).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(inital1.getName()));
+
+        given().log().all().
+                contentType(ContentType.JSON).body(inital2).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(inital2.getName()));
 
         given().log().all().
         when().
-                get("/places" ).
+                get(controllerBasePath).
         then().
                 statusCode(200);
     }
@@ -97,19 +117,33 @@ public class LocationControllerTest extends RestAssuredTestBase {
     //##### UPDATE ######
     //###################
 
+    // TODO update Funktion ersetzt created TimeStamp -> Fehlermeldung
     @Test
     public void update_place_test () {
 
         //Update
         Place inital = InstanceHelper.createPlace();
-        repo.save(inital);
-        Place update = InstanceHelper.createPlace();
+        Response response;
+        response = given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(inital.getName())).extract().response();
+
+        Place update = InstanceHelper.definedId(InstanceHelper.createPlace(),response.jsonPath().getLong("id"));
+
+        given().log().all().
+                when().
+                get(controllerBasePath + "/" + response.jsonPath().getInt("id") ).
+                then().log().body().
+                statusCode(200);
 
         given().log().all().
                 contentType(ContentType.JSON).body(update).
         when().
-                put("/places/" + inital.getId()).
-        then().
+                put(controllerBasePath + "/" + response.jsonPath().getInt("id")).
+        then().log().body().
                 statusCode(200).assertThat().body("name", equalTo(update.getName()));
 
     }
@@ -123,17 +157,24 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         //Delete
         Place inital = InstanceHelper.createPlace();
-        repo.save(inital);
+
+        Response response;
+        response = given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(inital.getName())).extract().response();
 
         given().log().all().
         when().
-                delete("/places/" + inital.getId()).
+                delete(controllerBasePath + "/" + response.jsonPath().getLong("id")).
                 then().
                 statusCode(200);
 
         given().log().all().
         when().
-                get("/places/" + inital.getId()).
+                get(controllerBasePath + "/" + response.jsonPath().getLong("id")).
         then().
                 statusCode(404);
 
@@ -145,11 +186,17 @@ public class LocationControllerTest extends RestAssuredTestBase {
     public void show_persons_of_place_test () {
 
         Place inital = InstanceHelper.createPlace();
-        repo.save(inital);
+
+        given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(inital.getName()));
 
         given().log().all().
         when().
-                get("/places/"+inital.getId()+"/persons").
+                get(controllerBasePath + "/" + inital.getId() + "/persons").
         then().
                 statusCode(200);
 
@@ -159,19 +206,45 @@ public class LocationControllerTest extends RestAssuredTestBase {
     public void add_person_to_place_test (){
 
         Place inital = InstanceHelper.createPlace();
-        repo.save(inital);
+        Response responseInital;
+        responseInital = given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(inital.getName())).extract().response();
+
+        given().log().all().
+                when().
+                get(controllerBasePath + "/" + inital.getId() + "/persons").
+                then().
+                statusCode(200);
+
         Person person = InstanceHelper.createPerson();
-        repoPerson.save(person);
+        Response responsePerson;
+        responsePerson = given().log().all().
+                contentType(ContentType.JSON).body(person).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("name", equalTo(person.getName())).extract().response();
+
+        given().log().all().
+                when().
+                get(controllerBasePath + "/" + person.getId() + "/persons").
+                then().
+                statusCode(200);
+
 
         given().log().all().
         when().
-                put("/places/" + inital.getId() + "/persons/" + person.getId()).
+                put(controllerBasePath + "/" + responseInital.jsonPath().getLong("id") + "/persons/" + responsePerson.jsonPath().getLong("id")).
                 then().
                 statusCode(200);
 
         given().log().all().
         when().
-                get("/places/" + inital.getId() + "/persons/" + person.getId()).
+                get(controllerBasePath + "/" + responseInital.jsonPath().getLong("id") + "/persons/" + responsePerson.jsonPath().getLong("id")).
                 then().
                 statusCode(200);
 
@@ -187,13 +260,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                delete("/places/" + inital.getId() + "/persons/" + person.getId()).
+                delete(controllerBasePath + "/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
         given().log().all().
         when().
-                get("/places/" + inital.getId() + "/persons/" + person.getId()).
+                get(controllerBasePath + "/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(404);
 
@@ -209,7 +282,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/places/"+inital.getId()+"/expenses").
+                get(controllerBasePath + "/" +inital.getId()+"/expenses").
                 then().
                 statusCode(200);
 
@@ -225,13 +298,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                put("/places/" + inital.getId() + "/expenses/" + expense.getId()).
+                put(controllerBasePath + "/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
                 statusCode(200);
 
         given().log().all().
         when().
-                get("/places/" + inital.getId() + "/expenses/" + expense.getId()).
+                get(controllerBasePath + "/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
                 statusCode(200);
 
@@ -247,13 +320,13 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                delete("/places/" + inital.getId() + "/expenses/" + expense.getId()).
+                delete(controllerBasePath + "/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
                 statusCode(200);
 
         given().log().all().
         when().
-                get("/places/" + inital.getId() + "/expenses/" + expense.getId()).
+                get(controllerBasePath + "/" + inital.getId() + "/expenses/" + expense.getId()).
                 then().
                 statusCode(404);
 
@@ -270,7 +343,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/places/" + inital.getId() + "/costspp" + person.getId() +"/EUR").
+                get(controllerBasePath + "/" + inital.getId() + "/costspp" + person.getId() +"/EUR").
                 then().
                 statusCode(200).
                 assertThat().body("currency",equalTo("EUR")).
@@ -288,7 +361,7 @@ public class LocationControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/places/" + inital.getId() + "/money").
+                get(controllerBasePath + "/" + inital.getId() + "/money").
                 then().
                 statusCode(200).
                 assertThat().body("currency",equalTo(inital.totalCost(Currency.getInstance("EUR")).getCurrency())).

@@ -274,5 +274,10 @@ public class InstanceHelper {
     {
         return initId(inst, null);
     }
+
+    public static <T extends BaseModel> T definedId(T inst,Long value)
+    {
+        return initId(inst, value);
+    }
 }
 

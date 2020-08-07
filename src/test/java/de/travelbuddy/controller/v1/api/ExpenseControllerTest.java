@@ -8,6 +8,7 @@ import de.travelbuddy.storage.repositories.ExpenseRepo;
 import de.travelbuddy.storage.repositories.PersonRepo;
 import de.travelbuddy.utilities.InstanceHelper;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +28,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
     @Autowired
     PersonRepo repoPerson;
 
+    String controllerBasePath = "/expenses";
 
     //<editor-fold desc="CRUD">
 
@@ -43,9 +45,9 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         given().log().all().
                 contentType(ContentType.JSON).body(post).
                 when().
-                post("/expenses").
+                post(controllerBasePath).
                 then().
-                statusCode(201).assertThat().body("id", equalTo(post.getId()));
+                statusCode(201).assertThat().body("title", equalTo(post.getTitle()));
     }
 
     //###################
@@ -57,29 +59,45 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         //Read
         Expense inital = InstanceHelper.createExpense();
-        repo.save(inital);
+        Response response;
+
+        response = given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).then().statusCode(201).extract().response();
 
         given().log().all().
-        when().
-                get("/expenses/" + inital.getId()).
-                then().
-                statusCode(200).assertThat().body("id", equalTo(inital.getId()));
+                when().
+                get(controllerBasePath + "/" + response.jsonPath().getInt("id") ).
+                then().log().body().
+                statusCode(200);
     }
 
 
-    //TODO Check if all Expenses are there
     @Test
     public void read_expenses_test () {
 
         //Read
         Expense inital1 = InstanceHelper.createExpense();
         Expense inital2 = InstanceHelper.createExpense();
-        repo.save(inital1);
-        repo.save(inital2);
 
         given().log().all().
-        when().
-                get("/expenses" ).
+                contentType(ContentType.JSON).body(inital1).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("title", equalTo(inital1.getTitle()));
+
+        given().log().all().
+                contentType(ContentType.JSON).body(inital2).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("title", equalTo(inital2.getTitle()));
+
+        given().log().all().
+                when().
+                get(controllerBasePath).
                 then().
                 statusCode(200);
     }
@@ -99,7 +117,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
         given().log().all().
                 contentType(ContentType.JSON).body(update).
                 when().
-                put("/expenses/" + inital.getId()).
+                put(controllerBasePath + "/" + inital.getId()).
                 then().
                 statusCode(200).assertThat().body("title", equalTo(update.getTitle()));
 
@@ -114,18 +132,25 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         //Delete
         Expense inital = InstanceHelper.createExpense();
-        repo.save(inital);
+        Response response;
+        response = given().log().all().
+                contentType(ContentType.JSON).body(inital).
+                when().
+                post(controllerBasePath).
+                then().
+                statusCode(201).assertThat().body("title", equalTo(inital.getTitle())).extract().response();
 
         given().log().all().
-        when().
-                delete("/expenses/" + inital.getId()).
+                when().
+                delete(controllerBasePath + "/" + response.jsonPath().getLong("id")).
                 then().
                 statusCode(200);
 
-        when().
-                get("/expenses/" + inital.getId()).then().statusCode(404);
-
-
+        given().log().all().
+                when().
+                get(controllerBasePath + "/" + response.jsonPath().getLong("id")).
+                then().
+                statusCode(404);
     }
     //</editor-fold>
 
@@ -138,7 +163,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/expenses/"+inital.getId()+"/persons").
+                get(controllerBasePath + "/" + inital.getId() + "/persons").
                 then().
                 statusCode(200);
 
@@ -155,12 +180,12 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                put("/expenses/" + inital.getId() + "/persons/" + person.getId()).
+                put(controllerBasePath + "/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
         when().
-                get("/expenses/" + inital.getId() + "/persons/" + person.getId()).
+                get(controllerBasePath + "/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
@@ -176,13 +201,13 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                delete("/expenses/" + inital.getId() + "/persons/" + person.getId()).
+                delete(controllerBasePath + "/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(200);
 
         given().log().all().
         when().
-                get("/expenses/" + inital.getId() + "/persons/" + person.getId()).
+                get(controllerBasePath + "/" + inital.getId() + "/persons/" + person.getId()).
                 then().
                 statusCode(404);
 
@@ -198,7 +223,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/expenses/" + inital.getId() + "/costpp").
+                get(controllerBasePath + "/" + inital.getId() + "/costpp").
                 then().
                 statusCode(200).assertThat().body("currency",equalTo(inital.getMoneyPerPerson().getCurrency())).
                 assertThat().body("value",equalTo(inital.getMoneyPerPerson().getValue()));
@@ -214,7 +239,7 @@ public class ExpenseControllerTest extends RestAssuredTestBase {
 
         given().log().all().
         when().
-                get("/expenses/" + inital.getId() + "/money").
+                get(controllerBasePath + "/" + inital.getId() + "/money").
                 then().
                 statusCode(200).assertThat().body("currency",equalTo(inital.getPrice().getCurrency())).
                 assertThat().body("value",equalTo(inital.getPrice().getValue()));

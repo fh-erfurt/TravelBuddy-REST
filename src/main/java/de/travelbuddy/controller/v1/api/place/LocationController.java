@@ -71,7 +71,7 @@ public class LocationController<T extends Place> extends BaseController<T> {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     public T createLocation(@RequestBody T Location) {
-        LOG.info("Create location...");
+        LOG.info("Create location..."+ Location.getId());
 
         T loc = repoLocation.save(Location);
 

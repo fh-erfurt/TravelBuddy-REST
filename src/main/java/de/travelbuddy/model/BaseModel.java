@@ -1,5 +1,6 @@
 package de.travelbuddy.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Getter
-@Setter
+@Setter(AccessLevel.PRIVATE)
 public abstract class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gen_base")
