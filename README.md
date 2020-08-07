@@ -57,4 +57,8 @@ Aktuell nur auf einem Gerät, somit Local Admin.
 2.1 Hierdurch werden die Q-Entitäten erstellt
 
 ### Entwickler
-Frieder Ullmann, Tim Vogel, Marcel van der Heide  
+Frieder Ullmann, Tim Vogel, Marcel van der Heide 
+
+### WebUI
+Die Oberfläche des Projekts ist zu finden im Projekt: TravelBuddy-WebUI
+https://github.com/fh-erfurt/TravelBuddy-WebUI
