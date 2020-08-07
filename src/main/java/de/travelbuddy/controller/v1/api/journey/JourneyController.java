@@ -44,9 +44,6 @@ public class JourneyController extends BaseController<Journey> {
     private static final Logger LOG = LoggerFactory.getLogger(JourneyController.class);
 
     @Autowired
-    JourneyRepo rep;
-
-    @Autowired
     public JourneyController(JourneyRepo repo, PersonRepo repoPerson,
                              PlaceRepo repoPlace) {
         this.type = Journey.class;
@@ -60,7 +57,7 @@ public class JourneyController extends BaseController<Journey> {
     private Journey fetchJourney(Long journeyId) {
         LOG.info("Find journey: " + journeyId);
 
-        Optional<Journey> journey = rep.findById(journeyId);
+        Optional<Journey> journey = repo.findById(journeyId);
 
         if (!journey.isPresent())
             throw new JourneyNotFoundAPIException();

@@ -17,7 +17,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Embeddable
-
 public class Coordinates {
 
     @Column(nullable = false)
