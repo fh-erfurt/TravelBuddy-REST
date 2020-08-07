@@ -65,3 +65,6 @@ https://github.com/fh-erfurt/TravelBuddy-WebUI
 
 ### Generische Repository
 Ein veralteter Stand, mit generischem repository und DAO ist zu finden im branch: generic_dao_repo.
+
+### Besprechungsprotokolle
+Unsere bisherige Besprechungsprotokollen sind zu finden in der Datei: Protokoll_.docx
