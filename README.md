@@ -62,3 +62,6 @@ Frieder Ullmann, Tim Vogel, Marcel van der Heide
 ### WebUI
 Die Oberfläche des Projekts ist zu finden im Projekt: TravelBuddy-WebUI
 https://github.com/fh-erfurt/TravelBuddy-WebUI
+
+### Generische Repository
+Ein veralteter Stand, mit generischem repository und DAO ist zu finden im branch: generic_dao_repo.
