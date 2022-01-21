@@ -19,7 +19,7 @@
         <!-- Dependency versions -->
         <mariadbjdbc.version>2.6.0</mariadbjdbc.version>
         <lombok.version>1.18.12</lombok.version>
-        <h2.version>1.4.194</h2.version>
+        <h2.version>2.1.210</h2.version>
         <springfox.version>3.0.0</springfox.version>
         <junitjupiter.version>5.5.2</junitjupiter.version>
         <restassured.version>4.2.0</restassured.version>
